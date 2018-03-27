@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="page du cours professions informatiques">
+  <meta name="author" content="Département informatique, collège Édouard Montpetit">
+
+  <title>Contact : Roberto Laverdure</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+  body {
+    padding-top: 70px;
+  }
+  </style>
+</head>
+
+<body>
+
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Roberto Laverdure : <strong>Contact</strong></a>
+      </div>
+      <div class="navbar-collapse collapse navbar-right">
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="entreprise.html">Mon entreprise</a></li>
+          <li><a href="formation.html">Ma formation</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="">
+        <div class="col-md-8 alert">
+          <h1>Me contacter</h1>
+          <form action="http://103.di.college-em.info/courriel.php" method="POST">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Votre courriel</label>
+              <input type="email" class="form-control" name="de" id="exampleInputEmail1" placeholder="Votre courriel">
+              <input type="hidden" value="joris@deguet.org" name="a" >
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Sujet</label>
+              <input type="text" name="sujet" class="form-control" id="exampleInputPassword1" placeholder="Le sujet">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Message</label>
+              <textarea name="message" class="form-control" id="exampleInputFile"
+              placeholder="Votre message ici"></textarea>
+            </div>
+            <div class="checkbox">
+
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Envoyer</button>
+          </form>
+        </div>
+        <div class="col-md-4 alert ">
+          <h3>Pourquoi un formulaire?</h3>
+          <p>
+            Bli bla blo explication de pourquoi un formulaire et
+            pas mettre l'adresse courriel.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="bootstrap/jquery.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
