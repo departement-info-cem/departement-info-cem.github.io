@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+       
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>Enseignant</title>
+		
+		<link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+		
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+		
+		<link href="./css/bootstrap-xxl.css" rel="stylesheet">
+		<link href="./css/site.css" rel="stylesheet">
+		
+		<script src="./js/utils.js"></script>
+		<script src="./js/liste-cours.js"></script>
+		<script src="./js/liste-enseignants.js"></script>
+		
+		<script>
+			var id = getQueryString()['id'];
+			
+			if(id == undefined || getProf(id) == null) window.location.href = "enseignants.html";
+		</script>
+	</head>
+    <body>
+		<nav class="navbar navbar-dept fixed-top navbar-expand-lg">
+			<div class="container">
+			<a class="navbar-brand" href="index.html">Montpetit : <strong>Informatique</strong></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="index.html"><i class="fas fa-home"></i></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="http://www.cegepmontpetit.ca/">Collège</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="https://cegepmontpetit.omnivox.ca/">Portail</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container mt-5 pt-5">
+            <div class="row mt-4">
+                <div class="col-12 col-sm-6 col-lg-5 col-xxl-4">
+					<div class="card position-relative">
+						<div class="profile-picture position-absolute rounded-circle w-50 pt-50 mx-25 mt-n25">
+						</div>
+						<div class="card-body mt-25 p-3 text-center">
+							<h3 class="nom-prof"></h3>
+							<h6 class="titre-prof text-secondary"></h6>
+							<ul class="nav flex-column text-left mt-4">
+								<li class="mb-2">
+									<div>
+										<div class="d-inline-block">
+											<i class="fas fa-home"></i>
+										</div>
+										<div class="d-inline-block ml-2 bureau-prof"></div>
+									</div>
+								</li>
+								<li class="mb-2">
+									<div>
+										<div class="d-inline-block">
+											<i class="fas fa-envelope"></i>
+										</div>
+										<div class="d-inline-block ml-2">
+											<a class="courriel-prof"></a>
+										</div>
+									</div>
+								</li>
+								<li class="mb-2">
+									<div>
+										<div class="d-inline-block">
+											<i class="fas fa-phone"></i>
+										</div>
+										<div class="d-inline-block ml-2 telephone-prof"></div>
+									</div>
+								</li>
+								<li class="video-prof-container d-none">
+									<div>
+										<div class="d-inline-block">
+											<i class="fas fa-video"></i>
+										</div>
+										<div class="d-inline-block ml-2">
+											<a class="video-prof" target="_blank">Je me présente</a>
+										</div>
+									</div>
+								</li>
+							</ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-7 col-xxl-8">
+                    <div class="card">
+                        <div class="card-header font-weight-bold text-center h4">Mes cours pour la session Automne 2020</div>
+                        <div class="card-body">
+							<div class="row row-cols-2 row-cols-lg-3 row-cols-xl-4 cours-prof">
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<script src="./js/enseignant.js"></script>
+    </body>
+</html>

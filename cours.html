@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+       
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>Cours</title>
+		
+		<link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" crossorigin="anonymous">
+		
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+		
+		<link href="./css/bootstrap-xxl.css" rel="stylesheet">
+		<link href="./css/site.css" rel="stylesheet">
+		
+		<script src="./js/utils.js"></script>
+		<script src="./js/liste-cours.js"></script>
+		<script src="./js/liste-enseignants.js"></script>
+		
+		<script>
+			var code = getQueryString()['code'];
+			
+			if(code == undefined || getCours(code) == null) window.location.href = "liste-cours.html";
+		</script>
+	</head>
+    <body>
+		<nav class="navbar navbar-dept fixed-top navbar-expand-lg">
+			<div class="container">
+			<a class="navbar-brand" href="index.html">Montpetit : <strong>Informatique</strong></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="index.html"><i class="fas fa-home"></i></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="http://www.cegepmontpetit.ca/">Collège</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="https://cegepmontpetit.omnivox.ca/">Portail</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container mt-4 pt-4">
+            <div class="row mt-4">
+                <div class="col-12 col-sm-6 col-lg-5 col-xxl-4">
+					<div class="card position-relative">
+						<div class="icone-cours ic1 position-absolute rounded-circle w-25 pt-25">
+							<div class="position-absolute">
+								<i class=""></i>
+							</div>
+						</div>
+						<div class="icone-cours ic2 position-absolute rounded-circle w-25 pt-25">
+							<div class="position-absolute">
+								<i class=""></i>
+							</div>
+						</div>
+						<div class="card-body mt-15 p-3 text-center">
+							<h3 class="code-cours"></h3>
+							<h4 class="nom-cours text-secondary"></h4>
+							<h6 class="type-cours text-black-50"></h6>
+							<ul class="nav flex-column text-left mt-5">
+								<li class="mb-2">
+									<div>
+										<div class="d-inline-block w-5">
+											<i class="fas fa-chalkboard-teacher"></i>
+										</div>
+										<div class="d-inline-block ml-2 pond-theorie"></div>
+									</div>
+								</li>
+								<li class="mb-2">
+									<div>
+										<div class="d-inline-block w-5">
+											<i class="fas fa-tools"></i>
+										</div>
+										<div class="d-inline-block ml-2 pond-pratique"></div>
+									</div>
+								</li>
+								<li class="mb-2">
+									<div>
+										<div class="d-inline-block w-5">
+											<i class="fas fa-laptop-house"></i>
+										</div>
+										<div class="d-inline-block ml-2 pond-maison"></div>
+									</div>
+								</li>
+							</ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-7 col-xxl-8">
+					<div class="presentiel alert alert-warning border-0 d-none h5" role="alert">
+						Attention! Les périodes de laboratoire de ce cours auront lieu au cégep. <a href="">Voir la section sur les cours en présence pour la session Automne 2020.</a>
+					</div>
+                    <div class="card">
+                        <div class="card-header font-weight-bold text-center h4">Les enseignants pour la session Automne 2020</div>
+                        <div class="card-body">
+							<div class="row row-cols-2 row-cols-xl-3 cours-profs">
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<script src="./js/cours.js"></script>
+    </body>
+</html>
