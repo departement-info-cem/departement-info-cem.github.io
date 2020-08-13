@@ -14,7 +14,6 @@ body {
 .w-5 {width:5%;}
 
 .card {z-index:1;}
-.card-header, .card-header * {background-color:#0658a4; color:white;}
 .footer .card-header {background-color:#0658a40f; color:#0658a4;}
 .footer i {color:white;}
 .profile-picture, .icone-cours {background:white center center no-repeat;background-size:contain;z-index:100;border:2px solid;}
@@ -57,4 +56,38 @@ body {
 
 .jumbotron {
     background-color: #0658a40f;
+}
+
+.container > div > .accordion > .card > .card-header {
+    border: 1px solid white !important;
+}
+.accordion .accordion .card-header {
+    background-color: #0658a40f;
+    color: #0658a4;
+}
+.accordion .accordion .card-header * {
+    background-color: transparent;
+    color: #0658a4;
+	border:0;
+}
+.card-header, .card-header * {background-color:#0658a4; color:white;}
+.accordion .card-header h2 button {
+    font-size: 1.75rem;
+}
+.accordion .card-header h2 .btn-link:hover {
+    color:white;
+    text-decoration: underline;
+	border-color:transparent;
+}
+.accordion .accordion .card-header h2 button  {
+    font-size: 1.5rem;
+}
+.accordion .accordion .card-header h2 .btn-link:hover {
+    color:#0658a4;
+    text-decoration: underline;
+	border-color:transparent;
+}
+.accordion .accordion .card-header h2 .btn.focus, .accordion .accordion .card-header h2 .btn:focus {
+    outline: 0;
+    box-shadow: none;
 }

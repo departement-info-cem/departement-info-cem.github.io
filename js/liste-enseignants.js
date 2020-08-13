@@ -140,7 +140,7 @@ var profs = [
 		bureau: "D-1612",
 		courriel: "joris.deguet@cegepmontpetit.ca",
 		extension: "6379",
-		lienVideo: "",	// laisser vide si pas de vidéo
+		lienVideo: "https://youtu.be/R-YbYMqB_LI",	// laisser vide si pas de vidéo
 		cours: ["3N5", "5A5"] // numéro des cours entre guillemets séparés par des virgules
 	},
 	{
