@@ -52,7 +52,7 @@ var profs = [
 		nom: "Chantal Vallières",
 		titre: "Enseignant",
 		actif: true,
-		image: "personne.png", // mettre la photo dans le sous-répertoire images
+		image: "chantal_vallieres.png", // mettre la photo dans le sous-répertoire images
 		bureau: "E-209",
 		courriel: "chantal.vallieres@cegepmontpetit.ca",
 		extension: "6402",
@@ -220,11 +220,11 @@ var profs = [
 		nom: "Stéphane DesMeules",
 		titre: "Enseignant",
 		actif: true,
-		image: "personne.png", // mettre la photo dans le sous-répertoire images
+		image: "stephane_desmeules", // mettre la photo dans le sous-répertoire images
 		bureau: "E-212",
 		courriel: "stephane.desmeules@cegepmontpetit.ca",
 		extension: "5108",
-		lienVideo: "",	// laisser vide si pas de vidéo
+		lienVideo: "https://youtu.be/CwFxbtJWoAc",	// laisser vide si pas de vidéo
 		cours: ["1N6"] // numéro des cours entre guillemets séparés par des virgules
 	},
 	{
