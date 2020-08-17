@@ -256,11 +256,11 @@ var profs = [
 		nom: "Vincent Carrier",
 		titre: "Enseignant",
 		actif: true,
-		image: "personne.png", // mettre la photo dans le sous-répertoire images
+		image: "vincent_carrier.png", // mettre la photo dans le sous-répertoire images
 		bureau: "E-209",
 		courriel: "vincent.carrier@cegepmontpetit.ca",
 		extension: "2915",
-		lienVideo: "",	// laisser vide si pas de vidéo
+		lienVideo: "https://youtu.be/agrYqQdKSNU",	// laisser vide si pas de vidéo
 		cours: ["1S6", "3A5", "5E5"] // numéro des cours entre guillemets séparés par des virgules
 	},
 	{
