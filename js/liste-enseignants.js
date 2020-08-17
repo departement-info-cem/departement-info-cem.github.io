@@ -56,7 +56,7 @@ var profs = [
 		bureau: "E-209",
 		courriel: "chantal.vallieres@cegepmontpetit.ca",
 		extension: "6402",
-		lienVideo: "",	// laisser vide si pas de vidéo
+		lienVideo: "https://www.youtube.com/watch?v=UEi_9RpgtmU",	// laisser vide si pas de vidéo
 		cours: ["1N6"] // numéro des cours entre guillemets séparés par des virgules
 	},
 	{
