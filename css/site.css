@@ -16,7 +16,7 @@ body {
 .card {z-index:1;}
 .footer .card-header {background-color:#0658a40f; color:#0658a4;}
 .footer i {color:white;}
-.profile-picture, .icone-cours {background:white center center no-repeat;background-size:contain;z-index:100;border:2px solid;}
+.profile-picture, .icone-cours {background:white center center no-repeat;background-size:cover;z-index:100;border:2px solid;}
 .cours-icones {font-size: 3rem;}
 
 .profs .card-title, .cours-profs .card-title {height: 3.6rem;}
