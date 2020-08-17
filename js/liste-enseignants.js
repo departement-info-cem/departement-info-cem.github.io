@@ -220,7 +220,7 @@ var profs = [
 		nom: "Stéphane DesMeules",
 		titre: "Enseignant",
 		actif: true,
-		image: "stephane_desmeules", // mettre la photo dans le sous-répertoire images
+		image: "stephane_desmeules.png", // mettre la photo dans le sous-répertoire images
 		bureau: "E-212",
 		courriel: "stephane.desmeules@cegepmontpetit.ca",
 		extension: "5108",
