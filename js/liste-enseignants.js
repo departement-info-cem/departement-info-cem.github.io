@@ -100,7 +100,7 @@ var profs = [
 		nom: "Hector Bustillo",
 		titre: "Enseignant",
 		actif: true,
-		image: "personne.png", // mettre la photo dans le sous-répertoire images
+		image: "hector_bustillo.png", // mettre la photo dans le sous-répertoire images
 		bureau: "E-214",
 		courriel: "hector.bustillo@cegepmontpetit.ca",
 		extension: "6478",
@@ -196,7 +196,7 @@ var profs = [
 		nom: "Réjean Bilodeau ",
 		titre: "Enseignant",
 		actif: true,
-		image: "personne.png", // mettre la photo dans le sous-répertoire images
+		image: "rejean_bilodeau.png", // mettre la photo dans le sous-répertoire images
 		bureau: "D-1612",
 		courriel: "rejean.bilodeau@cegepmontpetit.ca",
 		extension: "6418",
@@ -268,7 +268,7 @@ var profs = [
 		nom: "Vincent Drolet",
 		titre: "Enseignant",
 		actif: false,
-		image: "personne.png", // mettre la photo dans le sous-répertoire images
+		image: "vincent_drolet.png", // mettre la photo dans le sous-répertoire images
 		bureau: "",
 		courriel: "vincent.drolet@cegepmontpetit.ca​",
 		extension: "2762",
