@@ -244,7 +244,7 @@ var profs = [
 		nom: "Valérie Turgeon",
 		titre: "Enseignant",
 		actif: true,
-		image: "personne.png", // mettre la photo dans le sous-répertoire images
+		image: "valerie_turgeon.png", // mettre la photo dans le sous-répertoire images
 		bureau: "D-1612",
 		courriel: "valerie.turgeon@cegepmontpetit.ca",
 		extension: "6409",
