@@ -8,7 +8,7 @@ $('.courriel-prof').html(prof.courriel);
 $('.courriel-prof').attr('href', 'mailto:' + prof.courriel);
 $('.telephone-prof').html('(450)679-2631 ext.: ' + prof.extension);
 if(prof.lienVideo.length > 0) {
-	$('.video-prof').attr('href', prof.lienVideo);
+	$('.video-prof').attr('href', 'https://youtu.be/' + prof.lienVideo);
 	$('.video-prof-container').removeClass('d-none');
 }
 

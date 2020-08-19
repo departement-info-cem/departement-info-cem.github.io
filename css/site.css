@@ -70,7 +70,7 @@ body {
     color: #0658a4;
 	border:0;
 }
-.card-header, .card-header * {background-color:#0658a4; color:white;}
+.card-header:not(.video-info), .card-header:not(.video-info) * {background-color:#0658a4; color:white;}
 .accordion .card-header h2 button {
     font-size: 1.75rem;
 }
@@ -90,4 +90,11 @@ body {
 .accordion .accordion .card-header h2 .btn.focus, .accordion .accordion .card-header h2 .btn:focus {
     outline: 0;
     box-shadow: none;
+}
+.videos-cont > div:first-child {
+	padding-left:0!important;
+}
+.video-info {
+    padding: 1rem;
+    line-height: 1.6;
 }

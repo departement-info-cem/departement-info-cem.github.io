@@ -56,7 +56,7 @@ var profs = [
 		bureau: "E-209",
 		courriel: "chantal.vallieres@cegepmontpetit.ca",
 		extension: "6402",
-		lienVideo: "https://www.youtube.com/watch?v=UEi_9RpgtmU",	// laisser vide si pas de vidéo
+		lienVideo: "UEi_9RpgtmU",	// laisser vide si pas de vidéo
 		cours: ["1N6"] // numéro des cours entre guillemets séparés par des virgules
 	},
 	{
@@ -140,7 +140,7 @@ var profs = [
 		bureau: "D-1612",
 		courriel: "joris.deguet@cegepmontpetit.ca",
 		extension: "6379",
-		lienVideo: "https://youtu.be/R-YbYMqB_LI",	// laisser vide si pas de vidéo
+		lienVideo: "R-YbYMqB_LI",	// laisser vide si pas de vidéo
 		cours: ["3N5", "5A5"] // numéro des cours entre guillemets séparés par des virgules
 	},
 	{
@@ -224,7 +224,7 @@ var profs = [
 		bureau: "E-212",
 		courriel: "stephane.desmeules@cegepmontpetit.ca",
 		extension: "5108",
-		lienVideo: "https://youtu.be/CwFxbtJWoAc",	// laisser vide si pas de vidéo
+		lienVideo: "CwFxbtJWoAc",	// laisser vide si pas de vidéo
 		cours: ["1N6"] // numéro des cours entre guillemets séparés par des virgules
 	},
 	{
@@ -260,7 +260,7 @@ var profs = [
 		bureau: "E-209",
 		courriel: "vincent.carrier@cegepmontpetit.ca",
 		extension: "2915",
-		lienVideo: "https://youtu.be/agrYqQdKSNU",	// laisser vide si pas de vidéo
+		lienVideo: "agrYqQdKSNU",	// laisser vide si pas de vidéo
 		cours: ["1S6", "3A5", "5E5"] // numéro des cours entre guillemets séparés par des virgules
 	},
 	{
