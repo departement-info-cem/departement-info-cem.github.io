@@ -124,11 +124,11 @@ var profs = [
 		nom: "​Jean-Michel Nadeau",
 		titre: "Enseignant",
 		actif: true,
-		image: "personne.png", // mettre la photo dans le sous-répertoire images
+		image: "j_m_nadeau.png", // mettre la photo dans le sous-répertoire images
 		bureau: "E-211",
 		courriel: "jean-michel.nadeau@cegepmontpetit.ca",
 		extension: "6415",
-		lienVideo: "",	// laisser vide si pas de vidéo
+		lienVideo: "MTHD_VL8O78",	// laisser vide si pas de vidéo
 		cours: ["1B3", "503", "545"] // numéro des cours entre guillemets séparés par des virgules
 	},
 	{
@@ -148,11 +148,11 @@ var profs = [
 		nom: "Kevin Leduc",
 		titre: "Enseignant",
 		actif: true,
-		image: "personne.png", // mettre la photo dans le sous-répertoire images
+		image: "kevin_leduc.png", // mettre la photo dans le sous-répertoire images
 		bureau: "E-213",
 		courriel: "kevin.leduc@cegepmontpetit.ca​",
 		extension: "2913",
-		lienVideo: "",	// laisser vide si pas de vidéo
+		lienVideo: "hGE8XJskYzg",	// laisser vide si pas de vidéo
 		cours: ["1B3", "905"] // numéro des cours entre guillemets séparés par des virgules
 	},
 	{
