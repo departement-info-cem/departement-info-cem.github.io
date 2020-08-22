@@ -248,7 +248,7 @@ var profs = [
 		bureau: "D-1612",
 		courriel: "valerie.turgeon@cegepmontpetit.ca",
 		extension: "6409",
-		lienVideo: "",	// laisser vide si pas de vidéo
+		lienVideo: "HUZU1aHCJxM",	// laisser vide si pas de vidéo
 		cours: ["3W6", "905"] // numéro des cours entre guillemets séparés par des virgules
 	},
 	{
