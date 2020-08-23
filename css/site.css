@@ -70,7 +70,7 @@ body {
     color: #0658a4;
 	border:0;
 }
-.card-header:not(.video-info), .card-header:not(.video-info) * {background-color:#0658a4; color:white;}
+.card-header:not(.video-info):not(.presentiel-sem), .card-header:not(.video-info):not(.presentiel-sem) * {background-color:#0658a4; color:white;}
 .accordion .card-header h2 button {
     font-size: 1.75rem;
 }

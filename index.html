@@ -81,8 +81,8 @@
 						</div>
 						<div class="col-md-6 mb-5">
 							<div class="card">
-								<div class="card-header font-weight-bold text-center h3">1N6/1S6, groupes séparés</div>
-								<a class="stretched-link" href="images/Decoupage_groupes_1N6_1S6_v4.pdf" target="_blank"></a>
+								<div id="pres-sem" class="card-header presentiel-sem bg-primary text-white font-weight-bold text-center h3">Horaire présentiel sem. 1</div>
+								<a class="stretched-link" href="presentiel_sem_1.html" target="_blank"></a>
 							</div>
 						</div>
 						<div class="col-md-6 mb-5 pl-0">
@@ -232,5 +232,10 @@
             </div>
 		</div>
 		<script src="./js/index.js"></script>
+		<script>
+			var e = $('#pres-sem');
+			setInterval(function() { e.toggleClass('presentiel-sem bg-primary text-white'); }, 1000);
+			
+		</script>
 	</body>
 </html>
