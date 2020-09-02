@@ -64,7 +64,7 @@ var profs = [
 		nom: "Christian Farley",
 		titre: "Enseignant",
 		actif: true,
-		image: "personne.png", // mettre la photo dans le sous-répertoire images
+		image: "christian_farley.png", // mettre la photo dans le sous-répertoire images
 		bureau: "",
 		courriel: "",
 		extension: "",
