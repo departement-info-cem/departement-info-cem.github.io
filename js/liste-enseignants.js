@@ -76,7 +76,7 @@ var profs = [
 		nom: "Dominic Proulx",
 		titre: "Coordonnateur du département",
 		actif: true,
-		image: "personne.png", // mettre la photo dans le sous-répertoire images
+		image: "dominic_proulx.png", // mettre la photo dans le sous-répertoire images
 		bureau: "E-210",
 		courriel: "dominic.proulx@cegepmontpetit.ca",
 		extension: "2061",
