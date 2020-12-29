@@ -18,7 +18,7 @@ var profs = [
 		actif: true,
 		image: "personne.png", // mettre la photo dans le sous-répertoire images
 		bureau: "E-211",
-		courriel: "​azze-eddine.akkouche@cegepmontpetit.ca",
+		courriel: "azze-eddine.akkouche@cegepmontpetit.ca",
 		extension: "2639",
 		lienVideo: "",	// laisser vide si pas de vidéo
 		cours: ["1S6", "973"] // numéro des cours entre guillemets séparés par des virgules
@@ -90,7 +90,7 @@ var profs = [
 		actif: true,
 		image: "personne.png", // mettre la photo dans le sous-répertoire images
 		bureau: "E-209",
-		courriel: "ericb.gendron@cegepmontpetit.ca​",
+		courriel: "ericb.gendron@cegepmontpetit.ca",
 		extension: "5317",
 		lienVideo: "",	// laisser vide si pas de vidéo
 		cours: ["3S6", "5E5", "5G5"] // numéro des cours entre guillemets séparés par des virgules
@@ -114,14 +114,14 @@ var profs = [
 		actif: true,
 		image: "personne.png", // mettre la photo dans le sous-répertoire images
 		bureau: "E-212",
-		courriel: "​​jamil.gammoudi@cegepmontpetit.ca",
+		courriel: "jamil.gammoudi@cegepmontpetit.ca",
 		extension: "2804",
 		lienVideo: "",	// laisser vide si pas de vidéo
 		cours: ["1N6", "943"] // numéro des cours entre guillemets séparés par des virgules
 	},
 	{
 		id: 10,
-		nom: "​Jean-Michel Nadeau",
+		nom: "Jean-Michel Nadeau",
 		titre: "Enseignant",
 		actif: true,
 		image: "j_m_nadeau.png", // mettre la photo dans le sous-répertoire images
@@ -150,7 +150,7 @@ var profs = [
 		actif: true,
 		image: "kevin_leduc.png", // mettre la photo dans le sous-répertoire images
 		bureau: "E-213",
-		courriel: "kevin.leduc@cegepmontpetit.ca​",
+		courriel: "kevin.leduc@cegepmontpetit.ca",
 		extension: "2913",
 		lienVideo: "hGE8XJskYzg",	// laisser vide si pas de vidéo
 		cours: ["1B3", "905"] // numéro des cours entre guillemets séparés par des virgules
@@ -270,7 +270,7 @@ var profs = [
 		actif: false,
 		image: "vincent_drolet.png", // mettre la photo dans le sous-répertoire images
 		bureau: "",
-		courriel: "vincent.drolet@cegepmontpetit.ca​",
+		courriel: "vincent.drolet@cegepmontpetit.ca",
 		extension: "2762",
 		lienVideo: "",	// laisser vide si pas de vidéo
 		cours: [] // numéro des cours entre guillemets séparés par des virgules
