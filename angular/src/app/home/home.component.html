@@ -1,0 +1,101 @@
+<div [style.background-image]="'url(assets/spag.jpg)'"
+     style="height:100%;background-repeat: repeat;background-position: center;background-size: 100%;background-attachment: fixed;">
+  <br>
+  <div class="container" >
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <app-terminal></app-terminal>
+      </div>
+      <div class="col-md-4">
+        <mat-card class="mb-4">
+          <mat-card-header>
+            <mat-card-title>Les cours</mat-card-title>
+            <mat-card-subtitle>et les programmes</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              Nous offrons un programme de DEC technique avec 2 voies de sorties et un DEC Bac en programmation.
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button mat-flat-button color="accent" routerLink="/dec">DEC</button>
+            <button mat-button mat-flat-button color="accent" routerLink="/decbac">DEC-BAC</button>
+          </mat-card-actions>
+        </mat-card>
+
+      </div>
+
+      <div class="col-md-4">
+        <mat-card class="mb-4">
+          <mat-card-header>
+            <mat-card-title>Tu es déjà avec nous</mat-card-title>
+<!--            <mat-card-subtitle>quelques informations</mat-card-subtitle>-->
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              Quelques conseils pour
+              &nbsp;
+              <a class="badge badge-light" routerLink="/nouveau" > Nouvel étudiant</a>
+            </p>
+
+            <p>
+              Explications sur le
+              &nbsp;
+              <a class="badge badge-danger" routerLink="/plagiat">
+                <i class="fas fa-radiation"></i> plagiat <i class="fas fa-radiation"></i>
+              </a>
+            </p>
+
+            <p>
+              Le document si tu as un problème avec ton
+              &nbsp;
+              <a class="badge badge-light" href="assets/RequeteDDA.pdf">
+                <i class="fas fa-hdd"></i> SSD
+              </a>
+            </p>
+            <a mat-button mat-flat-button color="primary" target="_blank" href="https://cegepmontpetit.ca">Collège</a>
+            &nbsp;
+            <a mat-button mat-flat-button color="primary" target="_blank" href="https://cegepmontpetit.omnivox.ca/">Omnivox</a>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-card class="mb-4">
+          <mat-card-header>
+            <mat-card-title routerLink="/profs">Nos profs</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="carousel slide" data-ride="carousel" data-interval="2000">
+              <div class="carousel-inner">
+                <!--            <div class="carousel-item active"><img src="assets/grimace.JPG" class="d-block w-100" alt="..."></div>-->
+                <div [class]="i==0?'carousel-item active' : 'carousel-item'" *ngFor="let video of videos | async; index as i">
+                  <div class="embed-responsive embed-responsive-16by9" >
+                    <iframe class="embed-responsive-item " [src]="urlFor(video)" allowfullscreen></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-md-4">
+        <button mat-button (click)="openAdept()">
+          <img style="width: 100%" src="assets/logo-adept.png">
+        </button>
+      </div>
+      <div class="col-md-4">
+        <<div class="carousel slide" data-ride="carousel" data-interval="2000">
+          <div class="carousel-inner">
+            <div [class]="i==0?'carousel-item active' : 'carousel-item'"class="carousel-item" *ngFor="let image of images; index as i;"><img src="assets/{{image}}" class="d-block w-100" alt="..."></div>
+          </div>
+        </div>>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

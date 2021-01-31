@@ -1,0 +1,38 @@
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <a class="btn btn-success" href="https://www.cegepmontpetit.ca/coronavirus/etudiants#session-automne-2020">
+        Page Covid du CEGEP
+      </a>
+    </div>
+    <div class="col-md-4">
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Recherche par mot clé</mat-label>
+        <input type="text" [(ngModel)]="recherche"
+               (input)="filter(recherche)"
+               placeholder="Tape ici"
+               matInput>
+      </mat-form-field>
+
+    </div>
+    <div class="col-md4"></div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let q of questions | async">
+      <div class="alert alert-dark" >
+        <h3>{{q.q}}</h3>
+
+        <p>
+          {{q.r}}
+        </p>
+        <a href="{{l}}" class="card-link" *ngFor="let l of q.liens">lien</a>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

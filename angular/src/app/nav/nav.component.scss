@@ -1,0 +1,30 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  //width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.mat-sidenav {
+  //background: $candy-app-accent;
+}
+
+.principale {
+  padding-top: 0px;
+  height: 100%;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
