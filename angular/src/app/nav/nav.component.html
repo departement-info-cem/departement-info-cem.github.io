@@ -12,15 +12,15 @@
       <mat-icon aria-label="Menu">close_fullscreen</mat-icon>
     </button>
     <mat-nav-list>
-      <mat-list-item routerLink="home">
+      <mat-list-item routerLink="home" (click)="isExpanded = false">
         <mat-icon mat-list-icon>home</mat-icon>
         <h4 mat-line *ngIf="isExpanded">Accueil</h4>
       </mat-list-item>
-      <mat-list-item routerLink="profs">
+      <mat-list-item routerLink="profs" (click)="isExpanded = false">
         <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
         <h4 mat-line *ngIf="isExpanded">Profs</h4>
       </mat-list-item>
-      <mat-list-item routerLink="dec">
+      <mat-list-item routerLink="dec" (click)="isExpanded = false">
         <mat-icon mat-list-icon>school</mat-icon>
         <h4 mat-line *ngIf="isExpanded">DEC Technique</h4>
       </mat-list-item>
@@ -28,19 +28,19 @@
         <mat-icon mat-list-icon>science</mat-icon>
         <h4 mat-line *ngIf="isExpanded">DEC Bac</h4>
       </mat-list-item>
-      <mat-list-item routerLink="faq">
+      <mat-list-item routerLink="faq" (click)="isExpanded = false">
         <mat-icon mat-list-icon>help_outline</mat-icon>
         <h4 mat-line *ngIf="isExpanded">Foire aux questions</h4>
       </mat-list-item>
-      <mat-list-item routerLink="goodies">
+      <mat-list-item routerLink="goodies" (click)="isExpanded = false">
         <mat-icon mat-list-icon>savings</mat-icon>
         <h4 mat-line *ngIf="isExpanded">Logiciels gratuits</h4>
       </mat-list-item>
-      <mat-list-item routerLink="plagiat">
+      <mat-list-item routerLink="plagiat" (click)="isExpanded = false">
         <mat-icon mat-list-icon>copyright</mat-icon>
         <h4 mat-line *ngIf="isExpanded">Plagiat</h4>
       </mat-list-item>
-      <mat-list-item routerLink="contact">
+      <mat-list-item routerLink="contact" (click)="isExpanded = false">
         <mat-icon mat-list-icon>email</mat-icon>
         <h4 mat-line *ngIf="isExpanded">Contact</h4>
       </mat-list-item>
@@ -66,7 +66,7 @@
         </span>
       </a>
       <a class="" href="https://cegepedouardmontpetit.sharepoint.com/teams/PED-INFO" target="_blank">
-        <img style="height: 25px" src="https://upload.wikimedia.org/wikipedia/commons/3/31/Microsoft_Office_SharePoint_%282018–present%29.svg" />
+        <img style="height: 25px" src="assets/sharepoint.png" />
       </a>
       <button mat-icon-button class="example-icon" routerLink="/">
         <mat-icon>home</mat-icon>
