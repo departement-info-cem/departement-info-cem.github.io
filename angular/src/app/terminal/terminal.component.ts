@@ -131,6 +131,7 @@ export class TerminalComponent implements OnInit {
       const diagnostic = this.diagnostic(this.triggers);
       if (diagnostic) {
         this.question = diagnostic;
+        this.playDiagnostic();
         return;
       }
       // find one that is the most triggered and not already asked.
@@ -260,7 +261,7 @@ export class TerminalComponent implements OnInit {
 
   playDiagnostic(): void{
     const audio = new Audio();
-    audio.src = '../../../assets/audio/alarm.wav';
+    audio.src = 'assets/diagno.wav';
     audio.load();
     audio.play();
   }
