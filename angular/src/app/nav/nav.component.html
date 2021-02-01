@@ -52,7 +52,10 @@
       <mat-icon *ngIf="drawer.opened" aria-label="Side nav toggle icon" (click)="drawer.toggle()">chevron_left</mat-icon>
       <mat-icon *ngIf="!drawer.opened" aria-label="Side nav toggle icon" (click)="drawer.toggle()">menu</mat-icon>
       &nbsp;
-      <span>Info</span> <span style="font-size:.6em">@Montpetit</span>
+      <span routerLink="/">
+        <span>Info</span>
+        <span style="font-size:.6em">@Montpetit</span>
+      </span>
       <span class="example-spacer"></span>
       <a class="mr-1" href="https://cegepmontpetit.ca" target="_blank">
         <img style="height: 25px" src="assets/CEM_V_blanc.svg" />
