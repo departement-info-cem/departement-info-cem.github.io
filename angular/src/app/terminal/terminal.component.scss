@@ -18,7 +18,7 @@ input {
   bottom: 10px;
   left:5px;
   color: rgb(160,160,160);
-  font-family: courier, monospace;
+  font-family:  'Space Mono', Courier, monospace;
   display: inline-block;
 }
 
@@ -53,8 +53,8 @@ input {
 }
 
 .cmd div {
-  font-family: courier, monospace;
-  font-size: .95em;
+  font-family: 'VT323', 'Space Mono', monospace;
+  font-size: 1.2em;
   white-space: normal;
 }
 .que {
