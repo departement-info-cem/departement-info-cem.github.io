@@ -2,8 +2,7 @@
 @import "~@fortawesome/fontawesome-free/css/all.css";
 
 // font
-@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Space+Mono:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Space+Mono:wght@700&family=VT323&display=swap');
 
 /* You can add global styles to this file, and also import other style files */
@@ -18,8 +17,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$candy-app-primary: mat-palette($mat-blue-grey);
-$candy-app-accent:  mat-palette($mat-light-blue, A200, A100, A400);
+$candy-app-primary: mat-palette($mat-blue-grey, A700,A300,A900);
+$candy-app-accent:  mat-palette($mat-green, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $candy-app-warn:    mat-palette($mat-red);
