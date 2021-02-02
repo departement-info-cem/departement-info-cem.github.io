@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100px" height="100px" version="1.1"
+     viewBox="0 0 100 100"
+     preserveAspectRatio="xMinYMin meet">
+
+
+  <g fill="grey"
+     transform="rotate(-25 50 50)
+                ">
+    <circle cx="50" cy="50" r="50" fill="#990000"/>
+    <circle cx="50" cy="50" r="48" fill="white"/>
+    <circle cx="50" cy="50" r="45" fill="#990000"/>
+    <circle cx="50" cy="50" r="43" fill="white"/>
+    <text x="8" y="55" fill="#990000"
+          style="font-family: 'Courier';
+                font-size:20px;
+                font-weight:bolder;
+                font-style: normal">GRATUIT</text>
+  </g>
+</svg>
+
