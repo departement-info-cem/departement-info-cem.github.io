@@ -2,8 +2,8 @@
   height: 100%;
 }
 
-.sidenav {
-  //width: 200px;
+.pointy:hover {
+  cursor: pointer;
 }
 
 .sidenav .mat-toolbar {
@@ -21,8 +21,8 @@
 }
 
 .principale {
-  padding-top: 0px;
   height: 100%;
+  overflow: scroll;
 }
 
 .example-spacer {
