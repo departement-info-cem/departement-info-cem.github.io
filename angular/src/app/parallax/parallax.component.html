@@ -1,0 +1,193 @@
+
+<div class="bgimg-1">
+  <div class="container" style="position: relative; top:40px;">
+    <div class="row mr-1 ml-1">
+      <div class="col-lg-6 mb-1" >
+        <div class="bienvenue" style="font-family: Raleway, Roboto, Courier">
+          <h4 style="font-family: 'Roboto';font-size: 1.3em;">Bienvenue</h4>
+          <p>
+            Notre bot est là pour t'aider à choisir le bon DEC.
+          </p>
+          <object  data="assets/logo.svg" type="image/svg+xml" height="100" style="float:right;">
+          </object>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <app-terminal></app-terminal>
+      </div>
+    </div>
+  </div>
+  <div style="text-align: center; position:absolute;width:100%;bottom: 60px;">
+    <p style="text-align: center; color: white; font-size: 3em;">
+      <i class="fas fa-angle-double-down"></i>
+    </p>
+
+  </div>
+</div>
+
+<div style="color: #777;background-color:#dddddd;text-align:center;padding:40px 10px;text-align: justify;">
+  <h3 style="text-align:center;">Logiciels gratuits !!!!</h3>
+  <app-goodies></app-goodies>
+</div>
+
+<div class="bgimg-2">
+
+  <div class="container" style="position: relative; top:50px;">
+    <div class="row mr-1 ml-1">
+      <div class="col-lg-7 mb-4" >
+        <div class="bienvenue" style="font-family: Raleway, Roboto, Courier">
+          <h4 style="font-family: 'Raleway';font-size: 1.5em;">DEC technique</h4>
+          <p>
+            3 ans pour apprendre les bases de l'informatique.
+          </p>
+          <p>
+            On offre 2 profils
+          </p>
+          <a routerLink="/dec/r">réseautique</a>&nbsp;  <a routerLink="/dec/p">programmation</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mr-1 ml-1">
+      <div class="col-lg-5" ></div>
+      <div class="col-lg-7 mb-5">
+        <div class="bienvenue" style="font-family: Raleway, Roboto, Courier">
+          <h4 style="font-family: 'Major Mono Display';font-size: 1.5em;">DEC Bac</h4>
+
+            Un DEC et un bac en <a routerLink="/decbac">prog</a>.
+          <br>
+          (intensif en 5 ans)
+
+          <div style="float:right;border:1px solid black;margin:5px;">
+            <img  src="https://www.usherbrooke.ca/communications/fileadmin/_processed_/8/5/csm_UdeS_nouveau_noir-72dpi_03_e495519a59.jpg"
+                  height="80" >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="position:relative;">
+  <div style="color:#ddd;background-color:#282E34;overflow:scroll;margin:10px 0px;text-align: justify;">
+    <div style="overflow:scroll;display: grid;grid-gap: 10px;
+        grid-template-columns: repeat(20, 230px);
+        grid-template-rows: minmax(150px, 1fr);">
+      <div
+        style="border-left: 5px solid black;"
+        *ngFor="let image of ['gang.JPG', 'tablo.JPG', 'blond.JPG', 'jo-jm.JPG', 'grimace.JPG',    'profs/jo.JPG', 'profs/hb.png']; index as i;">
+        <img  style="height: 200px;" src="assets/{{image}}"  />
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="bgimg-3">
+  <div class="row mr-2 ml-2 mb-5" style="position: relative; top: 70px;">
+
+    <div class="col-lg-7 mb-5" >
+      <div class="bienvenue" style="font-family: Courier">
+        <h4 style="font-family: 'Roboto';font-size: 1.2em;">Déjà au DEC ...</h4>
+        <p>
+          Conseils pour
+          <a class="badge badge-dark" routerLink="/nouveau" > nouvel étudiant</a>
+        </p>
+
+        <p>
+          Attention
+          &nbsp;
+          <a class="badge badge-light" routerLink="/plagiat">
+            <i class="fas fa-radiation"></i> plagiat <i class="fas fa-radiation"></i>
+          </a>
+        </p>
+
+        <p>
+          Problèmes de
+          &nbsp;
+          <a class="badge badge-dark" href="assets/RequeteDDA.pdf">
+            <i class="fas fa-hdd"></i> SSD
+          </a>
+        </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="row mr-2 ml-2 mt-5">
+    <div class="col-lg-5" ></div>
+    <div class="col-lg-7 mb-5">
+      <div class="bienvenue" style="font-family: Roboto, Courier;" >
+        <h4 style="font-family: Raleway, 'Major Mono Display';float: right;font-size: 1.5em;margin-bottom: 10px;">LIENS</h4>
+        <a target="_blank" href="https://cegepmontpetit.ca">Collège</a> &nbsp;
+        <br><br>
+        <a target="_blank" href="https://cegepmontpetit.omnivox.ca/">Omnivox</a>
+
+        <br>
+        <a target="_blank" style="float:right;" href="https://www.adeptinfo.ca">
+          <img src="assets/logo-adept.png" width="80px"/>
+        </a>
+        <br>
+        <a target="_blank" href="https://www.adeptinfo.ca">
+          Association
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="position:relative; ">
+  <div style="font-size:3em;color:#eee;background-color:#282E34;">
+    <h2 style="font-family: 'Major Mono Display'; margin: 20px;">LES PROFS </h2>
+
+    <div style="overflow:scroll;display: grid;grid-gap: 10px;
+        grid-template-columns: repeat(20, 200px);
+        grid-template-rows: minmax(150px, 1fr);">
+      <div routerLink="/prof/{{photo.courriel}}"
+        style="border-left: 5px solid black;"
+        *ngFor="let photo of photos | async; index as i">
+        <img  style="height: 200px;" src="assets/profs/{{photo.image}}"  alt="{{photo.nom}}" />
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="bgimg-1">
+  <div class="row mr-4 ml-4 mb-5" style="position: relative; top:70px;">
+    <div class="col-lg-5" ></div>
+    <div class="col-lg-7 mb-4" >
+      <div class="bienvenue" style="font-family: Raleway, Roboto, Courier">
+        <h4 style="font-family: 'Raleway';font-size: 1.5em;">questions?</h4>
+        <br>
+        Tu peux consulter notre
+        <br>
+        <a routerLink="/faq">foire aux questions</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mr-2 ml-2">
+
+    <div class="col-lg-7 mt-5 mb-4">
+      <div class="bienvenue" style="font-family: Raleway, Roboto, Courier">
+        <h3>nous contacter</h3>
+        <br><br>
+        une seule adresse:
+        <br><br>
+        <a class="btn btn-block btn-dark btn-lg mb-5" href="mailto:coordo-info@cegepmontpetit.ca">
+          coordo-info@cegepmontpetit.ca <i class="far fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div style="position:relative; ">
+  <div style="font-family:Raleway, Roboto, Courier;color:#ddd;background-color:#282E34;text-align:center;padding:30px 50px;text-align: justify;">
+    <p>Copyright Joris Deguet 2021.</p>
+  </div>
+</div>

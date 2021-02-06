@@ -38,6 +38,7 @@ import {FormsModule} from '@angular/forms';
 import { PlagiatComponent } from './plagiat/plagiat.component';
 import { NouveauComponent } from './nouveau/nouveau.component';
 import { TerminalComponent } from './terminal/terminal.component';
+import { ParallaxComponent } from './parallax/parallax.component';
 
 // TODO regarder snap scroll effects pour la page des profs ou pour le dec bac
 // TODO remplacer les photos par du plus récent
@@ -59,7 +60,8 @@ import { TerminalComponent } from './terminal/terminal.component';
     ContactComponent,
     PlagiatComponent,
     NouveauComponent,
-    TerminalComponent
+    TerminalComponent,
+    ParallaxComponent
   ],
   imports: [
     BrowserModule,

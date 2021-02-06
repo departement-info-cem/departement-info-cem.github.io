@@ -11,6 +11,7 @@ import {ContactComponent} from './contact/contact.component';
 import {NouveauComponent} from './nouveau/nouveau.component';
 import {PlagiatComponent} from './plagiat/plagiat.component';
 import {TerminalComponent} from './terminal/terminal.component';
+import {ParallaxComponent} from './parallax/parallax.component';
 
 const routes: Routes = [
   {path: 'profs',              component: ProfsComponent,          data: { title: 'Prof' }},
@@ -23,9 +24,11 @@ const routes: Routes = [
   {path: 'plagiat',               component: PlagiatComponent,          data: { title: 'Dec' }},
 
   {path: 'dec',               component: DecComponent,          data: { title: 'Dec' }},
+  {path: 'dec/:profil',         component: DecComponent,        data: { title: 'Dec' }},
   {path: 'decbac',               component: DecbacComponent,          data: { title: 'Dec Bac' }},
   {path: 'goodies',            component: GoodiesComponent,     data: { title: 'Etudiant' }},
   {path: 'terminal',            component: TerminalComponent,     data: { title: 'Etudiant' }},
+  {path: 'parallax',            component: ParallaxComponent,     data: { title: 'Etudiant' }},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', component: HomeComponent }
 ];
