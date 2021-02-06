@@ -69,8 +69,8 @@
 </div>
 
 <div style="position:relative;">
-  <div style="color:#ddd;background-color:#282E34;overflow:scroll;margin:10px 0px;text-align: justify;">
-    <div style="overflow:scroll;display: grid;grid-gap: 10px;
+  <div style="color:#ddd;background-color:#282E34;overflow:hidden;margin:10px 0px;text-align: justify;">
+    <div style="overflow-x:scroll;overflow-y:hidden;display: grid;grid-gap: 10px;
         grid-template-columns: repeat(20, 230px);
         grid-template-rows: minmax(150px, 1fr);">
       <div
@@ -78,10 +78,8 @@
         *ngFor="let image of ['gang.JPG', 'tablo.JPG', 'blond.JPG', 'jo-jm.JPG', 'grimace.JPG',    'profs/jo.JPG', 'profs/hb.png']; index as i;">
         <img  style="height: 200px;" src="assets/{{image}}"  />
       </div>
-
     </div>
   </div>
-
 </div>
 
 <div class="bgimg-3">
@@ -138,10 +136,10 @@
 </div>
 
 <div style="position:relative; ">
-  <div style="font-size:3em;color:#eee;background-color:#282E34;">
+  <div style="font-size:3em;color:#eee;background-color:#282E34;overflow: hidden;">
     <h2 style="font-family: 'Major Mono Display'; margin: 20px;">LES PROFS </h2>
 
-    <div style="overflow:scroll;display: grid;grid-gap: 10px;
+    <div style="overflow-y:hidden;overflow-x:auto;display: grid;grid-gap: 10px;
         grid-template-columns: repeat(20, 200px);
         grid-template-rows: minmax(150px, 1fr);">
       <div routerLink="/prof/{{photo.courriel}}"
