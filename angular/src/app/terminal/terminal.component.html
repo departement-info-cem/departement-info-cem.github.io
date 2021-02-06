@@ -5,7 +5,7 @@
   <div class="boutons z" (click)="reset()"></div>
   <div class="titre">superbot 2000 </div>
 </div>
-<div class="cmd" onclick="$('#foo').focus();">
+<div class="cmd" style="overflow: hidden;" onclick="$('#foo').focus();">
   <div *ngIf="!userName">
     <div class="que">bot % Yo, moi c'est bot. <br>Tu te demandes si tu veux faire de l'info à Montpetit?<br> Comment tu t'appelles?</div>
     <div class="prompt">anonymous>&nbsp;{{userLine}}<span class="cursor">_</span></div>
