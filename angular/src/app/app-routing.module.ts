@@ -28,8 +28,8 @@ const routes: Routes = [
   {path: 'decbac',               component: DecbacComponent,          data: { title: 'Dec Bac' }},
   {path: 'goodies',            component: GoodiesComponent,     data: { title: 'Etudiant' }},
   {path: 'terminal',            component: TerminalComponent,     data: { title: 'Etudiant' }},
-  {path: 'parallax',            component: ParallaxComponent,     data: { title: 'Etudiant' }},
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'accueil',            component: ParallaxComponent,     data: { title: 'Accueil' }},
+  {path: '', redirectTo: '/accueil', pathMatch: 'full'},
   {path: '**', component: HomeComponent }
 ];
 
