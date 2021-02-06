@@ -23,6 +23,10 @@ export class DataService {
     return this.profs().pipe(map(profs => profs.filter(prof => prof.lienVideo)));
   }
 
+  photos(): Observable<Prof[]> {
+    return this.profs().pipe(map(profs => profs.filter(prof => prof.image)));
+  }
+
   cours(): Observable<Cours[]> {
     return this.http.get<Cours[]>('assets/data/cours.json');
   }
