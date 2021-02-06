@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Cours, DataService, Prof} from '../service/service.prof';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-dec',
@@ -11,8 +12,13 @@ export class DecComponent implements OnInit {
   cours: Observable<Cours[]>;
   programme = 'c';
 
-  constructor(private service: DataService) {
+  constructor(private service: DataService,
+              private route: ActivatedRoute) {
     this.cours = this.service.cours();
+    const profil = this.route.snapshot.paramMap.get('profil');
+    if (profil) {
+      this.programme = profil;
+    }
   }
 
   ngOnInit(): void {
