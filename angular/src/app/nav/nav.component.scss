@@ -16,13 +16,10 @@
   z-index: 1;
 }
 
-.mat-sidenav {
-  //background: $candy-app-accent;
-}
-
 .principale {
-  height: 100%;
+  height: calc(100% - 64px);    // doit enlever le navbar sinon on a 2 scroll bars !! crée une petit bande noire en bas
   overflow: scroll;
+  overflow-x: hidden;
 }
 
 .example-spacer {
