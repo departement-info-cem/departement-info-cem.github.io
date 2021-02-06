@@ -30,16 +30,6 @@ body, html {
   min-height: 100%;
 }
 
-.bienvenue {
-  color:black;
-  background: #ffffffee;
-  margin: 0 10px;
-  border: 2px solid black;
-  border-radius: 5px;
-  font-size: 1.8em;
-  line-height: 1.2em;
-  padding:35px;
-}
 
 .caption {
   position: absolute;
@@ -73,11 +63,29 @@ h3 {
   }
 }
 
-
 @media not all and (min-resolution:.001dpcm) {
-
   .bgimg-1, .bgimg-2, .bgimg-3 {
     background-attachment: scroll;
   }
+}
 
+
+
+
+.bienvenue {
+  color:black;
+  background: #ffffffee;
+  margin: 0 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 1.8em;
+  line-height: 1.2em;
+  padding:35px;
+}
+
+
+@media only screen and (max-device-width: 400px) {
+  .cue {
+    display: none;
+  }
 }

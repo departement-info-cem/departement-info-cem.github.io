@@ -2,26 +2,29 @@
 <div class="bgimg-1">
   <div class="container" style="position: relative; top:40px;">
     <div class="row mr-1 ml-1">
+
+      <div class="col-lg-6">
+        <app-terminal></app-terminal>
+      </div>
+
       <div class="col-lg-6 mb-1" >
         <div class="bienvenue" style="font-family: Raleway, Roboto, Courier">
           <h4 style="font-family: 'Roboto';font-size: 1.3em;">Bienvenue</h4>
           <p>
             Notre bot est là pour t'aider à choisir le bon DEC.
           </p>
-          <object  data="assets/logo.svg" type="image/svg+xml" height="100" style="float:right;">
+          <a routerLink="/faq/covid">info covid</a>
+          <object  data="assets/logo.svg" type="image/svg+xml" height="90" style="float:right;">
           </object>
         </div>
       </div>
-      <div class="col-lg-6">
-        <app-terminal></app-terminal>
-      </div>
+
     </div>
   </div>
-  <div style="text-align: center; position:absolute;width:100%;bottom: 60px;">
+  <div class="cue" style="text-align: center; position:absolute;width:100%;bottom: 60px;">
     <p style="text-align: center; color: white; font-size: 3em;">
       <i class="fas fa-angle-double-down"></i>
     </p>
-
   </div>
 </div>
 
@@ -83,11 +86,11 @@
 </div>
 
 <div class="bgimg-3">
-  <div class="row mr-2 ml-2 mb-5" style="position: relative; top: 70px;">
+  <div class="row mr-1 ml-1 mb-5" style="position: relative; top: 70px;">
 
     <div class="col-lg-7 mb-5" >
       <div class="bienvenue" style="font-family: Courier">
-        <h4 style="font-family: 'Roboto';font-size: 1.2em;">Déjà au DEC ...</h4>
+        <h4 style="font-family: 'Roboto';font-size: 1.2em;">Déjà au DEC</h4>
         <p>
           Conseils pour
           <a class="badge badge-dark" routerLink="/nouveau" > nouvel étudiant</a>
@@ -112,7 +115,7 @@
       </div>
     </div>
   </div>
-  <div class="row mr-2 ml-2 mt-5">
+  <div class="row mr-1 ml-1 mt-5">
     <div class="col-lg-5" ></div>
     <div class="col-lg-7 mb-5">
       <div class="bienvenue" style="font-family: Roboto, Courier;" >
@@ -154,7 +157,7 @@
 </div>
 
 <div class="bgimg-1">
-  <div class="row mr-4 ml-4 mb-5" style="position: relative; top:70px;">
+  <div class="row mr-1 ml-1 mb-5" style="position: relative; top:70px;">
     <div class="col-lg-5" ></div>
     <div class="col-lg-7 mb-4" >
       <div class="bienvenue" style="font-family: Raleway, Roboto, Courier">
@@ -167,15 +170,14 @@
     </div>
   </div>
 
-  <div class="row mr-2 ml-2">
+  <div class="row mr-1 ml-1">
 
     <div class="col-lg-7 mt-5 mb-4">
       <div class="bienvenue" style="font-family: Raleway, Roboto, Courier">
         <h3>nous contacter</h3>
-        <br><br>
         une seule adresse:
         <br><br>
-        <a class="btn btn-block btn-dark btn-lg mb-5" href="mailto:coordo-info@cegepmontpetit.ca">
+        <a class="btn btn-block btn-dark btn-lg mb-1" style="word-wrap: break-word;" href="mailto:coordo-info@cegepmontpetit.ca">
           coordo-info@cegepmontpetit.ca <i class="far fa-envelope"></i>
         </a>
       </div>
