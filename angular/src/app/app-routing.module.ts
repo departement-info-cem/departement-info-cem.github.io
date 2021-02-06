@@ -19,6 +19,7 @@ const routes: Routes = [
   {path: 'home',               component: HomeComponent,          data: { title: 'Prof' }},
   {path: 'contact',               component: ContactComponent,          data: { title: 'Prof' }},
   {path: 'faq',               component: FaqComponent,          data: { title: 'Dec' }},
+  {path: 'faq/:cat',               component: FaqComponent,          data: { title: 'Dec' }},
 
   {path: 'nouveau',               component: NouveauComponent,          data: { title: 'Dec' }},
   {path: 'plagiat',               component: PlagiatComponent,          data: { title: 'Dec' }},

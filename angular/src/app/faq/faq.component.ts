@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {filter, map, startWith} from 'rxjs/operators';
 import {DataService, Question} from '../service/service.prof';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-faq',
@@ -13,8 +14,14 @@ export class FaqComponent implements OnInit {
   questions: Observable<Question[]>;
   recherche = '';
 
-  constructor(private service: DataService) {
+  constructor(private service: DataService,
+              private route: ActivatedRoute) {
     this.questions = this.service.qs();
+    const categorie = this.route.snapshot.paramMap.get('cat');
+    if (categorie) {
+      this.recherche = categorie;
+      this.filter(this.recherche);
+    }
   }
 
   ngOnInit(): void {}
