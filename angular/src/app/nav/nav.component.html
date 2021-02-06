@@ -3,7 +3,7 @@
       [disableClose]="true"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'side' : 'side'"
-      [opened]="(isHandset$ | async) ? 'false' : 'true'">
+      [opened]="false">
 <!--    <mat-toolbar color="accent">Menu</mat-toolbar>-->
     <button *ngIf="!isExpanded" mat-mini-fab (click)="isExpanded = !isExpanded" color="accent" style="margin: 13px;">
       <mat-icon aria-label="Menu">open_in_full</mat-icon>
