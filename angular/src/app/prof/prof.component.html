@@ -10,7 +10,8 @@
             <mat-card-subtitle>{{prof.courriel}}@cegepmontpetit.ca</mat-card-subtitle>
           </mat-card-header>
 
-          <img *ngIf="prof.image && prof.image.length > 1" mat-card-image src="assets/profs/{{prof.image}}" />
+          <img *ngIf="prof.image && prof.image.length > 1" mat-card-image
+               src="https://raw.githubusercontent.com/departement-info-cem/departement-info-cem.github.io/master/data/photos/{{prof.image}}" />
 
           <mat-card-content>
 

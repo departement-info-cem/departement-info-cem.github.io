@@ -78,7 +78,7 @@
         grid-template-rows: minmax(150px, 1fr);">
       <div
         style="border-left: 5px solid black;"
-        *ngFor="let image of ['gang.JPG', 'tablo.JPG', 'blond.JPG', 'jo-jm.JPG', 'grimace.JPG',    'profs/jo.JPG', 'profs/hb.png']; index as i;">
+        *ngFor="let image of ['gang.JPG', 'tablo.JPG', 'blond.JPG', 'jo-jm.JPG', 'grimace.JPG', 'hugo.JPG', 'home.jpg', 'college.jpg']; index as i;">
         <img  style="height: 200px;" src="assets/{{image}}"  />
       </div>
     </div>
@@ -148,7 +148,7 @@
       <div routerLink="/prof/{{photo.courriel}}"
         style="border-left: 5px solid black;"
         *ngFor="let photo of photos | async; index as i">
-        <img  style="height: 200px;" src="assets/profs/{{photo.image}}"  alt="{{photo.nom}}" />
+        <img  style="height: 200px;" src="https://raw.githubusercontent.com/departement-info-cem/departement-info-cem.github.io/master/data/photos/{{photo.image}}"  alt="{{photo.nom}}" />
       </div>
 
     </div>
