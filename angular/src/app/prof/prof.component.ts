@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Prof, DataService} from '../service/service.prof';
-import {Observable} from 'rxjs';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
