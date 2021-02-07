@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {filter, map} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 
 @Injectable()
@@ -10,7 +10,7 @@ export class DataService {
   constructor(private http: HttpClient ) { }
 
   profs(): Observable<Prof[]> {
-    return this.http.get<Prof[]>('assets/data/profs.json');
+    return this.http.get<Prof[]>('https://raw.githubusercontent.com/departement-info-cem/departement-info-cem.github.io/master/data/profs.json');
   }
 
   profParCourriel(courriel: string): Observable<Prof> {
@@ -28,7 +28,7 @@ export class DataService {
   }
 
   cours(): Observable<Cours[]> {
-    return this.http.get<Cours[]>('assets/data/cours.json');
+    return this.http.get<Cours[]>('https://raw.githubusercontent.com/departement-info-cem/departement-info-cem.github.io/master/data/cours.json');
   }
 
   questions(s: string): Observable<Question[]> {
@@ -40,9 +40,26 @@ export class DataService {
   }
 
   qs(): Observable<Question[]> {
-    return this.http.get<Question[]>('assets/data/faq.json');
+    return this.http.get<Question[]>('https://raw.githubusercontent.com/departement-info-cem/departement-info-cem.github.io/master/data/faq.json');
+  }
+
+  botRules(): Observable<BotRule[]> {
+    return this.http.get<BotRule[]>('https://raw.githubusercontent.com/departement-info-cem/departement-info-cem.github.io/master/data/bot.json');
   }
 }
+
+export class BotRule {
+  id = -1;
+  q: string | undefined;
+  reponses: string[] = [];
+  triggers: BotTrigger[] = [];
+}
+
+export class BotTrigger {
+  id = -1;
+  r: string | undefined;
+}
+
 
 export class Prof {
   nom = '';

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {Prof} from '../service/service.prof';
+import {Prof} from '../service/service.data';
 
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 

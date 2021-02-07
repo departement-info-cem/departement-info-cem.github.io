@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {filter, map, startWith} from 'rxjs/operators';
-import {DataService, Question} from '../service/service.prof';
+import {DataService, Question} from '../service/service.data';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-faq',
-  templateUrl: './faq.component.html',
-  styleUrls: ['./faq.component.scss']
+  templateUrl: './faq.component.html'
 })
 export class FaqComponent implements OnInit {
   questions: Observable<Question[]>;

@@ -1,21 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {Prof, DataService} from '../service/service.prof';
+import {Prof, DataService} from '../service/service.data';
 
 @Component({
   selector: 'app-prof',
   templateUrl: './profs.component.html',
   styleUrls: ['./profs.component.scss']
 })
-export class ProfsComponent implements OnInit {
+export class ProfsComponent {
 
   profs: Observable<Prof[]>;
 
   constructor(private profService: DataService) {
     this.profs = profService.profs();
   }
-
-  ngOnInit(): void {
-  }
-
 }

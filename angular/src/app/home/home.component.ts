@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {DataService, Prof} from '../service/service.prof';
+import {DataService, Prof} from '../service/service.data';
 import {Observable} from 'rxjs';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 

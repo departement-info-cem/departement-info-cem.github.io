@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DataService, Prof} from '../service/service.prof';
+import {DataService, Prof} from '../service/service.data';
 import {Observable} from 'rxjs';
 
 @Component({

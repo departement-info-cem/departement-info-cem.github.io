@@ -21,7 +21,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { NavComponent } from './nav/nav.component';
 import {DialogAdeptComponent, HomeComponent} from './home/home.component';
 import { MatMenuModule } from '@angular/material/menu';
-import {DataService} from './service/service.prof';
+import {DataService} from './service/service.data';
 import {HttpClientModule} from '@angular/common/http';
 import {SafePipe, TriProfPipe} from './prof/tri.pipe';
 import { GoodiesComponent } from './goodies/goodies.component';
