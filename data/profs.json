@@ -64,7 +64,7 @@
     "image": "vdr.png","lienVideo": ""
 	},
 	{"nom": "Vincent Duval", "bureau": "D-1612", "courriel": "vincent.duval", "extension": "6451",
-		"lienVideo": ""
+		"image": "vd.jpg","lienVideo": ""
 	},
 	{"nom": "Mathieu Dupont", "bureau": "D-????", "courriel": "mathieu.dupont", "extension": "????", "image": "md.jpg",
 		"lienVideo": ""
