@@ -53,13 +53,13 @@
 
   {
     "q": "Quelle formation si je veux faire de l'intelligence artificielle?",
-    "r": "La formation habituelle pour l'IA, c'est l'université en informatique, si possible accompagné de projets de jeu que tu as fait par toi-même. Au CEGEP, nous avons le pré-universitaire et les techniques. PréU, ça prend 2 ans et tu peux continuer au bac en info, la technique prend 3 ans et tu peux aussi continuer au bac (avec des cours crédités). La grosse différence, dans la technique vas faire dans les 1000 heures de cours de programmation, au préU, une centaine et le reste dans d'autres matières.",
+    "r": "La formation habituelle pour l'IA, c'est l'université en informatique, à l'université de Montréal par exemple. Au CEGEP, nous avons le pré-universitaire et les techniques. PréU, ça prend 2 ans et tu peux continuer au bac en info, la technique prend 3 ans et tu peux aussi continuer au bac (avec des cours crédités). La grosse différence, dans la technique tu vas faire dans les 1000 heures de cours de programmation, au préU, une centaine et le reste dans d'autres matières.",
     "cats": ["IA", "professions"],
     "liens": ["https://www.umontreal.ca/intelligenceartificielle/"]
   },
   {
     "q": "Quelle formation si je veux faire du jeu video?",
-    "r": "La formation habituelle des pros du jeu video, c'est le Bac en informatique, si possible accompagné de projets de jeu que tu as fait par toi-même. Au CEGEP, nous avons le pré-universitaire et les techniques. PréU, ça prend 2 ans et tu peux continuer au bac en info, la technique prend 3 ans et tu peux aussi continuer au bac (avec des cours crédités). La grosse différence, dans la technique vas faire dans les 1000 heures de cours de programmation, au préU, une centaine et le reste dans d'autres matières.",
+    "r": "La formation habituelle des pros du jeu video, c'est le Bac en informatique, si possible accompagné de projets de jeux que tu as fait par toi-même. Au CEGEP, nous avons le pré-universitaire et les techniques. PréU, ça prend 2 ans et tu peux continuer au bac en info, la technique prend 3 ans et tu peux aussi continuer au bac (avec des cours crédités). La grosse différence, dans la technique vas faire dans les 1000 heures de cours de programmation, au préU, une centaine et le reste dans d'autres matières.",
     "cats": ["jeux video", "professions"],
     "liens": []
   },
