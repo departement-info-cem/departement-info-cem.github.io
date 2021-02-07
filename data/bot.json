@@ -1,0 +1,69 @@
+[
+  {"id": 1, "q": "L'informatique ça t'intéresse?", "reponses": ["oui", "non"], "triggers": []},
+  {"id": 2, "q": "Tu as envie de démonter des ordis, de souder?", "reponses": ["oui", "non"], "triggers": []},
+  {"id": 3, "q": "Tu te sens plutôt logique/prog ou créatif/dessin?", "reponses": ["logique", "créatif"], "triggers": []},
+  {"id": 4, "q": "Tu doutes ou tu es sûr de ce que tu veux faire?", "reponses": ["sûr", "doute"], "triggers": []},
+  {"id": 22, "q": "Tu veux aller à l'université?", "reponses": ["oui", "non"], "triggers": []},
+
+  {"id": 18, "q": "Tu veux être un hackeur pirate?", "reponses": ["oui", "non"], "triggers": [{"id": 1, "r": "oui"}]},
+  {"id": 11, "q": "Tu rêves de datacenter et de salle de serveur?", "reponses": ["oui", "non"], "triggers": [{"id": 1, "r": "oui"}, {"id": 3, "r": "logique"}]},
+  {"id": 10, "q": "Tu veux développer programmer?", "reponses": ["oui", "non"], "triggers": [{"id": 1, "r": "oui"}, {"id": 3, "r": "logique"}]},
+  {"id": 12, "q": "Tu veux faire la prochaine app mobile?", "reponses": ["oui", "non"], "triggers": [{"id": 10, "r": "oui"}, {"id": 1, "r": "oui"}, {"id": 3, "r": "logique"}]},
+  {"id": 19, "q": "Tu veux faire du support informatique?", "reponses": ["oui", "non"], "triggers": [{"id": 1, "r": "oui"}, {"id": 3, "r": "logique"}]},
+
+  {"id": 20, "q": "Toi c'est l'IA qui t'allume?", "reponses": ["oui", "non"], "triggers": [{"id": 1, "r": "oui"}, {"id": 3, "r": "logique"}]},
+  {"id": 21, "q": "Toi c'est le jeu video qui t'allume?", "reponses": ["oui", "non"], "triggers": [{"id": 1, "r": "oui"}, {"id": 3, "r": "logique"}, {"id": 10, "r": "oui"}]},
+
+
+
+
+
+  {"id": 100, "q": "Diagnostic terminé, 50-50: tu ne connais pas trop l'informatique, ça vaut la peine d'essayer. Tu peux regarder les cours pour te faire un avis.", "reponses": [], "triggers": [{"id": 4, "r": "doute"}]},
+  {"id": 100, "q": "Diagnostic terminé, 0% compatibilité", "reponses": [], "triggers": [{"id": 1, "r": "non"}]},
+  {
+    "id": 100,
+    "q": "Diagnostic terminé, 10% compatibilité. Je te conseille la technique intégration multimédia TIM au CEGEP",
+    "reponses": [], "triggers": [{"id": 1, "r": "oui"}, {"id": 3, "r": "créatif"}]
+  },
+  {
+    "id": 100,
+    "q": "Diagnostic terminé, 10% compatibilité. Je te conseille la technique en génie électrique, ils font de l'électronique, des télécoms. En info, on n'ouvre pas la boite",
+    "reponses": [], "triggers": [{"id": 1, "r": "oui"}, {"id": 2, "r": "oui"}]
+  },
+  {
+    "id": 100,
+    "q": "Diagnostic terminé, 100% compatibilité. Développer des apps, c'est ici. La technique profil prog, c'est pour toi.",
+    "reponses": [], "triggers": [{"id": 1, "r": "oui"}, {"id": 12, "r": "oui"}]
+  },
+  {
+    "id": 100,
+    "q": "Diagnostic terminé, 100% compatibilité. Le réseau c'est ici. La technique profil réseau, c'est pour toi.",
+    "reponses": [], "triggers": [{"id": 1, "r": "oui"}, {"id": 11, "r": "oui"} ]
+  },
+  {
+    "id": 100,
+    "q": "Diagnostic terminé, 100% compatibilité. La technique en réseau ça t'amène au support technique. C'est souvent comme ça que commence les carrières en réseau.",
+    "reponses": [], "triggers": [{"id": 1, "r": "oui"}, {"id": 19, "r": "oui"} ]
+  },
+
+  {
+    "id": 100,
+    "q": "Diagnostic terminé, 100% compatibilité. Cyber sécurité c'est ici. On en fait dans les 2 voies de sorties, tu as la première session pour te faire une idée.",
+    "reponses": [], "triggers": [{"id": 1, "r": "oui"}, {"id": 18, "r": "oui"} ]
+  },
+  {
+    "id": 100,
+    "q": "Diagnostic terminé, 100% compatibilité. Là tu as 2 options, avec nous. Tu peux continuer après la technique à l'université. Tu peux aussi t'inscrire au dec-bac en programmation et tout finir en 5 ans.",
+    "reponses": [], "triggers": [{"id": 10, "r": "oui"}, {"id": 22, "r": "oui"} ]
+  },
+  {
+    "id": 100,
+    "q": "Diagnostic terminé, 70% compatibilité. Pour l'IA, il faut aller à l'université. Tu peux y aller après la technique et tu auras plus d'expérience de programmation que si tu vas en pré-universitaire.",
+    "reponses": [], "triggers": [{"id": 20, "r": "oui"} ]
+  },
+  {
+    "id": 100,
+    "q": "Diagnostic terminé, 70% compatibilité. Pour le jeu video, il faut souvent aller à l'université et programmer des jeux pendant tes études. Tu peux y aller après la technique et tu auras plus d'expérience de programmation que si tu vas en pré-universitaire.",
+    "reponses": [], "triggers": [{"id": 21, "r": "oui"} ]
+  }
+]
