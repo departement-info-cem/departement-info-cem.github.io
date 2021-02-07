@@ -11,7 +11,6 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-devkit/schematics": "^11.0.9",
     "@angular/animations": "~11.1.1",
     "@angular/cdk": "^11.0.3",
     "@angular/common": "~11.1.1",
@@ -25,27 +24,18 @@
     "@fortawesome/fontawesome-free": "^5.15.2",
     "bootstrap": "^4.6.0",
     "jquery": "^3.5.1",
-    "ngx-bootstrap": "^6.2.0",
+    "rellax": "^1.12.1",
     "rxjs": "^6.6.3",
-    "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/architect": ">= 0.900 < 0.1200",
     "@angular-devkit/build-angular": "~0.1100.5",
     "@angular/cli": "~11.1.2",
     "@angular/compiler-cli": "~11.1.1",
-    "@types/jasmine": "~3.6.0",
-    "@types/node": "^12.11.1",
     "angular-cli-ghpages": "^1.0.0-rc.1",
     "codelyzer": "^6.0.0",
-    "fuzzy": "^0.1.3",
-    "inquirer": "^6.2.2",
-    "inquirer-autocomplete-prompt": "^1.0.1",
-    "open": "^7.0.3",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
-    "tslint": "~6.1.0",
     "typescript": "~4.1.3"
   }
 }
