@@ -5,7 +5,7 @@
 	{"nom": "Belhachemi Ouldali", "bureau": "E-210", "courriel": "belhachemi.ouldali", "extension": "6411",
 		"image": "bo.JPG","lienVideo": ""
 	},
-	{"nom": "Bernard Tremblay", "bureau": "D-162", "courriel": "bernard.tremblay", "extension": "3749",
+	{"nom": "Bernard Tremblay", "bureau": "E-214", "courriel": "bernard.tremblay", "extension": "3749",
 		"image": "bt.jpg","lienVideo": ""
 	},
 	{"nom": "Chantal Vallières",  "bureau": "E-209", "courriel": "chantal.vallieres", "extension": "6402",
@@ -30,7 +30,7 @@
     "image": "j_m_nadeau.png",
 		"lienVideo": "MTHD_VL8O78"
 	},
-	{"nom": "Joris Deguet", "bureau": "D-1612", "courriel": "joris.deguet", "extension": "6379",
+	{"nom": "Joris Deguet", "bureau": "E-211", "courriel": "joris.deguet", "extension": "6379",
     "image": "jo.JPG", "lienVideo": "R-YbYMqB_LI"
 	},
 	{"nom": "Kevin Leduc",  "bureau": "E-213", "courriel": "kevin.leduc", "extension": "2913",
@@ -42,7 +42,7 @@
 	},
 	{"nom": "Peter Mylchreest", "bureau": "E-214", "courriel": "peter.mylchreest", "extension": "6453"
 	},
-	{"nom": "Réjean Bilodeau", "bureau": "D-1612", "courriel": "rejean.bilodeau", "extension": "6418",
+	{"nom": "Réjean Bilodeau", "bureau": "A211a", "courriel": "rejean.bilodeau", "extension": "6418",
     "image": "rb.png", "lienVideo": ""
 	},
 	{"nom": "Saïd Cherkaoui", "bureau": "E-214", "courriel": "said.cherkaoui", "extension": "6492",
@@ -54,7 +54,7 @@
 	{"nom": "Thierry Giroux Veilleux", "bureau": "E-211", "courriel": "t.girouxveilleux", "extension": "2969",
 		"lienVideo": ""
 	},
-	{"nom": "Valérie Turgeon", "bureau": "D-1612", "courriel": "valerie.turgeon", "extension": "6409",
+	{"nom": "Valérie Turgeon", "bureau": "E-213", "courriel": "valerie.turgeon", "extension": "6409",
     "image": "vt.png", "lienVideo": "HUZU1aHCJxM"
 	},
 	{"nom": "Vincent Carrier", "bureau": "E-209", "courriel": "vincent.carrier", "extension": "2915",
@@ -63,16 +63,19 @@
 	{"nom": "Vincent Drolet",  "bureau": "", "courriel": "vincent.drolet", "extension": "2762",
     "image": "vdr.png","lienVideo": ""
 	},
-	{"nom": "Vincent Duval", "bureau": "D-1612", "courriel": "vincent.duval", "extension": "6451",
+	{"nom": "Vincent Duval", "bureau": "E-210", "courriel": "vincent.duval", "extension": "6451",
 		"image": "vd.jpg","lienVideo": ""
 	},
-	{"nom": "Mathieu Dupont", "bureau": "D-????", "courriel": "mathieu.dupont", "extension": "????", "image": "md.jpg",
+    {"nom": "Maxime Pelletier", "bureau": "A-241", "courriel": "maxime.pelletier", "extension": "3749",
 		"lienVideo": ""
 	},
-  {"nom": "Rahma Ben Djema", "bureau": "D-????", "courriel": "rahma.bendjemaa", "extension": "????",
+	{"nom": "Mathieu Dupont", "bureau": "E-213", "courriel": "mathieu.dupont", "extension": "2114", 
+     "image": "md.jpg", "lienVideo": ""
+	},
+  {"nom": "Rahma Ben Djema", "bureau": "E-209", "courriel": "rahma.bendjemaa", "extension": "????",
     "lienVideo": ""
   },
-	{"nom": "Achraf Moussaid", "bureau": "D-????", "courriel": "achraf.moussaid", "extension": "????",
+	{"nom": "Achraf Moussaid", "bureau": "E-212", "courriel": "achraf.moussaid", "extension": "????",
 		"lienVideo": ""
 	}
 ]
