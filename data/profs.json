@@ -18,7 +18,7 @@
     "image": "dp.png", "lienVideo": ""
 	},
 	{"nom": "Éric Gendron", "bureau": "E-209", "courriel": "ericb.gendron", "extension": "5317",
-		"lienVideo": ""
+	"image": "eg.jpg",	"lienVideo": ""
 	},
 	{"nom": "Hector Bustillo", "bureau": "E-214", "courriel": "hector.bustillo", "extension": "6478",
     "image": "hb.png", "lienVideo": ""
