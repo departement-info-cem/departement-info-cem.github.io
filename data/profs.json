@@ -6,7 +6,7 @@
 		"image": "bo.JPG","lienVideo": ""
 	},
 	{"nom": "Bernard Tremblay", "bureau": "D-162", "courriel": "bernard.tremblay", "extension": "3749",
-		"lienVideo": ""
+		"image": "bt.jpg","lienVideo": ""
 	},
 	{"nom": "Chantal Vallières",  "bureau": "E-209", "courriel": "chantal.vallieres", "extension": "6402",
     "image": "cv.png", "lienVideo": "UEi_9RpgtmU"
@@ -24,7 +24,7 @@
     "image": "hb.png", "lienVideo": ""
 	},
 	{"nom": "Jamil Gammoudi", "bureau": "E-212", "courriel": "jamil.gammoudi", "extension": "2804",
-		"lienVideo": ""
+		"image": "jg.jpg","lienVideo": ""
 	},
 	{"nom": "Jean-Michel Nadeau", "bureau": "E-211", "courriel": "jean-michel.nadeau", "extension": "6415",
     "image": "j_m_nadeau.png",
