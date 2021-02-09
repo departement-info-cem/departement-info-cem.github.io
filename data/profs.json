@@ -67,7 +67,7 @@
 		"image": "vd.jpg","lienVideo": ""
 	},
     {"nom": "Maxime Pelletier", "bureau": "A-241", "courriel": "maxime.pelletier", "extension": "3749",
-		"lienVideo": ""
+		"image": "mp.png", "lienVideo": ""
 	},
 	{"nom": "Mathieu Dupont", "bureau": "E-213", "courriel": "mathieu.dupont", "extension": "2114", 
      "image": "md.jpg", "lienVideo": ""
