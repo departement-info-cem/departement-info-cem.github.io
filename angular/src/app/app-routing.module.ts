@@ -12,6 +12,7 @@ import {NouveauComponent} from './nouveau/nouveau.component';
 import {PlagiatComponent} from './plagiat/plagiat.component';
 import {TerminalComponent} from './terminal/terminal.component';
 import {ParallaxComponent} from './parallax/parallax.component';
+import {GitComponent} from './git/git.component';
 
 const routes: Routes = [
   {path: 'profs',              component: ProfsComponent,          data: { title: 'Prof' }},
@@ -23,6 +24,7 @@ const routes: Routes = [
 
   {path: 'nouveau',               component: NouveauComponent,          data: { title: 'Dec' }},
   {path: 'plagiat',               component: PlagiatComponent,          data: { title: 'Dec' }},
+  {path: 'git',               component: GitComponent,          data: { title: 'Dec' }},
 
   {path: 'dec',               component: DecComponent,          data: { title: 'Dec' }},
   {path: 'dec/:profil',         component: DecComponent,        data: { title: 'Dec' }},

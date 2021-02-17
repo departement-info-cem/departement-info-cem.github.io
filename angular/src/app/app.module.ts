@@ -39,6 +39,7 @@ import { PlagiatComponent } from './plagiat/plagiat.component';
 import { NouveauComponent } from './nouveau/nouveau.component';
 import { TerminalComponent } from './terminal/terminal.component';
 import { ParallaxComponent } from './parallax/parallax.component';
+import { GitComponent } from './git/git.component';
 
 // TODO regarder snap scroll effects pour la page des profs ou pour le dec bac
 // TODO remplacer les photos par du plus récent
@@ -61,7 +62,8 @@ import { ParallaxComponent } from './parallax/parallax.component';
     PlagiatComponent,
     NouveauComponent,
     TerminalComponent,
-    ParallaxComponent
+    ParallaxComponent,
+    GitComponent
   ],
   imports: [
     BrowserModule,

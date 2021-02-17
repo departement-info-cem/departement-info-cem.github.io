@@ -12,7 +12,7 @@
       <mat-icon aria-label="Menu">close_fullscreen</mat-icon>
     </button>
     <mat-nav-list>
-      <mat-list-item routerLink="home" (click)="isExpanded = false">
+      <mat-list-item routerLink="accueil" (click)="isExpanded = false">
         <mat-icon mat-list-icon>home</mat-icon>
         <h4 mat-line *ngIf="isExpanded">Accueil</h4>
       </mat-list-item>
@@ -25,12 +25,16 @@
         <h4 mat-line *ngIf="isExpanded">DEC Technique</h4>
       </mat-list-item>
       <mat-list-item routerLink="decbac" (click)="isExpanded = false">
-        <mat-icon mat-list-icon>science</mat-icon>
+        <i class="fas fa-university" mat-list-icon></i>
         <h4 mat-line *ngIf="isExpanded">DEC Bac</h4>
       </mat-list-item>
       <mat-list-item routerLink="faq" (click)="isExpanded = false">
         <mat-icon mat-list-icon>help_outline</mat-icon>
         <h4 mat-line *ngIf="isExpanded">Foire aux questions</h4>
+      </mat-list-item>
+      <mat-list-item routerLink="git" (click)="isExpanded = false">
+        <i mat-list-icon class="fab fa-git-square"></i>
+        <h4 mat-line *ngIf="isExpanded">Consignes GIT</h4>
       </mat-list-item>
       <mat-list-item routerLink="goodies" (click)="isExpanded = false">
         <mat-icon mat-list-icon>savings</mat-icon>
