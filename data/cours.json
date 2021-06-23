@@ -54,7 +54,7 @@
 
   {"nom": "Design d'interface", "no": "582-905", "s":5, "v":"p","icons": ["fas fa-palette","far fa-object-group"]},
   {"nom": "Analyse et conception d'applications", "no": "420-5Y5", "v":"p","icons": ["fas fa-clipboard-list"]},
-  {"nom": "Applications mobiles avancées", "no": "420-5N6","v":"p", "icons": ["fas fa-globe-americas"]},
+  {"nom": "Applications mobiles avancées", "no": "420-5N6","v":"p", "icons": ["fas fa-globe-americas"], "url" : "https://departement-info-cem.github.io/5N6-mobile-2/"},
   {"nom": "Prog. Web Avancée", "no": "420-5W5", "v":"p","icons": ["fas fa-images", "fas fa-globe-americas"]},
 
   {"nom": "Cybersécurité 3 : Surveillance", "no": "420-5U5", "v":"r","icons": ["far fa-eye"]},
