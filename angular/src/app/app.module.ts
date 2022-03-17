@@ -40,6 +40,7 @@ import { NouveauComponent } from './nouveau/nouveau.component';
 import { TerminalComponent } from './terminal/terminal.component';
 import { ParallaxComponent } from './parallax/parallax.component';
 import { GitComponent } from './git/git.component';
+import {EngagementComponent} from "./engagements/engagement.component";
 
 // TODO regarder snap scroll effects pour la page des profs ou pour le dec bac
 // TODO remplacer les photos par du plus récent
@@ -61,6 +62,7 @@ import { GitComponent } from './git/git.component';
     ContactComponent,
     PlagiatComponent,
     NouveauComponent,
+    EngagementComponent,
     TerminalComponent,
     ParallaxComponent,
     GitComponent

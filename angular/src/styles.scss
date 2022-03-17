@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "~@fortawesome/fontawesome-free/css/all.css";
 
@@ -17,18 +19,20 @@
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
+
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$candy-app-primary: mat-palette($mat-blue-grey, A700,A300,A900);
-$candy-app-accent:  mat-palette($mat-green, A200, A100, A400);
+$candy-app-primary: mat.define-palette($mat-blue-grey, 700,300,900);
+$candy-app-accent:  mat.define-palette($mat-green, 200, 100, 400);
 
 // The warn palette is optional (defaults to red).
-$candy-app-warn:    mat-palette($mat-red);
+$candy-app-warn:    mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as `color` or `typography`.
-$candy-app-theme: mat-dark-theme((
+$candy-app-theme: mat.define-dark-theme((
   color: (
     primary: $candy-app-primary,
     accent: $candy-app-accent,

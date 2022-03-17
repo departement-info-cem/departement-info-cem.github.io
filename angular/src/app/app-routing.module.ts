@@ -13,6 +13,7 @@ import {PlagiatComponent} from './plagiat/plagiat.component';
 import {TerminalComponent} from './terminal/terminal.component';
 import {ParallaxComponent} from './parallax/parallax.component';
 import {GitComponent} from './git/git.component';
+import {EngagementComponent} from "./engagements/engagement.component";
 
 const routes: Routes = [
   {path: 'profs',              component: ProfsComponent,          data: { title: 'Prof' }},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'faq',               component: FaqComponent,          data: { title: 'Dec' }},
   {path: 'faq/:cat',               component: FaqComponent,          data: { title: 'Dec' }},
 
+  {path: 'engagement',               component: EngagementComponent,          data: { title: 'Dec' }},
   {path: 'nouveau',               component: NouveauComponent,          data: { title: 'Dec' }},
   {path: 'plagiat',               component: PlagiatComponent,          data: { title: 'Dec' }},
   {path: 'git',               component: GitComponent,          data: { title: 'Dec' }},
