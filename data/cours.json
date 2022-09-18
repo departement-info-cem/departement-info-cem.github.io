@@ -20,7 +20,7 @@
 
   {"nom": "Prog. 3", "no": "420-3N5","v":"p","url":"https://departement-info-cem.github.io/3N5-Prog3/",
      "icons": ["fab fa-java","fab fa-android"]},
-  {"nom": "Prog. Web transactionnelle","v":"p", "no": "420-3W6", "icons": ["fab fa-java","fab fa-android"]},
+  {"nom": "Prog. Web transactionnelle","v":"p", "no": "420-3W6", "icons": ["fas fa-file-code","fas fa-database"]},
 
   {"nom": "Automatisation de tâches", "no": "420-3A5","v":"r", "icons": ["fas fa-robot"]},
   {"nom": "Commutation et routage", "no": "420-3R5","v":"r", "icons": ["fas fa-network-wired"]},
