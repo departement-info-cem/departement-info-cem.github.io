@@ -75,10 +75,10 @@
   {"nom": "Rahma Ben Djema", "bureau": "E-209", "courriel": "rahma.bendjemaa", "extension": "2123",
     "image": "rbd.jpg", "lienVideo": ""
   },
-	{"nom": "Achraf Moussaid", "bureau": "E-212", "courriel": "achraf.moussaid", "extension": "2120",
+	{"nom": "Achraf Moussaid", "bureau": "E-211", "courriel": "achraf.moussaid", "extension": "2120",
 		"lienVideo": ""
 	},
-	{"nom": "Pierre-Olivier Brillant", "bureau": "E212", "courriel": "po.brillant", "extension": "2575",
+	{"nom": "Pierre-Olivier Brillant", "bureau": "E-212", "courriel": "po.brillant", "extension": "2575",
 		"lienVideo": "svHKgQrzkI8", "image": "pob.jpeg"
 	}
 ]
