@@ -3,7 +3,7 @@ name: Déploiement
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
@@ -48,3 +48,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # Build output to publish to the `gh-pages` branch:
           publish_dir: angular/dist/depinfo
+          cname: info.cegepmontpetit.ca
