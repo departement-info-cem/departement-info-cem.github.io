@@ -49,3 +49,19 @@ jobs:
           # Build output to publish to the `gh-pages` branch:
           publish_dir: angular/dist/depinfo
           cname: info.cegepmontpetit.ca
+
+      - name: Checkout gh-pages
+        run: git checkout gh-pages
+
+      - name: Copy index.html to 404.html
+        run: cp index.html 404.html
+
+      - name: Commit & Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "index.html -> 404.html" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
