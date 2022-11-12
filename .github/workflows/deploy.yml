@@ -44,7 +44,7 @@ jobs:
       - name: Fix 404.html
         working-directory: angular/dist/depinfo
         run: |
-          copy index.html 404.html
+          cp index.html 404.html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
