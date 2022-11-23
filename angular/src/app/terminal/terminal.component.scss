@@ -1,9 +1,8 @@
-
 .boutons {
   height: 10px;
   width: 10px;
   border-radius: 5px;
-  margin:10px 4px;
+  margin: 10px 4px;
   display: inline-block;
 }
 input {
@@ -17,32 +16,32 @@ input {
 .titre {
   position: relative;
   bottom: 10px;
-  left:5px;
+  left: 5px;
   text-align: left;
-  color: rgb(160,160,160);
-  font-family:  'Space Mono', Courier, monospace;
+  color: rgb(160, 160, 160);
+  font-family: "Space Mono", Courier, monospace;
   display: inline-block;
 }
 
 .x {
-  border-color: rgb(222,66,62);
-  background-color: rgb(252,96,92);
+  border-color: rgb(222, 66, 62);
+  background-color: rgb(252, 96, 92);
 }
 
 .y {
-  border-color: rgb(222,157,34);
-  background-color: rgb(252,187,64);
+  border-color: rgb(222, 157, 34);
+  background-color: rgb(252, 187, 64);
 }
 
 .z {
-  border-color: rgb(22,152,42);
-  background-color: rgb(52,182,72);
+  border-color: rgb(22, 152, 42);
+  background-color: rgb(52, 182, 72);
 }
 
 .menu {
   height: 30px;
   padding-left: 10px;
-  background-color: rgb(51,50,50);
+  background-color: rgb(51, 50, 50);
   border-radius: 5px 5px 0 0;
 }
 
@@ -55,11 +54,11 @@ input {
   text-align: left;
   overflow: scroll;
   min-height: 200px;
-  border-radius: 0 0 5px 5px ;
+  border-radius: 0 0 5px 5px;
 }
 
 .cmd div {
-  font-family: 'Space Mono','VT323',  monospace;
+  font-family: "Space Mono", "VT323", monospace;
   font-size: 1.1em;
   white-space: normal;
 }
@@ -70,8 +69,8 @@ input {
 .rep {
   color: #e7e7fd;
 }
-.prompt{
-  color:#eee;
+.prompt {
+  color: #eee;
   font-width: bolder;
 }
 
@@ -80,9 +79,19 @@ input {
 }
 
 @keyframes blink {
-  0% { opacity: 0; }
-  40% { opacity: 0; }
-  50% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { opacity: 0;}
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

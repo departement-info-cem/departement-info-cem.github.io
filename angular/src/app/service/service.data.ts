@@ -1,27 +1,26 @@
-import {Injectable} from '@angular/core';
-import profs from '../../../../data/profs.json'
-import cours from '../../../../data/cours.json'
-import bot from '../../../../data/bot.json'
-import faq from '../../../../data/faq.json'
+import { Injectable } from '@angular/core';
+import profs from '../../../../data/profs.json';
+import cours from '../../../../data/cours.json';
+import bot from '../../../../data/bot.json';
+import faq from '../../../../data/faq.json';
 
 @Injectable()
 export class DataService {
-
   profs(): Prof[] {
-    return profs as Prof[]
+    return profs as Prof[];
   }
 
   profParCourriel(courriel: string): Prof {
     // @ts-ignore
-    return this.profs().find(p => p.courriel === courriel);
+    return this.profs().find((p) => p.courriel === courriel);
   }
 
   videos(): Prof[] {
-    return this.profs().filter(prof => prof.lienVideo);
+    return this.profs().filter((prof) => prof.lienVideo);
   }
 
   photos(): Prof[] {
-    return this.profs().filter(prof => prof.image);
+    return this.profs().filter((prof) => prof.image);
   }
 
   cours(): Cours[] {
@@ -29,27 +28,29 @@ export class DataService {
   }
 
   questions(s: string): Question[] {
-    return this.qs().filter(q => {
-          console.log('coucou');
-          if (q.q.indexOf(s) > -1) return true;
-          if (q.r.indexOf(s) > -1) return true;
-          if (q.cats) {
-            //console.log(q.cats);
-            for (let cat of q.cats) {
-              console.log(q.q + ' ' + q.cats + ' ' + cat + ' ' + (cat.indexOf(s) > -1));
-              if (cat.indexOf(s) > -1) return true;
-            }
-          }
-          return false;
-        });
+    return this.qs().filter((q) => {
+      console.log('coucou');
+      if (q.q.indexOf(s) > -1) return true;
+      if (q.r.indexOf(s) > -1) return true;
+      if (q.cats) {
+        //console.log(q.cats);
+        for (let cat of q.cats) {
+          console.log(
+            q.q + ' ' + q.cats + ' ' + cat + ' ' + (cat.indexOf(s) > -1)
+          );
+          if (cat.indexOf(s) > -1) return true;
+        }
+      }
+      return false;
+    });
   }
 
   qs(): Question[] {
-    return faq as Question[]
+    return faq as Question[];
   }
 
   botRules(): BotRule[] {
-    return bot as BotRule[]
+    return bot as BotRule[];
   }
 }
 
@@ -64,7 +65,6 @@ export class BotTrigger {
   id = -1;
   r: string | undefined;
 }
-
 
 export class Prof {
   nom = '';
@@ -81,7 +81,6 @@ export class Question {
   liens: string[] = [];
 }
 
-
 export class Cours {
   no = '';
   nom = '';
@@ -90,4 +89,3 @@ export class Cours {
   icons: string[] = [];
   s = 0;
 }
-

@@ -1,39 +1,48 @@
-<br>
+<br />
 <div class="container" *ngIf="prof">
   <div class="row">
     <div class="col-md">
-      <div class="course-detail"  >
-        <mat-card class="example-card"
-                  [class.mat-elevation-z8]="20" >
+      <div class="course-detail">
+        <mat-card class="example-card" [class.mat-elevation-z8]="20">
           <mat-card-header>
-            <mat-card-title>{{prof.nom}}</mat-card-title>
-            <mat-card-subtitle>{{prof.courriel}}@cegepmontpetit.ca</mat-card-subtitle>
+            <mat-card-title>{{ prof.nom }}</mat-card-title>
+            <mat-card-subtitle
+              >{{ prof.courriel }}@cegepmontpetit.ca</mat-card-subtitle
+            >
           </mat-card-header>
 
-          <img *ngIf="prof.image && prof.image.length > 1" mat-card-image
-               src="../../../../assets/photos/{{prof.image}}" />
+          <img
+            *ngIf="prof.image && prof.image.length > 1"
+            mat-card-image
+            src="../../../../assets/photos/{{ prof.image }}"
+          />
 
-          <mat-card-content>
-
-          </mat-card-content>
+          <mat-card-content> </mat-card-content>
         </mat-card>
-
       </div>
     </div>
     <div class="col-md">
       <div class="alert alert-dark">
         <h3>Me contacter:</h3>
-        <a class="btn btn-block btn-outline-dark btn-lg mb-5" href="mailto:{{prof.courriel}}@cegepmontpetit.ca">
+        <a
+          class="btn btn-block btn-outline-dark btn-lg mb-5"
+          href="mailto:{{ prof.courriel }}@cegepmontpetit.ca"
+        >
           Courriel <i class="far fa-envelope"></i>
         </a>
-        <p>
-          On peut me trouver au CEGEP à mon bureau au {{prof.bureau}}.
-        </p>
+        <p>On peut me trouver au CEGEP à mon bureau au {{ prof.bureau }}.</p>
       </div>
 
-      <div class="alert alert-dark" *ngIf="prof.lienVideo && prof.lienVideo.length > 0">
-        <div class="embed-responsive embed-responsive-16by9" >
-          <iframe class="embed-responsive-item" [src]="urlFor(prof)" allowfullscreen></iframe>
+      <div
+        class="alert alert-dark"
+        *ngIf="prof.lienVideo && prof.lienVideo.length > 0"
+      >
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe
+            class="embed-responsive-item"
+            [src]="urlFor(prof)"
+            allowfullscreen
+          ></iframe>
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ jobs:
     name: Deploy to Github Pages
     runs-on: ubuntu-latest
     steps:
-      -  uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Use Node.js 16
         uses: actions/setup-node@v3
@@ -20,7 +20,7 @@ jobs:
       - name: Cache node modules
         id: cache-nodemodules
         uses: actions/cache@v3
-        env: 
+        env:
           cache-name: cache-node-modules
         with:
           # caching node_modules
@@ -45,7 +45,9 @@ jobs:
         working-directory: angular/dist/depinfo
         run: |
           cp index.html 404.html
-
+      - name: Test lint
+        working-directory: angular
+        run: npm lint
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

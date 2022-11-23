@@ -1,15 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-git',
   templateUrl: './git.component.html',
-  styleUrls: ['./git.component.scss']
+  styleUrls: ['./git.component.scss'],
 })
-export class GitComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class GitComponent {
+  constructor() {}
 }

@@ -1,18 +1,20 @@
-body, html {
+body,
+html {
   height: 100%;
   margin: 0;
   font: 400 15px/1.8 "Lato", sans-serif;
   color: #777;
 }
 
-.bgimg-1, .bgimg-2, .bgimg-3 {
+.bgimg-1,
+.bgimg-2,
+.bgimg-3 {
   position: relative;
   opacity: 0.95;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
 }
 .bgimg-1 {
   background-image: url("/assets/home.jpg");
@@ -30,10 +32,9 @@ body, html {
   min-height: 100%;
 }
 
-
 .caption {
   position: absolute;
-  margin:0 auto;
+  margin: 0 auto;
   top: 20%;
   min-width: 50%;
   text-align: center;
@@ -58,31 +59,31 @@ h3 {
 
 /* Turn off parallax scrolling for tablets and phones */
 @media only screen and (max-device-width: 1024px) {
-  .bgimg-1, .bgimg-2, .bgimg-3 {
+  .bgimg-1,
+  .bgimg-2,
+  .bgimg-3 {
     background-attachment: scroll;
   }
 }
 
-@media not all and (min-resolution:.001dpcm) {
-  .bgimg-1, .bgimg-2, .bgimg-3 {
+@media not all and (min-resolution: 0.001dpcm) {
+  .bgimg-1,
+  .bgimg-2,
+  .bgimg-3 {
     background-attachment: scroll;
   }
 }
-
-
-
 
 .bienvenue {
-  color:black;
+  color: black;
   background: #ffffffee;
   margin: 0 10px;
   border: 2px solid black;
   border-radius: 5px;
   font-size: 1.8em;
   line-height: 1.2em;
-  padding:35px;
+  padding: 35px;
 }
-
 
 @media only screen and (max-device-width: 400px) {
   .cue {

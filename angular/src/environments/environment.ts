@@ -12,8 +12,8 @@ export const environment = {
     storageBucket: 'internder.appspot.com',
     messagingSenderId: '150170745156',
     appId: '1:150170745156:web:36885454a1241d7e073f11',
-    measurementId: 'G-MSG3HBB11J'
-  }
+    measurementId: 'G-MSG3HBB11J',
+  },
 };
 
 /*

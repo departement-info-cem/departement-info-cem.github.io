@@ -1,79 +1,205 @@
 [
-	{"nom": "Azze-Eddine Akkouche", "bureau": "E-211", "courriel": "azze-eddine.akkouche", "extension": "2639",
-		"image": "aa.jpg","lienVideo": ""
-	},
-	{"nom": "Belhachemi Ouldali", "bureau": "E-210", "courriel": "belhachemi.ouldali", "extension": "6411",
-		"image": "bo.JPG","lienVideo": ""
-	},
-	{"nom": "Bernard Tremblay", "bureau": "E-214", "courriel": "bernard.tremblay", "extension": "3749",
-		"image": "bt.jpg","lienVideo": ""
-	},
-	{"nom": "Chantal Vallières",  "bureau": "E-209", "courriel": "chantal.vallieres", "extension": "6402",
-    "image": "cv.png", "lienVideo": "UEi_9RpgtmU"
-	},
-	{"nom": "Christian Farley", "bureau": "", "courriel": "christian.farley", "extension": "",
-    "image": "cf.png", "lienVideo": ""
-	},
-	{"nom": "Dominic Proulx", "bureau": "E-210", "courriel": "dominic.proulx", "extension": "2061",
-    "image": "dp.png", "lienVideo": ""
-	},
-	{"nom": "Éric B. Gendron", "bureau": "E-209", "courriel": "ericb.gendron", "extension": "5317",
-	"image": "eg.jpg",	"lienVideo": ""
-	},
-	{"nom": "Hector Bustillo", "bureau": "E-214", "courriel": "hector.bustillo", "extension": "6478",
-    "image": "hb.png", "lienVideo": ""
-	},
-	{"nom": "Jamil Gammoudi", "bureau": "E-212", "courriel": "jamil.gammoudi", "extension": "2804",
-		"image": "jg.jpg","lienVideo": ""
-	},
-	{"nom": "Jean-Michel Nadeau", "bureau": "E-211", "courriel": "jean-michel.nadeau", "extension": "6415",
+  {
+    "nom": "Azze-Eddine Akkouche",
+    "bureau": "E-211",
+    "courriel": "azze-eddine.akkouche",
+    "extension": "2639",
+    "image": "aa.jpg",
+    "lienVideo": ""
+  },
+  {
+    "nom": "Belhachemi Ouldali",
+    "bureau": "E-210",
+    "courriel": "belhachemi.ouldali",
+    "extension": "6411",
+    "image": "bo.JPG",
+    "lienVideo": ""
+  },
+  {
+    "nom": "Bernard Tremblay",
+    "bureau": "E-214",
+    "courriel": "bernard.tremblay",
+    "extension": "3749",
+    "image": "bt.jpg",
+    "lienVideo": ""
+  },
+  {
+    "nom": "Chantal Vallières",
+    "bureau": "E-209",
+    "courriel": "chantal.vallieres",
+    "extension": "6402",
+    "image": "cv.png",
+    "lienVideo": "UEi_9RpgtmU"
+  },
+  {
+    "nom": "Christian Farley",
+    "bureau": "",
+    "courriel": "christian.farley",
+    "extension": "",
+    "image": "cf.png",
+    "lienVideo": ""
+  },
+  {
+    "nom": "Dominic Proulx",
+    "bureau": "E-210",
+    "courriel": "dominic.proulx",
+    "extension": "2061",
+    "image": "dp.png",
+    "lienVideo": ""
+  },
+  {
+    "nom": "Éric B. Gendron",
+    "bureau": "E-209",
+    "courriel": "ericb.gendron",
+    "extension": "5317",
+    "image": "eg.jpg",
+    "lienVideo": ""
+  },
+  {
+    "nom": "Hector Bustillo",
+    "bureau": "E-214",
+    "courriel": "hector.bustillo",
+    "extension": "6478",
+    "image": "hb.png",
+    "lienVideo": ""
+  },
+  {
+    "nom": "Jamil Gammoudi",
+    "bureau": "E-212",
+    "courriel": "jamil.gammoudi",
+    "extension": "2804",
+    "image": "jg.jpg",
+    "lienVideo": ""
+  },
+  {
+    "nom": "Jean-Michel Nadeau",
+    "bureau": "E-211",
+    "courriel": "jean-michel.nadeau",
+    "extension": "6415",
     "image": "j_m_nadeau.png",
-		"lienVideo": "MTHD_VL8O78"
-	},
-	{"nom": "Joris Deguet", "bureau": "E-211", "courriel": "joris.deguet", "extension": "6379",
-    "image": "jo.JPG", "lienVideo": "R-YbYMqB_LI"
-	},
-	{"nom": "Kevin Leduc",  "bureau": "E-213", "courriel": "kevin.leduc", "extension": "2913",
-    "image": "kl.png", "lienVideo": "hGE8XJskYzg"
-	},
-	{"nom": "Maude Sabourin", "bureau": "E-213", "courriel": "maude.sabourin", "extension": "2914"
-	},
-	{"nom": "Peter Mylchreest", "bureau": "E-214", "courriel": "peter.mylchreest", "extension": "6453"
-	},
-	{"nom": "Réjean Bilodeau", "bureau": "A211a", "courriel": "rejean.bilodeau", "extension": "6418",
-    "image": "rb.png", "lienVideo": ""
-	},
-	{"nom": "Saïd Cherkaoui", "bureau": "E-214", "courriel": "said.cherkaoui", "extension": "6492",
-    "image": "said.JPG", "lienVideo": ""
-	},
-	{"nom": "Stéphane DesMeules", "bureau": "E-212", "courriel": "stephane.desmeules", "extension": "5108",
-    "image": "stephane_desmeules.png", "lienVideo": "CwFxbtJWoAc"
-	},
-	{"nom": "Thierry Giroux Veilleux", "bureau": "E-211", "courriel": "t.girouxveilleux", "extension": "2969",
-		"lienVideo": ""
-	},
-	{"nom": "Valérie Turgeon", "bureau": "E-213", "courriel": "valerie.turgeon", "extension": "6409",
-    "image": "vt.png", "lienVideo": "HUZU1aHCJxM"
-	},
-	{"nom": "Vincent Carrier", "bureau": "E-209", "courriel": "vincent.carrier", "extension": "2915",
-    "image": "vc.png", "lienVideo": "SUFWig6scPc"
-	},
-	{"nom": "Vincent Drolet",  "bureau": "", "courriel": "vincent.drolet", "extension": "2762",
-    "image": "vdr.png","lienVideo": ""
-	},
-	{"nom": "Vincent Duval", "bureau": "E-210", "courriel": "vincent.duval", "extension": "6451",
-		"image": "vd.jpg","lienVideo": ""
-	},
-    {"nom": "Maxime Pelletier", "bureau": "A-241", "courriel": "maxime.pelletier", "extension": "3749",
-		"image": "mp.png", "lienVideo": ""
-	},
-	{"nom": "Mathieu Dupont", "bureau": "E-213", "courriel": "mathieu.dupont", "extension": "2114", 
-     "image": "md.jpg", "lienVideo": ""
-	},
-	{"nom": "Achraf Moussaid", "bureau": "E-211", "courriel": "achraf.moussaid", "extension": "2120",
-		"image": "achraf.jpg", "lienVideo": ""
-	},
-	{"nom": "Pierre-Olivier Brillant", "bureau": "E-212", "courriel": "po.brillant", "extension": "2575",
-		"lienVideo": "svHKgQrzkI8", "image": "pob.jpeg"
-	}
+    "lienVideo": "MTHD_VL8O78"
+  },
+  {
+    "nom": "Joris Deguet",
+    "bureau": "E-211",
+    "courriel": "joris.deguet",
+    "extension": "6379",
+    "image": "jo.JPG",
+    "lienVideo": "R-YbYMqB_LI"
+  },
+  {
+    "nom": "Kevin Leduc",
+    "bureau": "E-213",
+    "courriel": "kevin.leduc",
+    "extension": "2913",
+    "image": "kl.png",
+    "lienVideo": "hGE8XJskYzg"
+  },
+  {
+    "nom": "Maude Sabourin",
+    "bureau": "E-213",
+    "courriel": "maude.sabourin",
+    "extension": "2914"
+  },
+  {
+    "nom": "Peter Mylchreest",
+    "bureau": "E-214",
+    "courriel": "peter.mylchreest",
+    "extension": "6453"
+  },
+  {
+    "nom": "Réjean Bilodeau",
+    "bureau": "A211a",
+    "courriel": "rejean.bilodeau",
+    "extension": "6418",
+    "image": "rb.png",
+    "lienVideo": ""
+  },
+  {
+    "nom": "Saïd Cherkaoui",
+    "bureau": "E-214",
+    "courriel": "said.cherkaoui",
+    "extension": "6492",
+    "image": "said.JPG",
+    "lienVideo": ""
+  },
+  {
+    "nom": "Stéphane DesMeules",
+    "bureau": "E-212",
+    "courriel": "stephane.desmeules",
+    "extension": "5108",
+    "image": "stephane_desmeules.png",
+    "lienVideo": "CwFxbtJWoAc"
+  },
+  {
+    "nom": "Thierry Giroux Veilleux",
+    "bureau": "E-211",
+    "courriel": "t.girouxveilleux",
+    "extension": "2969",
+    "lienVideo": ""
+  },
+  {
+    "nom": "Valérie Turgeon",
+    "bureau": "E-213",
+    "courriel": "valerie.turgeon",
+    "extension": "6409",
+    "image": "vt.png",
+    "lienVideo": "HUZU1aHCJxM"
+  },
+  {
+    "nom": "Vincent Carrier",
+    "bureau": "E-209",
+    "courriel": "vincent.carrier",
+    "extension": "2915",
+    "image": "vc.png",
+    "lienVideo": "SUFWig6scPc"
+  },
+  {
+    "nom": "Vincent Drolet",
+    "bureau": "",
+    "courriel": "vincent.drolet",
+    "extension": "2762",
+    "image": "vdr.png",
+    "lienVideo": ""
+  },
+  {
+    "nom": "Vincent Duval",
+    "bureau": "E-210",
+    "courriel": "vincent.duval",
+    "extension": "6451",
+    "image": "vd.jpg",
+    "lienVideo": ""
+  },
+  {
+    "nom": "Maxime Pelletier",
+    "bureau": "A-241",
+    "courriel": "maxime.pelletier",
+    "extension": "3749",
+    "image": "mp.png",
+    "lienVideo": ""
+  },
+  {
+    "nom": "Mathieu Dupont",
+    "bureau": "E-213",
+    "courriel": "mathieu.dupont",
+    "extension": "2114",
+    "image": "md.jpg",
+    "lienVideo": ""
+  },
+  {
+    "nom": "Achraf Moussaid",
+    "bureau": "E-211",
+    "courriel": "achraf.moussaid",
+    "extension": "2120",
+    "image": "achraf.jpg",
+    "lienVideo": ""
+  },
+  {
+    "nom": "Pierre-Olivier Brillant",
+    "bureau": "E-212",
+    "courriel": "po.brillant",
+    "extension": "2575",
+    "lienVideo": "svHKgQrzkI8",
+    "image": "pob.jpeg"
+  }
 ]

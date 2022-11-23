@@ -1,17 +1,17 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 
-@import 'bootstrap/dist/css/bootstrap.min.css';
+@import "bootstrap/dist/css/bootstrap.min.css";
 @import "@fortawesome/fontawesome-free/css/all.css";
 
 // font
-@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Space+Mono:wght@700&family=VT323&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Play&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Space+Mono:wght@700&family=VT323&display=swap");
 
 /* You can add global styles to this file, and also import other style files */
-@import '@angular/material/theming';
+@import "@angular/material/theming";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -19,31 +19,37 @@
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
-
-
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$candy-app-primary: mat.define-palette($mat-blue-grey, 700,300,900);
-$candy-app-accent:  mat.define-palette($mat-green, 200, 100, 400);
+$candy-app-primary: mat.define-palette($mat-blue-grey, 700, 300, 900);
+$candy-app-accent: mat.define-palette($mat-green, 200, 100, 400);
 
 // The warn palette is optional (defaults to red).
-$candy-app-warn:    mat.define-palette(mat.$red-palette);
+$candy-app-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as `color` or `typography`.
-$candy-app-theme: mat.define-dark-theme((
-  color: (
-    primary: $candy-app-primary,
-    accent: $candy-app-accent,
-    warn: $candy-app-warn,
+$candy-app-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $candy-app-primary,
+      accent: $candy-app-accent,
+      warn: $candy-app-warn,
+    ),
   )
-));
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($candy-app-theme);
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

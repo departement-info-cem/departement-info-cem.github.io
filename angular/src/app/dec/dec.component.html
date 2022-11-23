@@ -1,58 +1,75 @@
-<div [style.background-image]="'url(assets/dec.jpg)'"
-     style="min-height:100%; width:100%;background-position: center;background-size: 100%;background-attachment: fixed;">
-
-
-  <br>
+<div
+  [style.background-image]="'url(assets/dec.jpg)'"
+  style="
+    min-height: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: 100%;
+    background-attachment: fixed;
+  "
+>
+  <br />
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-4">
-        <div class="card text-dark bg-light mb-3" >
+        <div class="card text-dark bg-light mb-3">
           <div class="card-header">Diplôme d'études collégiales</div>
           <div class="card-body">
             <h5 class="card-title">Technique en informatique</h5>
             <p class="card-text">En 3 ans, tu vas devenir un pro de l'info.</p>
-            <p>
-              Choisis prog ou réseau :
-            </p>
-            <button class="btn btn-primary" (click)="changeProgramme('p')">Prog.</button>
+            <p>Choisis prog ou réseau :</p>
+            <button class="btn btn-primary" (click)="changeProgramme('p')">
+              Prog.
+            </button>
             &nbsp;
-            <button class="btn btn-info" (click)="changeProgramme('r')">Réseau</button>
+            <button class="btn btn-info" (click)="changeProgramme('r')">
+              Réseau
+            </button>
 
             (les cours en blanc sont communs)
           </div>
-
         </div>
       </div>
 
-      <div class="col-md-8" *ngIf="programme == 'p'">
-        <div class="card text-light bg-primary mb-3" >
+      <div class="col-md-8" *ngIf="programme === 'p'">
+        <div class="card text-light bg-primary mb-3">
           <div class="card-header">Info de gestion</div>
           <div class="card-body">
             <p>
-              Programmer des applications web avec ASP.Net et Angular <i class="fab fa-angular"></i> et mobiles Android <mat-icon>adb</mat-icon>.
+              Programmer des applications web avec ASP.Net et Angular
+              <i class="fab fa-angular"></i> et mobiles Android
+              <mat-icon>adb</mat-icon>.
             </p>
             <p>
-              Utiliser le cloud <i class="fas fa-cloud-upload-alt"></i>, <mat-icon>http</mat-icon> et des bases de données pour concrétiser tes idées d'apps.
+              Utiliser le cloud <i class="fas fa-cloud-upload-alt"></i>,
+              <mat-icon>http</mat-icon> et des bases de données pour concrétiser
+              tes idées d'apps.
             </p>
             <p>
-              Sécuriser le tout pour résister aux vilains hackeurs <i class="fab fa-hackerrank"></i>.
+              Sécuriser le tout pour résister aux vilains hackeurs
+              <i class="fab fa-hackerrank"></i>.
             </p>
           </div>
         </div>
       </div>
 
-      <div class="col-md-8" *ngIf="programme == 'r'">
-        <div class="card text-light bg-info mb-3" >
+      <div class="col-md-8" *ngIf="programme === 'r'">
+        <div class="card text-light bg-info mb-3">
           <div class="card-header">Gestion des réseaux</div>
           <div class="card-body">
             <p>
-              Mettre en place des réseaux pour une compagnie, un LAN party <i class="fas fa-network-wired"></i>, des serveurs de jeu en ligne.
+              Mettre en place des réseaux pour une compagnie, un LAN party
+              <i class="fas fa-network-wired"></i>, des serveurs de jeu en
+              ligne.
             </p>
             <p>
-              Un stack réseau Cisco, des serveurs Windows et Linux <i class="fab fa-linux"></i>. Tu gères des centaines d'utilisateurs grâce à la puissance des scripts.
+              Un stack réseau Cisco, des serveurs Windows et Linux
+              <i class="fab fa-linux"></i>. Tu gères des centaines
+              d'utilisateurs grâce à la puissance des scripts.
             </p>
             <p>
-              Tu fais de ton infra un donjon <i class="fas fa-dungeon"></i> impossible à pirater.
+              Tu fais de ton infra un donjon
+              <i class="fas fa-dungeon"></i> impossible à pirater.
             </p>
           </div>
         </div>
@@ -60,28 +77,43 @@
     </div>
 
     <div class="row">
-      <div class="col-sm-6 col-md-4 col-lg-2" *ngFor="let session of [1,2,3,4,5,6]">
-        <h3>Session {{session}}</h3>
-        <div *ngFor="let item of cours; index as i ">
-          <div [class]="item.v?'commun bg-dark text-white mb-2' : 'specifique bg-light text-dark web mb-2' "  *ngIf="sessionDe(item) == session && bon(item.v)">
+      <div
+        class="col-sm-6 col-md-4 col-lg-2"
+        *ngFor="let session of [1, 2, 3, 4, 5, 6]"
+      >
+        <h3>Session {{ session }}</h3>
+        <div *ngFor="let item of cours; index as i">
+          <div
+            [class]="
+              item.v
+                ? 'commun bg-dark text-white mb-2'
+                : 'specifique bg-light text-dark web mb-2'
+            "
+            *ngIf="sessionDe(item) === session && bon(item.v)"
+          >
             <span class="float-right">
-              <a  *ngIf="item.url" class="badge badge-info" href="{{item.url}}">
-                <mat-icon >http</mat-icon>
+              <a
+                *ngIf="item.url"
+                class="badge badge-info"
+                href="{{ item.url }}"
+              >
+                <mat-icon>http</mat-icon>
               </a>
             </span>
-            <span class="titre">{{item.nom}}</span>
-            <div style="clear:both;" class="mb-2">
-              <span class="numero badge badge-light">{{item.no}}-EM</span>
+            <span class="titre">{{ item.nom }}</span>
+            <div style="clear: both" class="mb-2">
+              <span class="numero badge badge-light">{{ item.no }}-EM</span>
             </div>
             <span class="icons" *ngFor="let icon of item.icons">
               &nbsp;
-              <i  class="{{icon}}"></i>
+              <i class="{{ icon }}"></i>
             </span>
-            <span class="float-right"><i class="fas fa-clock"></i> {{heuresDe(item)}} h</span>
-            <div style="clear: both;"></div>
+            <span class="float-right"
+              ><i class="fas fa-clock"></i> {{ heuresDe(item) }} h</span
+            >
+            <div style="clear: both"></div>
           </div>
         </div>
-
       </div>
     </div>
   </div>

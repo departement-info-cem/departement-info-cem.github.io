@@ -8,9 +8,8 @@ describe('PlagiatComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PlagiatComponent ]
-    })
-    .compileComponents();
+      declarations: [PlagiatComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
