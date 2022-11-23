@@ -10,7 +10,7 @@ import {ActivatedRoute} from '@angular/router';
   templateUrl: './faq.component.html'
 })
 export class FaqComponent implements OnInit {
-  questions: Observable<Question[]>;
+  questions: Question[];
   recherche = '';
 
   constructor(private service: DataService,

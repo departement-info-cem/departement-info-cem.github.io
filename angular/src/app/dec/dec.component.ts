@@ -9,7 +9,7 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./dec.component.scss']
 })
 export class DecComponent implements OnInit {
-  cours: Observable<Cours[]>;
+  cours: Cours[];
   programme = 'c';
 
   constructor(private service: DataService,

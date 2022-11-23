@@ -26,12 +26,8 @@ export class TerminalComponent implements OnInit {
   }
 
   constructor(private service: DataService) {
-    this.service.botRules().subscribe(
-      (res) => {
-        this.questions = res;
-        this.question = this.questions[0];
-      }
-    )
+    this.questions = this.service.botRules();
+    this.question = this.questions[0];
   }
 
   compute(line: string): void {

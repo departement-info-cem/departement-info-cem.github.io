@@ -62,7 +62,7 @@
     <div class="row">
       <div class="col-sm-6 col-md-4 col-lg-2" *ngFor="let session of [1,2,3,4,5,6]">
         <h3>Session {{session}}</h3>
-        <div *ngFor="let item of cours  | async ; index as i ">
+        <div *ngFor="let item of cours; index as i ">
           <div [class]="item.v?'commun bg-dark text-white mb-2' : 'specifique bg-light text-dark web mb-2' "  *ngIf="sessionDe(item) == session && bon(item.v)">
             <span class="float-right">
               <a  *ngIf="item.url" class="badge badge-info" href="{{item.url}}">
