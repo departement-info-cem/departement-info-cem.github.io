@@ -47,7 +47,7 @@ jobs:
           cp index.html 404.html
       - name: Test lint
         working-directory: angular
-        run: npm lint
+        run: npm run lint
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
