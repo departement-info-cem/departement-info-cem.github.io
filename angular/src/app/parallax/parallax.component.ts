@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 })
 export class ParallaxComponent implements OnInit {
 
-  photos: Observable<Prof[]>;
+  photos: Prof[];
 
   constructor(private service: DataService) {
     this.photos = this.service.photos();

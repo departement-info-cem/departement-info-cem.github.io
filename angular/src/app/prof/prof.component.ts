@@ -16,12 +16,7 @@ export class ProfComponent {
               private sanitizer: DomSanitizer,
               private service: DataService) {
     this.courriel = this.route.snapshot.paramMap.get('courriel');
-    this.service.profParCourriel(this.courriel).subscribe(
-      (res) => {
-        this.prof = res;
-      },
-      (error) => {}
-    );
+    this.prof = this.service.profParCourriel(this.courriel);
   }
 
   // tslint:disable-next-line:typedef

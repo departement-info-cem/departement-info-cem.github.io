@@ -106,7 +106,7 @@
           <div class="carousel slide" data-ride="carousel" data-interval="2000">
             <div class="carousel-inner">
               <!--            <div class="carousel-item active"><img src="assets/grimace.JPG" class="d-block w-100" alt="..."></div>-->
-              <div [class]="i==0?'carousel-item active' : 'carousel-item'" *ngFor="let video of videos | async; index as i">
+              <div [class]="i==0?'carousel-item active' : 'carousel-item'" *ngFor="let video of videos; index as i">
                 <div class="embed-responsive embed-responsive-16by9" >
                   <iframe class="embed-responsive-item " [src]="urlFor(video)" allowfullscreen></iframe>
                 </div>

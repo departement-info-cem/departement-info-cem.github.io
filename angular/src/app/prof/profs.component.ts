@@ -9,7 +9,7 @@ import {Prof, DataService} from '../service/service.data';
 })
 export class ProfsComponent {
 
-  profs: Observable<Prof[]>;
+  profs: Prof[];
 
   constructor(private profService: DataService) {
     this.profs = profService.profs();

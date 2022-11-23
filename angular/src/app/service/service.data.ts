@@ -2,29 +2,28 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-
+import profs from '../../../../data/profs.json'
 
 @Injectable()
 export class DataService {
 
   constructor(private http: HttpClient ) { }
 
-  profs(): Observable<Prof[]> {
-    return this.http.get<Prof[]>('https://raw.githubusercontent.com/departement-info-cem/departement-info-cem.github.io/master/data/profs.json');
+  profs(): Prof[] {
+    return profs as Prof[]
   }
 
-  profParCourriel(courriel: string): Observable<Prof> {
+  profParCourriel(courriel: string): Prof {
     // @ts-ignore
-    return this.profs().pipe(
-      map(ps => ps.find(p => p.courriel === courriel)));
+    return this.profs().find(p => p.courriel === courriel);
   }
 
-  videos(): Observable<Prof[]> {
-    return this.profs().pipe(map(profs => profs.filter(prof => prof.lienVideo)));
+  videos(): Prof[] {
+    return this.profs().filter(prof => prof.lienVideo);
   }
 
-  photos(): Observable<Prof[]> {
-    return this.profs().pipe(map(profs => profs.filter(prof => prof.image)));
+  photos(): Prof[] {
+    return this.profs().filter(prof => prof.image);
   }
 
   cours(): Observable<Cours[]> {

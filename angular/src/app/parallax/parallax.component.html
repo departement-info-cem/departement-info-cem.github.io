@@ -155,7 +155,7 @@
         grid-template-rows: minmax(150px, 1fr);">
       <div routerLink="/prof/{{photo.courriel}}"
         style="border-left: 5px solid black;"
-        *ngFor="let photo of photos | async; index as i">
+        *ngFor="let photo of photos">
         <img  style="height: 200px;" src="https://raw.githubusercontent.com/departement-info-cem/departement-info-cem.github.io/master/data/photos/{{photo.image}}"  alt="{{photo.nom}}" />
       </div>
 

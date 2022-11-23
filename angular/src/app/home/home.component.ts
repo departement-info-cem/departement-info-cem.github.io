@@ -13,7 +13,7 @@ export class HomeComponent {
 
   images = ['gang.JPG', 'tablo.JPG', 'blond.JPG', 'jo-jm.JPG', 'grimace.JPG'];
 
-  videos: Observable<Prof[]>;
+  videos: Prof[];
 
   constructor(private dialog: MatDialog,
               private service: DataService,
