@@ -29,6 +29,4 @@ Ensuite, il faut l'ajouter dans les routes.
 
 ## Déployer l'application
 
-  - ng build --prod
-  - copier coller index.html dans 404.html
-  - remplacer /docs du repo avec les fichiers du dossier dist
+L'application est présentement automatiquement déployée à l'aide de Github Actions, il n'y a donc rien à faire pour déployer l'application.
