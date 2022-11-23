@@ -2,7 +2,7 @@
 
   {"nom": "Bureautique", "no": "420-1B3", "icons": ["fa fa-file-word","fa fa-file-excel"]},
   {"nom": "Systèmes d'exploitation", "no": "420-1S6",  "icons": ["fab fa-linux","fab fa-windows"]},
-  {"nom": "Prog. 1", "no": "420-1N6",  "icons": ["fas fa-code","fas fa-hashtag"]},
+  {"nom": "Prog. 1", "no": "420-1N6",  "icons": ["fas fa-code","fas fa-hashtag"], "url":"https://info.cegepmontpetit.ca/notions-csharp/"},
   {"nom": "Intro aux bases de données", "no": "420-1D5",  "icons": ["fas fa-database"]},
 
 
