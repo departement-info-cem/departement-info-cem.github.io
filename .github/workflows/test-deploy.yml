@@ -16,10 +16,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-
       - name: Install dependencies
+        working-directory: angular
         run: npm ci
       - name: Test build website
+        working-directory: angular
         run: npm run build
       - name: Test lint
         working-directory: angular
