@@ -201,5 +201,18 @@
     "extension": "2575",
     "lienVideo": "svHKgQrzkI8",
     "image": "pob.jpeg"
+  },
+  {
+    "nom": "Sébastien Derumière",
+    "bureau": "E-212",
+    "courriel": "sebastien.derumiere@cegepmontpetit.ca",
+    "extension": "3105"
+  },
+  {
+    "nom": "Mathieu Briau",
+    "bureau": "E-252",
+    "courriel": "mathieu.briau@cegepmontpetit.ca",
+    "extension": "",
+    "image": "mb.jpeg"
   }
 ]
