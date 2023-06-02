@@ -6,8 +6,8 @@ Cette page sert à te guider vers les bonnes resources si ça ne va pas pendant 
 
 Si ce n'est pas facile d'en parler, n'hésite pas à approcher le prof ou l'employé du collègue avec lequel tu es le plus à l'aise.
 
-Si tu as une situation et que tu es fatigué de répéter, adresse toi aux profs PAIRE. Avec ton accord, ils pourront partager
-avec toutes les personnes qui peuvent t'aider.
+Si tu as une situation et que tu es fatigué de répéter, adresse toi aux profs PAIRE. Avec ton accord, ils pourront partager 
+l'information avec toutes les personnes qui peuvent t'aider.
 
 **EN BREF :**  *Profs PAIRE, personne avec qui tu es à l'aise*
 
@@ -25,7 +25,7 @@ Si tu as un conflit / problème avec un professeur, nous te recommandons les ét
 ### Retard ou absence d'un prof
 
 Si un professeur est absent ou en retard dans un cours, que ça se répète, que ce n'est pas affiché sur Omnivox ou les écrans au collège,
-passe prévenir la coordination.
+passe prévenir la coordination. Tu peux te déplacer à leur bureau ou juste leur écrire sur Teams.
 
 ### Retard de correction
 
@@ -37,8 +37,25 @@ Si ce n'est pas le cas, n'hésite pas à le mentionner ... au prof ou à la coor
 
 Tu peux produire une plainte concernant un professeur auprès de la direction des études (notre "boss"). Si tu as besoin d'aide dans le processus, n'hésite pas à en parler avec la coordination.
 
-## Problème avec mon code
-Si tu as un problème avec ton code, regarde la page suivante:
+### Comment nous rejoindre
+
+Si tu souhaites parler en privé, de manière confidentiel, nous te recommandons de rencontrer la personne (prof ou coordonateur) à son 
+bureau et d'expliquer la situation de vive voix.
+
+Si c'est approprié tu peux aussi communiquer par écrit sur Teams.
+
+## Objet perdu
+
+La plupart des objets perdus sont rapportés à la sécurité (l'aquarium au bout du couloir de l'aile D). 
+
+Il y a aussi parfois des étudiants qui rapportent les clés USB ou les disques externes au bureau des coordonateurs. Passe voir.
+
+## Problème technique
+Si tu as un problème avec ton code, ton infrastructure etc. ta resource principale est ton prof. 
+
+Ceci dit tu peux également aller au centre d'aide pour demander à un autre prof.
+
+Si tu as un problème de débogage, regarde la page suivante:
 [débogage](debogage.md)
 
 ## Résumé et schéma visuel
