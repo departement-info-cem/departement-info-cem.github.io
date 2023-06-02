@@ -60,25 +60,28 @@ Si tu as un problème de débogage, regarde la page suivante:
 
 ## Résumé et schéma visuel
 ```mermaid
-flowchart TD
+flowchart TB
     PB[Problème avec ...] --> |un prof| Prof[Problème avec un prof]
     PB -->|la coordination| Coordo[Problème avec la coordination]
-    Coordo -->|ok pour parler avec| ParleCoordo[Je parle avec le coordo]
-    Coordo -->|difficile en parler| ParleConfiance[Je parle avec un prof de confiance]
-    Prof -->|ok pour parler avec| ParleProf[Je parle avec le coordo]
-    ParleProf -->|passe bien| Ok[Mon problème est résolu]
-    ParleProf -->|pas bien| ParleCoordo
-    ParleCoordo -->|passe bien| Ok[Mon problème est résolu]
-    ParleCoordo -->|pas bien| ParleDirection
-    ParleCoordo -->|pas bien| ParleConfiance
-    Coordo -->|difficile en parler| ParleConfiance
+    Coordo -->|ok pour parler avec| ParleCoordo{Je parle avec coordo}
+    Coordo -->|difficile en parler| ParleConfiance{Je parle avec prof de confiance}
+    Prof -->|ok pour parler avec| ParleProf{Je parle avec prof}
+    ParleCoordo -->|c'est réglé| Ok((Mon problème est résolu))
+    ParlePAIRE -->|c'est réglé| Ok
+    ParleProf -->|c'est réglé| Ok
+    ParleProf -->|pas réglé| ParleCoordo
+    ParleDirection --> |pas réglé| Plainte((Je commence une plainte))
+    Plainte --> ParleDirection
+    ParleCoordo -->|pas réglé| ParleDirection
+    ParleCoordo -->|pas réglé| ParleConfiance
     PB -->|la vie| Vie[Problème santé argent, la vie]
-    Vie -->|à l'aise avec prof Paire|  ParlePaire[Je parle avec un prof de confiance]
-    Vie -->|pas à l'aise avec prof Paire|  ParleConfiance
-    Prof -->|à l'aise avec le prof| Prof[Parle avec ton prof]
-    Prof -->|ok ni avec le prof ni le coordo| Coordonateur[Problème avec un prof]
-    Prof -->|mon problème est avec le coordo| Directeur[Aller voir le directeur adjoint du département]
-    B -->|ta santé| Paire[Parle avec le prof PAIRE du département]
-    PB -->|ton code| Debogage[Visite la page sur le débogage]
+    Vie -->|ok avec prof PAIRE| ParlePAIRE{Je parle à PAIRE}
+    Vie -->|pas sûr avec prof PAIRE| ParleConfiance
+    ParleConfiance -->|c'est réglé| Ok
+    Prof -->|ok ni avec le prof ni le coordo| ParleConfiance
+    Prof -->|mon problème est avec le coordo| ParleDirection{Parle à la direction}
+    style PB stroke:#d13,stroke-width:8px
+    style Ok stroke:#3d6,stroke-width:8px
+    style Plainte stroke:#d33,stroke-width:8px
    
 ```
