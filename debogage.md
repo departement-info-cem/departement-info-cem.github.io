@@ -1,5 +1,37 @@
 # Bonnes pratiques de débogage
 
+## Reproduire le bogue
+
+Pour pouvoir travailler sur un bogue, il faut d'abord rendre explicite comment le reproduire.
+
+### A la main
+Tu peux commencer par décrire les étapes à réaliser pour reproduire le bogue:
+- quoi faire depuis le lancement de ton projet jusqu'au plantage
+- essaie de décrire les étapes de la manière la plus détaillée possible
+- cela servira de base de conversation si tu demandes de l'aide pour le bogue
+- on recommande de le faire dans un fichier texte dans ton projet, possiblement en MarkDown
+
+### Automatique (ne lis pas ça tant que tu n'as pas eu de cours sur les tests automatiques)
+Si c'est possible tu peux aussi produire un test unitaire qui illustre le bogue.
+- préparation de l'état où le bogue va se produire
+- déclenchement 
+Ce test va échouer tant que le bogue est là
+
+## Demander de l'aide
+
+### Prof
+Si tu es en cours, après 10 minutes à essayer, demande à ton prof.
+Si tu n'est pas en cours, écris nous sur Teams.
+
+### ChatGPT 
+
+### StackOverFlow
+
+
+### Ami 
+On vous encourage à vous entraider. Garde juste en tête
+que ton ami vient juste d'apprendre, il ne sait pas tout.
+
 ## Points d'arrêts,  règles de base
 Le point d'arrêt te permettent d'arrêter le temps, de regarder ce que valent les variables et enfin de comprendre 
 pourquoi l'ordinateur ne fait pas ce que tu penses qu'il doit faire.
