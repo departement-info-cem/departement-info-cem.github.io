@@ -61,14 +61,24 @@ Si tu as un problème de débogage, regarde la page suivante:
 ## Résumé et schéma visuel
 ```mermaid
 flowchart TD
-    PB[Problème] --> B{Avec ...}
-    B -->|un prof| Prof[Problème avec un prof]
-    Prof -->|un prof je peux lui parler| Prof[Parle avec ton prof]
-    Prof -->|je ne peux pas lui parler| Coordonateur[Problème avec un prof]
+    PB[Problème avec ...] --> |un prof| Prof[Problème avec un prof]
+    PB -->|la coordination| Coordo[Problème avec la coordination]
+    Coordo -->|ok pour parler avec| ParleCoordo[Je parle avec le coordo]
+    Coordo -->|difficile en parler| ParleConfiance[Je parle avec un prof de confiance]
+    Prof -->|ok pour parler avec| ParleProf[Je parle avec le coordo]
+    ParleProf -->|passe bien| Ok[Mon problème est résolu]
+    ParleProf -->|pas bien| ParleCoordo
+    ParleCoordo -->|passe bien| Ok[Mon problème est résolu]
+    ParleCoordo -->|pas bien| ParleDirection
+    ParleCoordo -->|pas bien| ParleConfiance
+    Coordo -->|difficile en parler| ParleConfiance
+    PB -->|la vie| Vie[Problème santé argent, la vie]
+    Vie -->|à l'aise avec prof Paire|  ParlePaire[Je parle avec un prof de confiance]
+    Vie -->|pas à l'aise avec prof Paire|  ParleConfiance
+    Prof -->|à l'aise avec le prof| Prof[Parle avec ton prof]
+    Prof -->|ok ni avec le prof ni le coordo| Coordonateur[Problème avec un prof]
     Prof -->|mon problème est avec le coordo| Directeur[Aller voir le directeur adjoint du département]
     B -->|ta santé| Paire[Parle avec le prof PAIRE du département]
-    B -->|ton code| Debogage[Visite la page sur le débogage]
-    C --> D[Rethink]
-    D --> B
-    B ---->|No| E[End]
+    PB -->|ton code| Debogage[Visite la page sur le débogage]
+   
 ```
