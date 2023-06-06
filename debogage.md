@@ -1,8 +1,19 @@
 # Bonnes pratiques de débogage
 
+Tout d'abord, garde en tête que l'objectif est de maitrise ces techniques à la fin de ta formation. 
+
+Donc:
+1. la première fois qu'un type de blocage t'arrive, demande à ton prof pour bénéficier de son expérience en débogage ... où mettre le point d'arrêt ... etc.
+2. la deuxième fois, essaie d'investiguer par toi-même mais si tu bloques après 5-10 minutes, ça ne sert à rien de s'obstiner et potentiellement de rager
+3. si par la suite, tu n'y arrives toujours pas, on sera toujours là pour t'aider, il faudra peut-être revoir ton approche.
+
 ## Reproduire le bogue
 
 Pour pouvoir travailler sur un bogue, il faut d'abord rendre explicite comment le reproduire.
+
+Tu vas utiliser cette séquence d'actions pour déboguer mais aussi pour valider ta solution. Quand tu as récupéré le comportement attendu, ton bogue est résolu.
+
+Si le bogue semble apparaître de manière aléatoire, n'hésite pas à demander à ton prof, il aura peut-être une idée pour le reproduire de manière fiable.
 
 ### A la main
 Tu peux commencer par décrire les étapes à réaliser pour reproduire le bogue:
@@ -10,6 +21,18 @@ Tu peux commencer par décrire les étapes à réaliser pour reproduire le bogue
 - essaie de décrire les étapes de la manière la plus détaillée possible
 - cela servira de base de conversation si tu demandes de l'aide pour le bogue
 - on recommande de le faire dans un fichier texte dans ton projet, possiblement en MarkDown
+
+```
+#mise en place
+Partir l'application
+Cliquer sur inscription pour aller sur l'écran d'inscription
+Remplir le champ utilisateur avec la valeur "pipo"
+Cliquer sur m'inscrire
+#comportement attendu
+J'arrive sur l'écran d'accueil
+#comportement observé
+Crash
+```
 
 ### Automatique (ne lis pas ça tant que tu n'as pas eu de cours sur les tests automatiques)
 Si c'est possible tu peux aussi produire un test unitaire qui illustre le bogue.
@@ -86,6 +109,34 @@ Pour un appel asynchrone, il est important de mettre un point d'arrêt
 
 ```java
 ```
+
+# Une fois le bogue résolu
+
+## Commit de bogue (oublie ça si tu n'as pas encore vu Git)
+
+Le titre de ton commit ressemblera sans doute à *BUGFIX: problème d'affichage dans l'adapteur du recycler accueil résolu*
+
+Toutefois, nous t'encourageons à produire une description détaillée avec les étapes que tu as suivi voir les choses que tu as réalisées. On apprend souvent
+beaucoup plus quand on se plante que quand ça marche. Pour l'exemple précédent:
+
+```
+L'appli plante dès que j'ajout une objet dans le recyclerview
+Débogage montre que le plantage se fait sur un setText dans le recyclerView en indiquant "resource not found for id 0x84487328"
+Recherche Google avec "resource not found for id Android setText"
+Solution trouvée sur post : "https://stackoverflow"
+setText avec un int cherche une resource dans un fichier de traduction strings.xml
+Bonne pratique pour la suite toujours faire setText(""+variableEntiere) au lieu de setText(variableEntiere)
+```
+
+Comme ça tu gardes une trace pour ton toi du futur. Si tu retombes sur truc similaire, tu peux chercher ton repo, retrouver ton cheminement etc.
+
+## Apprentissage
+
+Parfois un bogue est vraiment une erreur d'inattention, un détail. 
+
+D'autre fois, la solution d'un bogue va te faire comprendre un nouvel élément que tu ne maitrisais pas avant. Dans ce cas, tu peux revisiter le reste de ton application 
+pour voir si d'autres parties de ton code devrait être revu. Par exemple, si tu viens de réaliser que **==** en Java teste si deux objets sont en fait le même au lieu de 
+tester l'égalité (qui se fait avec **.equals(...)**), alors tu devrais sans doute chercher tous les == dans ton projet pour voir si il n'y a pas d'autres erreurs.
 
 
 ```mermaid
