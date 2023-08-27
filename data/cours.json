@@ -180,7 +180,8 @@
     "nom": "Prog. Web Avancée",
     "no": "420-5W5",
     "v": "p",
-    "icons": ["fas fa-images", "fas fa-globe-americas"]
+    "icons": ["fas fa-images", "fas fa-globe-americas"],
+    "url": "https://departement-info-cem.github.io/5W5/"
   },
 
   {
