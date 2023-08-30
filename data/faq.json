@@ -1,7 +1,7 @@
 [
   {
     "q": "Quels cours se donneront en présence au cégep?",
-    "r": "Tous les cours vont se donner en présence pour la rentrée automne 2021. Plusieurs mesures sont en place (masque, nettoyage etc.).",
+    "r": "Tous les cours vont se donner en présence pour la rentrée automne 2023.",
     "cats": ["covid"],
     "liens": []
   },
@@ -19,7 +19,12 @@
     "cats": ["locaux", "covid"],
     "liens": []
   },
-
+  {
+    "q": "Je cherche désespérément un local",
+    "r": "Tu peux consulter cette carte interactive du cégep",
+    "cats": ["locaux"],
+    "liens": ["https://montpetit-tour.cegepmontpetit.ca/plan-longueuil/"]
+  },
   {
     "q": "Est-ce que je dois acheter un portable?",
     "r": "Tu peux travailler chez toi avec un portable ou une tour. Au collège, nous te fournissons un ordinateur pour travailler donc ce n'est pas nécessaire d'avoir un ordinateur chez soi mais la plupart des étudiants choisissent quand même d'en avoir un.",
