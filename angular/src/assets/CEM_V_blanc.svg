@@ -1,17 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 25.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 144 144" style="enable-background:new 0 0 258 144;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#FFFFFF;}
-</style>
-<g id="Calque_1_1_">
-</g>
-<g id="Layer_1_1_">
-	<polygon class="st0" points="-101,92.5 -120.5,92.5 -120.5,90 -101,89 	"/>
-	<path class="st0" d="M79.5,20.4v-5.1h35.9V5.2H17.8v16v60.9v0.4c2.5,20.1,45.3,46.5,53.9,51.6l7.8,4.7V129l-2.9-2.1
-		c-25-18-42-33.6-43.4-44.1V20.4H79.5z"/>
-	<path class="st0" d="M58.8,30.8v7.6h20.5v2.7h30.9v40.2c-1,6.8-11.7,17.2-27.9,28.9l-2.7,2v6.4l5.9-3.5
-		c5.7-3.3,33.6-20.7,35.2-33.8v-0.2v-40V30.8H58.8z"/>
-</g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg2"
+   width="250"
+   height="250"
+   viewBox="0 0 250 250"
+   sodipodi:docname="Logo_Edouard_Montpetit_Slogan_h_blanc.svg"
+   inkscape:version="1.3 (0e150ed, 2023-07-21)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs6" />
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.540805"
+     inkscape:cx="144.08053"
+     inkscape:cy="194.05441"
+     inkscape:window-width="1440"
+     inkscape:window-height="847"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g10" />
+  <g
+     id="g8"
+     inkscape:groupmode="layer"
+     inkscape:label="ink_ext_XXXXXX"
+     transform="matrix(1.3333333,0,0,-1.3333333,0,389.04)">
+    <g
+       id="g10"
+       transform="scale(0.1)">
+      <path
+         d="m 1646.7145,2650.07 c 0.01,19.58 -4.86,39.41 -15.35,57.58 -31.81,55.1 -102.26,73.97 -157.36,42.17 l -518.36998,-299.3 -518.398,299.3 c -55.094,31.8 -125.551,12.93 -157.364,-42.17 -31.808,-55.1 -12.933,-125.55 42.165,-157.36 l 575.997,-332.55 c 35.64,-20.58 79.56,-20.58 115.19998,0 l 403.19,232.78 v -772.84 c 0,-63.62 51.58,-115.2 115.2,-115.2 63.62,0 115.2,51.58 115.2,115.2 0,0 -0.1,972.39 -0.11,972.39 z m -633.48,-1205.2 -575.99798,332.55 c -55.094,31.81 -125.551,12.94 -157.364,-42.16 -31.808,-55.1 -12.933,-125.55 42.165,-157.36 l 575.997,-332.549 c 55.09,-31.812 125.54998,-12.941 157.35998,42.16 31.81,55.098 12.93,125.547 -42.16,157.359 z m 42.16,328.84 c -31.81,-55.11 -102.26998,-73.97 -157.35998,-42.17 l -575.997,332.55 c -55.098,31.81 -73.973,102.27 -42.165,157.37 31.813,55.1 102.27,73.97 157.364,42.16 l 575.99798,-332.55 c 55.09,-31.81 73.97,-102.27 42.16,-157.36"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="path12" />
+    </g>
+  </g>
 </svg>
