@@ -225,6 +225,14 @@
   {
     "nom": "Caldairou Benoit",
     "bureau": "E-252",
-    "courriel": "benoit.caldairou@cegepmontpetit.ca"
+    "courriel": "benoit.caldairou",
+    "extension": "3293"
+  },
+  {
+    "nom": "Gaudreault Gabriel",
+    "bureau": "E-252",
+    "courriel": "gabriel.gaudreault",
+    "extension": "3294",
+    "image": "gg.png"
   }
 ]
