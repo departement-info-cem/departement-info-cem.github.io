@@ -1,10 +1,19 @@
 {
   "eslint.validate": ["typescript", "javascript", "html", "css"],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "eslint.alwaysShowStatus": false,
-  "prettier.ignorePath": "angular/.prettierignore"
+  "prettier.ignorePath": "angular/.prettierignore",
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  }
 }
