@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DataService, Prof } from '../service/service.data';
 import { Observable } from 'rxjs';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -41,4 +41,4 @@ export class HomeComponent {
   selector: 'app-dialog-adept',
   templateUrl: 'dialog-adept.html',
 })
-export class DialogAdeptComponent {}
+export class DialogAdeptComponent { }
