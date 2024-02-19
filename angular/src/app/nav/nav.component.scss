@@ -27,3 +27,18 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.menu-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  mat-icon {
+    padding: 4px;
+    box-sizing: content-box;
+  }
+
+  span {
+    margin-left: 8px;
+  }
+}

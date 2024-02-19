@@ -1,95 +1,72 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav
-    #drawer
-    class="sidenav"
-    fixedInViewport
-    [disableClose]="true"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'side' : 'side'"
-    [opened]="false"
-  >
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [disableClose]="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'side' : 'side'"
+    [opened]="false">
     <!--    <mat-toolbar color="accent">Menu</mat-toolbar>-->
-    <button
-      *ngIf="!isExpanded"
-      mat-mini-fab
-      (click)="isExpanded = !isExpanded"
-      color="accent"
-      style="margin: 13px"
-    >
+    <button *ngIf="!isExpanded" mat-mini-fab (click)="isExpanded = !isExpanded" color="accent" style="margin: 13px">
       <mat-icon aria-label="Menu">open_in_full</mat-icon>
     </button>
-    <button
-      *ngIf="isExpanded"
-      mat-mini-fab
-      (click)="isExpanded = !isExpanded"
-      color="accent"
-      style="margin: 13px"
-    >
+    <button *ngIf="isExpanded" mat-mini-fab (click)="isExpanded = !isExpanded" color="accent" style="margin: 13px">
       <mat-icon aria-label="Menu">close_fullscreen</mat-icon>
     </button>
     <mat-nav-list>
       <mat-list-item routerLink="accueil" (click)="isExpanded = false">
-        <mat-icon mat-list-icon>home</mat-icon>
-        <h4 mat-line *ngIf="isExpanded">Accueil</h4>
+        <span class="menu-item">
+          <mat-icon mat-list-icon>home</mat-icon>
+          <span mat-line *ngIf="isExpanded">Accueil</span>
+        </span>
       </mat-list-item>
-      <mat-list-item routerLink="profs" (click)="isExpanded = false">
-        <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
-        <h4 mat-line *ngIf="isExpanded">Profs</h4>
+      <mat-list-item routerLink="profs" (click)="isExpanded = false"><span class="menu-item">
+          <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
+          <span mat-line *ngIf="isExpanded">Profs</span></span>
       </mat-list-item>
-      <mat-list-item routerLink="dec" (click)="isExpanded = false">
-        <mat-icon mat-list-icon>school</mat-icon>
-        <h4 mat-line *ngIf="isExpanded">DEC Technique</h4>
+      <mat-list-item routerLink="dec" (click)="isExpanded = false"><span class="menu-item">
+          <mat-icon mat-list-icon>school</mat-icon>
+          <span mat-line *ngIf="isExpanded">DEC Technique</span>
+        </span>
       </mat-list-item>
-      <mat-list-item routerLink="decbac" (click)="isExpanded = false">
-        <i class="fas fa-university" mat-list-icon></i>
-        <h4 mat-line *ngIf="isExpanded">DEC Bac</h4>
+      <mat-list-item routerLink="decbac" (click)="isExpanded = false"><span class="menu-item">
+          <mat-icon mat-list-icon>account_balance</mat-icon>
+          <span mat-line *ngIf="isExpanded">DEC Bac</span>
+        </span>
       </mat-list-item>
-      <mat-list-item routerLink="faq" (click)="isExpanded = false">
-        <mat-icon mat-list-icon>help_outline</mat-icon>
-        <h4 mat-line *ngIf="isExpanded">Foire aux questions</h4>
+      <mat-list-item routerLink="faq" (click)="isExpanded = false"><span class="menu-item">
+          <mat-icon mat-list-icon>help_outline</mat-icon>
+          <span mat-line *ngIf="isExpanded">Foire aux questions</span>
+        </span>
       </mat-list-item>
-      <mat-list-item routerLink="git" (click)="isExpanded = false">
-        <i mat-list-icon class="fab fa-git-square"></i>
-        <h4 mat-line *ngIf="isExpanded">Consignes GIT</h4>
+      <mat-list-item routerLink="git" (click)="isExpanded = false"><span class="menu-item">
+          <mat-icon mat-list-icon class="material-symbols-outlined">folder_data</mat-icon>
+          <span mat-line *ngIf="isExpanded">Consignes GIT</span>
+        </span>
       </mat-list-item>
-      <mat-list-item routerLink="goodies" (click)="isExpanded = false">
-        <mat-icon mat-list-icon>savings</mat-icon>
-        <h4 mat-line *ngIf="isExpanded">Logiciels gratuits</h4>
+      <mat-list-item routerLink="goodies" (click)="isExpanded = false"><span class="menu-item">
+          <mat-icon mat-list-icon>savings</mat-icon>
+          <span mat-line *ngIf="isExpanded">Logiciels gratuits</span>
+        </span>
       </mat-list-item>
-      <mat-list-item routerLink="plagiat" (click)="isExpanded = false">
-        <mat-icon mat-list-icon>copyright</mat-icon>
-        <h4 mat-line *ngIf="isExpanded">Plagiat</h4>
+      <mat-list-item routerLink="plagiat" (click)="isExpanded = false"><span class="menu-item">
+          <mat-icon mat-list-icon>copyright</mat-icon>
+          <span mat-line *ngIf="isExpanded">Plagiat</span>
+        </span>
       </mat-list-item>
-      <mat-list-item routerLink="contact" (click)="isExpanded = false">
-        <mat-icon mat-list-icon>email</mat-icon>
-        <h4 mat-line *ngIf="isExpanded">Contact</h4>
+      <mat-list-item routerLink="contact" (click)="isExpanded = false"><span class="menu-item">
+          <mat-icon mat-list-icon>email</mat-icon>
+          <span mat-line *ngIf="isExpanded">Contact</span>
+        </span>
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary" style="z-index: 99">
-      <mat-icon
-        class="pointy"
-        *ngIf="drawer.opened"
-        aria-label="Side nav toggle icon"
-        (click)="drawer.toggle()"
-        >chevron_left</mat-icon
-      >
-      <mat-icon
-        class="pointy"
-        *ngIf="!drawer.opened"
-        aria-label="Side nav toggle icon"
-        (click)="drawer.toggle()"
-        >menu</mat-icon
-      >
+      <mat-icon class="pointy" *ngIf="drawer.opened" aria-label="Side nav toggle icon"
+        (click)="drawer.toggle()">chevron_left</mat-icon>
+      <mat-icon class="pointy" *ngIf="!drawer.opened" aria-label="Side nav toggle icon"
+        (click)="drawer.toggle()">menu</mat-icon>
 
       <div style="margin-top: 10px; margin-left: 5px">
         <a routerLink="/">
-          <object
-            data="assets/logo.svg"
-            type="image/svg+xml"
-            height="50"
-          ></object>
+          <object data="assets/logo.svg" type="image/svg+xml" height="50"></object>
         </a>
       </div>
 
@@ -97,20 +74,12 @@
       <a class="mr-3" href="https://cegepmontpetit.ca" target="_blank">
         <img style="height: 25px" src="assets/CEM_V_blanc.svg" />
       </a>
-      <a
-        class="mr-3"
-        href="https://www.facebook.com/groups/377761922376448"
-        target="_blank"
-      >
+      <a class="mr-3" href="https://www.facebook.com/groups/377761922376448" target="_blank">
         <span style="color: white">
           <i class="fab fa-facebook-f"></i>
         </span>
       </a>
-      <a
-        class=""
-        href="https://cegepedouardmontpetit.sharepoint.com/teams/PED-INFO"
-        target="_blank"
-      >
+      <a class="" href="https://cegepedouardmontpetit.sharepoint.com/teams/PED-INFO" target="_blank">
         <img style="height: 25px" src="assets/sharepoint.png" />
       </a>
     </mat-toolbar>
