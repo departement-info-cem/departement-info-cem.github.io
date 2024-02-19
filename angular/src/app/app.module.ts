@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NavComponent } from './nav/nav.component';
 import { DialogAdeptComponent, HomeComponent } from './home/home.component';
@@ -70,6 +71,7 @@ import { EngagementComponent } from './engagements/engagement.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    MatInputModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent],
