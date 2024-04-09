@@ -23,11 +23,11 @@
     "@angular/platform-browser": "^17.3.3",
     "@angular/platform-browser-dynamic": "^17.3.3",
     "@angular/router": "^17.3.3",
-    "@fortawesome/fontawesome-free": "^5.15.2",
-    "bootstrap": "^4.6.0",
-    "jquery": "^3.5.1",
+    "@fortawesome/fontawesome-free": "^6.5.2",
+    "bootstrap": "^5.3.3",
+    "jquery": "^3.7.1",
     "rellax": "^1.12.1",
-    "rxjs": "^6.6.3",
+    "rxjs": "^7.8.1",
     "zone.js": "~0.14.4"
   },
   "devDependencies": {
@@ -39,14 +39,13 @@
     "@angular-eslint/template-parser": "17.3.0",
     "@angular/cli": "^17.3.3",
     "@angular/compiler-cli": "^17.3.3",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0",
     "angular-cli-ghpages": "^2.0.0-beta.2",
-    "codelyzer": "^6.0.0",
-    "eslint": "^8.53.0",
-    "prettier": "^2.8.0",
-    "protractor": "~7.0.0",
-    "ts-node": "~8.3.0",
-    "typescript": "~5.3.3"
+    "codelyzer": "^6.0.2",
+    "eslint": "^8.0.0",
+    "prettier": "^3.2.5",
+    "ts-node": "~10.9.2",
+    "typescript": "~5.4.4"
   }
 }

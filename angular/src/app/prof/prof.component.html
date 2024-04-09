@@ -26,12 +26,14 @@
     <div class="col-md-6">
       <div class="alert alert-dark">
         <h3>Me contacter:</h3>
-        <a
-          class="btn btn-block btn-outline-dark btn-lg mb-5"
-          href="mailto:{{ prof.courriel }}@cegepmontpetit.ca"
-        >
-          Courriel <i class="far fa-envelope"></i>
-        </a>
+        <div class="d-grid">
+          <a
+            class="btn btn-block btn-outline-dark btn-lg mb-5"
+            href="mailto:{{ prof.courriel }}@cegepmontpetit.ca"
+          >
+            Courriel <i class="far fa-envelope"></i>
+          </a>
+        </div>
         <p>On peut me trouver au CEGEP à mon bureau au {{ prof.bureau }}.</p>
       </div>
 
