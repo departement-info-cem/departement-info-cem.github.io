@@ -6,6 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-prof',
   templateUrl: './prof.component.html',
+  styleUrls: ['./prof.component.scss'],
 })
 export class ProfComponent {
   courriel: any;
