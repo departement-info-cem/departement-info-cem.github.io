@@ -1,9 +1,13 @@
 <br />
 <div class="container" *ngIf="prof">
   <div class="row">
-    <div class="col-md">
+    <div class="col-md-6">
       <div class="course-detail">
-        <mat-card appearance="outlined" class="example-card" [class.mat-elevation-z8]="20">
+        <mat-card
+          appearance="outlined"
+          class="example-card"
+          [class.mat-elevation-z8]="20"
+        >
           <mat-card-header>
             <mat-card-title>{{ prof.nom }}</mat-card-title>
             <mat-card-subtitle
@@ -21,7 +25,7 @@
         </mat-card>
       </div>
     </div>
-    <div class="col-md">
+    <div class="col-md-6">
       <div class="alert alert-dark">
         <h3>Me contacter:</h3>
         <a
