@@ -32,7 +32,6 @@ import { NouveauComponent } from './nouveau/nouveau.component';
 import { TerminalComponent } from './terminal/terminal.component';
 import { ParallaxComponent } from './parallax/parallax.component';
 import { GitComponent } from './git/git.component';
-import { EngagementComponent } from './engagements/engagement.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +50,6 @@ import { EngagementComponent } from './engagements/engagement.component';
     ContactComponent,
     PlagiatComponent,
     NouveauComponent,
-    EngagementComponent,
     TerminalComponent,
     ParallaxComponent,
     GitComponent,
@@ -76,4 +74,4 @@ import { EngagementComponent } from './engagements/engagement.component';
   providers: [DataService],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

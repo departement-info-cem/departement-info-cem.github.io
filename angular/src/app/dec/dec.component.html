@@ -91,10 +91,10 @@
             "
             *ngIf="sessionDe(item) === session && bon(item.v)"
           >
-            <span class="float-right">
+            <span class="float-end">
               <a
                 *ngIf="item.url"
-                class="badge badge-info"
+                class="badge text-bg-info"
                 href="{{ item.url }}"
               >
                 <mat-icon>http</mat-icon>
@@ -102,13 +102,13 @@
             </span>
             <span class="titre">{{ item.nom }}</span>
             <div style="clear: both" class="mb-2">
-              <span class="numero badge badge-light">{{ item.no }}-EM</span>
+              <span class="numero badge text-bg-light">{{ item.no }}-EM</span>
             </div>
             <span class="icons" *ngFor="let icon of item.icons">
               &nbsp;
               <i class="{{ icon }}"></i>
             </span>
-            <span class="float-right"
+            <span class="float-end"
               ><i class="fas fa-clock"></i> {{ heuresDe(item) }} h</span
             >
             <div style="clear: both"></div>

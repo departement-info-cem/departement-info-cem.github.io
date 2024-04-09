@@ -16,7 +16,11 @@
           <div class="col-lg-8">
             <app-terminal></app-terminal>
           </div>
-          <div class="col-lg-4" routerLink="/goodies">
+          <div
+            class="col-lg-4"
+            routerLink="/goodies"
+            style="position: relative"
+          >
             <img
               src="assets/gratuit.svg"
               style="position: absolute; top: -20px; left: -10px; width: 65px"
@@ -96,21 +100,21 @@
               <mat-card-content>
                 <p>
                   Quelques conseils pour &nbsp;
-                  <a class="badge badge-light" routerLink="/nouveau">
+                  <a class="badge text-bg-light" routerLink="/nouveau">
                     Nouvel étudiant</a
                   >
                 </p>
 
                 <p>
                   Beaucoup de &nbsp;
-                  <a class="badge badge-light" routerLink="/goodies"
+                  <a class="badge text-bg-light" routerLink="/goodies"
                     >logiciels gratuits</a
                   >
                 </p>
 
                 <p>
                   Explications sur le &nbsp;
-                  <a class="badge badge-danger" routerLink="/plagiat">
+                  <a class="badge text-bg-danger" routerLink="/plagiat">
                     <i class="fas fa-radiation"></i> plagiat
                     <i class="fas fa-radiation"></i>
                   </a>
@@ -118,7 +122,7 @@
 
                 <p>
                   Le document pour les problèmes de &nbsp;
-                  <a class="badge badge-light" href="assets/RequeteDDA.pdf">
+                  <a class="badge text-bg-light" href="assets/RequeteDDA.pdf">
                     <i class="fas fa-hdd"></i> SSD
                   </a>
                 </p>
@@ -170,12 +174,8 @@
                 [class]="i === 0 ? 'carousel-item active' : 'carousel-item'"
                 *ngFor="let video of videos; index as i"
               >
-                <div class="embed-responsive embed-responsive-16by9">
-                  <iframe
-                    class="embed-responsive-item"
-                    [src]="urlFor(video)"
-                    allowfullscreen
-                  ></iframe>
+                <div class="ratio ratio-16x9">
+                  <iframe [src]="urlFor(video)" allowfullscreen></iframe>
                 </div>
               </div>
             </div>
