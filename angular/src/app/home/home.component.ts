@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService, Prof } from '../service/service.data';
-import { Observable } from 'rxjs';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
@@ -10,14 +9,14 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  images = ['gang.JPG', 'tablo.JPG', 'blond.JPG', 'jo-jm.JPG', 'grimace.JPG'];
+  images = ['gang.jpg', 'tablo.jpg', 'blond.jpg', 'jo-jm.jpg', 'grimace.jpg'];
 
   videos: Prof[];
 
   constructor(
     private dialog: MatDialog,
     private service: DataService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
   ) {
     this.videos = this.service.videos();
   }
@@ -32,7 +31,7 @@ export class HomeComponent {
 
   urlFor(prof: Prof): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(
-      'https://www.youtube.com/embed/' + prof.lienVideo + '?rel=0'
+      'https://www.youtube.com/embed/' + prof.lienVideo + '?rel=0',
     );
   }
 }
@@ -41,4 +40,4 @@ export class HomeComponent {
   selector: 'app-dialog-adept',
   templateUrl: 'dialog-adept.html',
 })
-export class DialogAdeptComponent { }
+export class DialogAdeptComponent {}
