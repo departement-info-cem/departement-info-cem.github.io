@@ -3,7 +3,7 @@ name: Déploiement
 on:
   push:
     branches:
-      - mise-a-niveau
+      - master
 
 jobs:
   deploy:
