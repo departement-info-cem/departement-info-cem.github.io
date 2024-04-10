@@ -1,50 +1,52 @@
 <br />
-<div class="container" *ngIf="prof">
-  <div class="row">
-    <div class="col-md">
-      <div class="course-detail">
-        <mat-card class="example-card" [class.mat-elevation-z8]="20">
-          <mat-card-header>
-            <mat-card-title>{{ prof.nom }}</mat-card-title>
-            <mat-card-subtitle
-              >{{ prof.courriel }}@cegepmontpetit.ca</mat-card-subtitle
+@if (prof) {
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="course-detail">
+          <mat-card
+            appearance="outlined"
+            class="example-card"
+            [class.mat-elevation-z8]="20"
             >
-          </mat-card-header>
-
-          <img
-            *ngIf="prof.image && prof.image.length > 1"
-            mat-card-image
-            src="../../../../assets/photos/{{ prof.image }}"
-          />
-
-          <mat-card-content> </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-    <div class="col-md">
-      <div class="alert alert-dark">
-        <h3>Me contacter:</h3>
-        <a
-          class="btn btn-block btn-outline-dark btn-lg mb-5"
-          href="mailto:{{ prof.courriel }}@cegepmontpetit.ca"
-        >
-          Courriel <i class="far fa-envelope"></i>
-        </a>
-        <p>On peut me trouver au CEGEP à mon bureau au {{ prof.bureau }}.</p>
-      </div>
-
-      <div
-        class="alert alert-dark"
-        *ngIf="prof.lienVideo && prof.lienVideo.length > 0"
-      >
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe
-            class="embed-responsive-item"
-            [src]="urlFor(prof)"
-            allowfullscreen
-          ></iframe>
+            <mat-card-header>
+              <mat-card-title>{{ prof.nom }}</mat-card-title>
+              <mat-card-subtitle
+                >{{ prof.courriel }}&#64;cegepmontpetit.ca</mat-card-subtitle
+                >
+              </mat-card-header>
+              @if (prof.image && prof.image.length > 1) {
+                <img
+                  mat-card-image
+                  src="../../../../assets/photos/{{ prof.image }}"
+                  />
+              }
+            </mat-card>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="alert alert-dark">
+            <h3>Me contacter:</h3>
+            <div class="d-grid">
+              <a
+                class="btn btn-block btn-outline-dark btn-lg mb-5"
+                href="mailto:{{ prof.courriel }}@cegepmontpetit.ca"
+                >
+                Courriel <i class="far fa-envelope"></i>
+              </a>
+            </div>
+            <p>On peut me trouver au CEGEP à mon bureau au {{ prof.bureau }}.</p>
+          </div>
+          @if (prof.lienVideo && prof.lienVideo.length > 0) {
+            <div
+              class="alert alert-dark"
+              >
+              <div class="ratio ratio-16x9">
+                <iframe [src]="urlFor(prof)" allowfullscreen></iframe>
+              </div>
+            </div>
+          }
         </div>
       </div>
     </div>
-  </div>
-</div>
+  }

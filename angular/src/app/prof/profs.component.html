@@ -1,38 +1,23 @@
 <br />
 <div class="container">
   <div class="row">
-    <div
-      class="col-md-6 col-lg-4"
-      *ngFor="let item of profs | triProf; index as i"
-    >
-      <mat-card
-        class="example-card ml-1 mr-1 mb-4"
-        [class.mat-elevation-z8]="20"
-      >
-        <mat-card-header routerLink="/prof/{{ item.courriel }}">
-          <mat-card-title>{{ item.nom }}</mat-card-title>
-          <!--        <mat-card-subtitle>{{item.courriel}}</mat-card-subtitle>-->
-        </mat-card-header>
-
-        <img
-          routerLink="/prof/{{ item.courriel }}"
-          *ngIf="item.image && item.image.length > 1"
-          mat-card-image
-          src="../../../../assets/photos/{{ item.image }}"
-        />
-
-        <!--      <mat-card-content>-->
-        <!--        <p>-->
-        <!--          {{item | json}}-->
-        <!--        </p>-->
-        <!--      </mat-card-content>-->
-        <mat-card-actions>
-          <button mat-button routerLink="/prof/{{ item.courriel }}">
-            En savoir plus
-          </button>
-          <!--        <button mat-button>SHARE</button>-->
-        </mat-card-actions>
-      </mat-card>
-    </div>
+    @for (item of profs | triProf; track item; let i = $index) {
+      <div class="col-md-6 col-lg-4">
+        <mat-card appearance="outlined" class="example-card ml-1 mr-1 mb-4" [class.mat-elevation-z8]="20">
+          <mat-card-header routerLink="/prof/{{ item.courriel }}">
+            <mat-card-title>{{ item.nom }}</mat-card-title>
+          </mat-card-header>
+          @if (item.image && item.image.length > 1) {
+            <img routerLink="/prof/{{ item.courriel }}" mat-card-image
+              src="../../../../assets/photos/{{ item.image }}" />
+          }
+          <mat-card-actions>
+            <button mat-button routerLink="/prof/{{ item.courriel }}">
+              En savoir plus
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    }
   </div>
 </div>

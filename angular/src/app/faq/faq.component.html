@@ -10,15 +10,18 @@
     <div class="col-md4"></div>
   </div>
   <div class="row">
-    <div class="col-md-4" *ngFor="let q of questions">
-      <div class="alert alert-dark">
-        <h3>{{ q.q }}</h3>
-
-        <p>
-          {{ q.r }}
-        </p>
-        <a href="{{ l }}" class="card-link" *ngFor="let l of q.liens">lien</a>
+    @for (q of questions; track q) {
+      <div class="col-md-4">
+        <div class="alert alert-dark">
+          <h3>{{ q.q }}</h3>
+          <p>
+            {{ q.r }}
+          </p>
+          @for (l of q.liens; track l) {
+            <a href="{{ l }}" class="card-link">lien</a>
+          }
+        </div>
       </div>
-    </div>
+    }
   </div>
 </div>

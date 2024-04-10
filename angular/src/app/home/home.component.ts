@@ -1,23 +1,50 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogClose,
+} from '@angular/material/dialog';
 import { DataService, Prof } from '../service/service.data';
-import { Observable } from 'rxjs';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+import { MatButton, MatAnchor } from '@angular/material/button';
+import {
+  MatCard,
+  MatCardHeader,
+  MatCardTitle,
+  MatCardSubtitle,
+  MatCardContent,
+} from '@angular/material/card';
+import { RouterLink } from '@angular/router';
+import { TerminalComponent } from '../terminal/terminal.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  standalone: true,
+  imports: [
+    TerminalComponent,
+    RouterLink,
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardSubtitle,
+    MatCardContent,
+    MatButton,
+    MatAnchor
+],
 })
 export class HomeComponent {
-  images = ['gang.JPG', 'tablo.JPG', 'blond.JPG', 'jo-jm.JPG', 'grimace.JPG'];
+  images = ['gang.jpg', 'tablo.jpg', 'blond.jpg', 'jo-jm.jpg', 'grimace.jpg'];
 
   videos: Prof[];
 
   constructor(
     private dialog: MatDialog,
     private service: DataService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
   ) {
     this.videos = this.service.videos();
   }
@@ -32,7 +59,7 @@ export class HomeComponent {
 
   urlFor(prof: Prof): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(
-      'https://www.youtube.com/embed/' + prof.lienVideo + '?rel=0'
+      'https://www.youtube.com/embed/' + prof.lienVideo + '?rel=0',
     );
   }
 }
@@ -40,5 +67,7 @@ export class HomeComponent {
 @Component({
   selector: 'app-dialog-adept',
   templateUrl: 'dialog-adept.html',
+  standalone: true,
+  imports: [MatDialogTitle, MatDialogContent, MatAnchor, MatDialogClose],
 })
 export class DialogAdeptComponent {}
