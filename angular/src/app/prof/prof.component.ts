@@ -2,11 +2,28 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Prof, DataService } from '../service/service.data';
 import { DomSanitizer } from '@angular/platform-browser';
+import {
+  MatCard,
+  MatCardHeader,
+  MatCardTitle,
+  MatCardSubtitle,
+  MatCardImage,
+} from '@angular/material/card';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-prof',
   templateUrl: './prof.component.html',
   styleUrls: ['./prof.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardSubtitle,
+    MatCardImage,
+  ],
 })
 export class ProfComponent {
   courriel: any;
@@ -15,7 +32,7 @@ export class ProfComponent {
   constructor(
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
-    private service: DataService
+    private service: DataService,
   ) {
     this.courriel = this.route.snapshot.paramMap.get('courriel');
     this.prof = this.service.profParCourriel(this.courriel);
@@ -24,7 +41,7 @@ export class ProfComponent {
   // tslint:disable-next-line:typedef
   urlFor(prof: Prof) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(
-      'https://www.youtube.com/embed/' + prof.lienVideo + '?rel=0'
+      'https://www.youtube.com/embed/' + prof.lienVideo + '?rel=0',
     );
   }
 }

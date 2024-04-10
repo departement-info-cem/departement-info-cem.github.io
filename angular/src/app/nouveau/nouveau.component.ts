@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-nouveau',
   templateUrl: './nouveau.component.html',
   styleUrls: ['./nouveau.component.scss'],
+  standalone: true,
 })
 export class NouveauComponent {
   constructor() {}

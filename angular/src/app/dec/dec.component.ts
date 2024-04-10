@@ -1,17 +1,24 @@
 import { Component } from '@angular/core';
 import { Cours, DataService, Prof } from '../service/service.data';
 import { ActivatedRoute } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-dec',
   templateUrl: './dec.component.html',
   styleUrls: ['./dec.component.scss'],
+  standalone: true,
+  imports: [NgIf, MatIcon, NgFor],
 })
 export class DecComponent {
   cours: Cours[];
   programme = 'c';
 
-  constructor(private service: DataService, private route: ActivatedRoute) {
+  constructor(
+    private service: DataService,
+    private route: ActivatedRoute,
+  ) {
     this.cours = this.service.cours();
     const profil = this.route.snapshot.paramMap.get('profil');
     if (profil) {

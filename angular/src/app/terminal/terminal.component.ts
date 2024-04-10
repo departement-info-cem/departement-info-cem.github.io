@@ -1,10 +1,13 @@
 import { Component, HostListener } from '@angular/core';
 import { BotRule, BotTrigger, DataService } from '../service/service.data';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-terminal',
   templateUrl: './terminal.component.html',
   styleUrls: ['./terminal.component.scss'],
+  standalone: true,
+  imports: [NgIf, NgFor],
 })
 export class TerminalComponent {
   userLine = '';
@@ -93,7 +96,7 @@ export class TerminalComponent {
           if (res) {
             const numberOfTrigsBest = this.trigsCompletedFor(
               res,
-              this.triggers
+              this.triggers,
             );
             if (numberOfTrigs > numberOfTrigs) {
               res = q;
@@ -178,7 +181,7 @@ export class TerminalComponent {
       console.log(
         r.substring(0, 1).toLowerCase() +
           ' = ' +
-          userLine.substring(0, 1).toLowerCase()
+          userLine.substring(0, 1).toLowerCase(),
       );
       if (
         r.substring(0, 1).toLowerCase() ===
