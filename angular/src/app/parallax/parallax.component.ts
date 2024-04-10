@@ -8,6 +8,7 @@ import { DataService, Prof } from '../service/service.data';
 })
 export class ParallaxComponent {
   photos: Prof[];
+  currentYear = new Date().getFullYear();
 
   constructor(private service: DataService) {
     this.photos = this.service.photos();

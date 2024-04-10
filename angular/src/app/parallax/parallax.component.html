@@ -25,7 +25,7 @@
 
         <div class="bienvenue">
           Besoin d'aide ...
-          <video muted autoplay="false" controls style="width: 100%">
+          <video muted controls style="width: 100%">
             <source src="assets/paire.mp4" type="video/mp4" />
           </video>
         </div>
@@ -99,26 +99,16 @@
       text-align: justify;
     "
   >
-    <div
-      style="
-        overflow-x: scroll;
-        overflow-y: hidden;
-        display: grid;
-        grid-gap: 10px;
-        grid-template-columns: repeat(20, 230px);
-        grid-template-rows: minmax(150px, 1fr);
-      "
-    >
+    <div style="overflow-y: hidden; overflow-x: auto; display: flex; gap: 10px">
       <div
-        style="border-left: 5px solid black"
         *ngFor="
           let image of [
-            'gang.JPG',
-            'tablo.JPG',
-            'blond.JPG',
-            'jo-jm.JPG',
-            'grimace.JPG',
-            'hugo.JPG',
+            'gang.jpg',
+            'tablo.jpg',
+            'blond.jpg',
+            'jo-jm.jpg',
+            'grimace.jpg',
+            'hugo.jpg',
             'home.jpg',
             'college.jpg'
           ];
@@ -204,21 +194,8 @@
       LES PROFS
     </h2>
 
-    <div
-      style="
-        overflow-y: hidden;
-        overflow-x: auto;
-        display: grid;
-        grid-gap: 10px;
-        grid-template-columns: repeat(60, 200px);
-        grid-template-rows: minmax(150px, 1fr);
-      "
-    >
-      <div
-        routerLink="/prof/{{ photo.courriel }}"
-        style="border-left: 5px solid black"
-        *ngFor="let photo of photos"
-      >
+    <div style="overflow-y: hidden; overflow-x: auto; display: flex; gap: 10px">
+      <div routerLink="/prof/{{ photo.courriel }}" *ngFor="let photo of photos">
         <img
           style="height: 200px"
           src="../../../../assets/photos/{{ photo.image }}"
@@ -277,6 +254,9 @@
       text-align: justify;
     "
   >
-    <p>Copyright Joris Deguet 2021.</p>
+    <p>
+      Copyright Département d'Informatique du CÉGEP Édouard-Montpetit
+      {{ currentYear }}.
+    </p>
   </div>
 </div>
