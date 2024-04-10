@@ -9,7 +9,7 @@ import {
   MatCardSubtitle,
   MatCardImage,
 } from '@angular/material/card';
-import { NgIf } from '@angular/common';
+
 
 @Component({
   selector: 'app-prof',
@@ -17,13 +17,12 @@ import { NgIf } from '@angular/common';
   styleUrls: ['./prof.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
     MatCard,
     MatCardHeader,
     MatCardTitle,
     MatCardSubtitle,
-    MatCardImage,
-  ],
+    MatCardImage
+],
 })
 export class ProfComponent {
   courriel: any;

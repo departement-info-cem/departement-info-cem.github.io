@@ -7,7 +7,7 @@ import {
 } from '@angular/material/dialog';
 import { DataService, Prof } from '../service/service.data';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { NgFor } from '@angular/common';
+
 import { MatButton, MatAnchor } from '@angular/material/button';
 import {
   MatCard,
@@ -33,9 +33,8 @@ import { TerminalComponent } from '../terminal/terminal.component';
     MatCardSubtitle,
     MatCardContent,
     MatButton,
-    MatAnchor,
-    NgFor,
-  ],
+    MatAnchor
+],
 })
 export class HomeComponent {
   images = ['gang.jpg', 'tablo.jpg', 'blond.jpg', 'jo-jm.jpg', 'grimace.jpg'];

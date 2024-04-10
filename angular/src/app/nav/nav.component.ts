@@ -7,7 +7,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatNavList, MatListItem } from '@angular/material/list';
 import { MatIcon } from '@angular/material/icon';
 import { MatMiniFabButton } from '@angular/material/button';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   MatSidenavContainer,
   MatSidenav,
@@ -22,7 +22,6 @@ import {
   imports: [
     MatSidenavContainer,
     MatSidenav,
-    NgIf,
     MatMiniFabButton,
     MatIcon,
     MatNavList,
@@ -31,8 +30,8 @@ import {
     MatSidenavContent,
     MatToolbar,
     RouterOutlet,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class NavComponent {
   isExpanded = false;

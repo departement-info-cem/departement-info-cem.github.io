@@ -10,7 +10,7 @@ import {
   MatCardImage,
   MatCardActions,
 } from '@angular/material/card';
-import { NgFor, NgIf } from '@angular/common';
+
 
 @Component({
   selector: 'app-prof',
@@ -18,17 +18,15 @@ import { NgFor, NgIf } from '@angular/common';
   styleUrls: ['./profs.component.scss'],
   standalone: true,
   imports: [
-    NgFor,
     MatCard,
     MatCardHeader,
     RouterLink,
     MatCardTitle,
-    NgIf,
     MatCardImage,
     MatCardActions,
     MatButton,
-    TriProfPipe,
-  ],
+    TriProfPipe
+],
 })
 export class ProfsComponent {
   profs: Prof[];

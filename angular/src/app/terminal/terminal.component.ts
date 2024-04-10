@@ -1,13 +1,13 @@
 import { Component, HostListener } from '@angular/core';
 import { BotRule, BotTrigger, DataService } from '../service/service.data';
-import { NgIf, NgFor } from '@angular/common';
+
 
 @Component({
   selector: 'app-terminal',
   templateUrl: './terminal.component.html',
   styleUrls: ['./terminal.component.scss'],
   standalone: true,
-  imports: [NgIf, NgFor],
+  imports: [],
 })
 export class TerminalComponent {
   userLine = '';
