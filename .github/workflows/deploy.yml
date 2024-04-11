@@ -6,22 +6,21 @@ on:
       - master
 
 jobs:
-  deploy:
-    name: Deploy to Github Pages
+  build:
+    name: Build le site
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js 20
+      - name: Utiliser Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Cache node modules
+      - name: Cache de node modules
         id: cache-nodemodules
         uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
-          # caching node_modules
           path: angular/node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
@@ -29,11 +28,15 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
-      - name: Install Dependencies
+      - name: Installer les dépendences
         working-directory: angular
         if: steps.cache-nodemodules.outputs.cache-hit != 'true'
         run: |
           npm ci
+
+      - name: Lint
+        working-directory: angular
+        run: npm run lint
 
       - name: Build
         working-directory: angular
@@ -43,13 +46,27 @@ jobs:
         working-directory: angular/dist/depinfo
         run: |
           cp index.html 404.html
-      - name: Test lint
-        working-directory: angular
-        run: npm run lint
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+
+      - name: Téléverser l'artéfact
+        id: upload-artifact
+        uses: actions/upload-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          # Build output to publish to the `gh-pages` branch:
-          publish_dir: angular/dist/depinfo
-          cname: info.cegepmontpetit.ca
+          name: github-pages
+          path: angular/dist/depinfo
+          retention-days: 1
+          if-no-files-found: error
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
