@@ -1,4 +1,4 @@
-name: Test deployment
+name: Test déploiement
 
 on:
   pull_request:
@@ -6,21 +6,21 @@ on:
       - master
 
 jobs:
-  test-deploy:
-    name: Test deployment
+  test:
+    name: Test déploiement
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js 20
+      - name: Utiliser Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install dependencies
+      - name: Installer les dépendences
         working-directory: angular
         run: npm ci
-      - name: Test build website
+      - name: Tester le build du site
         working-directory: angular
         run: npm run build
-      - name: Test lint
+      - name: Lint
         working-directory: angular
         run: npm run lint
