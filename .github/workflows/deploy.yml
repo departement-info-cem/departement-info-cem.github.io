@@ -47,6 +47,13 @@ jobs:
         run: |
           cp index.html 404.html
 
+      - name: Fix permissions
+        working-directory: angular/dist/depinfo
+        run: |
+          chmod -c -R +rX "./" | while read line; do
+            echo "::warning title=Invalid file permissions automatically fixed::$line"
+          done
+
       - name: Téléverser l'artéfact
         id: upload-artifact
         uses: actions/upload-artifact@v4
