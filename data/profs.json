@@ -8,14 +8,6 @@
     "lienVideo": ""
   },
   {
-    "nom": "Belhachemi Ouldali",
-    "bureau": "E-210",
-    "courriel": "belhachemi.ouldali",
-    "extension": "6411",
-    "image": "bo.JPG",
-    "lienVideo": ""
-  },
-  {
     "nom": "Bernard Tremblay",
     "bureau": "E-214",
     "courriel": "bernard.tremblay",
@@ -116,27 +108,12 @@
     "lienVideo": ""
   },
   {
-    "nom": "Saïd Cherkaoui",
-    "bureau": "E-214",
-    "courriel": "said.cherkaoui",
-    "extension": "6492",
-    "image": "said.JPG",
-    "lienVideo": ""
-  },
-  {
     "nom": "Stéphane DesMeules",
     "bureau": "E-212",
     "courriel": "stephane.desmeules",
     "extension": "5108",
     "image": "stephane_desmeules.png",
     "lienVideo": "CwFxbtJWoAc"
-  },
-  {
-    "nom": "Thierry Giroux Veilleux",
-    "bureau": "E-211",
-    "courriel": "t.girouxveilleux",
-    "extension": "2969",
-    "lienVideo": ""
   },
   {
     "nom": "Valérie Turgeon",
@@ -251,5 +228,11 @@
     "nom": "Éric Mathieu",
     "bureau": "E-212",
     "courriel": "eric.mathieu@cegepmontpetit.ca"
+  },
+  {
+    "nom": "François Jasmin",
+    "bureau": "E-252",
+    "courriel": "francois.jasmin@cegepmontpetit.ca",
+    "extension": "2554"
   }
 ]
