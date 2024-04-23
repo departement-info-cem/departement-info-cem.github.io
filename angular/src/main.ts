@@ -21,7 +21,7 @@ import {
   provideHttpClient,
 } from '@angular/common/http';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
-import { DataService } from './app/service/service.data';
+import { DataService } from './app/service/data.service';
 
 if (environment.production) {
   enableProdMode();

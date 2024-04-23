@@ -15,6 +15,12 @@ export class DataService {
     return this.profs().find((p) => p.courriel === courriel);
   }
 
+  filtrerProfs(s: string): Prof[] {
+    return this.profs().filter((prof) => {
+      return prof.nom.toLowerCase().indexOf(s) > -1;
+    });
+  }
+
   videos(): Prof[] {
     return this.profs().filter((prof) => prof.lienVideo);
   }
@@ -36,7 +42,7 @@ export class DataService {
         //console.log(q.cats);
         for (let cat of q.cats) {
           console.log(
-            q.q + ' ' + q.cats + ' ' + cat + ' ' + (cat.indexOf(s) > -1)
+            q.q + ' ' + q.cats + ' ' + cat + ' ' + (cat.indexOf(s) > -1),
           );
           if (cat.indexOf(s) > -1) return true;
         }

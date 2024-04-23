@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { Cours, DataService, Prof } from '../service/service.data';
+import { Cours, DataService, Prof } from '../service/data.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
-
 
 @Component({
   selector: 'app-dec',

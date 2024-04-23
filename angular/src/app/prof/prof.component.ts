@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Prof, DataService } from '../service/service.data';
+import { Prof, DataService } from '../service/data.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
   MatCard,
@@ -9,7 +9,6 @@ import {
   MatCardSubtitle,
   MatCardImage,
 } from '@angular/material/card';
-
 
 @Component({
   selector: 'app-prof',
@@ -21,8 +20,8 @@ import {
     MatCardHeader,
     MatCardTitle,
     MatCardSubtitle,
-    MatCardImage
-],
+    MatCardImage,
+  ],
 })
 export class ProfComponent {
   courriel: any;

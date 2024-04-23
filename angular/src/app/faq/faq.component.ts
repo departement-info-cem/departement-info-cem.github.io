@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DataService, Question } from '../service/service.data';
+import { DataService, Question } from '../service/data.service';
 import { ActivatedRoute } from '@angular/router';
 
 import { FormsModule } from '@angular/forms';

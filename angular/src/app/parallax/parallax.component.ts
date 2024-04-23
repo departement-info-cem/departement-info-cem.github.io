@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DataService, Prof } from '../service/service.data';
+import { DataService, Prof } from '../service/data.service';
 
 import { RouterLink } from '@angular/router';
 import { GoodiesComponent } from '../goodies/goodies.component';

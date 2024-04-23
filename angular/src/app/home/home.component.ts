@@ -5,7 +5,7 @@ import {
   MatDialogContent,
   MatDialogClose,
 } from '@angular/material/dialog';
-import { DataService, Prof } from '../service/service.data';
+import { DataService, Prof } from '../service/data.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { MatButton, MatAnchor } from '@angular/material/button';
@@ -33,8 +33,8 @@ import { TerminalComponent } from '../terminal/terminal.component';
     MatCardSubtitle,
     MatCardContent,
     MatButton,
-    MatAnchor
-],
+    MatAnchor,
+  ],
 })
 export class HomeComponent {
   images = ['gang.jpg', 'tablo.jpg', 'blond.jpg', 'jo-jm.jpg', 'grimace.jpg'];
