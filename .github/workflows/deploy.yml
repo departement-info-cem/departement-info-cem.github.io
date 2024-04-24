@@ -58,6 +58,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: angular/dist/depinfo
+          retention-days: 5
   deploy:
     needs: build
 
