@@ -52,9 +52,7 @@ export class HomeComponent {
   openAdept(): void {
     const dialogRef = this.dialog.open(DialogAdeptComponent);
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
+    dialogRef.afterClosed().subscribe(() => {});
   }
 
   urlFor(prof: Prof): SafeResourceUrl {

@@ -16,10 +16,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  withInterceptorsFromDi,
-  provideHttpClient,
-} from '@angular/common/http';
+import { withInterceptorsFromDi, provideHttpClient } from '@angular/common/http';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { DataService } from './app/service/data.service';
 

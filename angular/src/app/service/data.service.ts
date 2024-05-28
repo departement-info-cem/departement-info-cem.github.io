@@ -35,15 +35,10 @@ export class DataService {
 
   questions(s: string): Question[] {
     return this.qs().filter((q) => {
-      console.log('coucou');
       if (q.q.indexOf(s) > -1) return true;
       if (q.r.indexOf(s) > -1) return true;
       if (q.cats) {
-        //console.log(q.cats);
         for (let cat of q.cats) {
-          console.log(
-            q.q + ' ' + q.cats + ' ' + cat + ' ' + (cat.indexOf(s) > -1),
-          );
           if (cat.indexOf(s) > -1) return true;
         }
       }

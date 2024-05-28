@@ -46,17 +46,13 @@ export class TerminalComponent {
       this.restart();
       return;
     }
-    console.log('got an answer');
     // add current answer to triggers
     const newOne = new BotTrigger();
     newOne.id = this.question.id;
     newOne.r = this.trouveLaReponse(this.question, this.userLine);
     // find one that is triggered
     this.userLine = '';
-    console.log('dfound answer  ' + newOne.r);
-    if (!newOne.r) {
-      console.log('ouch ');
-    } else {
+    if (newOne.r) {
       this.triggers.push(newOne);
       // try to find a diagnostic
       const diagnostic = this.diagnostic(this.triggers);
@@ -68,12 +64,9 @@ export class TerminalComponent {
       // find one that is the most triggered and not already asked.
       const nextQuestion = this.prochaineQuestion(this.triggers);
       if (!nextQuestion) {
-        console.log('out of questions, time to find the best advice');
         this.question = this.error;
       } else {
-        console.log('yeah ');
         this.question = nextQuestion;
-        console.log('new question ' + this.question.q);
       }
     }
   }
@@ -90,7 +83,6 @@ export class TerminalComponent {
     for (const q of this.questions) {
       if (q.reponses.length === 0) {
         const numberOfTrigs = this.trigsCompletedFor(q, this.triggers);
-        console.log(numberOfTrigs + ' for  ' + q.q);
         if (numberOfTrigs > 0) {
           if (res) {
             const numberOfTrigsBest = this.trigsCompletedFor(
@@ -114,7 +106,6 @@ export class TerminalComponent {
     for (const q of this.questions) {
       if (!this.alreadyAsked(q, this.triggers) && q.reponses.length > 0) {
         const numberOfTrigs = this.trigsBalance(q, this.triggers);
-        console.log(numberOfTrigs + ' for  ' + q.q);
         if (res) {
           const numberOfTrigsBest = this.trigsBalance(res, this.triggers);
           if (numberOfTrigs > numberOfTrigsBest) {
@@ -177,11 +168,6 @@ export class TerminalComponent {
 
   private trouveLaReponse(question: BotRule, userLine: string): string {
     for (const r of question.reponses) {
-      console.log(
-        r.substring(0, 1).toLowerCase() +
-          ' = ' +
-          userLine.substring(0, 1).toLowerCase(),
-      );
       if (
         r.substring(0, 1).toLowerCase() ===
         userLine.substring(0, 1).toLowerCase()

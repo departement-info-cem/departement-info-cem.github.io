@@ -30,7 +30,6 @@ export class FaqComponent {
 
   filter(value: string): void {
     const filterValue = value.toLowerCase();
-    console.log(filterValue);
     if (filterValue.length === 0) {
       this.questions = this.service.qs();
     } else {

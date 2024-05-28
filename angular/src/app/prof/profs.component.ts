@@ -44,7 +44,6 @@ export class ProfsComponent {
 
   filter(value: string): void {
     const filterValue = value.toLowerCase();
-    console.log(filterValue);
     if (filterValue.length === 0) {
       this.profs = this.service.profs();
     } else {
