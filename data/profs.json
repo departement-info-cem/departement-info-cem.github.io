@@ -221,24 +221,24 @@
   {
     "nom": "Ahmad Assy",
     "bureau": "E-214",
-    "courriel": "ahmad.assy@cegepmontpetit.ca",
+    "courriel": "ahmad.assy",
     "image": "aa2.jpeg"
   },
   {
     "nom": "Éric Mathieu",
     "bureau": "E-212",
-    "courriel": "eric.mathieu@cegepmontpetit.ca"
+    "courriel": "eric.mathieu"
   },
   {
     "nom": "François Jasmin",
     "bureau": "E-252",
-    "courriel": "francois.jasmin@cegepmontpetit.ca",
+    "courriel": "francois.jasmin",
     "extension": "2554"
   },
   {
     "nom": "Glorot Xavier",
     "bureau": "E-214",
-    "courriel": "xavier.glorot@cegepmontpetit.ca",
+    "courriel": "xavier.glorot",
     "extension": "5337"
   }
 ]
