@@ -219,12 +219,6 @@
     "extension": "3299"
   },
   {
-    "nom": "Ahmad Assy",
-    "bureau": "E-214",
-    "courriel": "ahmad.assy",
-    "image": "aa2.jpeg"
-  },
-  {
     "nom": "Éric Mathieu",
     "bureau": "E-212",
     "courriel": "eric.mathieu"
@@ -240,6 +234,6 @@
     "bureau": "E-214",
     "courriel": "xavier.glorot",
     "extension": "5337",
-    "image" : "xg.jpg"
+    "image": "xg.jpg"
   }
 ]
