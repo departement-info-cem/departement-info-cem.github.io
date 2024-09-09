@@ -235,5 +235,11 @@
     "courriel": "xavier.glorot",
     "extension": "5337",
     "image": "xg.jpg"
+  },
+  {
+    "nom": "Joël Legrand",
+    "bureau": "E-213",
+    "courriel": "joel.legrand",
+    "image": "jl.jpg"
   }
 ]
