@@ -1,18 +1,13 @@
 import { Component } from '@angular/core';
-import { Prof, DataService } from '../service/data.service';
+import { DataService } from '../service/data.service';
 import { TriProfPipe } from './tri.pipe';
-import { MatButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
-import {
-  MatCard,
-  MatCardHeader,
-  MatCardTitle,
-  MatCardImage,
-  MatCardActions,
-} from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { Prof } from '../model/prof';
 
 @Component({
   selector: 'app-prof',
@@ -20,18 +15,13 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./profs.component.scss'],
   standalone: true,
   imports: [
-    MatCard,
-    MatCardHeader,
+    MatCardModule,
     RouterLink,
-    MatCardTitle,
-    MatCardImage,
-    MatCardActions,
-    MatButton,
+    MatButtonModule,
     TriProfPipe,
     MatFormField,
     FormsModule,
-    MatInput,
-    MatLabel,
+    MatInputModule
   ],
 })
 export class ProfsComponent {

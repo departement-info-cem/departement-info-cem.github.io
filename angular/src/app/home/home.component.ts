@@ -5,19 +5,13 @@ import {
   MatDialogContent,
   MatDialogClose,
 } from '@angular/material/dialog';
-import { DataService, Prof } from '../service/data.service';
+import { DataService } from '../service/data.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-
-import { MatButton, MatAnchor } from '@angular/material/button';
-import {
-  MatCard,
-  MatCardHeader,
-  MatCardTitle,
-  MatCardSubtitle,
-  MatCardContent,
-} from '@angular/material/card';
+import { MatAnchor, MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 import { TerminalComponent } from '../terminal/terminal.component';
+import { Prof } from '../model/prof';
 
 @Component({
   selector: 'app-home',
@@ -27,13 +21,8 @@ import { TerminalComponent } from '../terminal/terminal.component';
   imports: [
     TerminalComponent,
     RouterLink,
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardSubtitle,
-    MatCardContent,
-    MatButton,
-    MatAnchor,
+    MatCardModule,
+    MatButtonModule
   ],
 })
 export class HomeComponent {
@@ -52,7 +41,7 @@ export class HomeComponent {
   openAdept(): void {
     const dialogRef = this.dialog.open(DialogAdeptComponent);
 
-    dialogRef.afterClosed().subscribe(() => {});
+    dialogRef.afterClosed().subscribe(() => { });
   }
 
   urlFor(prof: Prof): SafeResourceUrl {
@@ -68,4 +57,4 @@ export class HomeComponent {
   standalone: true,
   imports: [MatDialogTitle, MatDialogContent, MatAnchor, MatDialogClose],
 })
-export class DialogAdeptComponent {}
+export class DialogAdeptComponent { }

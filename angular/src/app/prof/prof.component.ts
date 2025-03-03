@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Prof, DataService } from '../service/data.service';
+import { DataService } from '../service/data.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
   MatCardModule,
 } from '@angular/material/card';
+import { Prof } from '../model/prof';
 
 @Component({
   selector: 'app-prof',

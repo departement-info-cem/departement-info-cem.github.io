@@ -3,6 +3,10 @@ import profs from '../../../../data/profs.json';
 import cours from '../../../../data/cours.json';
 import bot from '../../../../data/bot.json';
 import faq from '../../../../data/faq.json';
+import { BotRule } from '../model/bot-rule';
+import { Cours } from '../model/cours';
+import { Prof } from '../model/prof';
+import { Question } from '../model/question';
 
 @Injectable()
 export class DataService {
@@ -11,7 +15,6 @@ export class DataService {
   }
 
   profParCourriel(courriel: string): Prof {
-    // @ts-ignore
     return this.profs().find((p) => p.courriel === courriel);
   }
 
@@ -53,42 +56,4 @@ export class DataService {
   botRules(): BotRule[] {
     return bot as BotRule[];
   }
-}
-
-export class BotRule {
-  id = -1;
-  q: string | undefined;
-  reponses: string[] = [];
-  triggers: BotTrigger[] = [];
-}
-
-export class BotTrigger {
-  id = -1;
-  r: string | undefined;
-}
-
-export class Prof {
-  nom = '';
-  image = '';
-  courriel: any;
-  lienVideo = '';
-  bureau = '';
-  linkedin?: string
-  github?: string;
-}
-
-export class Question {
-  q = '';
-  r = '';
-  cats: string[] = [];
-  liens: string[] = [];
-}
-
-export class Cours {
-  no = '';
-  nom = '';
-  v = 'c';
-  url = '';
-  icons: string[] = [];
-  s = 0;
 }

@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Prof } from '../service/data.service';
 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Prof } from '../model/prof';
 
 @Pipe({
   name: 'triProf',
@@ -36,7 +36,7 @@ export class TriProfPipe implements PipeTransform {
   standalone: true,
 })
 export class SafePipe implements PipeTransform {
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer) { }
   transform(url: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }

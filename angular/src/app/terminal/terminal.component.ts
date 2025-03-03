@@ -1,5 +1,7 @@
 import { Component, HostListener } from '@angular/core';
-import { BotRule, BotTrigger, DataService } from '../service/data.service';
+import { DataService } from '../service/data.service';
+import { BotRule } from '../model/bot-rule';
+import { BotTrigger } from '../model/bot-trigger';
 
 @Component({
   selector: 'app-terminal',

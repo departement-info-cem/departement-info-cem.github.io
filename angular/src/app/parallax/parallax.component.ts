@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { DataService, Prof } from '../service/data.service';
+import { DataService } from '../service/data.service';
 
 import { RouterLink } from '@angular/router';
 import { GoodiesComponent } from '../goodies/goodies.component';
 import { TerminalComponent } from '../terminal/terminal.component';
+import { Prof } from '../model/prof';
 
 @Component({
   selector: 'app-parallax',

@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { Cours, DataService, Prof } from '../service/data.service';
+import { DataService } from '../service/data.service';
 import { ActivatedRoute } from '@angular/router';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { Cours } from '../model/cours';
 
 @Component({
   selector: 'app-dec',
   templateUrl: './dec.component.html',
   styleUrls: ['./dec.component.scss'],
   standalone: true,
-  imports: [MatIcon],
+  imports: [MatIconModule],
 })
 export class DecComponent {
   cours: Cours[];
