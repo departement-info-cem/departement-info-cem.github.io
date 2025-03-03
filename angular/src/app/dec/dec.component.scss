@@ -1,0 +1,31 @@
+.row .commun {
+  border-radius: 3px;
+  border: 2px solid black;
+  padding: 5px;
+}
+.row .specifique {
+  border-radius: 9px;
+  border: 2px solid #005e7c;
+  padding: 5px;
+}
+.icons {
+  font-size: 1.5em;
+}
+.titre {
+  font-weight: 700;
+  font-size: 1.1em;
+}
+.heures {
+  font-size: 0.8em;
+  float: right;
+  clear: right;
+}
+
+h3 {
+  background: #333;
+  color: #eee;
+  padding: 2px;
+  border: 2px solid #eee;
+  text-align: center;
+  border-radius: 4px;
+}

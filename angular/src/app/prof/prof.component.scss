@@ -1,0 +1,14 @@
+mat-card-subtitle {
+  margin-bottom: 1rem;
+}
+
+.contact-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+
+  * {
+    flex: 1;
+  }
+}

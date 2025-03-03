@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="165px" height="110px" version="1.1"
+     viewBox="0 0 165 110"
+     preserveAspectRatio="xMinYMin meet">
+  <defs>
+    <style type="text/css">
+      <![CDATA[
+      @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+      ]]>
+    </style>
+  </defs>
+  <rect x="5" y="10" width="154" height="90" rx="5" ry="5" fill="#222" />
+  <rect x="83" y="15" width="20" height="80" rx="2" ry="2" fill="white" />
+  <text x="57" y="50" fill="white"
+        style="font-family: 'Courier Prime';
+                font-size:40px;
+                font-weight:bolder;
+                font-style: normal">   M NT </text>
+  <text x="10" y="85" fill="white"
+        style="font-family: 'Courier Prime';
+                font-size:40px;
+                font-weight:bolder;
+                font-style: normal">PET T</text>
+  <text x="85" y="50" fill="black"
+        style="font-family: 'VT323';
+                font-size:40px;
+                font-weight:bolder;
+                font-style: normal">0</text>
+  <text x="85" y="85" fill="black"
+        style="font-family: 'VT323';
+                font-size:40px;
+                font-weight:bolder;
+                font-style: normal">1</text>
+
+</svg>
+

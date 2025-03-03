@@ -1,0 +1,52 @@
+<div class="menu">
+  <div class="boutons x" (click)="reset()"></div>
+  <div class="boutons y" (click)="reset()"></div>
+  <div class="boutons z" (click)="reset()"></div>
+  <div class="titre">superbot 2000</div>
+</div>
+@if (questions) {
+  <div
+    class="cmd"
+    style="overflow: hidden"
+    onclick="$('#foo').focus();"
+    >
+    @if (!userName) {
+      <div>
+        <div class="que">
+          bot % Yo, moi c'est bot. <br />Tu te demandes si tu veux faire de l'info à
+          Montpetit?<br />
+          Comment tu t'appelles?
+        </div>
+        <div class="prompt">
+          anonymous>&nbsp;{{ userLine }}<span class="cursor">_</span>
+        </div>
+      </div>
+    }
+    @if (userName) {
+      <div>
+        <div class="que">bot % {{ question.q }}</div>
+        @if (!isDiagnostic(question)) {
+          <div>
+            @for (rep of question.reponses; track rep) {
+              <div class="rep">
+                {{ rep.substring(0, 1).toLowerCase() }} = {{ rep }}
+              </div>
+            }
+            <div class="rep">0 = recommencer</div>
+            <br />
+            <div class="prompt">
+              {{ userName }}&nbsp;>&nbsp;{{ userLine }}
+              <span class="cursor">_</span>
+            </div>
+          </div>
+        }
+        @if (isDiagnostic(question)) {
+          <div>
+            <div class="rep">Appuie sur Enter si tu veux recommencer.</div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+}
+<input type="text" id="foo" #foo autocomplete="off" />

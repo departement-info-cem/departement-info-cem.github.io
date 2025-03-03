@@ -1,0 +1,154 @@
+<div [style.background-image]="'url(assets/home.jpg)'" style="
+    min-height: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: 100%;
+    background-attachment: fixed;
+  ">
+  <br />
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mb-4">
+        <div class="row">
+          <div class="col-lg-8">
+            <app-terminal></app-terminal>
+          </div>
+          <div class="col-lg-4" routerLink="/goodies" style="position: relative">
+            <img src="assets/gratuit.svg" style="position: absolute; top: -20px; left: -10px; width: 65px" />
+            <div class="goodies">
+              <p>
+                <i class="fab fa-windows"></i> &nbsp;
+                <i class="far fa-file-word"></i> &nbsp;
+                <i class="far fa-file-excel"></i> &nbsp;
+                <i class="fas fa-file-powerpoint"></i>
+              </p>
+              <p>
+                <img style="height: 20px" src="../../assets/vmware.png" />
+              </p>
+              <p>
+                <i class="fab fa-gitkraken"></i>&nbsp;
+                <i class="fab fa-github"></i>
+              </p>
+              <p>
+                <img style="width: 35px" src="../../assets/webstorm.png" />
+                &nbsp;
+                <img style="width: 35px" src="../../assets/intellij.png" />
+                &nbsp;
+                <img style="width: 35px" src="../../assets/pycharm.png" />
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg">
+            <mat-card appearance="outlined" class="mb-4">
+              <mat-card-header>
+                <mat-card-title>Les cours</mat-card-title>
+                <mat-card-subtitle>et les programmes</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <button mat-button mat-flat-button color="accent" routerLink="/dec/p">
+                  DEC Prog
+                </button>
+                &nbsp;
+                <button mat-button mat-flat-button color="accent" routerLink="/dec/r">
+                  DEC Réseau
+                </button>
+                <br />
+                <br />
+
+                <button mat-button mat-flat-button color="accent" routerLink="/decbac">
+                  DEC-BAC Prog
+                </button>
+              </mat-card-content>
+              <!--              <mat-card-actions>-->
+
+              <!--              </mat-card-actions>-->
+            </mat-card>
+          </div>
+          <div class="col-md">
+            <mat-card appearance="outlined" class="mb-4">
+              <mat-card-header>
+                <mat-card-title>Tu es déjà au département</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>
+                  Quelques conseils pour &nbsp;
+                  <a class="badge text-bg-light" routerLink="/nouveau">
+                    Nouvel étudiant</a>
+                </p>
+
+                <p>
+                  Beaucoup de &nbsp;
+                  <a class="badge text-bg-light" routerLink="/goodies">logiciels gratuits</a>
+                </p>
+
+                <p>
+                  Explications sur le &nbsp;
+                  <a class="badge text-bg-danger" routerLink="/plagiat">
+                    <i class="fas fa-radiation"></i> plagiat
+                    <i class="fas fa-radiation"></i>
+                  </a>
+                </p>
+                <a mat-button mat-flat-button color="primary" target="_blank"
+                  href="https://cegepmontpetit.ca">Collège</a>
+                &nbsp;
+                <a mat-button mat-flat-button color="primary" target="_blank"
+                  href="https://cegepmontpetit.omnivox.ca/">Omnivox</a>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div style="position: relative">
+          <div style="
+              position: absolute;
+              right: -20px;
+              top: -20px;
+              width: 120px;
+              z-index: 98;
+            ">
+            <object data="assets/logo.svg" type="image/svg+xml" width="120"></object>
+          </div>
+
+          <div class="carousel slide" data-ride="carousel" data-interval="2000">
+            <div class="carousel-inner">
+              @for (video of videos; track video; let i = $index) {
+              <div [class]="i === 0 ? 'carousel-item active' : 'carousel-item'">
+                <div class="ratio ratio-16x9">
+                  <iframe [src]="urlFor(video)" allowfullscreen></iframe>
+                </div>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        <div style="position: relative" class="mt-5">
+          <button style="
+              position: absolute;
+              right: -30px;
+              top: -20px;
+              width: 130px;
+              z-index: 98;
+            " mat-button (click)="openAdept()">
+            <img style="width: 100%" src="assets/logo-adept.png" />
+          </button>
+          <div class="carousel slide" data-ride="carousel" data-interval="2000">
+            <div class="carousel-inner">
+              @for (image of images; track image; let i = $index) {
+              <div [class]="i === 0 ? 'carousel-item active' : 'carousel-item'" class="carousel-item">
+                <img src="assets/{{ image }}" class="d-block w-100" alt="..." />
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="clear: both"></div>
+</div>

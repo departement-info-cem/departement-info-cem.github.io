@@ -1,0 +1,45 @@
+<br />
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-lg-3">
+      <mat-form-field>
+        <mat-label>Rechercher un enseignant</mat-label>
+        <input
+          type="text"
+          [(ngModel)]="recherche"
+          (input)="filter(recherche)"
+          placeholder="Ex : Édouard"
+          matInput
+        />
+      </mat-form-field>
+    </div>
+    <div class="col-md4"></div>
+  </div>
+  <div class="row">
+    @for (item of profs | triProf; track item; let i = $index) {
+      <div class="col-md-6 col-lg-3">
+        <mat-card
+          appearance="outlined"
+          class="example-card ml-1 mr-1 mb-4"
+          [class.mat-elevation-z8]="20"
+        >
+          <mat-card-header routerLink="/prof/{{ item.courriel }}">
+            <mat-card-title>{{ item.nom }}</mat-card-title>
+          </mat-card-header>
+          @if (item.image && item.image.length > 1) {
+            <img
+              routerLink="/prof/{{ item.courriel }}"
+              mat-card-image
+              src="../../../../assets/photos/{{ item.image }}"
+            />
+          }
+          <mat-card-actions>
+            <button mat-button routerLink="/prof/{{ item.courriel }}">
+              En savoir plus
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    }
+  </div>
+</div>

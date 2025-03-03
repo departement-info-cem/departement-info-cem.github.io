@@ -1,0 +1,44 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.pointy:hover {
+  cursor: pointer;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.principale {
+  height: calc(
+    100% - 64px
+  ); // doit enlever le navbar sinon on a 2 scroll bars !! crée une petit bande noire en bas
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  mat-icon {
+    padding: 4px;
+    box-sizing: content-box;
+  }
+
+  span {
+    margin-left: 8px;
+  }
+}

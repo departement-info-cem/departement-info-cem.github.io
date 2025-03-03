@@ -1,0 +1,27 @@
+<br />
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <mat-form-field class="example-full-width">
+        <mat-label>Recherche par mot clé</mat-label>
+        <input type="text" [(ngModel)]="recherche" (input)="filter(recherche)" placeholder="Tape ici" matInput />
+      </mat-form-field>
+    </div>
+    <div class="col-md4"></div>
+  </div>
+  <div class="row">
+    @for (q of questions; track q) {
+      <div class="col-md-4">
+        <div class="alert alert-dark">
+          <h3>{{ q.q }}</h3>
+          <p>
+            {{ q.r }}
+          </p>
+          @for (l of q.liens; track l) {
+            <a href="{{ l }}" class="card-link">lien</a>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>
