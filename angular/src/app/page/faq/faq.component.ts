@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { DataService } from '../service/data.service';
 import { ActivatedRoute } from '@angular/router';
-
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Question } from '../model/question';
+import { Question } from 'src/app/model/question';
+import { DataService } from 'src/app/service/data.service';
 
 @Component({
   selector: 'app-faq',

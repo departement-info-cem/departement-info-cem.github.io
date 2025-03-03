@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProfsComponent } from './prof/profs.component';
-import { HomeComponent } from './home/home.component';
-import { GoodiesComponent } from './goodies/goodies.component';
-import { ProfComponent } from './prof/prof.component';
-import { DecComponent } from './dec/dec.component';
-import { DecbacComponent } from './decbac/decbac.component';
-import { FaqComponent } from './faq/faq.component';
-import { ContactComponent } from './contact/contact.component';
-import { NouveauComponent } from './nouveau/nouveau.component';
-import { PlagiatComponent } from './plagiat/plagiat.component';
-import { TerminalComponent } from './terminal/terminal.component';
-import { ParallaxComponent } from './parallax/parallax.component';
-import { GitComponent } from './git/git.component';
+import { ProfsComponent } from './component/prof/profs.component';
+import { TerminalComponent } from './component/terminal/terminal.component';
+import { HomeComponent } from './page/home/home.component';
+import { ContactComponent } from './page/contact/contact.component';
+import { DecComponent } from './page/dec/dec.component';
+import { DecbacComponent } from './page/decbac/decbac.component';
+import { FaqComponent } from './page/faq/faq.component';
+import { GitComponent } from './page/git/git.component';
+import { GoodiesComponent } from './page/goodies/goodies.component';
+import { NouveauComponent } from './page/nouveau/nouveau.component';
+import { PlagiatComponent } from './page/plagiat/plagiat.component';
+import { ProfComponent } from './page/prof/prof.component';
+import { ParallaxComponent } from './page/parallax/parallax.component';
 
 const routes: Routes = [
   { path: 'profs', component: ProfsComponent, data: { title: 'Prof' } },
@@ -43,4 +43,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

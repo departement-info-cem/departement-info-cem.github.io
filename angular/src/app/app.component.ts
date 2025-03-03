@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavComponent } from './nav/nav.component';
+import { NavComponent } from './component/nav/nav.component';
 
 @Component({
   selector: 'app-root',
@@ -11,5 +11,5 @@ import { NavComponent } from './nav/nav.component';
 export class AppComponent {
   title = 'depinfo';
 
-  constructor() {}
+  constructor() { }
 }

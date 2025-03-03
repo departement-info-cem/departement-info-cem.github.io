@@ -15,7 +15,7 @@ export class DataService {
   }
 
   profParCourriel(courriel: string): Prof {
-    return this.profs().find((p) => p.courriel === courriel);
+    return this.profs().find((p: Prof) => p.courriel === courriel);
   }
 
   filtrerProfs(s: string): Prof[] {
@@ -25,11 +25,11 @@ export class DataService {
   }
 
   videos(): Prof[] {
-    return this.profs().filter((prof) => prof.lienVideo);
+    return this.profs().filter((prof: Prof) => prof.lienVideo);
   }
 
   photos(): Prof[] {
-    return this.profs().filter((prof) => prof.image);
+    return this.profs().filter((prof: Prof) => prof.image);
   }
 
   cours(): Cours[] {
@@ -37,7 +37,7 @@ export class DataService {
   }
 
   questions(s: string): Question[] {
-    return this.qs().filter((q) => {
+    return this.qs().filter((q: Question) => {
       if (q.q.indexOf(s) > -1) return true;
       if (q.r.indexOf(s) > -1) return true;
       if (q.cats) {

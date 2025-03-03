@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { DataService } from '../service/data.service';
-import { TriProfPipe } from './tri.pipe';
+import { TriProfPipe } from '../../pipe/tri-prof.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { Prof } from '../model/prof';
+import { Prof } from 'src/app/model/prof';
+import { DataService } from 'src/app/service/data.service';
 
 @Component({
   selector: 'app-prof',

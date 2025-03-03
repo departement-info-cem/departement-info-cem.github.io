@@ -5,13 +5,13 @@ import {
   MatDialogContent,
   MatDialogClose,
 } from '@angular/material/dialog';
-import { DataService } from '../service/data.service';
+import { DataService } from '../../service/data.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MatAnchor, MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
-import { TerminalComponent } from '../terminal/terminal.component';
-import { Prof } from '../model/prof';
+import { Prof } from '../../model/prof';
+import { TerminalComponent } from 'src/app/component/terminal/terminal.component';
 
 @Component({
   selector: 'app-home',

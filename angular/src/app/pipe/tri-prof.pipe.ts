@@ -1,14 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Prof } from '../model/prof';
+import { Prof } from 'src/app/model/prof';
 
 @Pipe({
   name: 'triProf',
   standalone: true,
 })
 export class TriProfPipe implements PipeTransform {
-  transform(array: any): Prof[] {
+  transform(array: Prof[]): Prof[] {
     if (!Array.isArray(array)) {
       return [];
     }
@@ -31,13 +29,3 @@ export class TriProfPipe implements PipeTransform {
   }
 }
 
-@Pipe({
-  name: 'safe',
-  standalone: true,
-})
-export class SafePipe implements PipeTransform {
-  constructor(private sanitizer: DomSanitizer) { }
-  transform(url: string): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
-  }
-}
