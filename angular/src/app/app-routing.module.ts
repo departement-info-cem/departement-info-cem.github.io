@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProfsComponent } from './component/prof/profs.component';
+import { ProfsComponent } from './page/profs/profs.component';
 import { TerminalComponent } from './component/terminal/terminal.component';
 import { HomeComponent } from './page/home/home.component';
 import { ContactComponent } from './page/contact/contact.component';
@@ -11,7 +11,7 @@ import { GitComponent } from './page/git/git.component';
 import { GoodiesComponent } from './page/goodies/goodies.component';
 import { NouveauComponent } from './page/nouveau/nouveau.component';
 import { PlagiatComponent } from './page/plagiat/plagiat.component';
-import { ProfComponent } from './page/prof/prof.component';
+import { ProfComponent } from './component/prof/prof.component';
 import { ParallaxComponent } from './page/parallax/parallax.component';
 
 const routes: Routes = [

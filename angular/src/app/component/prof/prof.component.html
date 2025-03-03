@@ -24,13 +24,13 @@
           </a>
           @if(prof.linkedin) {
           <a class="btn btn-block btn-outline-dark btn-lg" target="_blank" rel="noopener noreferrer"
-            [href]="prof.linkedin">
+            [href]="'https://www.linkedin.com/in/' + prof.linkedin">
             Linkedin <i class="fa-brands fa-linkedin"></i>
           </a>
           }
           @if(prof.github) {
           <a class="btn btn-block btn-outline-dark btn-lg" target="_blank" rel="noopener noreferrer"
-            [href]="prof.github">
+            [href]="'https://github.com/' + prof.github">
             Github <i class="fa-brands fa-github"></i>
           </a>
           }
