@@ -200,5 +200,11 @@
     "nom": "David Marsolais",
     "bureau": "E-252",
     "courriel": "david.marsolais"
+  },
+  {
+    "nom": "David Gagné-Leroux",
+    "bureau": "E-213",
+    "courriel": "david.gagne-leroux",
+    "image": "dgl_photo.jpg"
   }
 ]
