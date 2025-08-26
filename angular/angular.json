@@ -22,12 +22,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/depinfo",
+            "outputPath": {
+              "base": "dist/depinfo"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
@@ -43,7 +46,8 @@
             "scripts": [
               "./node_modules/jquery/dist/jquery.slim.js",
               "./node_modules/bootstrap/dist/js/bootstrap.bundle.js"
-            ]
+            ],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -58,8 +62,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -76,20 +78,20 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "options": {
-            "browserTarget": "depinfo:build"
+            "buildTarget": "depinfo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "depinfo:build:production"
+              "buildTarget": "depinfo:build:production"
             }
           }
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular/build:extract-i18n",
           "options": {
-            "browserTarget": "depinfo:build"
+            "buildTarget": "depinfo:build"
           }
         },
         "lint": {

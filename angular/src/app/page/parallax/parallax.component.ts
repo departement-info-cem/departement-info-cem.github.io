@@ -7,11 +7,10 @@ import { Prof } from '../../model/prof';
 import { TerminalComponent } from 'src/app/component/terminal/terminal.component';
 
 @Component({
-  selector: 'app-parallax',
-  templateUrl: './parallax.component.html',
-  styleUrls: ['./parallax.component.scss'],
-  standalone: true,
-  imports: [TerminalComponent, GoodiesComponent, RouterLink],
+    selector: 'app-parallax',
+    templateUrl: './parallax.component.html',
+    styleUrls: ['./parallax.component.scss'],
+    imports: [TerminalComponent, GoodiesComponent, RouterLink]
 })
 export class ParallaxComponent {
   photos: Prof[];

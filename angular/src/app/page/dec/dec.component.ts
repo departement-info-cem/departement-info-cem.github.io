@@ -5,11 +5,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { Cours } from '../../model/cours';
 
 @Component({
-  selector: 'app-dec',
-  templateUrl: './dec.component.html',
-  styleUrls: ['./dec.component.scss'],
-  standalone: true,
-  imports: [MatIconModule],
+    selector: 'app-dec',
+    templateUrl: './dec.component.html',
+    styleUrls: ['./dec.component.scss'],
+    imports: [MatIconModule]
 })
 export class DecComponent {
   cours: Cours[];

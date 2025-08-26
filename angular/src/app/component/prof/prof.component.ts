@@ -8,13 +8,12 @@ import { Prof } from 'src/app/model/prof';
 import { DataService } from 'src/app/service/data.service';
 
 @Component({
-  selector: 'app-prof',
-  templateUrl: './prof.component.html',
-  styleUrls: ['./prof.component.scss'],
-  standalone: true,
-  imports: [
-    MatCardModule
-  ],
+    selector: 'app-prof',
+    templateUrl: './prof.component.html',
+    styleUrls: ['./prof.component.scss'],
+    imports: [
+        MatCardModule
+    ]
 })
 export class ProfComponent {
   courriel: any;

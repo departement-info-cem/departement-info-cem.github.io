@@ -4,11 +4,10 @@ import { BotTrigger } from 'src/app/model/bot-trigger';
 import { DataService } from 'src/app/service/data.service';
 
 @Component({
-  selector: 'app-terminal',
-  templateUrl: './terminal.component.html',
-  styleUrls: ['./terminal.component.scss'],
-  standalone: true,
-  imports: [],
+    selector: 'app-terminal',
+    templateUrl: './terminal.component.html',
+    styleUrls: ['./terminal.component.scss'],
+    imports: []
 })
 export class TerminalComponent {
   userLine = '';

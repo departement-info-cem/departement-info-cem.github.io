@@ -15,23 +15,22 @@ import {
 } from '@angular/material/sidenav';
 
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss'],
-  standalone: true,
-  imports: [
-    MatSidenavContainer,
-    MatSidenav,
-    MatMiniFabButton,
-    MatIcon,
-    MatNavList,
-    MatListItem,
-    RouterLink,
-    MatSidenavContent,
-    MatToolbar,
-    RouterOutlet,
-    AsyncPipe
-],
+    selector: 'app-nav',
+    templateUrl: './nav.component.html',
+    styleUrls: ['./nav.component.scss'],
+    imports: [
+        MatSidenavContainer,
+        MatSidenav,
+        MatMiniFabButton,
+        MatIcon,
+        MatNavList,
+        MatListItem,
+        RouterLink,
+        MatSidenavContent,
+        MatToolbar,
+        RouterOutlet,
+        AsyncPipe
+    ]
 })
 export class NavComponent {
   isExpanded = false;
