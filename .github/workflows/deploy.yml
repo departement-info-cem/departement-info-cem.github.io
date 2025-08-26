@@ -43,12 +43,12 @@ jobs:
         run: npm run build:prod
 
       - name: Fix 404.html
-        working-directory: angular/dist/depinfo
+        working-directory: angular/dist/depinfo/browser
         run: |
           cp index.html 404.html
 
       - name: Fix permissions
-        working-directory: angular/dist/depinfo
+        working-directory: angular/dist/depinfo/browser
         run: |
           chmod -c -R +rX "./" | while read line; do
             echo "::warning title=Invalid file permissions automatically fixed::$line"
@@ -57,7 +57,7 @@ jobs:
       - name: Téléverser l'artéfact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: angular/dist/depinfo
+          path: angular/dist/depinfo/browser
           retention-days: 5
   deploy:
     needs: build
