@@ -12,13 +12,6 @@
     "image": "bt.jpg"
   },
   {
-    "nom": "Chantal Vallières",
-    "bureau": "E-209",
-    "courriel": "chantal.vallieres",
-    "image": "cv.png",
-    "lienVideo": "UEi_9RpgtmU"
-  },
-  {
     "nom": "Christian Farley",
     "bureau": "",
     "courriel": "christian.farley",
@@ -85,13 +78,6 @@
     "bureau": "A211a",
     "courriel": "rejean.bilodeau",
     "image": "rb.png"
-  },
-  {
-    "nom": "Stéphane DesMeules",
-    "bureau": "E-212",
-    "courriel": "stephane.desmeules",
-    "image": "stephane_desmeules.png",
-    "lienVideo": "CwFxbtJWoAc"
   },
   {
     "nom": "Valérie Turgeon",
@@ -210,5 +196,18 @@
     "bureau": "E-213",
     "courriel": "david.gagne-leroux",
     "image": "dgl_photo.jpg"
+  },
+  {
+    "nom": "Danny Brabant",
+    "bureau": "E-212",
+    "courriel": "danny.brabant"
+  },
+  {
+    "nom": "Jean-François Paradis",
+    "bureau": "E-213",
+    "courriel": "jf.paradis",
+    "image": "jfp.png",
+    "github": "paradisjf",
+    "linkedin": "jean-francois-paradis-49ab782"
   }
 ]
