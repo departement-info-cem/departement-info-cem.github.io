@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { BotRule } from 'src/app/model/bot-rule';
 import { BotTrigger } from 'src/app/model/bot-trigger';
 import { DataService } from 'src/app/service/data.service';
@@ -10,6 +10,8 @@ import { DataService } from 'src/app/service/data.service';
   imports: [],
 })
 export class TerminalComponent {
+  private service = inject(DataService);
+
   userLine = '';
   userName = '';
   questions: BotRule[];
@@ -32,7 +34,7 @@ export class TerminalComponent {
     }
   }
 
-  constructor(private service: DataService) {
+  constructor() {
     this.questions = this.service.botRules();
     this.question = this.questions[0];
   }

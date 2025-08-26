@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   MatDialog,
   MatDialogTitle,
@@ -20,15 +20,15 @@ import { TerminalComponent } from 'src/app/component/terminal/terminal.component
   imports: [TerminalComponent, RouterLink, MatCardModule, MatButtonModule],
 })
 export class HomeComponent {
+  private dialog = inject(MatDialog);
+  private service = inject(DataService);
+  private sanitizer = inject(DomSanitizer);
+
   images = ['gang.jpg', 'tablo.jpg', 'blond.jpg', 'jo-jm.jpg', 'grimace.jpg'];
 
   videos: Prof[];
 
-  constructor(
-    private dialog: MatDialog,
-    private service: DataService,
-    private sanitizer: DomSanitizer,
-  ) {
+  constructor() {
     this.videos = this.service.videos();
   }
 

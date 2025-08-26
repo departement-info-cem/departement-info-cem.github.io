@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,13 +11,13 @@ import { DataService } from 'src/app/service/data.service';
   imports: [MatFormFieldModule, FormsModule],
 })
 export class FaqComponent {
+  private service = inject(DataService);
+  private route = inject(ActivatedRoute);
+
   questions: Question[];
   recherche = '';
 
-  constructor(
-    private service: DataService,
-    private route: ActivatedRoute,
-  ) {
+  constructor() {
     this.questions = this.service.qs();
     const categorie = this.route.snapshot.paramMap.get('cat');
     if (categorie) {

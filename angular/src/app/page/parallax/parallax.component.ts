@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { DataService } from '../../service/data.service';
 
 import { RouterLink } from '@angular/router';
@@ -13,10 +13,12 @@ import { TerminalComponent } from 'src/app/component/terminal/terminal.component
   imports: [TerminalComponent, GoodiesComponent, RouterLink],
 })
 export class ParallaxComponent {
+  private service = inject(DataService);
+
   photos: Prof[];
   currentYear = new Date().getFullYear();
 
-  constructor(private service: DataService) {
+  constructor() {
     this.photos = this.service.photos();
   }
 }

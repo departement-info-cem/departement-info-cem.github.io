@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatCardModule } from '@angular/material/card';
@@ -12,14 +12,14 @@ import { DataService } from 'src/app/service/data.service';
   imports: [MatCardModule],
 })
 export class ProfComponent {
+  private route = inject(ActivatedRoute);
+  private sanitizer = inject(DomSanitizer);
+  private service = inject(DataService);
+
   courriel: any;
   prof: Prof | null = null;
 
-  constructor(
-    private route: ActivatedRoute,
-    private sanitizer: DomSanitizer,
-    private service: DataService,
-  ) {
+  constructor() {
     this.courriel = this.route.snapshot.paramMap.get('courriel');
     this.prof = this.service.profParCourriel(this.courriel);
   }

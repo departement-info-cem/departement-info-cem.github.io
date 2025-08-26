@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TriProfPipe } from '../../pipe/tri-prof.pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
@@ -24,10 +24,14 @@ import { DataService } from 'src/app/service/data.service';
   ],
 })
 export class ProfsComponent {
+  private service = inject(DataService);
+
   profs: Prof[];
   recherche = '';
 
-  constructor(private service: DataService) {
+  constructor() {
+    const service = this.service;
+
     this.profs = service.profs();
   }
 

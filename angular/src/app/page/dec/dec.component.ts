@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { DataService } from '../../service/data.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,13 +11,13 @@ import { Cours } from '../../model/cours';
   imports: [MatIconModule],
 })
 export class DecComponent {
+  private service = inject(DataService);
+  private route = inject(ActivatedRoute);
+
   cours: Cours[];
   programme = 'c';
 
-  constructor(
-    private service: DataService,
-    private route: ActivatedRoute,
-  ) {
+  constructor() {
     this.cours = this.service.cours();
     const profil = this.route.snapshot.paramMap.get('profil');
     if (profil) {
