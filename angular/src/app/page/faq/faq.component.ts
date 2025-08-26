@@ -6,9 +6,9 @@ import { Question } from 'src/app/model/question';
 import { DataService } from 'src/app/service/data.service';
 
 @Component({
-    selector: 'app-faq',
-    templateUrl: './faq.component.html',
-    imports: [MatFormFieldModule, FormsModule]
+  selector: 'app-faq',
+  templateUrl: './faq.component.html',
+  imports: [MatFormFieldModule, FormsModule],
 })
 export class FaqComponent {
   questions: Question[];

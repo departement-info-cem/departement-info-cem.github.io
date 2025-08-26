@@ -6,18 +6,29 @@
       </div>
 
       <div class="col-lg-6 mb-1">
-        <div class="bienvenue mb-1" style="font-family: Raleway, Roboto, Courier">
+        <div
+          class="bienvenue mb-1"
+          style="font-family: Raleway, Roboto, Courier"
+        >
           <h4 style="font-family: &quot;Roboto&quot;; font-size: 1.3em">
             Bienvenue
           </h4>
           <p>Notre bot est là pour t'aider à choisir le bon DEC.</p>
 
-          <object data="assets/logo.svg" type="image/svg+xml" height="90" style="float: right"></object>
+          <object
+            data="assets/logo.svg"
+            type="image/svg+xml"
+            height="90"
+            style="float: right"
+          ></object>
         </div>
       </div>
     </div>
   </div>
-  <div class="cue" style="text-align: center; position: absolute; width: 100%; bottom: 10px">
+  <div
+    class="cue"
+    style="text-align: center; position: absolute; width: 100%; bottom: 10px"
+  >
     <p style="text-align: center; color: white; font-size: 3em">
       <i class="fas fa-angle-double-down"></i>
     </p>
@@ -30,7 +41,7 @@
 </div>
 
 <div class="bgimg-2">
-  <div class="container" style="padding-top: 4rem; padding-bottom: 4rem;">
+  <div class="container" style="padding-top: 4rem; padding-bottom: 4rem">
     <div class="row mr-1 ml-1">
       <div class="col-lg-7 mb-4">
         <div class="bienvenue" style="font-family: Raleway, Roboto, Courier">
@@ -49,10 +60,12 @@
       <div class="col-lg-5"></div>
       <div class="col-lg-7">
         <div class="bienvenue" style="font-family: Raleway, Roboto, Courier">
-          <h4 style="
+          <h4
+            style="
               font-family: &quot;Major Mono Display&quot;;
               font-size: 1.5em;
-            ">
+            "
+          >
             DEC Bac
           </h4>
 
@@ -70,29 +83,33 @@
 </div>
 
 <div style="position: relative">
-  <div style="
+  <div
+    style="
       color: #ddd;
       background-color: #282e34;
       overflow: hidden;
       margin: 10px 0px;
       text-align: justify;
-    ">
+    "
+  >
     <div style="overflow-y: hidden; overflow-x: auto; display: flex; gap: 10px">
       @for (
-      image of [
-      'gang.jpg',
-      'tablo.jpg',
-      'blond.jpg',
-      'jo-jm.jpg',
-      'grimace.jpg',
-      'hugo.jpg',
-      'home.jpg',
-      'college.jpg'
-      ]; track
-      image; let i = $index) {
-      <div>
-        <img style="height: 200px" src="assets/{{ image }}" />
-      </div>
+        image of [
+          "gang.jpg",
+          "tablo.jpg",
+          "blond.jpg",
+          "jo-jm.jpg",
+          "grimace.jpg",
+          "hugo.jpg",
+          "home.jpg",
+          "college.jpg",
+        ];
+        track image;
+        let i = $index
+      ) {
+        <div>
+          <img style="height: 200px" src="assets/{{ image }}" />
+        </div>
       }
     </div>
   </div>
@@ -108,7 +125,8 @@
         <p>
           Conseils pour
           <a class="badge text-bg-dark" routerLink="/nouveau">
-            nouvel étudiant</a>
+            nouvel étudiant</a
+          >
         </p>
 
         <p>
@@ -125,12 +143,14 @@
     <div class="col-lg-5"></div>
     <div class="col-lg-7 mb-5">
       <div class="bienvenue" style="font-family: Roboto, Courier">
-        <h4 style="
+        <h4
+          style="
             font-family: Raleway, &quot;Major Mono Display&quot;;
             float: right;
             font-size: 1.5em;
             margin-bottom: 10px;
-          ">
+          "
+        >
           LIENS
         </h4>
         <a target="_blank" href="https://cegepmontpetit.ca">Collège</a> &nbsp;
@@ -149,21 +169,27 @@
 </div>
 
 <div style="position: relative">
-  <div style="
+  <div
+    style="
       font-size: 3em;
       color: #eee;
       background-color: #282e34;
       overflow: hidden;
-    ">
+    "
+  >
     <h2 style="font-family: &quot;Major Mono Display&quot;; margin: 20px">
       LES PROFS
     </h2>
 
     <div style="overflow-y: hidden; overflow-x: auto; display: flex; gap: 10px">
       @for (photo of photos; track photo) {
-      <div routerLink="/prof/{{ photo.courriel }}">
-        <img style="height: 200px" src="../../../../assets/photos/{{ photo.image }}" alt="{{ photo.nom }}" />
-      </div>
+        <div routerLink="/prof/{{ photo.courriel }}">
+          <img
+            style="height: 200px"
+            src="../../../../assets/photos/{{ photo.image }}"
+            alt="{{ photo.nom }}"
+          />
+        </div>
       }
     </div>
   </div>
@@ -192,8 +218,11 @@
         une seule adresse:
         <br /><br />
         <div class="d-grid">
-          <a class="btn btn-dark btn-lg mb-1" style="word-wrap: break-word"
-            href="mailto:coordination.info@cegepmontpetit.ca">
+          <a
+            class="btn btn-dark btn-lg mb-1"
+            style="word-wrap: break-word"
+            href="mailto:coordination.info@cegepmontpetit.ca"
+          >
             coordination.info&#64;cegepmontpetit.ca
             <i class="far fa-envelope"></i>
           </a>
@@ -204,14 +233,16 @@
 </div>
 
 <div style="position: relative">
-  <div style="
+  <div
+    style="
       font-family: Raleway, Roboto, Courier;
       color: #ddd;
       background-color: #282e34;
       text-align: center;
       padding: 30px 50px;
       text-align: justify;
-    ">
+    "
+  >
     <p>
       Copyright Département d'Informatique du CÉGEP Édouard-Montpetit
       {{ currentYear }}.

@@ -28,4 +28,3 @@ export class TriProfPipe implements PipeTransform {
     return array;
   }
 }
-

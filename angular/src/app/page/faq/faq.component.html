@@ -4,7 +4,13 @@
     <div class="col-md-4">
       <mat-form-field class="example-full-width">
         <mat-label>Recherche par mot clé</mat-label>
-        <input type="text" [(ngModel)]="recherche" (input)="filter(recherche)" placeholder="Tape ici" matInput />
+        <input
+          type="text"
+          [(ngModel)]="recherche"
+          (input)="filter(recherche)"
+          placeholder="Tape ici"
+          matInput
+        />
       </mat-form-field>
     </div>
     <div class="col-md4"></div>

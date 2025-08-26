@@ -7,7 +7,7 @@
     background-size: 100%;
     background-attachment: fixed;
   "
-  >
+>
   <br />
   <div class="container-fluid">
     <div class="row">
@@ -31,7 +31,7 @@
         </div>
       </div>
 
-      @if (programme === 'p') {
+      @if (programme === "p") {
         <div class="col-md-8">
           <div class="card text-light bg-primary mb-3">
             <div class="card-header">Info de gestion</div>
@@ -43,8 +43,8 @@
               </p>
               <p>
                 Utiliser le cloud <i class="fas fa-cloud-upload-alt"></i>,
-                <mat-icon>http</mat-icon> et des bases de données pour concrétiser
-                tes idées d'apps.
+                <mat-icon>http</mat-icon> et des bases de données pour
+                concrétiser tes idées d'apps.
               </p>
               <p>
                 Sécuriser le tout pour résister aux vilains hackeurs
@@ -55,7 +55,7 @@
         </div>
       }
 
-      @if (programme === 'r') {
+      @if (programme === "r") {
         <div class="col-md-8">
           <div class="card text-light bg-info mb-3">
             <div class="card-header">Gestion des réseaux</div>
@@ -82,33 +82,30 @@
 
     <div class="row">
       @for (session of [1, 2, 3, 4, 5, 6]; track session) {
-        <div
-          class="col-sm-6 col-md-4 col-lg-2"
-          >
+        <div class="col-sm-6 col-md-4 col-lg-2">
           <h3>Session {{ session }}</h3>
           @for (item of cours; track item; let i = $index) {
             <div>
               @if (sessionDe(item) === session && bon(item.v)) {
                 <div
-            [class]="
-              item.v
-                ? 'commun bg-dark text-white mb-2'
-                : 'specifique bg-light text-dark web mb-2'
-            "
-                  >
+                  [class]="
+                    item.v
+                      ? 'commun bg-dark text-white mb-2'
+                      : 'specifique bg-light text-dark web mb-2'
+                  "
+                >
                   <span class="float-end">
                     @if (item.url) {
-                      <a
-                        class="badge text-bg-info"
-                        href="{{ item.url }}"
-                        >
+                      <a class="badge text-bg-info" href="{{ item.url }}">
                         <mat-icon>http</mat-icon>
                       </a>
                     }
                   </span>
                   <span class="titre">{{ item.nom }}</span>
                   <div style="clear: both" class="mb-2">
-                    <span class="numero badge text-bg-light">{{ item.no }}-EM</span>
+                    <span class="numero badge text-bg-light"
+                      >{{ item.no }}-EM</span
+                    >
                   </div>
                   @for (icon of item.icons; track icon) {
                     <span class="icons">
@@ -118,14 +115,14 @@
                   }
                   <span class="float-end"
                     ><i class="fas fa-clock"></i> {{ heuresDe(item) }} h</span
-                    >
-                    <div style="clear: both"></div>
-                  </div>
-                }
-              </div>
-            }
-          </div>
-        }
-      </div>
+                  >
+                  <div style="clear: both"></div>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
     </div>
   </div>
+</div>

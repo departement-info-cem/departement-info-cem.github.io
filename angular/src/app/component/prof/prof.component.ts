@@ -1,19 +1,15 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import {
-  MatCardModule,
-} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { Prof } from 'src/app/model/prof';
 import { DataService } from 'src/app/service/data.service';
 
 @Component({
-    selector: 'app-prof',
-    templateUrl: './prof.component.html',
-    styleUrls: ['./prof.component.scss'],
-    imports: [
-        MatCardModule
-    ]
+  selector: 'app-prof',
+  templateUrl: './prof.component.html',
+  styleUrls: ['./prof.component.scss'],
+  imports: [MatCardModule],
 })
 export class ProfComponent {
   courriel: any;

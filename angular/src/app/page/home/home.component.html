@@ -1,10 +1,13 @@
-<div [style.background-image]="'url(assets/home.jpg)'" style="
+<div
+  [style.background-image]="'url(assets/home.jpg)'"
+  style="
     min-height: 100%;
     width: 100%;
     background-position: center;
     background-size: 100%;
     background-attachment: fixed;
-  ">
+  "
+>
   <br />
   <div class="container">
     <div class="row">
@@ -13,8 +16,15 @@
           <div class="col-lg-8">
             <app-terminal></app-terminal>
           </div>
-          <div class="col-lg-4" routerLink="/goodies" style="position: relative">
-            <img src="assets/gratuit.svg" style="position: absolute; top: -20px; left: -10px; width: 65px" />
+          <div
+            class="col-lg-4"
+            routerLink="/goodies"
+            style="position: relative"
+          >
+            <img
+              src="assets/gratuit.svg"
+              style="position: absolute; top: -20px; left: -10px; width: 65px"
+            />
             <div class="goodies">
               <p>
                 <i class="fab fa-windows"></i> &nbsp;
@@ -48,17 +58,32 @@
                 <mat-card-subtitle>et les programmes</mat-card-subtitle>
               </mat-card-header>
               <mat-card-content>
-                <button mat-button mat-flat-button color="accent" routerLink="/dec/p">
+                <button
+                  mat-button
+                  mat-flat-button
+                  color="accent"
+                  routerLink="/dec/p"
+                >
                   DEC Prog
                 </button>
                 &nbsp;
-                <button mat-button mat-flat-button color="accent" routerLink="/dec/r">
+                <button
+                  mat-button
+                  mat-flat-button
+                  color="accent"
+                  routerLink="/dec/r"
+                >
                   DEC Réseau
                 </button>
                 <br />
                 <br />
 
-                <button mat-button mat-flat-button color="accent" routerLink="/decbac">
+                <button
+                  mat-button
+                  mat-flat-button
+                  color="accent"
+                  routerLink="/decbac"
+                >
                   DEC-BAC Prog
                 </button>
               </mat-card-content>
@@ -76,12 +101,15 @@
                 <p>
                   Quelques conseils pour &nbsp;
                   <a class="badge text-bg-light" routerLink="/nouveau">
-                    Nouvel étudiant</a>
+                    Nouvel étudiant</a
+                  >
                 </p>
 
                 <p>
                   Beaucoup de &nbsp;
-                  <a class="badge text-bg-light" routerLink="/goodies">logiciels gratuits</a>
+                  <a class="badge text-bg-light" routerLink="/goodies"
+                    >logiciels gratuits</a
+                  >
                 </p>
 
                 <p>
@@ -91,11 +119,23 @@
                     <i class="fas fa-radiation"></i>
                   </a>
                 </p>
-                <a mat-button mat-flat-button color="primary" target="_blank"
-                  href="https://cegepmontpetit.ca">Collège</a>
+                <a
+                  mat-button
+                  mat-flat-button
+                  color="primary"
+                  target="_blank"
+                  href="https://cegepmontpetit.ca"
+                  >Collège</a
+                >
                 &nbsp;
-                <a mat-button mat-flat-button color="primary" target="_blank"
-                  href="https://cegepmontpetit.omnivox.ca/">Omnivox</a>
+                <a
+                  mat-button
+                  mat-flat-button
+                  color="primary"
+                  target="_blank"
+                  href="https://cegepmontpetit.omnivox.ca/"
+                  >Omnivox</a
+                >
               </mat-card-content>
             </mat-card>
           </div>
@@ -104,45 +144,64 @@
 
       <div class="col-lg-4">
         <div style="position: relative">
-          <div style="
+          <div
+            style="
               position: absolute;
               right: -20px;
               top: -20px;
               width: 120px;
               z-index: 98;
-            ">
-            <object data="assets/logo.svg" type="image/svg+xml" width="120"></object>
+            "
+          >
+            <object
+              data="assets/logo.svg"
+              type="image/svg+xml"
+              width="120"
+            ></object>
           </div>
 
           <div class="carousel slide" data-ride="carousel" data-interval="2000">
             <div class="carousel-inner">
               @for (video of videos; track video; let i = $index) {
-              <div [class]="i === 0 ? 'carousel-item active' : 'carousel-item'">
-                <div class="ratio ratio-16x9">
-                  <iframe [src]="urlFor(video)" allowfullscreen></iframe>
+                <div
+                  [class]="i === 0 ? 'carousel-item active' : 'carousel-item'"
+                >
+                  <div class="ratio ratio-16x9">
+                    <iframe [src]="urlFor(video)" allowfullscreen></iframe>
+                  </div>
                 </div>
-              </div>
               }
             </div>
           </div>
         </div>
 
         <div style="position: relative" class="mt-5">
-          <button style="
+          <button
+            style="
               position: absolute;
               right: -30px;
               top: -20px;
               width: 130px;
               z-index: 98;
-            " mat-button (click)="openAdept()">
+            "
+            mat-button
+            (click)="openAdept()"
+          >
             <img style="width: 100%" src="assets/logo-adept.png" />
           </button>
           <div class="carousel slide" data-ride="carousel" data-interval="2000">
             <div class="carousel-inner">
               @for (image of images; track image; let i = $index) {
-              <div [class]="i === 0 ? 'carousel-item active' : 'carousel-item'" class="carousel-item">
-                <img src="assets/{{ image }}" class="d-block w-100" alt="..." />
-              </div>
+                <div
+                  [class]="i === 0 ? 'carousel-item active' : 'carousel-item'"
+                  class="carousel-item"
+                >
+                  <img
+                    src="assets/{{ image }}"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                </div>
               }
             </div>
           </div>

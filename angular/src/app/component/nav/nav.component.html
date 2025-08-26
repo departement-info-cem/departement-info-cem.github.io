@@ -1,79 +1,106 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [disableClose]="true"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'side' : 'side'"
-    [opened]="false">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [disableClose]="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'side' : 'side'"
+    [opened]="false"
+  >
     <!--    <mat-toolbar color="accent">Menu</mat-toolbar>-->
     @if (!isExpanded) {
-    <button mat-mini-fab (click)="isExpanded = !isExpanded" color="accent" style="margin: 13px">
-      <mat-icon aria-label="Menu">open_in_full</mat-icon>
-    </button>
+      <button
+        mat-mini-fab
+        (click)="isExpanded = !isExpanded"
+        color="accent"
+        style="margin: 13px"
+      >
+        <mat-icon aria-label="Menu">open_in_full</mat-icon>
+      </button>
     }
     @if (isExpanded) {
-    <button mat-mini-fab (click)="isExpanded = !isExpanded" color="accent" style="margin: 13px">
-      <mat-icon aria-label="Menu">close_fullscreen</mat-icon>
-    </button>
+      <button
+        mat-mini-fab
+        (click)="isExpanded = !isExpanded"
+        color="accent"
+        style="margin: 13px"
+      >
+        <mat-icon aria-label="Menu">close_fullscreen</mat-icon>
+      </button>
     }
     <mat-nav-list>
       <mat-list-item routerLink="accueil" (click)="isExpanded = false">
         <span class="menu-item">
           <mat-icon mat-list-icon>home</mat-icon>
           @if (isExpanded) {
-          <span mat-line>Accueil</span>
+            <span mat-line>Accueil</span>
           }
         </span>
       </mat-list-item>
-      <mat-list-item routerLink="profs" (click)="isExpanded = false"><span class="menu-item">
+      <mat-list-item routerLink="profs" (click)="isExpanded = false"
+        ><span class="menu-item">
           <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
           @if (isExpanded) {
-          <span mat-line>Profs</span>
-          }</span>
+            <span mat-line>Profs</span>
+          }
+        </span>
       </mat-list-item>
-      <mat-list-item routerLink="dec" (click)="isExpanded = false"><span class="menu-item">
+      <mat-list-item routerLink="dec" (click)="isExpanded = false"
+        ><span class="menu-item">
           <mat-icon mat-list-icon>school</mat-icon>
           @if (isExpanded) {
-          <span mat-line>DEC Technique</span>
+            <span mat-line>DEC Technique</span>
           }
         </span>
       </mat-list-item>
-      <mat-list-item routerLink="decbac" (click)="isExpanded = false"><span class="menu-item">
+      <mat-list-item routerLink="decbac" (click)="isExpanded = false"
+        ><span class="menu-item">
           <mat-icon mat-list-icon>account_balance</mat-icon>
           @if (isExpanded) {
-          <span mat-line>DEC Bac</span>
+            <span mat-line>DEC Bac</span>
           }
         </span>
       </mat-list-item>
-      <mat-list-item routerLink="faq" (click)="isExpanded = false"><span class="menu-item">
+      <mat-list-item routerLink="faq" (click)="isExpanded = false"
+        ><span class="menu-item">
           <mat-icon mat-list-icon>help_outline</mat-icon>
           @if (isExpanded) {
-          <span mat-line>Foire aux questions</span>
+            <span mat-line>Foire aux questions</span>
           }
         </span>
       </mat-list-item>
-      <mat-list-item routerLink="git" (click)="isExpanded = false"><span class="menu-item">
-          <mat-icon mat-list-icon class="material-symbols-outlined">folder_data</mat-icon>
+      <mat-list-item routerLink="git" (click)="isExpanded = false"
+        ><span class="menu-item">
+          <mat-icon mat-list-icon class="material-symbols-outlined"
+            >folder_data</mat-icon
+          >
           @if (isExpanded) {
-          <span mat-line>Consignes GIT</span>
+            <span mat-line>Consignes GIT</span>
           }
         </span>
       </mat-list-item>
-      <mat-list-item routerLink="goodies" (click)="isExpanded = false"><span class="menu-item">
+      <mat-list-item routerLink="goodies" (click)="isExpanded = false"
+        ><span class="menu-item">
           <mat-icon mat-list-icon>savings</mat-icon>
           @if (isExpanded) {
-          <span mat-line>Logiciels gratuits</span>
+            <span mat-line>Logiciels gratuits</span>
           }
         </span>
       </mat-list-item>
-      <mat-list-item routerLink="plagiat" (click)="isExpanded = false"><span class="menu-item">
+      <mat-list-item routerLink="plagiat" (click)="isExpanded = false"
+        ><span class="menu-item">
           <mat-icon mat-list-icon>copyright</mat-icon>
           @if (isExpanded) {
-          <span mat-line>Plagiat</span>
+            <span mat-line>Plagiat</span>
           }
         </span>
       </mat-list-item>
-      <mat-list-item routerLink="contact" (click)="isExpanded = false"><span class="menu-item">
+      <mat-list-item routerLink="contact" (click)="isExpanded = false"
+        ><span class="menu-item">
           <mat-icon mat-list-icon>email</mat-icon>
           @if (isExpanded) {
-          <span mat-line>Contact</span>
+            <span mat-line>Contact</span>
           }
         </span>
       </mat-list-item>
@@ -82,31 +109,62 @@
   <mat-sidenav-content>
     <mat-toolbar color="primary" style="z-index: 99">
       @if (drawer.opened) {
-      <mat-icon class="pointy" aria-label="Side nav toggle icon" (click)="drawer.toggle()">chevron_left</mat-icon>
+        <mat-icon
+          class="pointy"
+          aria-label="Side nav toggle icon"
+          (click)="drawer.toggle()"
+          >chevron_left</mat-icon
+        >
       }
       @if (!drawer.opened) {
-      <mat-icon class="pointy" aria-label="Side nav toggle icon" (click)="drawer.toggle()">menu</mat-icon>
+        <mat-icon
+          class="pointy"
+          aria-label="Side nav toggle icon"
+          (click)="drawer.toggle()"
+          >menu</mat-icon
+        >
       }
 
       <div style="margin-top: 10px; margin-left: 5px">
-        <a routerLink="/" style="display: block;">
-          <object data="assets/logo.svg" type="image/svg+xml" height="50" style="pointer-events: none;"></object>
+        <a routerLink="/" style="display: block">
+          <object
+            data="assets/logo.svg"
+            type="image/svg+xml"
+            height="50"
+            style="pointer-events: none"
+          ></object>
         </a>
       </div>
 
       <span class="example-spacer"></span>
-      <a class="me-3" rel="noopener noreferrer" href="https://cegepmontpetit.ca">
+      <a
+        class="me-3"
+        rel="noopener noreferrer"
+        href="https://cegepmontpetit.ca"
+      >
         <img style="height: 25px" src="assets/CEM_V_blanc.svg" />
       </a>
-      <a class="me-3" rel="noopener noreferrer" href="http://facebook.com/info.cegepmontpetit.ca">
+      <a
+        class="me-3"
+        rel="noopener noreferrer"
+        href="http://facebook.com/info.cegepmontpetit.ca"
+      >
         <span style="color: white">
           <i class="fab fa-facebook-f"></i>
         </span>
       </a>
-      <a class="me-3" rel="noopener noreferrer" href="https://cegepedouardmontpetit.sharepoint.com/teams/PED-INFO">
+      <a
+        class="me-3"
+        rel="noopener noreferrer"
+        href="https://cegepedouardmontpetit.sharepoint.com/teams/PED-INFO"
+      >
         <img style="height: 25px" src="assets/sharepoint.png" />
       </a>
-      <a target="_blank" rel="noopener noreferrer" href="https://github.com/departement-info-cem">
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://github.com/departement-info-cem"
+      >
         <i class="fa-brands fa-github"></i>
       </a>
     </mat-toolbar>

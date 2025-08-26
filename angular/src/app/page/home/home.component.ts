@@ -14,15 +14,10 @@ import { Prof } from '../../model/prof';
 import { TerminalComponent } from 'src/app/component/terminal/terminal.component';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
-    imports: [
-        TerminalComponent,
-        RouterLink,
-        MatCardModule,
-        MatButtonModule
-    ]
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
+  imports: [TerminalComponent, RouterLink, MatCardModule, MatButtonModule],
 })
 export class HomeComponent {
   images = ['gang.jpg', 'tablo.jpg', 'blond.jpg', 'jo-jm.jpg', 'grimace.jpg'];
@@ -40,7 +35,7 @@ export class HomeComponent {
   openAdept(): void {
     const dialogRef = this.dialog.open(DialogAdeptComponent);
 
-    dialogRef.afterClosed().subscribe(() => { });
+    dialogRef.afterClosed().subscribe(() => {});
   }
 
   urlFor(prof: Prof): SafeResourceUrl {
@@ -51,8 +46,8 @@ export class HomeComponent {
 }
 
 @Component({
-    selector: 'app-dialog-adept',
-    templateUrl: 'dialog-adept.html',
-    imports: [MatDialogTitle, MatDialogContent, MatAnchor, MatDialogClose]
+  selector: 'app-dialog-adept',
+  templateUrl: 'dialog-adept.html',
+  imports: [MatDialogTitle, MatDialogContent, MatAnchor, MatDialogClose],
 })
-export class DialogAdeptComponent { }
+export class DialogAdeptComponent {}

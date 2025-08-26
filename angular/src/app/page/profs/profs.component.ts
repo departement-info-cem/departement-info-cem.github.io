@@ -10,18 +10,18 @@ import { Prof } from 'src/app/model/prof';
 import { DataService } from 'src/app/service/data.service';
 
 @Component({
-    selector: 'app-prof',
-    templateUrl: './profs.component.html',
-    styleUrls: ['./profs.component.scss'],
-    imports: [
-        MatCardModule,
-        RouterLink,
-        MatButtonModule,
-        TriProfPipe,
-        MatFormField,
-        FormsModule,
-        MatInputModule
-    ]
+  selector: 'app-prof',
+  templateUrl: './profs.component.html',
+  styleUrls: ['./profs.component.scss'],
+  imports: [
+    MatCardModule,
+    RouterLink,
+    MatButtonModule,
+    TriProfPipe,
+    MatFormField,
+    FormsModule,
+    MatInputModule,
+  ],
 })
 export class ProfsComponent {
   profs: Prof[];

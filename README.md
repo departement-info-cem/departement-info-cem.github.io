@@ -1,4 +1,4 @@
-# Site du département d'informatique 
+# Site du département d'informatique
 
 Ce fichier sert à expliquer comment modifier l'appli ou le contenu du site du département d'informatique du collège Edouard Montpetit.
 
