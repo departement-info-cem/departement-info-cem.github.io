@@ -1,31 +1,65 @@
-.row .commun {
-  border-radius: 3px;
-  border: 2px solid black;
-  background: #efe;
-  padding: 5px;
+.session {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-start;
+
+  .course {
+    border-radius: 5px;
+    flex: 0 24%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 5px;
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      .title-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      a {
+        display: flex;
+        align-items: center;
+        height: fit-content;
+      }
+    }
+
+    .bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .icons {
+      font-size: 1.5em;
+      padding: 0 4px 0 4px;
+    }
+    .titre {
+      font-weight: 700;
+      font-size: 1.1em;
+    }
+    .heures {
+      font-size: 0.8em;
+      float: right;
+      clear: right;
+    }
+  }
+
+  .sherbrooke {
+    border: 2px solid black;
+  }
+  .edouard {
+    border: 2px solid #005e7c;
+    color: black;
+    background: #efe;
+  }
 }
-.row .specifique {
-  border-radius: 5px;
-  border: 2px solid #005e7c;
-  color: black;
-  background: #efe;
-  padding: 5px;
-}
-.row .sherbrooke {
-  border-radius: 5px;
-  border: 2px solid black;
-  padding: 5px;
-}
-.icons {
-  font-size: 1.5em;
-  padding: 0 4px 0 4px;
-}
-.titre {
-  font-weight: 700;
-  font-size: 1.1em;
-}
-.heures {
-  font-size: 0.8em;
-  float: right;
-  clear: right;
+
+.infos-supp {
+  display: block !important;
 }

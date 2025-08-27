@@ -1,8 +1,11 @@
 export class Cours {
-  no = '';
-  nom = '';
-  profil = 'c';
-  url = '';
+  no: string = '';
+  nom: string = '';
+  profil?: string;
+  url: string = '';
   icons: string[] = [];
-  session = 0;
+  session: number = 0;
+  sessionDecBac?: number;
+  bac: boolean = false;
+  heures: number = 0;
 }

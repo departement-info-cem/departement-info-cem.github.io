@@ -3,98 +3,129 @@
     "nom": "Bureautique",
     "no": "420-1B3",
     "session": 1,
+    "sessionDecBac": 1,
+    "bac": false,
     "icons": [
       "fa fa-file-word",
       "fa fa-file-excel"
-    ]
+    ],
+    "heures": 45
   },
   {
     "nom": "Systèmes d'exploitation",
     "no": "420-1S6",
     "session": 1,
+    "sessionDecBac": 1,
+    "bac": false,
     "icons": [
       "fab fa-linux",
       "fab fa-windows"
-    ]
+    ],
+    "heures": 90
   },
   {
     "nom": "Prog. 1",
     "no": "420-1N6",
     "session": 1,
+    "sessionDecBac": 1,
+    "bac": false,
     "icons": [
       "fas fa-code",
       "fas fa-hashtag"
     ],
-    "url": "https://info.cegepmontpetit.ca/1P6/"
+    "url": "https://info.cegepmontpetit.ca/1P6/",
+    "heures": 90
   },
   {
     "nom": "Réseaux locaux",
     "no": "420-2R5",
     "session": 1,
+    "sessionDecBac": 1,
+    "bac": false,
     "icons": [
       "fas fa-network-wired"
-    ]
+    ],
+    "heures": 75
   },
   {
     "nom": "Mathématiques pour Informatique",
     "no": "201-924",
     "session": 2,
+    "sessionDecBac": 2,
+    "bac": false,
     "icons": [
       "fas fa-calculator"
-    ]
+    ],
+    "heures": 60
   },
   {
     "nom": "Intro aux bases de données",
     "no": "420-1D5",
     "session": 2,
+    "sessionDecBac": 1,
+    "bac": false,
     "icons": [
       "fas fa-database"
-    ]
+    ],
+    "heures": 75
   },
   {
     "nom": "Prog. 2",
     "no": "420-2P6",
     "session": 2,
+    "sessionDecBac": 2,
+    "bac": false,
     "icons": [
       "fab fa-git",
       "fas fa-hashtag"
-    ]
+    ],
+    "heures": 90
   },
   {
     "nom": "Prog. Web serveur",
     "no": "420-2W5",
     "profil": "prog",
     "session": 2,
+    "sessionDecBac": 2,
+    "bac": false,
     "icons": [
       "fab fa-html5",
       "fas fa-exchange-alt"
-    ]
+    ],
+    "heures": 75
   },
   {
     "nom": "Serveurs 1 : Services Intranet",
     "no": "420-2S5",
     "profil": "reseau",
     "session": 2,
+    "bac": false,
     "icons": [
       "fas fa-server"
-    ]
+    ],
+    "heures": 75
   },
   {
     "nom": "Communiquer en milieux professionnels",
     "no": "201-924",
     "session": 3,
+    "sessionDecBac": 4,
+    "bac": false,
     "icons": [
       "fas fa-comments"
-    ]
+    ],
+    "heures": 60
   },
   {
     "nom": "Introduction à la cybersécurité",
     "no": "420-3U4",
     "url": "https://info.cegepmontpetit.ca/3U4-cybersec/",
     "session": 3,
+    "bac": false,
     "icons": [
       "fas fa-shield-alt"
-    ]
+    ],
+    "heures": 60
   },
   {
     "nom": "Prog. 3",
@@ -102,21 +133,27 @@
     "profil": "prog",
     "url": "https://departement-info-cem.github.io/3N5-Prog3/",
     "session": 3,
+    "sessionDecBac": 4,
+    "bac": false,
     "icons": [
       "fab fa-java",
       "fab fa-android"
-    ]
+    ],
+    "heures": 75
   },
   {
     "nom": "Prog. Web transactionnelle",
     "profil": "prog",
     "no": "420-3W6",
     "session": 3,
+    "sessionDecBac": 3,
+    "bac": false,
     "icons": [
       "fas fa-file-code",
       "fas fa-database"
     ],
-    "url": "https://departement-info-cem.github.io/3W6-Web-Transactionelle/"
+    "url": "https://departement-info-cem.github.io/3W6-Web-Transactionelle/",
+    "heures": 90
   },
   {
     "nom": "Automatisation de tâches",
@@ -124,226 +161,561 @@
     "profil": "reseau",
     "url": "https://info.cegepmontpetit.ca/3t5-automatisation/",
     "session": 3,
+    "bac": false,
     "icons": [
       "fas fa-robot"
-    ]
+    ],
+    "heures": 75
   },
   {
     "nom": "Commutation et routage",
     "no": "420-3R5",
     "profil": "reseau",
     "session": 3,
+    "bac": false,
     "icons": [
       "fas fa-network-wired"
-    ]
+    ],
+    "heures": 75
   },
   {
     "nom": "Serveurs 2 : Services Internet",
     "no": "420-3S6",
     "profil": "reseau",
     "session": 3,
+    "bac": false,
     "icons": [
       "fas fa-at",
       "fas fa-database"
-    ]
+    ],
+    "heures": 90
   },
   {
     "nom": "Méthodologie",
     "no": "420-4M3",
     "session": 4,
+    "bac": false,
     "icons": [
       "fas fa-people-carry"
-    ]
+    ],
+    "heures": 45
   },
   {
     "nom": "Solutions technologiques en programmation",
     "no": "420-4E4",
     "profil": "prog",
     "session": 4,
+    "bac": false,
     "icons": [
       "fab fa-searchengin",
       "far fa-lightbulb"
-    ]
+    ],
+    "heures": 60
   },
   {
     "nom": "Bases de données et prog. Web ",
     "no": "420-4D5",
     "profil": "prog",
     "session": 4,
+    "sessionDecBac": 5,
+    "bac": false,
     "icons": [
       "fas fa-database"
     ],
-    "url": "https://info.cegepmontpetit.ca/4D5-Base-De-Donnees-Et-Prog-Web/"
+    "url": "https://info.cegepmontpetit.ca/4D5-Base-De-Donnees-Et-Prog-Web/",
+    "heures": 75
   },
   {
     "nom": "Applications mobiles ",
     "no": "420-4N6",
     "profil": "prog",
     "session": 4,
+    "sessionDecBac": 5,
+    "bac": false,
     "icons": [
       "fa fa-mobile-android"
     ],
-    "url": "https://github.com/departement-info-cem/4N6-Mobile/"
+    "url": "https://github.com/departement-info-cem/4N6-Mobile/",
+    "heures": 90
   },
   {
     "nom": "Prog. Web orientée services",
     "no": "420-4W6",
     "profil": "prog",
     "session": 4,
+    "sessionDecBac": 4,
+    "bac": false,
     "icons": [
       "fab fa-angular"
     ],
-    "url": "https://info.cegepmontpetit.ca/4W6-WebServices/"
+    "url": "https://info.cegepmontpetit.ca/4W6-WebServices/",
+    "heures": 90
   },
   {
     "nom": "Cybersécurité 2 : Architecture",
     "no": "420-4U5",
     "profil": "reseau",
     "session": 4,
+    "bac": false,
     "icons": [
       "fas fa-shield-alt",
       "fas fa-dungeon"
-    ]
+    ],
+    "heures": 75
   },
   {
     "nom": "Solutions technologiques en réseautique",
     "no": "420-4T4",
     "profil": "reseau",
     "session": 4,
+    "bac": false,
     "icons": [
       "far fa-lightbulb"
-    ]
+    ],
+    "heures": 60
   },
   {
     "nom": "Réseaux étendus",
     "no": "420-4R5",
     "profil": "reseau",
     "session": 4,
+    "bac": false,
     "icons": [
       "fas fa-globe-americas"
-    ]
+    ],
+    "heures": 75
   },
   {
     "nom": "Serveurs 3 : Administration centralisée",
     "no": "420-4S6",
     "profil": "reseau",
     "session": 4,
+    "bac": false,
     "icons": [
       "fas fa-server"
-    ]
+    ],
+    "heures": 90
   },
   {
     "nom": "Professions et soutien aux utilisateurs",
     "no": "420-5L4",
     "session": 5,
+    "bac": false,
     "icons": [
       "fas fa-user-tie"
-    ]
+    ],
+    "heures": 60
   },
   {
     "nom": "Design d'interface",
     "no": "582-905",
     "session": 5,
     "profil": "prog",
+    "sessionDecBac": 4,
+    "bac": false,
     "icons": [
       "fas fa-palette",
       "far fa-object-group"
-    ]
+    ],
+    "heures": 75
   },
   {
     "nom": "Analyse et conception d'applications",
     "no": "420-5Y5",
     "profil": "prog",
     "session": 5,
+    "bac": false,
     "icons": [
       "fas fa-clipboard-list"
-    ]
+    ],
+    "heures": 75
   },
   {
     "nom": "Applications mobiles avancées",
     "no": "420-5N6",
     "profil": "prog",
     "session": 5,
+    "sessionDecBac": 6,
+    "bac": false,
     "icons": [
       "fas fa-globe-americas"
     ],
-    "url": "https://departement-info-cem.github.io/5N6-mobile-2/"
+    "url": "https://departement-info-cem.github.io/5N6-mobile-2/",
+    "heures": 90
   },
   {
     "nom": "Prog. Web Avancée",
     "no": "420-5W5",
     "profil": "prog",
     "session": 5,
+    "sessionDecBac": 5,
+    "bac": false,
     "icons": [
       "fas fa-images",
       "fas fa-globe-americas"
     ],
-    "url": "https://departement-info-cem.github.io/5W5-Web-Avancee/"
+    "url": "https://departement-info-cem.github.io/5W5-Web-Avancee/",
+    "heures": 75
   },
   {
     "nom": "Cybersécurité 3 : Surveillance",
     "no": "420-5U5",
     "profil": "reseau",
     "session": 5,
+    "bac": false,
     "icons": [
       "far fa-eye"
-    ]
+    ],
+    "heures": 75
   },
   {
     "nom": "Infrastructure virtuelle",
     "no": "420-5V6",
     "profil": "reseau",
     "session": 5,
+    "bac": false,
     "icons": [
       "fas fa-layer-group"
-    ]
+    ],
+    "heures": 90
   },
   {
     "nom": "Serveurs 4 : Communication et collaboration",
     "no": "420-5S6",
     "profil": "reseau",
     "session": 5,
+    "bac": false,
     "icons": [
       "fas fa-mail-bulk"
-    ]
+    ],
+    "heures": 90
   },
   {
     "nom": "Projet de fin d'études",
     "no": "420-6J8",
     "profil": "reseau",
     "session": 6,
+    "bac": false,
     "icons": [
       "fas fa-users",
       "fas fa-people-carry"
-    ]
+    ],
+    "heures": 120
   },
   {
     "nom": "Stage",
     "no": "420-6GF",
     "profil": "reseau",
     "session": 6,
+    "bac": false,
     "icons": [
       "fas fa-user-tie"
-    ]
+    ],
+    "heures": 225
   },
   {
     "nom": "Projet de fin d'études",
     "no": "420-6P8",
     "profil": "prog",
     "session": 6,
+    "bac": false,
     "icons": [
       "fas fa-users",
       "fas fa-people-carry"
     ],
-    "url": "https://info.cegepmontpetit.ca/projet-prog/"
+    "url": "https://info.cegepmontpetit.ca/projet-prog/",
+    "heures": 120
   },
   {
     "nom": "Stage",
     "no": "420-6GF",
     "profil": "prog",
     "session": 6,
+    "bac": false,
     "icons": [
       "fas fa-user-tie"
+    ],
+    "heures": 225
+  },
+  {
+    "nom": "Compléments de mathématiques (intensif)",
+    "no": "MAT 099i",
+    "sessionDecBac": 6,
+    "bac": true,
+    "icons": [
+      "fas fa-calculator"
+    ]
+  },
+  {
+    "nom": "Informatique et société",
+    "no": "IFT 203",
+    "sessionDecBac": 7,
+    "bac": true,
+    "icons": [
+      "fas fa-users"
+    ]
+  },
+  {
+    "nom": "Programmation système",
+    "no": "IFT 209",
+    "sessionDecBac": 7,
+    "bac": true,
+    "icons": [
+      "fab fa-dev ",
+      "fas fa-terminal"
+    ]
+  },
+  {
+    "nom": "Structure de données",
+    "no": "IFT 339",
+    "sessionDecBac": 7,
+    "bac": true,
+    "icons": [
+      "fas fa-sitemap"
+    ]
+  },
+  {
+    "nom": "Logique et mathématiques discrètes",
+    "no": "MAT 115",
+    "sessionDecBac": 7,
+    "bac": true,
+    "icons": [
+      "fas fa-calculator"
+    ]
+  },
+  {
+    "nom": "Algèbre linéaire",
+    "no": "IFT 193",
+    "sessionDecBac": 7,
+    "bac": true,
+    "icons": [
+      "fas fa-calculator"
+    ]
+  },
+  {
+    "nom": "Compléments de mathématiques (suite)",
+    "no": "MAT 099f",
+    "sessionDecBac": 7,
+    "bac": true,
+    "icons": [
+      "fas fa-calculator"
+    ]
+  },
+  {
+    "nom": "Stage 1",
+    "no": "420-6GF",
+    "sessionDecBac": 8,
+    "bac": false,
+    "icons": [
+      "fas fa-user-tie"
+    ]
+  },
+  {
+    "nom": "Algorithmes et structures de données",
+    "no": "IFT 436",
+    "sessionDecBac": 9,
+    "bac": true,
+    "icons": [
+      "fas fa-project-diagram"
+    ]
+  },
+  {
+    "nom": "Télématique",
+    "no": "IFT 585",
+    "sessionDecBac": 9,
+    "bac": true,
+    "icons": [
+      "fas fa-wifi"
+    ]
+  },
+  {
+    "nom": "Sécurité et cryptographie",
+    "no": "IFT 606",
+    "sessionDecBac": 9,
+    "bac": true,
+    "icons": [
+      "fas fa-lock"
+    ]
+  },
+  {
+    "nom": "Techniques et outils de développement",
+    "no": "IGL 601",
+    "sessionDecBac": 9,
+    "bac": true,
+    "icons": [
+      "fas fa-code-branch"
+    ]
+  },
+  {
+    "nom": "Projet informatique 1",
+    "no": "IFT 595",
+    "sessionDecBac": 9,
+    "bac": true,
+    "icons": [
+      "fas fa-tasks"
+    ]
+  },
+  {
+    "nom": "Projet de fin d'études en programmation",
+    "no": "420-6P3",
+    "sessionDecBac": 9,
+    "bac": false,
+    "icons": [
+      "fas fa-tasks"
+    ]
+  },
+  {
+    "nom": "Stage 2",
+    "no": "T2",
+    "sessionDecBac": 10,
+    "bac": true,
+    "icons": [
+      "fas fa-user-tie"
+    ]
+  },
+  {
+    "nom": "Méthode de conception orientée objet",
+    "no": "IFT 232",
+    "sessionDecBac": 11,
+    "bac": true,
+    "icons": [
+      "fas fa-project-diagram"
+    ]
+  },
+  {
+    "nom": "Introduction aux langages formels",
+    "no": "IFT 313",
+    "sessionDecBac": 11,
+    "bac": true,
+    "icons": [
+      "fab fa-dev "
+    ]
+  },
+  {
+    "nom": "Intelligence artificielle",
+    "no": "IFT 615",
+    "sessionDecBac": 11,
+    "bac": true,
+    "icons": [
+      "fas fa-cog",
+      "fas fa-brain"
+    ]
+  },
+  {
+    "nom": "Infographie",
+    "no": "IMN 428",
+    "sessionDecBac": 11,
+    "bac": true,
+    "icons": [
+      "fas fa-cube",
+      "fas fa-photo-video"
+    ]
+  },
+  {
+    "nom": "Statistique appliquée",
+    "no": "STT 418",
+    "sessionDecBac": 11,
+    "bac": true,
+    "icons": [
+      "far fa-chart-bar"
+    ]
+  },
+  {
+    "nom": "Stage 3",
+    "no": "T3",
+    "sessionDecBac": 12,
+    "bac": true,
+    "icons": [
+      "fas fa-user-tie"
+    ]
+  },
+  {
+    "nom": "Systèmes d'exploitation",
+    "no": "IFT 320",
+    "sessionDecBac": 13,
+    "bac": true,
+    "icons": [
+      "fab fa-windows",
+      "fab fa-linux"
+    ]
+  },
+  {
+    "nom": "Programmation fonctionelle",
+    "no": "IFT 359",
+    "sessionDecBac": 13,
+    "bac": true,
+    "icons": []
+  },
+  {
+    "nom": "Cours au choix",
+    "no": "OPT",
+    "sessionDecBac": 13,
+    "bac": true,
+    "icons": [
+      "fas fa-question"
+    ]
+  },
+  {
+    "nom": "Cours au choix",
+    "no": "OPT",
+    "sessionDecBac": 13,
+    "bac": true,
+    "icons": [
+      "fas fa-question"
+    ]
+  },
+  {
+    "nom": "Cours au choix",
+    "no": "OPT",
+    "sessionDecBac": 13,
+    "bac": true,
+    "icons": [
+      "fas fa-question"
+    ]
+  },
+  {
+    "nom": "Processus concurrents et parallélisme",
+    "no": "IFT 630",
+    "sessionDecBac": 14,
+    "bac": true,
+    "icons": [
+      "fas fa-project-diagram"
+    ]
+  },
+  {
+    "nom": "Cours au choix",
+    "no": "OPT",
+    "sessionDecBac": 14,
+    "bac": true,
+    "icons": [
+      "fas fa-question"
+    ]
+  },
+  {
+    "nom": "Cours au choix",
+    "no": "OPT",
+    "sessionDecBac": 14,
+    "bac": true,
+    "icons": [
+      "fas fa-question"
+    ]
+  },
+  {
+    "nom": "Cours au choix",
+    "no": "OPT",
+    "sessionDecBac": 14,
+    "bac": true,
+    "icons": [
+      "fas fa-question"
+    ]
+  },
+  {
+    "nom": "Cours au choix",
+    "no": "OPT",
+    "sessionDecBac": 14,
+    "bac": true,
+    "icons": [
+      "fas fa-question"
     ]
   }
 ]

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { DataService } from '../../service/data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { Cours } from '../../model/cours';
 
@@ -11,22 +11,18 @@ import { Cours } from '../../model/cours';
   imports: [MatIconModule],
 })
 export class DecComponent {
-  private service = inject(DataService);
+  public dataService = inject(DataService);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
-  cours: Cours[];
-  programme = 'c';
+  profil?: string;
 
   constructor() {
-    this.cours = this.service.cours();
-    const profil = this.route.snapshot.paramMap.get('profil');
-    if (profil) {
-      this.programme = profil;
-    }
+    this.profil = this.route.snapshot.queryParamMap.get('profil');
   }
 
   sessionDe(item: Cours): number {
-    if (item.session > 0) {
+    if (item.session != null) {
       return item.session;
     }
     const c = item.no.substring(4, 5);
@@ -34,20 +30,23 @@ export class DecComponent {
     return res;
   }
 
-  heuresDe(item: Cours): number {
-    const c = item.no.substring(6, 7);
-    const res = parseInt(c, 16);
-    return res * 15;
-  }
-
-  changeProgramme(v: string): void {
-    this.programme = v;
-  }
-
-  bon(v: string): boolean {
-    if (!v) {
-      return true;
+  changeProfile(profil: string): void {
+    if (this.profil == profil) {
+      this.profil = undefined
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: {},
+      });
+    } else {
+      this.profil = profil;
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: { profil: profil },
+      });
     }
-    return v === 'c' || v === this.programme;
+  }
+
+  bonProfil(profil: string): boolean {
+    return profil === undefined || profil === this.profil;
   }
 }

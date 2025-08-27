@@ -15,11 +15,11 @@
             <h5 class="card-title">Technique en informatique</h5>
             <p class="card-text">En 3 ans, tu vas devenir un pro de l'info.</p>
             <p>Choisis prog ou réseau :</p>
-            <button class="btn btn-primary" (click)="changeProgramme('prog')">
+            <button class="btn btn-primary" (click)="changeProfile('prog')">
               Prog.
             </button>
             &nbsp;
-            <button class="btn btn-info" (click)="changeProgramme('reseau')">
+            <button class="btn btn-info" (click)="changeProfile('reseau')">
               Réseau
             </button>
 
@@ -28,7 +28,7 @@
         </div>
       </div>
 
-      @if (programme === "p") {
+      @if (profil === "prog") {
       <div class="col-md-8">
         <div class="card text-light bg-primary mb-3">
           <div class="card-header">Info de gestion</div>
@@ -52,7 +52,7 @@
       </div>
       }
 
-      @if (programme === "r") {
+      @if (profil === "reseau") {
       <div class="col-md-8">
         <div class="card text-light bg-info mb-3">
           <div class="card-header">Gestion des réseaux</div>
@@ -81,35 +81,33 @@
       @for (session of [1, 2, 3, 4, 5, 6]; track session) {
       <div class="col-sm-6 col-md-4 col-lg-2">
         <h3>Session {{ session }}</h3>
-        @for (item of cours; track item; let i = $index) {
+        @for (cours of dataService.coursSession(session, profil); track cours) {
         <div>
-          @if (sessionDe(item) === session && bon(item.profil)) {
           <div [class]="
-                    item.profil
+                    cours.profil
                       ? 'commun bg-dark text-white mb-2'
                       : 'specifique bg-light text-dark web mb-2'
                   ">
             <span class="float-end">
-              @if (item.url) {
-              <a class="badge text-bg-info" href="{{ item.url }}">
+              @if (cours.url) {
+              <a class="badge text-bg-info" href="{{ cours.url }}">
                 <mat-icon>http</mat-icon>
               </a>
               }
             </span>
-            <span class="titre">{{ item.nom }}</span>
+            <span class="titre">{{ cours.nom }}</span>
             <div style="clear: both" class="mb-2">
-              <span class="numero badge text-bg-light">{{ item.no }}-EM</span>
+              <span class="numero badge text-bg-light">{{ cours.no }}-EM</span>
             </div>
-            @for (icon of item.icons; track icon) {
+            @for (icon of cours.icons; track icon) {
             <span class="icons">
               &nbsp;
               <i class="{{ icon }}"></i>
             </span>
             }
-            <span class="float-end"><i class="fas fa-clock"></i> {{ heuresDe(item) }} h</span>
+            <span class="float-end"><i class="fas fa-clock"></i> {{ cours.heures }} h</span>
             <div style="clear: both"></div>
           </div>
-          }
         </div>
         }
       </div>

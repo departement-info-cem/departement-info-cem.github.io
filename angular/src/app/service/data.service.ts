@@ -36,6 +36,14 @@ export class DataService {
     return cours as Cours[];
   }
 
+  coursSession(session: number, profil: string): Cours[] {
+    return this.cours().filter((c: Cours) => c.session === session && (c.profil === profil || c.profil === undefined));
+  }
+
+  coursSessionDecBac(session: number): Cours[] {
+    return this.cours().filter((c: Cours) => c.sessionDecBac === session);
+  }
+
   questions(s: string): Question[] {
     return this.qs().filter((q: Question) => {
       if (q.q.indexOf(s) > -1) return true;
