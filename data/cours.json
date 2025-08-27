@@ -2,226 +2,348 @@
   {
     "nom": "Bureautique",
     "no": "420-1B3",
-    "icons": ["fa fa-file-word", "fa fa-file-excel"]
+    "session": 1,
+    "icons": [
+      "fa fa-file-word",
+      "fa fa-file-excel"
+    ]
   },
   {
     "nom": "Systèmes d'exploitation",
     "no": "420-1S6",
-    "icons": ["fab fa-linux", "fab fa-windows"]
+    "session": 1,
+    "icons": [
+      "fab fa-linux",
+      "fab fa-windows"
+    ]
   },
   {
     "nom": "Prog. 1",
     "no": "420-1N6",
-    "icons": ["fas fa-code", "fas fa-hashtag"],
+    "session": 1,
+    "icons": [
+      "fas fa-code",
+      "fas fa-hashtag"
+    ],
     "url": "https://info.cegepmontpetit.ca/1P6/"
-  },
-  {
-    "nom": "Intro aux bases de données",
-    "no": "420-1D5",
-    "icons": ["fas fa-database"]
-  },
-  {
-    "nom": "Mathématiques pour Informatique",
-    "no": "201-924",
-    "s": 2,
-    "icons": ["fas fa-calculator"]
   },
   {
     "nom": "Réseaux locaux",
     "no": "420-2R5",
-    "icons": ["fas fa-network-wired"]
+    "session": 1,
+    "icons": [
+      "fas fa-network-wired"
+    ]
+  },
+  {
+    "nom": "Mathématiques pour Informatique",
+    "no": "201-924",
+    "session": 2,
+    "icons": [
+      "fas fa-calculator"
+    ]
+  },
+  {
+    "nom": "Intro aux bases de données",
+    "no": "420-1D5",
+    "session": 2,
+    "icons": [
+      "fas fa-database"
+    ]
   },
   {
     "nom": "Prog. 2",
-    "no": "420-2N6",
-    "icons": ["fab fa-git", "fas fa-hashtag"]
+    "no": "420-2P6",
+    "session": 2,
+    "icons": [
+      "fab fa-git",
+      "fas fa-hashtag"
+    ]
   },
   {
     "nom": "Prog. Web serveur",
     "no": "420-2W5",
-    "v": "p",
-    "icons": ["fab fa-html5", "fas fa-exchange-alt"]
+    "profil": "prog",
+    "session": 2,
+    "icons": [
+      "fab fa-html5",
+      "fas fa-exchange-alt"
+    ]
   },
   {
     "nom": "Serveurs 1 : Services Intranet",
     "no": "420-2S5",
-    "v": "r",
-    "icons": ["fas fa-server"]
+    "profil": "reseau",
+    "session": 2,
+    "icons": [
+      "fas fa-server"
+    ]
   },
   {
     "nom": "Communiquer en milieux professionnels",
     "no": "201-924",
-    "s": 3,
-    "icons": ["fas fa-comments"]
+    "session": 3,
+    "icons": [
+      "fas fa-comments"
+    ]
   },
   {
     "nom": "Introduction à la cybersécurité",
     "no": "420-3U4",
     "url": "https://info.cegepmontpetit.ca/3U4-cybersec/",
-    "icons": ["fas fa-shield-alt"]
+    "session": 3,
+    "icons": [
+      "fas fa-shield-alt"
+    ]
   },
   {
     "nom": "Prog. 3",
     "no": "420-3N5",
-    "v": "p",
+    "profil": "prog",
     "url": "https://departement-info-cem.github.io/3N5-Prog3/",
-    "icons": ["fab fa-java", "fab fa-android"]
+    "session": 3,
+    "icons": [
+      "fab fa-java",
+      "fab fa-android"
+    ]
   },
   {
     "nom": "Prog. Web transactionnelle",
-    "v": "p",
+    "profil": "prog",
     "no": "420-3W6",
-    "icons": ["fas fa-file-code", "fas fa-database"],
+    "session": 3,
+    "icons": [
+      "fas fa-file-code",
+      "fas fa-database"
+    ],
     "url": "https://departement-info-cem.github.io/3W6-Web-Transactionelle/"
   },
   {
     "nom": "Automatisation de tâches",
     "no": "420-3T5",
-    "v": "r",
+    "profil": "reseau",
     "url": "https://info.cegepmontpetit.ca/3t5-automatisation/",
-    "icons": ["fas fa-robot"]
+    "session": 3,
+    "icons": [
+      "fas fa-robot"
+    ]
   },
   {
     "nom": "Commutation et routage",
     "no": "420-3R5",
-    "v": "r",
-    "icons": ["fas fa-network-wired"]
+    "profil": "reseau",
+    "session": 3,
+    "icons": [
+      "fas fa-network-wired"
+    ]
   },
   {
     "nom": "Serveurs 2 : Services Internet",
     "no": "420-3S6",
-    "v": "r",
-    "icons": ["fas fa-at", "fas fa-database"]
+    "profil": "reseau",
+    "session": 3,
+    "icons": [
+      "fas fa-at",
+      "fas fa-database"
+    ]
   },
   {
     "nom": "Méthodologie",
     "no": "420-4M3",
-    "icons": ["fas fa-people-carry"]
+    "session": 4,
+    "icons": [
+      "fas fa-people-carry"
+    ]
   },
   {
     "nom": "Solutions technologiques en programmation",
     "no": "420-4E4",
-    "v": "p",
-    "icons": ["fab fa-searchengin", "far fa-lightbulb"]
+    "profil": "prog",
+    "session": 4,
+    "icons": [
+      "fab fa-searchengin",
+      "far fa-lightbulb"
+    ]
   },
   {
     "nom": "Bases de données et prog. Web ",
     "no": "420-4D5",
-    "v": "p",
-    "icons": ["fas fa-database"],
+    "profil": "prog",
+    "session": 4,
+    "icons": [
+      "fas fa-database"
+    ],
     "url": "https://info.cegepmontpetit.ca/4D5-Base-De-Donnees-Et-Prog-Web/"
   },
   {
     "nom": "Applications mobiles ",
     "no": "420-4N6",
-    "v": "p",
-    "icons": ["fa fa-mobile-android"],
+    "profil": "prog",
+    "session": 4,
+    "icons": [
+      "fa fa-mobile-android"
+    ],
     "url": "https://github.com/departement-info-cem/4N6-Mobile/"
   },
   {
     "nom": "Prog. Web orientée services",
     "no": "420-4W6",
-    "v": "p",
-    "icons": ["fab fa-angular"],
+    "profil": "prog",
+    "session": 4,
+    "icons": [
+      "fab fa-angular"
+    ],
     "url": "https://info.cegepmontpetit.ca/4W6-WebServices/"
   },
   {
     "nom": "Cybersécurité 2 : Architecture",
     "no": "420-4U5",
-    "v": "r",
-    "icons": ["fas fa-shield-alt", "fas fa-dungeon"]
+    "profil": "reseau",
+    "session": 4,
+    "icons": [
+      "fas fa-shield-alt",
+      "fas fa-dungeon"
+    ]
   },
   {
     "nom": "Solutions technologiques en réseautique",
     "no": "420-4T4",
-    "v": "r",
-    "icons": ["far fa-lightbulb"]
+    "profil": "reseau",
+    "session": 4,
+    "icons": [
+      "far fa-lightbulb"
+    ]
   },
   {
     "nom": "Réseaux étendus",
     "no": "420-4R5",
-    "v": "r",
-    "icons": ["fas fa-globe-americas"]
+    "profil": "reseau",
+    "session": 4,
+    "icons": [
+      "fas fa-globe-americas"
+    ]
   },
   {
     "nom": "Serveurs 3 : Administration centralisée",
     "no": "420-4S6",
-    "v": "r",
-    "icons": ["fas fa-server"]
+    "profil": "reseau",
+    "session": 4,
+    "icons": [
+      "fas fa-server"
+    ]
   },
   {
     "nom": "Professions et soutien aux utilisateurs",
     "no": "420-5L4",
-    "icons": ["fas fa-user-tie"]
+    "session": 5,
+    "icons": [
+      "fas fa-user-tie"
+    ]
   },
   {
     "nom": "Design d'interface",
     "no": "582-905",
-    "s": 5,
-    "v": "p",
-    "icons": ["fas fa-palette", "far fa-object-group"]
+    "session": 5,
+    "profil": "prog",
+    "icons": [
+      "fas fa-palette",
+      "far fa-object-group"
+    ]
   },
   {
     "nom": "Analyse et conception d'applications",
     "no": "420-5Y5",
-    "v": "p",
-    "icons": ["fas fa-clipboard-list"]
+    "profil": "prog",
+    "session": 5,
+    "icons": [
+      "fas fa-clipboard-list"
+    ]
   },
   {
     "nom": "Applications mobiles avancées",
     "no": "420-5N6",
-    "v": "p",
-    "icons": ["fas fa-globe-americas"],
+    "profil": "prog",
+    "session": 5,
+    "icons": [
+      "fas fa-globe-americas"
+    ],
     "url": "https://departement-info-cem.github.io/5N6-mobile-2/"
   },
   {
     "nom": "Prog. Web Avancée",
     "no": "420-5W5",
-    "v": "p",
-    "icons": ["fas fa-images", "fas fa-globe-americas"],
+    "profil": "prog",
+    "session": 5,
+    "icons": [
+      "fas fa-images",
+      "fas fa-globe-americas"
+    ],
     "url": "https://departement-info-cem.github.io/5W5-Web-Avancee/"
   },
   {
     "nom": "Cybersécurité 3 : Surveillance",
     "no": "420-5U5",
-    "v": "r",
-    "icons": ["far fa-eye"]
+    "profil": "reseau",
+    "session": 5,
+    "icons": [
+      "far fa-eye"
+    ]
   },
   {
     "nom": "Infrastructure virtuelle",
     "no": "420-5V6",
-    "v": "r",
-    "icons": ["fas fa-layer-group"]
+    "profil": "reseau",
+    "session": 5,
+    "icons": [
+      "fas fa-layer-group"
+    ]
   },
   {
     "nom": "Serveurs 4 : Communication et collaboration",
     "no": "420-5S6",
-    "v": "r",
-    "icons": ["fas fa-mail-bulk"]
+    "profil": "reseau",
+    "session": 5,
+    "icons": [
+      "fas fa-mail-bulk"
+    ]
   },
   {
     "nom": "Projet de fin d'études",
     "no": "420-6J8",
-    "v": "r",
-    "icons": ["fas fa-users", "fas fa-people-carry"]
+    "profil": "reseau",
+    "session": 6,
+    "icons": [
+      "fas fa-users",
+      "fas fa-people-carry"
+    ]
   },
   {
     "nom": "Stage",
     "no": "420-6GF",
-    "v": "r",
-    "icons": ["fas fa-user-tie"]
+    "profil": "reseau",
+    "session": 6,
+    "icons": [
+      "fas fa-user-tie"
+    ]
   },
   {
     "nom": "Projet de fin d'études",
     "no": "420-6P8",
-    "v": "p",
-    "icons": ["fas fa-users", "fas fa-people-carry"],
+    "profil": "prog",
+    "session": 6,
+    "icons": [
+      "fas fa-users",
+      "fas fa-people-carry"
+    ],
     "url": "https://info.cegepmontpetit.ca/projet-prog/"
   },
   {
     "nom": "Stage",
     "no": "420-6GF",
-    "v": "p",
-    "icons": ["fas fa-user-tie"]
+    "profil": "prog",
+    "session": 6,
+    "icons": [
+      "fas fa-user-tie"
+    ]
   }
 ]
