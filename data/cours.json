@@ -24,7 +24,7 @@
     "heures": 90
   },
   {
-    "nom": "Prog. 1",
+    "nom": "Introduction à la programmation",
     "no": "420-1N6",
     "session": 1,
     "sessionDecBac": 1,
@@ -38,7 +38,7 @@
   },
   {
     "nom": "Réseaux locaux",
-    "no": "420-2R5",
+    "no": "420-1C5",
     "session": 1,
     "sessionDecBac": 1,
     "bac": false,
@@ -59,8 +59,8 @@
     "heures": 60
   },
   {
-    "nom": "Intro aux bases de données",
-    "no": "420-1D5",
+    "nom": "Introduction aux bases de données",
+    "no": "420-2D5",
     "session": 2,
     "sessionDecBac": 1,
     "bac": false,
@@ -70,14 +70,27 @@
     "heures": 75
   },
   {
-    "nom": "Prog. 2",
+    "nom": "Programmation orientée objet",
     "no": "420-2P6",
     "session": 2,
     "sessionDecBac": 2,
+    "profil": "prog",
     "bac": false,
     "icons": [
       "fab fa-git",
       "fas fa-hashtag"
+    ],
+    "heures": 90
+  },
+  {
+    "nom": "Programmation en TI",
+    "no": "420-2T6",
+    "session": 2,
+    "profil": "reseau",
+    "bac": false,
+    "icons": [
+      "fab fa-git",
+      "fa-brands fa-python"
     ],
     "heures": 90
   },
@@ -95,8 +108,8 @@
     "heures": 75
   },
   {
-    "nom": "Serveurs 1 : Services Intranet",
-    "no": "420-2S5",
+    "nom": "Serveurs intranet",
+    "no": "420-2X5",
     "profil": "reseau",
     "session": 2,
     "bac": false,
@@ -118,7 +131,7 @@
   },
   {
     "nom": "Introduction à la cybersécurité",
-    "no": "420-3U4",
+    "no": "420-3S4",
     "url": "https://info.cegepmontpetit.ca/3U4-cybersec/",
     "session": 3,
     "bac": false,
@@ -128,8 +141,8 @@
     "heures": 60
   },
   {
-    "nom": "Prog. 3",
-    "no": "420-3N5",
+    "nom": "Introduction à la programmation mobile",
+    "no": "420-3M5",
     "profil": "prog",
     "url": "https://departement-info-cem.github.io/3N5-Prog3/",
     "session": 3,
@@ -168,8 +181,8 @@
     "heures": 75
   },
   {
-    "nom": "Commutation et routage",
-    "no": "420-3R5",
+    "nom": "Réseaux d'entreprise",
+    "no": "420-3C5",
     "profil": "reseau",
     "session": 3,
     "bac": false,
@@ -179,7 +192,7 @@
     "heures": 75
   },
   {
-    "nom": "Serveurs 2 : Services Internet",
+    "nom": "Serveurs internet",
     "no": "420-3S6",
     "profil": "reseau",
     "session": 3,
@@ -191,8 +204,8 @@
     "heures": 90
   },
   {
-    "nom": "Méthodologie",
-    "no": "420-4M3",
+    "nom": "Méthodologie et gestion de projet",
+    "no": "420-4G3",
     "session": 4,
     "bac": false,
     "icons": [
@@ -201,8 +214,8 @@
     "heures": 45
   },
   {
-    "nom": "Solutions technologiques en programmation",
-    "no": "420-4E4",
+    "nom": "Solutions applicatives",
+    "no": "420-4N4",
     "profil": "prog",
     "session": 4,
     "bac": false,
@@ -213,8 +226,8 @@
     "heures": 60
   },
   {
-    "nom": "Bases de données et prog. Web ",
-    "no": "420-4D5",
+    "nom": "Bases de données et programmation Web ",
+    "no": "420-4D6",
     "profil": "prog",
     "session": 4,
     "sessionDecBac": 5,
@@ -223,11 +236,11 @@
       "fas fa-database"
     ],
     "url": "https://info.cegepmontpetit.ca/4D5-Base-De-Donnees-Et-Prog-Web/",
-    "heures": 75
+    "heures": 90
   },
   {
-    "nom": "Applications mobiles ",
-    "no": "420-4N6",
+    "nom": "Applications mobiles",
+    "no": "420-4M6",
     "profil": "prog",
     "session": 4,
     "sessionDecBac": 5,
@@ -252,7 +265,7 @@
     "heures": 90
   },
   {
-    "nom": "Cybersécurité 2 : Architecture",
+    "nom": "Architecture et cybersécurité",
     "no": "420-4U5",
     "profil": "reseau",
     "session": 4,
@@ -264,8 +277,8 @@
     "heures": 75
   },
   {
-    "nom": "Solutions technologiques en réseautique",
-    "no": "420-4T4",
+    "nom": "Solutions d'infrastructure TI",
+    "no": "420-4L4",
     "profil": "reseau",
     "session": 4,
     "bac": false,
@@ -276,7 +289,7 @@
   },
   {
     "nom": "Réseaux étendus",
-    "no": "420-4R5",
+    "no": "420-4C5",
     "profil": "reseau",
     "session": 4,
     "bac": false,
@@ -286,8 +299,8 @@
     "heures": 75
   },
   {
-    "nom": "Serveurs 3 : Administration centralisée",
-    "no": "420-4S6",
+    "nom": "Administration centralisée",
+    "no": "420-4X6",
     "profil": "reseau",
     "session": 4,
     "bac": false,
@@ -298,7 +311,7 @@
   },
   {
     "nom": "Professions et soutien aux utilisateurs",
-    "no": "420-5L4",
+    "no": "420-5F4",
     "session": 5,
     "bac": false,
     "icons": [
@@ -332,7 +345,7 @@
   },
   {
     "nom": "Applications mobiles avancées",
-    "no": "420-5N6",
+    "no": "420-5M6",
     "profil": "prog",
     "session": 5,
     "sessionDecBac": 6,
@@ -344,8 +357,8 @@
     "heures": 90
   },
   {
-    "nom": "Prog. Web Avancée",
-    "no": "420-5W5",
+    "nom": "Programmation web avancée",
+    "no": "420-5W6",
     "profil": "prog",
     "session": 5,
     "sessionDecBac": 5,
@@ -355,11 +368,11 @@
       "fas fa-globe-americas"
     ],
     "url": "https://departement-info-cem.github.io/5W5-Web-Avancee/",
-    "heures": 75
+    "heures": 90
   },
   {
-    "nom": "Cybersécurité 3 : Surveillance",
-    "no": "420-5U5",
+    "nom": "Cybersécurité et surveillance TI",
+    "no": "420-5S5",
     "profil": "reseau",
     "session": 5,
     "bac": false,
@@ -369,8 +382,8 @@
     "heures": 75
   },
   {
-    "nom": "Infrastructure virtuelle",
-    "no": "420-5V6",
+    "nom": "Virtualisation et infonuagique",
+    "no": "420-5U6",
     "profil": "reseau",
     "session": 5,
     "bac": false,
@@ -380,8 +393,8 @@
     "heures": 90
   },
   {
-    "nom": "Serveurs 4 : Communication et collaboration",
-    "no": "420-5S6",
+    "nom": "Serveurs de communication",
+    "no": "420-5X6",
     "profil": "reseau",
     "session": 5,
     "bac": false,
@@ -391,8 +404,19 @@
     "heures": 90
   },
   {
-    "nom": "Projet de fin d'études",
-    "no": "420-6J8",
+    "nom": "Serveurs de base de données",
+    "no": "420-5D5",
+    "profil": "reseau",
+    "session": 5,
+    "bac": false,
+    "icons": [
+      "fas fa-database"
+    ],
+    "heures": 75
+  },
+  {
+    "nom": "Projet en TI",
+    "no": "420-6X5",
     "profil": "reseau",
     "session": 6,
     "bac": false,
@@ -403,18 +427,7 @@
     "heures": 120
   },
   {
-    "nom": "Stage",
-    "no": "420-6GF",
-    "profil": "reseau",
-    "session": 6,
-    "bac": false,
-    "icons": [
-      "fas fa-user-tie"
-    ],
-    "heures": 225
-  },
-  {
-    "nom": "Projet de fin d'études",
+    "nom": "Projet en développement d'applications",
     "no": "420-6P8",
     "profil": "prog",
     "session": 6,
@@ -428,8 +441,7 @@
   },
   {
     "nom": "Stage",
-    "no": "420-6GF",
-    "profil": "prog",
+    "no": "420-6GE",
     "session": 6,
     "bac": false,
     "icons": [
