@@ -149,7 +149,7 @@
     "sessionDecBac": 4,
     "bac": false,
     "icons": [
-      "fab fa-java",
+      "fa fa-mobile-android",
       "fab fa-android"
     ],
     "heures": 75
@@ -246,7 +246,8 @@
     "sessionDecBac": 5,
     "bac": false,
     "icons": [
-      "fa fa-mobile-android"
+      "fa fa-mobile-android",
+      "fab fa-java"
     ],
     "url": "https://github.com/departement-info-cem/4N6-Mobile/",
     "heures": 90
@@ -364,8 +365,8 @@
     "sessionDecBac": 5,
     "bac": false,
     "icons": [
-      "fas fa-images",
-      "fas fa-globe-americas"
+      "fab fa-angular",
+      "fas fa-hashtag"
     ],
     "url": "https://departement-info-cem.github.io/5W5-Web-Avancee/",
     "heures": 90
@@ -415,6 +416,16 @@
     "heures": 75
   },
   {
+    "nom": "Stage",
+    "no": "420-6GE",
+    "session": 6,
+    "bac": false,
+    "icons": [
+      "fas fa-user-tie"
+    ],
+    "heures": 225
+  },
+  {
     "nom": "Projet en TI",
     "no": "420-6X5",
     "profil": "reseau",
@@ -438,16 +449,6 @@
     ],
     "url": "https://info.cegepmontpetit.ca/projet-prog/",
     "heures": 120
-  },
-  {
-    "nom": "Stage",
-    "no": "420-6GE",
-    "session": 6,
-    "bac": false,
-    "icons": [
-      "fas fa-user-tie"
-    ],
-    "heures": 225
   },
   {
     "nom": "Compléments de mathématiques (intensif)",
