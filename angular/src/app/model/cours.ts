@@ -1,8 +1,8 @@
 export class Cours {
   no = '';
   nom = '';
-  v = 'c';
+  profil = 'c';
   url = '';
   icons: string[] = [];
-  s = 0;
+  session = 0;
 }

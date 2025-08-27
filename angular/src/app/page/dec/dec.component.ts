@@ -26,8 +26,8 @@ export class DecComponent {
   }
 
   sessionDe(item: Cours): number {
-    if (item.s > 0) {
-      return item.s;
+    if (item.session > 0) {
+      return item.session;
     }
     const c = item.no.substring(4, 5);
     const res = parseInt(c, 16);

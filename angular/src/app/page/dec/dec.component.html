@@ -1,13 +1,10 @@
-<div
-  [style.background-image]="'url(assets/dec.jpg)'"
-  style="
+<div [style.background-image]="'url(assets/dec.jpg)'" style="
     min-height: 100%;
     width: 100%;
     background-position: center;
     background-size: 100%;
     background-attachment: fixed;
-  "
->
+  ">
   <br />
   <div class="container-fluid">
     <div class="row">
@@ -18,11 +15,11 @@
             <h5 class="card-title">Technique en informatique</h5>
             <p class="card-text">En 3 ans, tu vas devenir un pro de l'info.</p>
             <p>Choisis prog ou réseau :</p>
-            <button class="btn btn-primary" (click)="changeProgramme('p')">
+            <button class="btn btn-primary" (click)="changeProgramme('prog')">
               Prog.
             </button>
             &nbsp;
-            <button class="btn btn-info" (click)="changeProgramme('r')">
+            <button class="btn btn-info" (click)="changeProgramme('reseau')">
               Réseau
             </button>
 
@@ -32,96 +29,90 @@
       </div>
 
       @if (programme === "p") {
-        <div class="col-md-8">
-          <div class="card text-light bg-primary mb-3">
-            <div class="card-header">Info de gestion</div>
-            <div class="card-body">
-              <p>
-                Programmer des applications web avec ASP.Net et Angular
-                <i class="fab fa-angular"></i> et mobiles Android
-                <mat-icon>adb</mat-icon>.
-              </p>
-              <p>
-                Utiliser le cloud <i class="fas fa-cloud-upload-alt"></i>,
-                <mat-icon>http</mat-icon> et des bases de données pour
-                concrétiser tes idées d'apps.
-              </p>
-              <p>
-                Sécuriser le tout pour résister aux vilains hackeurs
-                <i class="fab fa-hackerrank"></i>.
-              </p>
-            </div>
+      <div class="col-md-8">
+        <div class="card text-light bg-primary mb-3">
+          <div class="card-header">Info de gestion</div>
+          <div class="card-body">
+            <p>
+              Programmer des applications web avec ASP.Net et Angular
+              <i class="fab fa-angular"></i> et mobiles Android
+              <mat-icon>adb</mat-icon>.
+            </p>
+            <p>
+              Utiliser le cloud <i class="fas fa-cloud-upload-alt"></i>,
+              <mat-icon>http</mat-icon> et des bases de données pour
+              concrétiser tes idées d'apps.
+            </p>
+            <p>
+              Sécuriser le tout pour résister aux vilains hackeurs
+              <i class="fab fa-hackerrank"></i>.
+            </p>
           </div>
         </div>
+      </div>
       }
 
       @if (programme === "r") {
-        <div class="col-md-8">
-          <div class="card text-light bg-info mb-3">
-            <div class="card-header">Gestion des réseaux</div>
-            <div class="card-body">
-              <p>
-                Mettre en place des réseaux pour une compagnie, un LAN party
-                <i class="fas fa-network-wired"></i>, des serveurs de jeu en
-                ligne.
-              </p>
-              <p>
-                Un stack réseau Cisco, des serveurs Windows et Linux
-                <i class="fab fa-linux"></i>. Tu gères des centaines
-                d'utilisateurs grâce à la puissance des scripts.
-              </p>
-              <p>
-                Tu fais de ton infra un donjon
-                <i class="fas fa-dungeon"></i> impossible à pirater.
-              </p>
-            </div>
+      <div class="col-md-8">
+        <div class="card text-light bg-info mb-3">
+          <div class="card-header">Gestion des réseaux</div>
+          <div class="card-body">
+            <p>
+              Mettre en place des réseaux pour une compagnie, un LAN party
+              <i class="fas fa-network-wired"></i>, des serveurs de jeu en
+              ligne.
+            </p>
+            <p>
+              Un stack réseau Cisco, des serveurs Windows et Linux
+              <i class="fab fa-linux"></i>. Tu gères des centaines
+              d'utilisateurs grâce à la puissance des scripts.
+            </p>
+            <p>
+              Tu fais de ton infra un donjon
+              <i class="fas fa-dungeon"></i> impossible à pirater.
+            </p>
           </div>
         </div>
+      </div>
       }
     </div>
 
     <div class="row">
       @for (session of [1, 2, 3, 4, 5, 6]; track session) {
-        <div class="col-sm-6 col-md-4 col-lg-2">
-          <h3>Session {{ session }}</h3>
-          @for (item of cours; track item; let i = $index) {
-            <div>
-              @if (sessionDe(item) === session && bon(item.v)) {
-                <div
-                  [class]="
-                    item.v
+      <div class="col-sm-6 col-md-4 col-lg-2">
+        <h3>Session {{ session }}</h3>
+        @for (item of cours; track item; let i = $index) {
+        <div>
+          @if (sessionDe(item) === session && bon(item.profil)) {
+          <div [class]="
+                    item.profil
                       ? 'commun bg-dark text-white mb-2'
                       : 'specifique bg-light text-dark web mb-2'
-                  "
-                >
-                  <span class="float-end">
-                    @if (item.url) {
-                      <a class="badge text-bg-info" href="{{ item.url }}">
-                        <mat-icon>http</mat-icon>
-                      </a>
-                    }
-                  </span>
-                  <span class="titre">{{ item.nom }}</span>
-                  <div style="clear: both" class="mb-2">
-                    <span class="numero badge text-bg-light"
-                      >{{ item.no }}-EM</span
-                    >
-                  </div>
-                  @for (icon of item.icons; track icon) {
-                    <span class="icons">
-                      &nbsp;
-                      <i class="{{ icon }}"></i>
-                    </span>
-                  }
-                  <span class="float-end"
-                    ><i class="fas fa-clock"></i> {{ heuresDe(item) }} h</span
-                  >
-                  <div style="clear: both"></div>
-                </div>
+                  ">
+            <span class="float-end">
+              @if (item.url) {
+              <a class="badge text-bg-info" href="{{ item.url }}">
+                <mat-icon>http</mat-icon>
+              </a>
               }
+            </span>
+            <span class="titre">{{ item.nom }}</span>
+            <div style="clear: both" class="mb-2">
+              <span class="numero badge text-bg-light">{{ item.no }}-EM</span>
             </div>
+            @for (icon of item.icons; track icon) {
+            <span class="icons">
+              &nbsp;
+              <i class="{{ icon }}"></i>
+            </span>
+            }
+            <span class="float-end"><i class="fas fa-clock"></i> {{ heuresDe(item) }} h</span>
+            <div style="clear: both"></div>
+          </div>
           }
         </div>
+        }
+      </div>
       }
     </div>
   </div>
