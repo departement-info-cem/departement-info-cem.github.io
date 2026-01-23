@@ -58,7 +58,7 @@ export class TerminalComponent {
     if (newOne.r) {
       this.triggers.push(newOne);
       // try to find a diagnostic
-      const diagnostic = this.diagnostic(this.triggers);
+      const diagnostic = this.diagnostic();
       if (diagnostic) {
         this.question = diagnostic;
         this.playDiagnostic();
@@ -81,23 +81,13 @@ export class TerminalComponent {
     this.question = this.questions[0];
   }
 
-  private diagnostic(triggers: BotTrigger[]): BotRule {
+  private diagnostic(): BotRule {
     let res: BotRule;
     for (const q of this.questions) {
       if (q.reponses.length === 0) {
         const numberOfTrigs = this.trigsCompletedFor(q, this.triggers);
         if (numberOfTrigs > 0) {
-          if (res) {
-            const numberOfTrigsBest = this.trigsCompletedFor(
-              res,
-              this.triggers,
-            );
-            if (numberOfTrigs > numberOfTrigs) {
-              res = q;
-            }
-          } else {
-            res = q;
-          }
+          res = q;
         }
       }
     }
