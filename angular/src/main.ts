@@ -29,7 +29,7 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideZoneChangeDetection(),importProvidersFrom(
+    provideZoneChangeDetection(), importProvidersFrom(
       BrowserModule,
       MatButtonModule,
       MatDialogModule,
@@ -45,7 +45,6 @@ bootstrapApplication(AppComponent, {
       MatInputModule,
     ),
     DataService,
-    provideHttpClient(withInterceptorsFromDi()),
-    provideAnimations(),
+    provideHttpClient(withInterceptorsFromDi())
   ],
 }).catch((err) => console.error(err));
