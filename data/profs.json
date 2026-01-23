@@ -1,13 +1,13 @@
 [
   {
     "nom": "Azze-Eddine Akkouche",
-    "bureau": "E-211",
+    "bureau": "E-214",
     "courriel": "azze-eddine.akkouche",
     "image": "aa.jpg"
   },
   {
     "nom": "Bernard Tremblay",
-    "bureau": "E-214",
+    "bureau": "E-209",
     "courriel": "bernard.tremblay",
     "image": "bt.jpg"
   },
@@ -51,7 +51,7 @@
   },
   {
     "nom": "Joris Deguet",
-    "bureau": "C-126",
+    "bureau": "E-211",
     "courriel": "joris.deguet",
     "image": "jo.JPG",
     "lienVideo": "R-YbYMqB_LI"
@@ -75,7 +75,7 @@
   },
   {
     "nom": "Valérie Turgeon",
-    "bureau": "E-213",
+    "bureau": "E-210",
     "courriel": "valerie.turgeon",
     "image": "vt.png",
     "lienVideo": "HUZU1aHCJxM"
@@ -104,7 +104,7 @@
   },
   {
     "nom": "Maxime Pelletier",
-    "bureau": "A-241",
+    "bureau": "C-126",
     "courriel": "maxime.pelletier",
     "image": "mp.png"
   },
@@ -116,13 +116,13 @@
   },
   {
     "nom": "Achraf Moussaid",
-    "bureau": "E-211",
+    "bureau": "E-213",
     "courriel": "achraf.moussaid",
     "image": "achraf.jpg"
   },
   {
     "nom": "Pierre-Olivier Brillant",
-    "bureau": "C-243",
+    "bureau": "E-211",
     "courriel": "po.brillant",
     "extension": "2575",
     "lienVideo": "svHKgQrzkI8",
@@ -137,13 +137,13 @@
   },
   {
     "nom": "Mathieu Briau",
-    "bureau": "E-252",
+    "bureau": "E-211",
     "courriel": "mathieu.briau",
     "image": "mb.jpeg"
   },
   {
     "nom": "Pierre-Paul Gallant",
-    "bureau": "E-211",
+    "bureau": "E-213",
     "courriel": "pierre-paul.gallant",
     "image": "ppg.png"
   },
@@ -154,7 +154,7 @@
   },
   {
     "nom": "Gaudreault Gabriel",
-    "bureau": "E-252",
+    "bureau": "E-209",
     "courriel": "gabriel.gaudreault",
     "image": "gg.png"
   },
@@ -187,7 +187,7 @@
   },
   {
     "nom": "David Gagné-Leroux",
-    "bureau": "E-213",
+    "bureau": "E-252",
     "courriel": "david.gagne-leroux",
     "image": "dgl_photo.jpg"
   },
@@ -220,6 +220,12 @@
   },
   {
     "nom": "Victor Delia",
-    "courriel": "victor.delia"
+    "courriel": "victor.delia",
+    "bureau": "E-209",
+  },
+  {
+    "nom": "Jimmy Beaubien",
+    "courriel": "jimmy.beaubien",
+    "bureau": "E-213",
   }
 ]
