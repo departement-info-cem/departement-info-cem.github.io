@@ -25,7 +25,7 @@
   },
   {
     "nom": "Introduction à la programmation",
-    "no": "420-1N6",
+    "no": "420-1P6",
     "session": 1,
     "sessionDecBac": 1,
     "bac": false,
@@ -80,6 +80,7 @@
       "fab fa-git",
       "fas fa-hashtag"
     ],
+    "url": "https://info.cegepmontpetit.ca/2P6/",
     "heures": 90
   },
   {
