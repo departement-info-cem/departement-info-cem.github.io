@@ -13,14 +13,14 @@
           <div class="card-header">Diplôme d'études collégiales</div>
           <div class="card-body">
             <h5 class="card-title">Technique en informatique</h5>
-            <p class="card-text">En 3 ans, tu vas devenir un pro de l'info.</p>
-            <p>Choisis prog ou réseau :</p>
+            <p class="card-text">En 3 ans, tu vas devenir un pro de l'informatique</p>
+            <p>Choisis dev ou infra :</p>
             <button class="btn btn-primary" (click)="changeProfile('prog')">
-              Prog.
+              Dev.
             </button>
             &nbsp;
             <button class="btn btn-info" (click)="changeProfile('reseau')">
-              Réseau
+              Infra
             </button>
 
             (les cours en blanc sont communs)
@@ -34,8 +34,8 @@
           <div class="card-header">Info de gestion</div>
           <div class="card-body">
             <p>
-              Programmer des applications web avec ASP.Net et Angular
-              <i class="fab fa-angular"></i> et mobiles Android
+              Développer des applications web avec ASP.Net et React
+              <i class="fab fa-react"></i> et mobiles Android
               <mat-icon>adb</mat-icon>.
             </p>
             <p>
@@ -55,10 +55,10 @@
       @if (profil === "reseau") {
       <div class="col-md-8">
         <div class="card text-light bg-info mb-3">
-          <div class="card-header">Gestion des réseaux</div>
+          <div class="card-header">Administration d'infrastructure TI</div>
           <div class="card-body">
             <p>
-              Mettre en place des réseaux pour une compagnie, un LAN party
+              Mettre en place des réseaux et infras pour une compagnie, un LAN party
               <i class="fas fa-network-wired"></i>, des serveurs de jeu en
               ligne.
             </p>

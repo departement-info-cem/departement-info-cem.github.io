@@ -84,7 +84,7 @@
     "heures": 90
   },
   {
-    "nom": "Programmation en TI",
+    "nom": "Programmation objet en TI",
     "no": "420-2T6",
     "session": 2,
     "profil": "reseau",
@@ -96,8 +96,8 @@
     "heures": 90
   },
   {
-    "nom": "Prog. Web serveur",
-    "no": "420-2W5",
+    "nom": "Programmation Web serveur",
+    "no": "420-2W6",
     "profil": "prog",
     "session": 2,
     "sessionDecBac": 2,
@@ -106,7 +106,7 @@
       "fab fa-html5",
       "fas fa-exchange-alt"
     ],
-    "heures": 75
+    "heures": 90
   },
   {
     "nom": "Serveurs intranet",
@@ -156,7 +156,7 @@
     "heures": 75
   },
   {
-    "nom": "Prog. Web transactionnelle",
+    "nom": "Programmation web transactionnelle",
     "profil": "prog",
     "no": "420-3W6",
     "session": 3,
@@ -254,21 +254,21 @@
     "heures": 90
   },
   {
-    "nom": "Prog. Web orientée services",
+    "nom": "Programmation web orientée services",
     "no": "420-4W6",
     "profil": "prog",
     "session": 4,
     "sessionDecBac": 4,
     "bac": false,
     "icons": [
-      "fab fa-angular"
+      "fab fa-react"
     ],
     "url": "https://info.cegepmontpetit.ca/4W6-WebServices/",
     "heures": 90
   },
   {
     "nom": "Architecture et cybersécurité",
-    "no": "420-4U5",
+    "no": "420-4S5",
     "profil": "reseau",
     "session": 4,
     "bac": false,
@@ -313,17 +313,17 @@
   },
   {
     "nom": "Professions et soutien aux utilisateurs",
-    "no": "420-5F4",
+    "no": "420-5F3",
     "session": 5,
     "bac": false,
     "icons": [
       "fas fa-user-tie"
     ],
-    "heures": 60
+    "heures": 45
   },
   {
     "nom": "Design d'interface",
-    "no": "582-905",
+    "no": "582-914",
     "session": 5,
     "profil": "prog",
     "sessionDecBac": 4,
@@ -332,7 +332,7 @@
       "fas fa-palette",
       "far fa-object-group"
     ],
-    "heures": 75
+    "heures": 60
   },
   {
     "nom": "Analyse et conception d'applications",
@@ -366,7 +366,7 @@
     "sessionDecBac": 5,
     "bac": false,
     "icons": [
-      "fab fa-angular",
+      "fab fa-react",
       "fas fa-hashtag"
     ],
     "url": "https://departement-info-cem.github.io/5W5-Web-Avancee/",
@@ -407,14 +407,14 @@
   },
   {
     "nom": "Serveurs de base de données",
-    "no": "420-5D5",
+    "no": "420-5D3",
     "profil": "reseau",
     "session": 5,
     "bac": false,
     "icons": [
       "fas fa-database"
     ],
-    "heures": 75
+    "heures": 45
   },
   {
     "nom": "Stage",
@@ -423,8 +423,7 @@
     "bac": false,
     "icons": [
       "fas fa-user-tie"
-    ],
-    "heures": 225
+    ]
   },
   {
     "nom": "Projet en TI",
@@ -435,12 +434,11 @@
     "icons": [
       "fas fa-users",
       "fas fa-people-carry"
-    ],
-    "heures": 120
+    ]
   },
   {
     "nom": "Projet en développement d'applications",
-    "no": "420-6P8",
+    "no": "420-6P5",
     "profil": "prog",
     "session": 6,
     "bac": false,
@@ -448,8 +446,7 @@
       "fas fa-users",
       "fas fa-people-carry"
     ],
-    "url": "https://info.cegepmontpetit.ca/projet-prog/",
-    "heures": 120
+    "url": "https://info.cegepmontpetit.ca/projet-prog/"
   },
   {
     "nom": "Compléments de mathématiques (intensif)",
