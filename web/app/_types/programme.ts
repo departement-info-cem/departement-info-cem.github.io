@@ -10,6 +10,8 @@ export const coursSchema = z
     ecole: z.string().optional(),
     tags: z.array(z.string()).optional(),
     url: z.url().optional(),
+    /** fiche officielle du cours dans un autre établissement (UdeS) */
+    fiche: z.url().optional(),
     description: z.string().optional(),
     /** anciens numéros du cours, avec l'ancien titre s'il a changé avec le programme */
     alias: z.array(z.union([z.string().transform((no) => ({ no, nom: undefined as string | undefined })), z.object({ no: z.string(), nom: z.string().optional() }).strict()])).optional(),
@@ -27,6 +29,8 @@ export const coursHorsCatalogueSchema = z
     ecole: z.string().optional(),
     tags: z.array(z.string()).optional(),
     url: z.url().optional(),
+    /** fiche officielle du cours dans un autre établissement (UdeS) */
+    fiche: z.url().optional(),
     description: z.string().optional(),
   })
   .strict();
@@ -69,6 +73,7 @@ export type CoursAffiche = {
   ecole?: string;
   tags: string[];
   url?: string;
+  fiche?: string;
   description?: string;
   /** cours donné par le département d'informatique (420-...) */
   departement: boolean;

@@ -3,6 +3,7 @@
 #   no: numéro officiel (ex. 420-1P6-EM)        nom: titre du cours
 #   heures: nombre d'heures (optionnel)        url: site du cours (optionnel)
 #   tags: technos/thèmes pour les filtres       ecole: UdeS si le cours est donné par l'Université de Sherbrooke
+#   fiche: fiche officielle du cours (ex. sur le site de l'UdeS), affichée dans la grille mais pas dans « Sites des cours »
 #   alias: autres numéros acceptés (ex. ancien numéro utilisé dans un horaire)
 - no: 420-1B3-EM
   nom: Bureautique
@@ -224,36 +225,43 @@
 - no: MAT 099i
   nom: Compléments de mathématiques (intensif)
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/MAT099
   tags:
     - maths
 - no: IFT 203
   nom: Informatique et société
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT203
   tags:
     - pro
 - no: IFT 209
   nom: Programmation système
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT209
   tags:
     - prog
 - no: IFT 339
-  nom: Structure de données
+  nom: Structures de données
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT339
   tags:
     - algo
 - no: MAT 115
   nom: Logique et mathématiques discrètes
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/MAT115
   tags:
     - maths
-- no: IFT 193
+- no: MAT 193
   nom: Algèbre linéaire
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/MAT193
   tags:
     - maths
 - no: MAT 099f
   nom: Compléments de mathématiques (suite)
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/MAT099
   tags:
     - maths
 - no: 420-6GF-EM
@@ -263,27 +271,32 @@
 - no: IFT 436
   nom: Algorithmes et structures de données
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT436
   tags:
     - algo
 - no: IFT 585
   nom: Télématique
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT585
   tags:
     - reseau
 - no: IFT 606
   nom: Sécurité et cryptographie
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT606
   tags:
     - securite
 - no: IGL 601
   nom: Techniques et outils de développement
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/IGL601
   tags:
     - prog
     - algo
 - no: IFT 595
-  nom: Projet informatique 1
+  nom: Projet d'intégration en informatique
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT595
   tags:
     - pro
 - no: 420-6P3-EM
@@ -291,41 +304,49 @@
   tags:
     - pro
 - no: IFT 232
-  nom: Méthode de conception orientée objet
+  nom: Méthodes de conception orientée objet
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT232
   tags:
     - algo
 - no: IFT 313
   nom: Introduction aux langages formels
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT313
   tags:
     - prog
 - no: IFT 615
   nom: Intelligence artificielle
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT615
   tags:
     - ia
 - no: IMN 428
   nom: Infographie
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/IMN428
   tags:
     - graphisme
 - no: STT 418
   nom: Statistique appliquée
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/STT418
   tags:
     - maths
 - no: IFT 320
   nom: Systèmes d'exploitation
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT320
   tags:
     - os
 - no: IFT 359
   nom: Programmation fonctionnelle
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT359
 - no: IFT 630
   nom: Processus concurrents et parallélisme
   ecole: UdeS
+  fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT630
   tags:
     - algo
 - no: 420-SN1-RE

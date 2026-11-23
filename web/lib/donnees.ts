@@ -74,6 +74,7 @@ function afficher(c: Partial<Cours> & { nom: string }): CoursAffiche {
     ecole: c.ecole,
     tags: c.tags ?? [],
     url: c.url,
+    fiche: c.fiche,
     description: c.description,
     departement: Boolean(c.no?.startsWith("420-")),
   };

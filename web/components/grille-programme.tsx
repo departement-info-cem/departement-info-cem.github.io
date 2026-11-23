@@ -1,7 +1,7 @@
 "use client";
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ExternalLink, Globe } from "lucide-react";
+import { ExternalLink, FileText, Globe } from "lucide-react";
 import type { CoursAffiche, Programme } from "@/app/_types/programme";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { IconeTag, LIBELLES_TAGS } from "@/components/icone-tag";
@@ -11,6 +11,8 @@ export type ProfsParCours = Record<string, { id: string; nom: string }[]>;
 
 function CarteCours({ c, attenue, commun, onClick }: { c: CoursAffiche; attenue: boolean; commun?: boolean; onClick: () => void }) {
   const ecole = c.ecole === "UdeS";
+  // Le site du cours, sinon sa fiche officielle (UdeS)
+  const lien = c.url ?? c.fiche;
   return (
     <div className="relative">
     <button
@@ -21,7 +23,7 @@ function CarteCours({ c, attenue, commun, onClick }: { c: CoursAffiche; attenue:
     >
       <div className="flex items-start justify-between gap-2">
         <span className="text-sm font-semibold leading-snug group-hover:text-primary">{c.nom}</span>
-        {c.url && <span className="h-5 w-14 shrink-0" aria-hidden />}
+        {lien && <span className="h-5 w-14 shrink-0" aria-hidden />}
       </div>
       <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
         {c.no && <span className="font-mono">{c.no}</span>}
@@ -35,15 +37,15 @@ function CarteCours({ c, attenue, commun, onClick }: { c: CoursAffiche; attenue:
         </span>
       </div>
     </button>
-      {c.url && (
+      {lien && (
         <a
-          href={c.url}
+          href={lien}
           target="_blank"
           rel="noreferrer"
-          aria-label={`Site web du cours ${c.nom}`}
+          aria-label={`${c.url ? "Site web" : "Fiche"} du cours ${c.nom}`}
           className={`absolute right-2 top-2 flex items-center gap-1 rounded bg-primary px-2 py-0.5 text-xs font-semibold text-primary-foreground transition hover:brightness-110 ${attenue ? "opacity-25" : ""}`}
         >
-          <Globe className="size-3" /> Site
+          {c.url ? <Globe className="size-3" /> : <FileText className="size-3" />} {c.url ? "Site" : "Fiche"}
         </a>
       )}
     </div>
@@ -141,6 +143,11 @@ export function GrilleProgramme({
         <span className="flex items-center gap-1">
           <Globe className="size-3 text-primary" /> Bouton « Site » : ouvre le site web du cours
         </span>
+        {tous.some((c) => c.fiche) && (
+          <span className="flex items-center gap-1">
+            <FileText className="size-3 text-primary" /> Bouton « Fiche » : ouvre la fiche du cours à l&apos;Université de Sherbrooke
+          </span>
+        )}
       </div>
 
       <Dialog open={choisi !== null} onOpenChange={(o) => !o && setChoisi(null)}>
@@ -178,6 +185,11 @@ export function GrilleProgramme({
           {choisi?.url && (
             <a href={choisi.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline">
               Site du cours <ExternalLink className="size-4" />
+            </a>
+          )}
+          {choisi?.fiche && (
+            <a href={choisi.fiche} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline">
+              Fiche du cours (Université de Sherbrooke) <ExternalLink className="size-4" />
             </a>
           )}
         </DialogContent>
