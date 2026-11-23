@@ -1,0 +1,12 @@
+# Fiche de Hector Bustillo — affichée sur https://info.cegepmontpetit.ca/react/hector.bustillo
+# Mode d'emploi : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+# Après « Commit changes », le site se met à jour en 2-3 minutes (onglet Actions sur GitHub).
+
+nom: "Hector Bustillo"
+courriel: hector.bustillo  # sans @cegepmontpetit.ca
+bureau: "E-214"
+photo: hb.png  # fichier dans data/photos/
+# video: abc123XYZ      # identifiant d'une vidéo YouTube
+# github: mon-pseudo
+# linkedin: mon-profil
+

@@ -1,0 +1,48 @@
+# Grille de cours : DEC Réseau
+# Les cours sont des numéros du catalogue data/cours.yaml, ou un objet { nom, heures } pour un cours hors catalogue.
+nom: DEC technique en informatique — Administration d’infrastructure TI
+court: DEC Réseau
+type: dec
+code: 420.B0
+famille: dec-technique
+duree: 3 ans (6 sessions)
+ordre: 2
+resume: "Mettre en place réseaux et infrastructures : Cisco, serveurs Windows et Linux, scripts, et une infra impossible à pirater."
+sessions:
+  - titre: Session 1
+    cours:
+      - 420-1B3-EM
+      - 420-1X6-EM
+      - 420-1P6-EM
+      - 420-1C5-EM
+  - titre: Session 2
+    cours:
+      - 201-924-EM
+      - 420-2D5-EM
+      - 420-2T6-EM
+      - 420-2X5-EM
+  - titre: Session 3
+    cours:
+      - 350-944-EM
+      - 420-3S4-EM
+      - 420-3T5-EM
+      - 420-3C5-EM
+      - 420-3X6-EM
+  - titre: Session 4
+    cours:
+      - 420-4G3-EM
+      - 420-4S5-EM
+      - 420-4L4-EM
+      - 420-4C5-EM
+      - 420-4X6-EM
+  - titre: Session 5
+    cours:
+      - 420-5F3-EM
+      - 420-5S5-EM
+      - 420-5U6-EM
+      - 420-5X6-EM
+      - 420-5D3-EM
+  - titre: Session 6
+    cours:
+      - 420-6GE-EM
+      - 420-6X5-EM

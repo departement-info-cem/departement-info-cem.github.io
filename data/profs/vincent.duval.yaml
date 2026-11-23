@@ -1,0 +1,12 @@
+# Fiche de Vincent Duval — affichée sur https://info.cegepmontpetit.ca/react/vincent.duval
+# Mode d'emploi : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+# Après « Commit changes », le site se met à jour en 2-3 minutes (onglet Actions sur GitHub).
+
+nom: "Vincent Duval"
+courriel: vincent.duval  # sans @cegepmontpetit.ca
+bureau: "E-210"
+photo: vd.jpg  # fichier dans data/photos/
+# video: abc123XYZ      # identifiant d'une vidéo YouTube
+# github: mon-pseudo
+# linkedin: mon-profil
+

@@ -1,0 +1,12 @@
+# Fiche de Jean-François Paradis — affichée sur https://info.cegepmontpetit.ca/react/jf.paradis
+# Mode d'emploi : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+# Après « Commit changes », le site se met à jour en 2-3 minutes (onglet Actions sur GitHub).
+
+nom: "Jean-François Paradis"
+courriel: jf.paradis  # sans @cegepmontpetit.ca
+bureau: "E-213"
+photo: jfp.png  # fichier dans data/photos/
+# video: abc123XYZ      # identifiant d'une vidéo YouTube
+github: paradisjf
+linkedin: jean-francois-paradis-49ab782
+

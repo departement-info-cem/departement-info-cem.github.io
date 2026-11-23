@@ -1,0 +1,62 @@
+"use client";
+import { ExternalLink, Search } from "lucide-react";
+import type { SiteCours } from "@/lib/donnees";
+import { Input } from "@/components/ui/input";
+import { useTwoWayBinding } from "@/app/_hooks/use-two-way-binding";
+import { useStockageLocal } from "@/app/_hooks/use-stockage-local";
+import { simplifier } from "@/lib/texte";
+
+// Accès direct aux sites web des cours. Le filtre choisi (DEC Dév, DEC Réseau...) est retenu pour la prochaine visite.
+export function ListeSites({ sites, filtres }: { sites: SiteCours[]; filtres: { id: string; texte: string }[] }) {
+  const recherche = useTwoWayBinding("");
+  const [filtre, setFiltre] = useStockageLocal<string | null>("filtre-sites", null);
+
+  const mots = simplifier(recherche.value).split(/\s+/).filter(Boolean);
+  const visibles = sites
+    .filter((s) => !filtre || s.places.some((p) => p.id === filtre))
+    .filter((s) => mots.every((m) => simplifier(`${s.no} ${s.nom}`).includes(m)))
+    .map((s) => ({ s, place: s.places.find((p) => p.id === filtre) ?? s.places[0] }));
+  const groupes = [...new Set(visibles.map((v) => v.place?.session ?? "Autres"))].sort((a, b) => Number(a === "Autres" || a === "Cours de service") - Number(b === "Autres" || b === "Cours de service") || a.localeCompare(b, "fr", { numeric: true }));
+
+  return (
+    <div>
+      <div className="mb-4 flex flex-wrap items-center gap-2">
+        <div className="relative w-full sm:w-64">
+          <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+          <Input {...recherche} placeholder="Numéro ou nom du cours" className="pl-9" aria-label="Rechercher le site d'un cours" />
+        </div>
+        {[{ id: null, texte: "Tous" }, ...filtres].map((f) => (
+          <button
+            key={f.texte}
+            onClick={() => setFiltre(f.id)}
+            aria-pressed={filtre === f.id}
+            className={`rounded-full border px-3 py-1 text-sm font-medium ${filtre === f.id ? "border-primary bg-primary text-primary-foreground" : "bg-card hover:bg-accent"}`}
+          >
+            {f.texte}
+          </button>
+        ))}
+      </div>
+      {visibles.length === 0 && <p className="text-muted-foreground">Aucun site de cours ne correspond.</p>}
+      <div className="grid gap-x-6 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
+        {groupes.map((g) => (
+          <section key={g}>
+            <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-muted-foreground">{g}</h3>
+            <ul className="space-y-1.5">
+              {visibles
+                .filter((v) => (v.place?.session ?? "Autres") === g)
+                .map(({ s }) => (
+                  <li key={s.no}>
+                    <a href={s.url} target="_blank" rel="noreferrer" className="group flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-sm transition hover:border-primary hover:shadow-sm">
+                      <span className="w-20 shrink-0 font-mono text-xs text-primary">{s.no.replace(/^420-/, "").replace(/-(EM|RE)$/, "")}</span>
+                      <span className="flex-1 font-medium group-hover:text-primary">{s.nom}</span>
+                      <ExternalLink className="size-3.5 shrink-0 text-muted-foreground" />
+                    </a>
+                  </li>
+                ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+    </div>
+  );
+}

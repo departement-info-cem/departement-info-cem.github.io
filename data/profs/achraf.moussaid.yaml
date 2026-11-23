@@ -1,0 +1,39 @@
+# Fiche de Achraf Moussaid — affichée sur https://info.cegepmontpetit.ca/react/achraf.moussaid
+# Mode d'emploi : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+# Après « Commit changes », le site se met à jour en 2-3 minutes (onglet Actions sur GitHub).
+
+nom: "Achraf Moussaid"
+courriel: achraf.moussaid  # sans @cegepmontpetit.ca
+bureau: "E-213"
+photo: achraf.jpg  # fichier dans data/photos/
+# video: abc123XYZ      # identifiant d'une vidéo YouTube
+# github: mon-pseudo
+# linkedin: mon-profil
+
+cours: [420-1X6-EM, 420-983-EM]   # numéros des cours que tu donnes cette session
+session: A2026   # session de l'horaire ci-dessous (A = automne, H = hiver)
+
+# ---------- Horaire de la semaine ----------
+# PRÉREMPLI à partir de l'horaire officiel des laboratoires (PDF RPHOR020 du 2026-08-19) : il peut manquer des cours
+# donnés ailleurs. Corrige, ajoute tes disponibilités, puis enlève la ligne « prerempli: true ».
+# type : cours, dispo, centre-aide, reunion ou autre
+# jour : lundi ... vendredi       heures : "08:00" (entre guillemets)
+horaire:
+  prerempli: true
+  debut: "08:00"
+  fin: "18:00"
+  plages:
+    - { jour: lundi, debut: "09:00", fin: "12:00", type: cours, cours: 420-1X6-EM, groupe: 1020, local: D-0602 }
+    - { jour: lundi, debut: "15:00", fin: "18:00", type: cours, cours: 420-1X6-EM, groupe: 1010, local: D-0605 }
+    - { jour: mercredi, debut: "09:00", fin: "12:00", type: cours, cours: 420-983-EM, groupe: 1080, local: D-0008 }
+    - { jour: mercredi, debut: "14:00", fin: "17:00", type: cours, cours: 420-983-EM, groupe: 1090, local: D-0008 }
+    - { jour: jeudi, debut: "09:00", fin: "12:00", type: cours, cours: 420-1X6-EM, groupe: 1010, local: D-0602 }
+    - { jour: jeudi, debut: "15:00", fin: "18:00", type: cours, cours: 420-1X6-EM, groupe: 1020, local: D-0602 }
+#    - { jour: mardi, debut: "13:00", fin: "15:00", type: dispo, local: E-2xx }   # exemple de disponibilité
+
+# ---------- Calendrier : tes dates à toi (remises, examens, absences...) ----------
+# Les congés et journées pédagogiques du cégep sont ajoutés automatiquement.
+# type : remise, examen, cours, absence, deplacement, activite ou autre
+calendrier: []
+#  - { date: 2026-12-07, titre: Remise du TP3, cours: 420-1X6-EM, type: remise }
+#  - { date: 2026-12-01, au: 2026-12-02, titre: Absent (colloque), type: absence }

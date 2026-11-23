@@ -1,0 +1,33 @@
+# Logiciels gratuits pour les étudiants du département (page /logiciels).
+# identifiant : comment se connecter ; lien : où s'inscrire ou télécharger.
+- nom: GitHub Student Developer Pack
+  identifiant: ton courriel matricule@cegepmontpetit.ca
+  description: Le pack étudiant de GitHub Education — GitHub Pro, GitHub Copilot gratuit, et des dizaines d'outils pros offerts (hébergement, domaines, IDE...). On utilise GitHub dans la plupart des cours pour gérer le code source.
+  lien: https://education.github.com/pack
+  bouton: Obtenir le pack étudiant
+  vedette: true
+- nom: JetBrains (IntelliJ, PyCharm, WebStorm, Rider...)
+  identifiant: matricule@cegepmontpetit.ca
+  description: Toutes les versions « Ultimate » des IDE JetBrains, gratuites pendant ta technique. Utilisés pour Java, Python, le web, Android...
+  lien: https://www.jetbrains.com/student/
+  bouton: Licence étudiante JetBrains
+- nom: Windows et Visual Studio (Azure Dev Tools for Teaching)
+  identifiant: matricule@cegepmontpetit.ca
+  description: Visual Studio, Windows et d'autres logiciels Microsoft pour le développement .NET et les cours du début de la technique.
+  lien: https://portal.azure.com/#blade/Microsoft_Azure_Education/EducationMenuBlade/software
+  bouton: Portail Azure Education
+- nom: Office 365
+  identifiant: matricule@cegepmontpetit.ca
+  description: Ton compte Office 365 du cégep te permet d'installer Word, Excel, PowerPoint... sur ton ordi à la maison.
+  lien: https://go.microsoft.com/fwlink/?linkid=2264705&clcid=0xc0c&culture=fr-ca&country=ca
+  bouton: Télécharger Office
+- nom: VMware Workstation Pro
+  identifiant: compte Broadcom (gratuit)
+  description: Pour rouler des machines virtuelles à la maison. Utile dans les cours de systèmes d'exploitation et de réseau.
+  lien: https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20Workstation%20Pro&freeDownloads=true
+  bouton: Télécharger VMware
+- nom: MobaXterm
+  identifiant: aucun
+  description: Un terminal pour Windows qui permet de se connecter à des serveurs distants (SSH, RDP, VNC...).
+  lien: https://mobaxterm.mobatek.net/
+  bouton: Télécharger MobaXterm

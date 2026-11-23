@@ -1,0 +1,37 @@
+# Cours donnés par le département d'informatique dans d'autres programmes du cégep.
+# Les numéros viennent de data/cours.yaml. Source : grilles publiées sur cegepmontpetit.ca (novembre 2026).
+- programme: Sciences de la nature
+  court: SN
+  lien: https://www.cegepmontpetit.ca/programmes/sciences-nature
+  description: La programmation scientifique en Python, pour résoudre des problèmes de sciences avec du code.
+  cours:
+    - no: 420-SN1-RE
+      quand:
+        - "Session 3 : profil Sciences pures et appliquées"
+        - "Session 3 : profil Découverte"
+        - "Session 4 : profil Sciences de la santé"
+    - no: 420-4A4-EM
+      quand:
+        - "Session 4 (cours au choix) : profils Sciences pures et appliquées, et Découverte"
+
+- programme: Techniques d'intégration multimédia
+  court: TIM
+  lien: https://www.cegepmontpetit.ca/programmes/integration-mulimedia
+  cours:
+    - no: 420-905-EM
+      quand: ["Session 1"]
+    - no: 420-964-EM
+      quand: ["Session 4"]
+
+- programme: Techniques de l'administration et de la gestion
+  court: TAG
+  lien: https://www.cegepmontpetit.ca/programmes/administration-gestion
+  cours:
+    - no: 420-983-EM
+      quand: ["Session 1 (les trois spécialisations)"]
+
+- programme: Cours à option (hors programme d'informatique)
+  court: Option
+  description: Aucune expérience en informatique, HTML ou CSS nécessaire.
+  cours:
+    - no: 420-Z03-EM

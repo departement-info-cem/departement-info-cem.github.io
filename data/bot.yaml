@@ -1,0 +1,162 @@
+# Bot d'orientation : « Est-ce que l'informatique est pour toi ? »
+# C'est un arbre de décision simple :
+#   - chaque question a des choix ;
+#   - un choix mène soit à une autre question (suivant: <id de question>),
+#     soit à un résultat (resultat: <id de résultat>).
+# Les textes sur l'IA (questions ia-*) sont à valider par le département.
+
+depart: interet
+
+questions:
+  interet:
+    question: "L'informatique, ça t'intéresse ?"
+    choix:
+      - { texte: "Oui, carrément !", suivant: style }
+      - { texte: "Je ne sais pas trop, je découvre", resultat: decouvrir }
+      - { texte: "Non, pas vraiment", resultat: pas-info }
+
+  style:
+    question: "Tu te sens plutôt…"
+    choix:
+      - { texte: "Logique : j'aime résoudre des problèmes", suivant: passion }
+      - { texte: "Créatif : dessin, vidéo, animation", resultat: tim }
+      - { texte: "Manuel : démonter des ordis, souder des circuits", resultat: electronique }
+      - { texte: "Scientifique : maths, physique, chimie", suivant: sciences }
+
+  sciences:
+    question: "Tu veux surtout…"
+    choix:
+      - { texte: "Faire de la programmation tous les jours", suivant: passion }
+      - { texte: "Garder toutes les portes ouvertes en sciences (médecine, génie...)", resultat: sciences-nature }
+
+  passion:
+    question: "Qu'est-ce qui t'allume le plus ?"
+    choix:
+      - { texte: "Créer des applications web ou mobiles", suivant: universite }
+      - { texte: "Les serveurs, les réseaux, les datacenters", resultat: dec-reseau }
+      - { texte: "La cybersécurité, les hackers", resultat: cyber }
+      - { texte: "L'intelligence artificielle", suivant: ia-quoi }
+      - { texte: "Les jeux vidéo", resultat: jeux }
+      - { texte: "Aider les gens avec leurs problèmes d'ordi", resultat: support }
+
+  universite:
+    question: "Tu te vois aller à l'université ?"
+    choix:
+      - { texte: "Oui, je veux un bac", resultat: dec-bac }
+      - { texte: "Non, je veux travailler après le cégep", resultat: dec-prog }
+      - { texte: "Peut-être, je verrai", resultat: dec-prog-peut-etre }
+
+  ia-quoi:
+    question: "Avec l'IA, qu'est-ce qui t'intéresse ?"
+    aide: "Il n'y a pas de mauvaise réponse."
+    choix:
+      - { texte: "Comprendre comment ça marche (maths, réseaux de neurones)", resultat: ia-recherche }
+      - { texte: "Utiliser l'IA pour créer des applications", resultat: ia-dev }
+      - { texte: "J'ai peur que l'IA remplace les programmeurs", suivant: ia-peur }
+
+  ia-peur:
+    question: "Selon toi, dans 5 ans, l'IA va…"
+    choix:
+      - { texte: "Écrire tout le code toute seule", resultat: ia-emploi }
+      - { texte: "Aider les programmeurs à aller plus vite", resultat: ia-dev }
+      - { texte: "Je n'en ai aucune idée", resultat: ia-emploi }
+
+resultats:
+  dec-prog:
+    titre: "DEC technique, profil programmation"
+    compatibilite: 100
+    texte: "Développer des apps, c'est ici. En 3 ans, tu programmes des applications web et mobiles et tu es prêt pour le marché du travail."
+    liens:
+      - { texte: "Voir la grille DEC Dév", href: /programmes/dec-prog }
+  dec-prog-peut-etre:
+    titre: "DEC technique, profil programmation"
+    compatibilite: 100
+    texte: "Commence par la technique : après le DEC tu peux travailler tout de suite, ou continuer à l'université avec des cours crédités. Et si tu es sûr de vouloir un bac, regarde le DEC-BAC."
+    liens:
+      - { texte: "Grille DEC Dév", href: /programmes/dec-prog }
+      - { texte: "Grille DEC-BAC", href: /programmes/dec-bac }
+  dec-bac:
+    titre: "DEC-BAC intégré en informatique"
+    compatibilite: 100
+    texte: "Un DEC du cégep et un bac de l'Université de Sherbrooke en 5 ans. Tu peux aussi faire la technique puis aller à l'université."
+    liens:
+      - { texte: "Voir la grille DEC-BAC", href: /programmes/dec-bac }
+      - { texte: "Comparer DEC Dév et DEC-BAC", href: /programmes/comparer/?a=dec-prog&b=dec-bac }
+  dec-reseau:
+    titre: "DEC technique, profil réseau"
+    compatibilite: 100
+    texte: "Le réseau, c'est ici : serveurs Windows et Linux, Cisco, virtualisation, infonuagique et scripts."
+    liens:
+      - { texte: "Voir la grille DEC Réseau", href: /programmes/dec-reseau }
+  cyber:
+    titre: "La cybersécurité, dans les deux profils"
+    compatibilite: 100
+    texte: "On fait de la cybersécurité dans les deux profils du DEC. La première année est commune : tu as le temps de te faire une idée avant de choisir."
+    liens:
+      - { texte: "DEC Réseau", href: /programmes/dec-reseau }
+      - { texte: "DEC Dév", href: /programmes/dec-prog }
+  support:
+    titre: "DEC technique, profil réseau"
+    compatibilite: 100
+    texte: "Le support technique, c'est souvent le début d'une carrière en réseau. La technique profil réseau est faite pour toi."
+    liens:
+      - { texte: "Voir la grille DEC Réseau", href: /programmes/dec-reseau }
+  jeux:
+    titre: "La technique, puis l'université"
+    compatibilite: 70
+    texte: "Pour le jeu vidéo, il faut souvent aller à l'université et programmer des jeux pendant ses études. Après la technique, tu arrives au bac avec beaucoup plus d'expérience de programmation qu'en préuniversitaire."
+    liens:
+      - { texte: "Grille DEC Dév", href: /programmes/dec-prog }
+      - { texte: "Grille DEC-BAC", href: /programmes/dec-bac }
+  ia-recherche:
+    titre: "L'IA, ça se poursuit à l'université"
+    compatibilite: 70
+    texte: "Pour concevoir des modèles d'IA, il faut un bac (et souvent une maîtrise) en informatique ou en maths. Deux chemins : la technique en informatique puis l'université (beaucoup de programmation), ou Sciences de la nature, où le département donne le cours au choix « Réseaux de neurones et sciences ». Le DEC-BAC comprend aussi un cours d'intelligence artificielle (IFT 615)."
+    liens:
+      - { texte: "Grille DEC-BAC", href: /programmes/dec-bac }
+      - { texte: "Le cours de programmation en Sciences de la nature", href: /cours-service }
+      - { texte: "FAQ sur l'IA", href: /faq/?categorie=IA }
+  ia-dev:
+    titre: "DEC technique, profil programmation"
+    compatibilite: 100
+    texte: "Les outils d'IA aident à programmer, mais il faut comprendre le code pour savoir quoi leur demander et vérifier ce qu'ils produisent. C'est exactement ce que tu apprends dans la technique."
+    liens:
+      - { texte: "Grille DEC Dév", href: /programmes/dec-prog }
+      - { texte: "FAQ sur l'IA", href: /faq/?categorie=IA }
+  ia-emploi:
+    titre: "Bonne question, voici notre avis"
+    compatibilite: 80
+    texte: "L'IA change le métier, comme les compilateurs, Internet et Stack Overflow l'ont fait avant elle. Les entreprises ont encore besoin de gens qui comprennent les systèmes, savent poser le bon problème et vérifier une solution. Viens voir notre FAQ sur l'IA."
+    liens:
+      - { texte: "FAQ sur l'IA", href: /faq/?categorie=IA }
+      - { texte: "Grille DEC Dév", href: /programmes/dec-prog }
+  decouvrir:
+    titre: "50-50 : ça vaut la peine d'essayer"
+    compatibilite: 50
+    texte: "Tu ne connais pas encore trop l'informatique. Regarde les cours des grilles pour te faire une idée, et viens aux portes ouvertes du cégep."
+    liens:
+      - { texte: "Toutes les grilles", href: /programmes }
+  pas-info:
+    titre: "0 % de compatibilité"
+    compatibilite: 0
+    texte: "Pas de problème ! Le cégep offre plein d'autres programmes."
+    liens:
+      - { texte: "Programmes du cégep", href: "https://www.cegepmontpetit.ca/programmes" }
+  tim:
+    titre: "10 % de compatibilité"
+    compatibilite: 10
+    texte: "Je te conseille la technique d'intégration multimédia (TIM) du cégep."
+    liens:
+      - { texte: "Programmes du cégep", href: "https://www.cegepmontpetit.ca/programmes" }
+  electronique:
+    titre: "10 % de compatibilité"
+    compatibilite: 10
+    texte: "Je te conseille la technique de génie électrique : électronique, télécoms... En informatique, on n'ouvre pas la boîte !"
+    liens:
+      - { texte: "Programmes du cégep", href: "https://www.cegepmontpetit.ca/programmes" }
+  sciences-nature:
+    titre: "Sciences de la nature"
+    compatibilite: 40
+    texte: "Sciences de la nature garde toutes les portes ouvertes. Tu y feras quand même de la programmation : le département y donne le cours 420-SN1 Programmation en sciences (Python)."
+    liens:
+      - { texte: "Le cours de programmation en Sciences de la nature", href: /cours-service }

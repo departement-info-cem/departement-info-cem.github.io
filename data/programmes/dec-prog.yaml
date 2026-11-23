@@ -1,0 +1,47 @@
+# Grille de cours : DEC Dév
+# Les cours sont des numéros du catalogue data/cours.yaml, ou un objet { nom, heures } pour un cours hors catalogue.
+nom: DEC technique en informatique — Développement d’applications
+court: DEC Dév
+type: dec
+code: 420.B0
+famille: dec-technique
+duree: 3 ans (6 sessions)
+ordre: 1
+resume: Développer des applications web et mobiles, utiliser le cloud, les bases de données, et sécuriser le tout contre les vilains hackeurs.
+sessions:
+  - titre: Session 1
+    cours:
+      - 420-1B3-EM
+      - 420-1X6-EM
+      - 420-1P6-EM
+      - 420-1C5-EM
+  - titre: Session 2
+    cours:
+      - 201-924-EM
+      - 420-2D5-EM
+      - 420-2P6-EM
+      - 420-2W6-EM
+  - titre: Session 3
+    cours:
+      - 350-944-EM
+      - 420-3S4-EM
+      - 420-3M5-EM
+      - 420-3W6-EM
+  - titre: Session 4
+    cours:
+      - 420-4G3-EM
+      - 420-4N4-EM
+      - 420-4D6-EM
+      - 420-4M6-EM
+      - 420-4W6-EM
+  - titre: Session 5
+    cours:
+      - 420-5F3-EM
+      - 582-914-EM
+      - 420-5Y5-EM
+      - 420-5M6-EM
+      - 420-5W6-EM
+  - titre: Session 6
+    cours:
+      - 420-6GE-EM
+      - 420-6P5-EM

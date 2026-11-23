@@ -1,0 +1,37 @@
+# Fiche de Jimmy Beaubien — affichée sur https://info.cegepmontpetit.ca/react/jimmy.beaubien
+# Mode d'emploi : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+# Après « Commit changes », le site se met à jour en 2-3 minutes (onglet Actions sur GitHub).
+
+nom: "Jimmy Beaubien"
+courriel: jimmy.beaubien  # sans @cegepmontpetit.ca
+bureau: "E-213"
+# photo: prenom.jpg     # ajoute ta photo dans data/photos/
+# video: abc123XYZ      # identifiant d'une vidéo YouTube
+# github: mon-pseudo
+# linkedin: mon-profil
+
+cours: [420-983-EM]   # numéros des cours que tu donnes cette session
+session: A2026   # session de l'horaire ci-dessous (A = automne, H = hiver)
+
+# ---------- Horaire de la semaine ----------
+# PRÉREMPLI à partir de l'horaire officiel des laboratoires (PDF RPHOR020 du 2026-08-19) : il peut manquer des cours
+# donnés ailleurs. Corrige, ajoute tes disponibilités, puis enlève la ligne « prerempli: true ».
+# type : cours, dispo, centre-aide, reunion ou autre
+# jour : lundi ... vendredi       heures : "08:00" (entre guillemets)
+horaire:
+  prerempli: true
+  debut: "08:00"
+  fin: "18:00"
+  plages:
+    - { jour: mardi, debut: "12:00", fin: "15:00", type: cours, cours: 420-983-EM, groupe: 1180, local: D-0008 }
+    - { jour: mardi, debut: "15:00", fin: "18:00", type: cours, cours: 420-983-EM, groupe: 1120, local: D-0008 }
+    - { jour: vendredi, debut: "12:00", fin: "15:00", type: cours, cours: 420-983-EM, groupe: 1170, local: D-0603 }
+    - { jour: vendredi, debut: "15:00", fin: "18:00", type: cours, cours: 420-983-EM, groupe: 1160, local: D-0603 }
+#    - { jour: mardi, debut: "13:00", fin: "15:00", type: dispo, local: E-2xx }   # exemple de disponibilité
+
+# ---------- Calendrier : tes dates à toi (remises, examens, absences...) ----------
+# Les congés et journées pédagogiques du cégep sont ajoutés automatiquement.
+# type : remise, examen, cours, absence, deplacement, activite ou autre
+calendrier: []
+#  - { date: 2026-12-07, titre: Remise du TP3, cours: 420-983-EM, type: remise }
+#  - { date: 2026-12-01, au: 2026-12-02, titre: Absent (colloque), type: absence }

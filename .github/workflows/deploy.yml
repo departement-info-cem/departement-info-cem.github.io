@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+  # Chaque matin : reprend le calendrier scolaire officiel au cas où le cégep l'aurait modifié
+  schedule:
+    - cron: "0 9 * * 1-5"
+  workflow_dispatch:
 
 jobs:
   build:
@@ -46,6 +50,34 @@ jobs:
         working-directory: angular/dist/depinfo/browser
         run: |
           cp index.html 404.html
+
+      # ---------- Nouveau site React (web/), publié sous /react/ ----------
+      - name: Installer les dépendances (React)
+        working-directory: web
+        run: npm ci
+
+      # Si le site du cégep est en panne ou si le PDF change de forme, on garde le calendrier du dépôt.
+      - name: Mettre à jour le calendrier scolaire (PDF du cégep)
+        working-directory: web
+        continue-on-error: true
+        run: npm run calendrier
+
+      - name: Valider les données (fiches des profs, grilles, FAQ...)
+        working-directory: web
+        run: npm run valider
+
+      - name: Lint et tests (React)
+        working-directory: web
+        run: |
+          npm run lint
+          npm test
+
+      - name: Build (React)
+        working-directory: web
+        run: npm run build
+
+      - name: Placer le site React sous /react/
+        run: cp -r web/out angular/dist/depinfo/browser/react
 
       - name: Fix permissions
         working-directory: angular/dist/depinfo/browser

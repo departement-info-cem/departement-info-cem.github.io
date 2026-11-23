@@ -1,0 +1,141 @@
+# Calendrier scolaire commun à tout le monde (affiché dans chaque calendrier de prof).
+# FICHIER GÉNÉRÉ à partir du PDF officiel par « npm run calendrier » (dossier web/) : ne pas le modifier à la main,
+# il est recalculé à chaque déploiement et chaque matin. Les dates propres à un prof vont dans data/profs/<courriel>.yaml.
+#
+# Types : conge, pedagogique, mise-a-jour, relache, encadrement, suspension, reprise (JR), evaluations (EC, EUL) -> pas de cours réguliers
+#   horaire-modifie (avec horaireDu) -> on suit l'horaire d'un autre jour ; evaluations-horaire (EHR) -> horaire régulier
+source: https://www.cegepmontpetit.ca/cegep/calendrier-scolaire
+pdf:
+  - { annee: "2026-2027", url: "https://www.cegepmontpetit.ca/uploads/CEM_Le_Cegep/Calendrier-scolaire/Calendrier-2026-2027_Cegep-et-ENA_AdoptionCA2_anonymous-1.pdf", revise: 2026-11-17 }
+  - { annee: "2027-2028", url: "https://www.cegepmontpetit.ca/uploads/CEM_Le_Cegep/Calendrier-scolaire/Calendrier-2027-2028_Cegep-et-ENA_AdoptionCA1_anonymous-1.pdf" }
+
+sessions:
+  - { id: A2026, nom: "Automne 2026", debut: 2026-08-24, fin: 2026-12-24 }
+  - { id: H2027, nom: "Hiver 2027", debut: 2027-01-25, fin: 2027-06-01 }
+  - { id: A2027, nom: "Automne 2027", debut: 2027-08-23, fin: 2027-12-22 }
+  - { id: H2028, nom: "Hiver 2028", debut: 2028-01-24, fin: 2028-05-30 }
+
+journees:
+  # ---------- Automne 2026 ----------
+  - { date: 2026-08-24, titre: "Début de la session d'automne", type: info }
+  - { date: 2026-09-07, titre: "Fête du Travail (congé)", type: conge }
+  - { date: 2026-09-18, titre: "Date limite de désinscription", type: limite }
+  - { date: 2026-10-05, titre: "Journée d'élections (suspension des cours)", type: suspension }
+  - { date: 2026-10-06, titre: "Horaire du lundi", type: horaire-modifie, horaireDu: lundi }
+  - { date: 2026-10-12, au: 2026-10-16, titre: "Semaine de relâche", type: relache }
+  - { date: 2026-10-12, titre: "Action de grâces (congé)", type: conge }
+  - { date: 2026-10-13, titre: "Journée pédagogique", type: pedagogique, code: JP }
+  - { date: 2026-10-14, au: 2026-10-15, titre: "Journée de mise à jour", type: mise-a-jour, code: JM }
+  - { date: 2026-10-16, titre: "Journée d'encadrement", type: encadrement, code: JE }
+  - { date: 2026-11-06, titre: "Date limite d'abandon", type: limite }
+  - { date: 2026-11-11, titre: "Journée particulière d'enseignement (priorité à l'EUL)", type: reprise, code: JR* }
+  - { date: 2026-12-10, titre: "Journée particulière d'enseignement (reprises)", type: reprise, code: JR }
+  - { date: 2026-12-11, titre: "Évaluations terminales (horaire régulier)", type: evaluations-horaire, code: EHR }
+  - { date: 2026-12-14, titre: "Évaluations terminales (horaire régulier)", type: evaluations-horaire, code: EHR }
+  - { date: 2026-12-15, au: 2026-12-16, titre: "Évaluations terminales communes", type: evaluations, code: EC }
+  - { date: 2026-12-16, titre: "Épreuve uniforme de langue", type: evaluations, code: EUL }
+  - { date: 2026-12-17, titre: "Évaluations terminales (horaire régulier)", type: evaluations-horaire, code: EHR }
+  - { date: 2026-12-18, titre: "Évaluations terminales communes", type: evaluations, code: EC }
+  - { date: 2026-12-21, titre: "Évaluations terminales communes", type: evaluations, code: EC }
+  - { date: 2026-12-22, au: 2026-12-23, titre: "Évaluations terminales (horaire régulier)", type: evaluations-horaire, code: EHR }
+  - { date: 2026-12-24, titre: "Fin de la session", type: info }
+  - { date: 2026-12-24, titre: "Journée provisoire de reprise", type: reprise, code: JPR }
+  - { date: 2026-12-24, titre: "Remise des notes (délai provisoire)", type: limite }
+  - { date: 2026-12-25, titre: "Noël (congé)", type: conge }
+  - { date: 2026-12-28, au: 2026-12-31, titre: "Remise des notes", type: limite }
+  - { date: 2027-01-01, titre: "Jour de l'An (congé)", type: conge }
+  - { date: 2027-01-04, titre: "Congé férié", type: conge }
+  - { date: 2027-01-05, titre: "Remise des notes (délai provisoire)", type: limite }
+  # ---------- Hiver 2027 ----------
+  - { date: 2027-01-25, titre: "Début de la session d'hiver", type: info }
+  - { date: 2027-02-12, titre: "Date limite de désinscription", type: limite }
+  - { date: 2027-03-15, au: 2027-03-19, titre: "Semaine de relâche", type: relache }
+  - { date: 2027-03-15, titre: "Journée de mise à jour", type: mise-a-jour, code: JM }
+  - { date: 2027-03-16, titre: "Journée pédagogique", type: pedagogique, code: JP }
+  - { date: 2027-03-17, au: 2027-03-18, titre: "Journée de mise à jour", type: mise-a-jour, code: JM }
+  - { date: 2027-03-19, titre: "Journée d'encadrement", type: encadrement, code: JE }
+  - { date: 2027-03-26, titre: "Vendredi saint (congé)", type: conge }
+  - { date: 2027-03-29, titre: "Lundi de Pâques (congé)", type: conge }
+  - { date: 2027-03-30, titre: "Horaire du vendredi", type: horaire-modifie, horaireDu: vendredi }
+  - { date: 2027-04-07, titre: "Journée particulière d'enseignement (reprises)", type: reprise, code: JR }
+  - { date: 2027-04-13, titre: "Date limite d'abandon", type: limite }
+  - { date: 2027-04-15, titre: "Journée particulière d'enseignement (priorité à l'EUL)", type: reprise, code: JR* }
+  - { date: 2027-04-21, titre: "Journée institutionnelle (suspension des cours)", type: suspension }
+  - { date: 2027-04-23, titre: "Horaire du mercredi", type: horaire-modifie, horaireDu: mercredi }
+  - { date: 2027-05-10, titre: "Horaire du mercredi", type: horaire-modifie, horaireDu: mercredi }
+  - { date: 2027-05-12, titre: "Épreuve uniforme de langue", type: evaluations, code: EUL }
+  - { date: 2027-05-12, titre: "Évaluations terminales communes", type: evaluations, code: EC }
+  - { date: 2027-05-18, au: 2027-05-19, titre: "Journée particulière d'enseignement (reprises)", type: reprise, code: JR }
+  - { date: 2027-05-20, au: 2027-05-21, titre: "Évaluations terminales (horaire régulier)", type: evaluations-horaire, code: EHR }
+  - { date: 2027-05-24, titre: "Évaluations terminales communes", type: evaluations, code: EC }
+  - { date: 2027-05-25, au: 2027-05-26, titre: "Évaluations terminales (horaire régulier)", type: evaluations-horaire, code: EHR }
+  - { date: 2027-05-27, au: 2027-05-28, titre: "Évaluations terminales communes", type: evaluations, code: EC }
+  - { date: 2027-05-31, titre: "Évaluations terminales (horaire régulier)", type: evaluations-horaire, code: EHR }
+  - { date: 2027-06-01, titre: "Fin de la session", type: info }
+  - { date: 2027-06-01, titre: "Journée provisoire de reprise", type: reprise, code: JPR }
+  - { date: 2027-06-01, titre: "Remise des notes (délai provisoire)", type: limite }
+  - { date: 2027-06-02, au: 2027-06-04, titre: "Remise des notes", type: limite }
+  - { date: 2027-06-07, titre: "Remise des notes", type: limite }
+  - { date: 2027-06-08, titre: "Remise des notes (délai provisoire)", type: limite }
+  # ---------- Automne 2027 ----------
+  - { date: 2027-08-23, titre: "Début de la session d'automne", type: info }
+  - { date: 2027-09-06, titre: "Fête du Travail (congé)", type: conge }
+  - { date: 2027-09-17, titre: "Date limite de désinscription", type: limite }
+  - { date: 2027-10-11, au: 2027-10-15, titre: "Semaine de relâche", type: relache }
+  - { date: 2027-10-11, titre: "Action de grâces (congé)", type: conge }
+  - { date: 2027-10-12, titre: "Journée pédagogique", type: pedagogique, code: JP }
+  - { date: 2027-10-13, au: 2027-10-14, titre: "Journée de mise à jour", type: mise-a-jour, code: JM }
+  - { date: 2027-10-15, titre: "Journée d'encadrement", type: encadrement, code: JE }
+  - { date: 2027-11-04, titre: "Date limite d'abandon", type: limite }
+  - { date: 2027-11-09, titre: "Journée particulière d'enseignement (priorité à l'EUL)", type: reprise, code: JR* }
+  - { date: 2027-12-08, titre: "Journée particulière d'enseignement (reprises)", type: reprise, code: JR }
+  - { date: 2027-12-09, au: 2027-12-10, titre: "Évaluations terminales (horaire régulier)", type: evaluations-horaire, code: EHR }
+  - { date: 2027-12-10, titre: "Horaire du mercredi", type: horaire-modifie, horaireDu: mercredi }
+  - { date: 2027-12-13, titre: "Évaluations terminales communes", type: evaluations, code: EC }
+  - { date: 2027-12-14, titre: "Évaluations terminales (horaire régulier)", type: evaluations-horaire, code: EHR }
+  - { date: 2027-12-15, titre: "Épreuve uniforme de langue", type: evaluations, code: EUL }
+  - { date: 2027-12-15, au: 2027-12-16, titre: "Évaluations terminales communes", type: evaluations, code: EC }
+  - { date: 2027-12-17, titre: "Évaluations terminales (horaire régulier)", type: evaluations-horaire, code: EHR }
+  - { date: 2027-12-20, titre: "Évaluations terminales (horaire régulier)", type: evaluations-horaire, code: EHR }
+  - { date: 2027-12-21, titre: "Évaluations terminales communes", type: evaluations, code: EC }
+  - { date: 2027-12-22, titre: "Fin de la session", type: info }
+  - { date: 2027-12-22, titre: "Journée provisoire de reprise", type: reprise, code: JPR }
+  - { date: 2027-12-22, titre: "Remise des notes (délai provisoire)", type: limite }
+  - { date: 2027-12-23, titre: "Remise des notes", type: limite }
+  - { date: 2027-12-24, titre: "Congé férié", type: conge }
+  - { date: 2027-12-27, au: 2027-12-29, titre: "Remise des notes", type: limite }
+  - { date: 2027-12-30, titre: "Remise des notes (délai provisoire)", type: limite }
+  - { date: 2027-12-31, titre: "Congé férié", type: conge }
+  - { date: 2028-01-03, titre: "Congé férié", type: conge }
+  # ---------- Hiver 2028 ----------
+  - { date: 2028-01-24, titre: "Début de la session d'hiver", type: info }
+  - { date: 2028-02-14, titre: "Date limite de désinscription", type: limite }
+  - { date: 2028-03-13, au: 2028-03-17, titre: "Semaine de relâche", type: relache }
+  - { date: 2028-03-13, titre: "Journée de mise à jour", type: mise-a-jour, code: JM }
+  - { date: 2028-03-14, titre: "Journée pédagogique", type: pedagogique, code: JP }
+  - { date: 2028-03-15, au: 2028-03-16, titre: "Journée de mise à jour", type: mise-a-jour, code: JM }
+  - { date: 2028-03-17, titre: "Journée d'encadrement", type: encadrement, code: JE }
+  - { date: 2028-04-07, titre: "Date limite d'abandon", type: limite }
+  - { date: 2028-04-10, titre: "Journée particulière d'enseignement (reprises)", type: reprise, code: JR }
+  - { date: 2028-04-13, titre: "Horaire du vendredi", type: horaire-modifie, horaireDu: vendredi }
+  - { date: 2028-04-14, titre: "Vendredi saint (congé)", type: conge }
+  - { date: 2028-04-17, titre: "Lundi de Pâques (congé)", type: conge }
+  - { date: 2028-04-18, titre: "Horaire du lundi", type: horaire-modifie, horaireDu: lundi }
+  - { date: 2028-04-19, titre: "Journée particulière d'enseignement (priorité à l'EUL)", type: reprise, code: JR* }
+  - { date: 2028-05-12, titre: "Journée particulière d'enseignement (reprises)", type: reprise, code: JR }
+  - { date: 2028-05-15, titre: "Journée particulière d'enseignement (reprises)", type: reprise, code: JR }
+  - { date: 2028-05-16, titre: "Évaluations terminales (horaire régulier)", type: evaluations-horaire, code: EHR }
+  - { date: 2028-05-16, titre: "Horaire du lundi", type: horaire-modifie, horaireDu: lundi }
+  - { date: 2028-05-17, titre: "Épreuve uniforme de langue", type: evaluations, code: EUL }
+  - { date: 2028-05-17, au: 2028-05-18, titre: "Évaluations terminales communes", type: evaluations, code: EC }
+  - { date: 2028-05-19, titre: "Évaluations terminales (horaire régulier)", type: evaluations-horaire, code: EHR }
+  - { date: 2028-05-22, titre: "Journée d'encadrement", type: encadrement, code: JE }
+  - { date: 2028-05-23, au: 2028-05-25, titre: "Évaluations terminales (horaire régulier)", type: evaluations-horaire, code: EHR }
+  - { date: 2028-05-26, titre: "Évaluations terminales communes", type: evaluations, code: EC }
+  - { date: 2028-05-29, titre: "Évaluations terminales communes", type: evaluations, code: EC }
+  - { date: 2028-05-30, titre: "Fin de la session", type: info }
+  - { date: 2028-05-30, titre: "Journée provisoire de reprise", type: reprise, code: JPR }
+  - { date: 2028-05-30, titre: "Remise des notes (délai provisoire)", type: limite }
+  - { date: 2028-05-31, au: 2028-06-02, titre: "Remise des notes", type: limite }
+  - { date: 2028-06-05, titre: "Remise des notes", type: limite }
+  - { date: 2028-06-06, titre: "Remise des notes (délai provisoire)", type: limite }

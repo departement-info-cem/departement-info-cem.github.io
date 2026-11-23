@@ -1,0 +1,36 @@
+# Grille de cours : AEC Développement d'applications Web (LEA.DY)
+# Source : https://www.cegepmontpetit.ca/formation-adultes/attestations-etudes-collegiales/developpement-app-web
+# Le site du cégep ne donne pas les numéros de cours ni le découpage en étapes : les cours sont listés dans l'ordre de la grille.
+nom: "AEC Développement d'applications Web"
+court: AEC Web
+type: aec
+code: LEA.DY
+duree: "19 mois (1530 heures), soirs de semaine 18 h – 23 h"
+ordre: 4
+resume: "Une formation intensive pour adultes : programmation, web serveur et client, bases de données, projet et stage. 1125 heures de pratique + 405 heures de théorie."
+lien: https://www.cegepmontpetit.ca/formation-adultes/attestations-etudes-collegiales/developpement-app-web
+source: https://www.cegepmontpetit.ca/formation-adultes/attestations-etudes-collegiales/developpement-app-web
+remarque: "Aucune cohorte prévue en 2026-2027 (selon le site du cégep)."
+sessions:
+  - titre: "Cours de l'attestation (ordre de la grille)"
+    cours:
+      - { nom: "Bureautique", heures: 45 }
+      - { nom: "Introduction aux bases de données", heures: 75 }
+      - { nom: "Ordinateurs et réseaux", heures: 45 }
+      - { nom: "Programmation 1", heures: 60 }
+      - { nom: "Communiquer en milieux professionnels", heures: 60 }
+      - { nom: "Mathématiques pour informatique", heures: 60 }
+      - { nom: "Programmation 2", heures: 60 }
+      - { nom: "Introduction à la cybersécurité", heures: 60 }
+      - { nom: "Programmation 3", heures: 60 }
+      - { nom: "Programmation Web serveur", heures: 75 }
+      - { nom: "Design d'interface Web", heures: 90 }
+      - { nom: "Méthodologie", heures: 45 }
+      - { nom: "Programmation Web transactionnelle", heures: 75 }
+      - { nom: "Bases de données de programmation Web", heures: 75 }
+      - { nom: "Profession et soutien aux utilisateurs", heures: 75 }
+      - { nom: "Programmation Web avancée", heures: 75 }
+      - { nom: "Programmation Web orientée services", heures: 90 }
+      - { nom: "Analyse et conception d'applications", heures: 75 }
+      - { nom: "Projet en programmation", heures: 105 }
+      - { nom: "Stage", heures: 225 }

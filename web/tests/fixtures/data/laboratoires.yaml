@@ -1,0 +1,287 @@
+# Laboratoires et leur horaire d'occupation (affichés dans le bandeau du site et sur
+# https://info.cegepmontpetit.ca/react/maintenant).
+#
+# Source, automne 2026 : « Horaire du local » (RPHOR020, 2026-08-19), publié dans le dépôt du cours SN1 :
+# https://github.com/departement-info-cem/420-SN1/blob/main/web/static/pdf/horairelabos.pdf
+# Ce PDF ne contient que des images : il faut le recopier ici à la main à chaque session, puis changer « session ».
+# Tant que ce n'est pas fait, le site dit « horaire incomplet » et n'affiche aucun local libre.
+#
+# Cours de 5 heures : ce sont 2 séances de 2 h 30, mais le PDF réserve 3 h. Quand deux d'entre eux se chevauchent
+# (cadres rouges), on coupe au milieu : 08:10-10:30 puis 10:30-13:00. Sinon on garde la réservation de 3 h.
+# « horsCalendrier: true » : groupe du soir (AEC) qui ne suit pas le calendrier scolaire (JR, relâche, horaire modifié...).
+# « complet: true » dit que toutes les occupations de la session sont connues.
+# Les cours inscrits dans les fiches des profs (data/profs) sont ajoutés automatiquement.
+
+- local: D-0003
+  postes: 24
+  session: A2026
+  complet: true
+  ouverture: "08:00"
+  fermeture: "20:00"
+  occupations:
+    - { jour: lundi, debut: "08:10", fin: "10:30", cours: 420-905-EM, groupe: 1030 }
+    - { jour: lundi, debut: "10:30", fin: "13:00", cours: 420-905-EM, groupe: 1040 }
+    - { jour: lundi, debut: "15:10", fin: "18:00", cours: 420-SN1-RE, groupe: 1120 }
+    - { jour: mardi, debut: "09:10", fin: "12:00", cours: 420-Z03-EM, groupe: 1020 }
+    - { jour: mardi, debut: "12:10", fin: "15:00", cours: 420-SN1-RE, groupe: 1050 }
+    - { jour: mardi, debut: "15:10", fin: "18:00", cours: 420-SN1-RE, groupe: 1060 }
+    - { jour: mercredi, debut: "09:10", fin: "12:00", cours: 420-1B3-EM, groupe: 1030 }
+    - { jour: mercredi, debut: "14:10", fin: "17:00", cours: 420-1B3-EM, groupe: 1040 }
+    - { jour: jeudi, debut: "08:10", fin: "10:30", cours: 420-905-EM, groupe: 1040 }
+    - { jour: jeudi, debut: "10:30", fin: "13:00", cours: 420-905-EM, groupe: 1030 }
+    - { jour: jeudi, debut: "13:10", fin: "16:00", cours: 420-SN1-RE, groupe: 1100 }
+    - { jour: vendredi, debut: "08:10", fin: "11:00", cours: 420-SN1-RE, groupe: 1070 }
+    - { jour: vendredi, debut: "11:10", fin: "13:00", cours: 420-4A4-EM, groupe: 1010 }
+    - { jour: vendredi, debut: "13:10", fin: "15:30", cours: 420-905-EM, groupe: 1020 }
+    - { jour: vendredi, debut: "15:30", fin: "18:00", cours: 420-905-EM, groupe: 1010 }
+
+- local: D-0007
+  postes: 24
+  session: A2026
+  complet: true
+  ouverture: "08:00"
+  fermeture: "20:00"
+  occupations:
+    - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-SN1-RE, groupe: 1110 }
+    - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-983-EM, groupe: 1130 }
+    - { jour: lundi, debut: "15:10", fin: "18:00", cours: 420-983-EM, groupe: 1140 }
+    - { jour: mardi, debut: "08:10", fin: "11:00", cours: 360-4A3-EM, groupe: 1010, titre: "Projet sc. info" }
+    - { jour: mardi, debut: "11:10", fin: "13:00", cours: 420-4A4-EM, groupe: 1010 }
+    - { jour: mardi, debut: "13:10", fin: "15:30", cours: 420-905-EM, groupe: 1010 }
+    - { jour: mardi, debut: "15:30", fin: "18:00", cours: 420-905-EM, groupe: 1020 }
+    - { jour: mercredi, debut: "09:10", fin: "12:00", cours: 420-SN1-RE, groupe: 1010 }
+    - { jour: mercredi, debut: "14:10", fin: "17:00", cours: 420-SN1-RE, groupe: 1020 }
+    - { jour: jeudi, debut: "08:10", fin: "11:00", cours: 420-SN1-RE, groupe: 1090 }
+    - { jour: jeudi, debut: "12:10", fin: "15:00", cours: 420-983-EM, groupe: 1060 }
+    - { jour: jeudi, debut: "15:10", fin: "18:00", cours: 420-983-EM, groupe: 1070 }
+    - { jour: vendredi, debut: "08:10", fin: "11:00", cours: 420-983-EM, groupe: 1100 }
+    - { jour: vendredi, debut: "12:10", fin: "15:00", cours: 420-983-EM, groupe: 1110 }
+
+- local: D-0008
+  postes: 24
+  session: A2026
+  complet: true
+  ouverture: "08:00"
+  fermeture: "20:00"
+  occupations:
+    - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-983-EM, groupe: 1010 }
+    - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-983-EM, groupe: 1020 }
+    - { jour: mardi, debut: "08:10", fin: "11:00", cours: 420-983-EM, groupe: 1040 }
+    - { jour: mardi, debut: "12:10", fin: "15:00", cours: 420-983-EM, groupe: 1180 }
+    - { jour: mardi, debut: "15:10", fin: "18:00", cours: 420-983-EM, groupe: 1120 }
+    - { jour: mercredi, debut: "09:10", fin: "12:00", cours: 420-983-EM, groupe: 1080 }
+    - { jour: mercredi, debut: "14:10", fin: "17:00", cours: 420-983-EM, groupe: 1090 }
+    - { jour: jeudi, debut: "08:10", fin: "11:00", cours: 420-983-EM, groupe: 1150 }
+    - { jour: jeudi, debut: "12:10", fin: "15:00", cours: 420-983-EM, groupe: 1030 }
+    - { jour: vendredi, debut: "12:10", fin: "15:00", cours: 420-SN1-RE, groupe: 1130 }
+
+- local: D-0226
+  postes: 24
+  session: A2026
+  complet: true
+  ouverture: "08:00"
+  fermeture: "20:00"
+  occupations:
+    - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-1C5-EM, groupe: 1050 }
+    - { jour: lundi, debut: "11:10", fin: "13:00", cours: 420-3S4-EM, groupe: 1050 }
+    - { jour: lundi, debut: "13:10", fin: "16:00", cours: 420-1C5-EM, groupe: 1060 }
+    - { jour: lundi, debut: "16:10", fin: "18:00", cours: 420-3S4-EM, groupe: 1040 }
+    - { jour: mardi, debut: "08:10", fin: "10:30", cours: 420-1C5-EM, groupe: 1010 }
+    - { jour: mardi, debut: "10:30", fin: "13:00", cours: 420-1C5-EM, groupe: 1020 }
+    - { jour: mardi, debut: "13:10", fin: "15:30", cours: 420-1C5-EM, groupe: 1040 }
+    - { jour: mardi, debut: "15:30", fin: "18:00", cours: 420-1C5-EM, groupe: 1030 }
+    - { jour: mercredi, debut: "09:10", fin: "12:00", cours: 420-1X6-EM, groupe: 1070 }
+    - { jour: mercredi, debut: "14:10", fin: "16:00", cours: 420-3S4-EM, groupe: 1040 }
+    - { jour: mercredi, debut: "16:10", fin: "18:00", cours: 420-3S4-EM, groupe: 1050 }
+    - { jour: jeudi, debut: "08:10", fin: "11:00", cours: 420-1C5-EM, groupe: 1050 }
+    - { jour: jeudi, debut: "12:10", fin: "15:00", cours: 420-3C5-EM, groupe: 1020 }
+    - { jour: jeudi, debut: "15:10", fin: "18:00", cours: 420-3C5-EM, groupe: 1010 }
+    - { jour: vendredi, debut: "08:10", fin: "10:30", cours: 420-1C5-EM, groupe: 1020 }
+    - { jour: vendredi, debut: "10:30", fin: "13:00", cours: 420-1C5-EM, groupe: 1010 }
+    - { jour: vendredi, debut: "13:10", fin: "15:30", cours: 420-1C5-EM, groupe: 1030 }
+    - { jour: vendredi, debut: "15:30", fin: "18:00", cours: 420-1C5-EM, groupe: 1040 }
+
+- local: D-0602
+  postes: 23
+  session: A2026
+  complet: true
+  ouverture: "08:00"
+  fermeture: "20:00"
+  occupations:
+    - { jour: lundi, debut: "09:10", fin: "12:00", cours: 420-1X6-EM, groupe: 1020 }
+    - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-SN1-RE, groupe: 1030 }
+    - { jour: lundi, debut: "15:10", fin: "18:00", cours: 420-SN1-RE, groupe: 1040 }
+    - { jour: mardi, debut: "08:10", fin: "10:00", cours: 420-3S4-EM, groupe: 1020 }
+    - { jour: mardi, debut: "12:10", fin: "15:00", cours: 420-1X6-EM, groupe: 1060 }
+    - { jour: mardi, debut: "15:10", fin: "18:00", cours: 420-1P6-EM, groupe: 1050 }
+    - { jour: mercredi, debut: "09:10", fin: "12:00", cours: 420-4W6-EM, groupe: 1020 }
+    - { jour: mercredi, debut: "14:10", fin: "17:00", cours: 420-1X6-EM, groupe: 1080 }
+    - { jour: jeudi, debut: "09:10", fin: "12:00", cours: 420-1X6-EM, groupe: 1010 }
+    - { jour: jeudi, debut: "12:10", fin: "15:00", cours: 420-1X6-EM, groupe: 1030 }
+    - { jour: jeudi, debut: "15:10", fin: "18:00", cours: 420-1X6-EM, groupe: 1020 }
+    - { jour: vendredi, debut: "08:10", fin: "11:00", cours: 420-4W6-EM, groupe: 1020 }
+    - { jour: vendredi, debut: "12:10", fin: "15:00", cours: 420-4W6-EM, groupe: 1010 }
+
+- local: D-0603
+  postes: 23
+  session: A2026
+  complet: true
+  ouverture: "08:00"
+  fermeture: "20:00"
+  occupations:
+    - { jour: lundi, debut: "08:10", fin: "10:30", cours: 420-3M5-EM, groupe: 1010 }
+    - { jour: lundi, debut: "10:30", fin: "13:00", cours: 420-3M5-EM, groupe: 1020 }
+    - { jour: lundi, debut: "13:10", fin: "16:00", cours: 420-1B3-EM, groupe: 1070 }
+    - { jour: mardi, debut: "08:10", fin: "11:00", cours: 420-3W6-EM, groupe: 1010 }
+    - { jour: mardi, debut: "13:10", fin: "16:00", cours: 420-3W6-EM, groupe: 1020 }
+    - { jour: mercredi, debut: "09:10", fin: "12:00", cours: 420-3W6-EM, groupe: 1030 }
+    - { jour: mercredi, debut: "14:10", fin: "17:00", cours: 420-Z03-EM, groupe: 1010 }
+    - { jour: jeudi, debut: "08:10", fin: "11:00", cours: 420-1P6-EM, groupe: 1060 }
+    - { jour: jeudi, debut: "12:10", fin: "15:00", cours: 420-3W6-EM, groupe: 1010 }
+    - { jour: jeudi, debut: "15:10", fin: "18:00", cours: 420-3W6-EM, groupe: 1020 }
+    - { jour: vendredi, debut: "08:10", fin: "11:00", cours: 420-3W6-EM, groupe: 1030 }
+    - { jour: vendredi, debut: "12:10", fin: "15:00", cours: 420-983-EM, groupe: 1170 }
+    - { jour: vendredi, debut: "15:10", fin: "18:00", cours: 420-983-EM, groupe: 1160 }
+
+- local: D-0604
+  postes: 23
+  session: A2026
+  complet: true
+  ouverture: "08:00"
+  fermeture: "20:00"
+  occupations:
+    - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-1P6-EM, groupe: 1020 }
+    - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-1P6-EM, groupe: 1010 }
+    - { jour: lundi, debut: "15:10", fin: "18:00", cours: 420-983-EM, groupe: 1190 }
+    - { jour: mardi, debut: "08:10", fin: "11:00", cours: 420-1P6-EM, groupe: 1030 }
+    - { jour: mardi, debut: "12:10", fin: "15:00", cours: 420-983-EM, groupe: 1050 }
+    - { jour: mardi, debut: "15:10", fin: "18:00", cours: 420-1P6-EM, groupe: 1040 }
+    - { jour: mercredi, debut: "09:10", fin: "12:00", cours: 420-3M5-EM, groupe: 1020 }
+    - { jour: mercredi, debut: "14:10", fin: "17:00", cours: 420-3M5-EM, groupe: 1010 }
+    - { jour: jeudi, debut: "08:10", fin: "10:30", cours: 420-3M5-EM, groupe: 1030 }
+    - { jour: jeudi, debut: "10:30", fin: "13:00", cours: 420-3M5-EM, groupe: 1040 }
+    - { jour: jeudi, debut: "13:10", fin: "16:00", cours: 420-1P6-EM, groupe: 1050 }
+    - { jour: vendredi, debut: "08:10", fin: "11:00", cours: 420-1P6-EM, groupe: 1040 }
+    - { jour: vendredi, debut: "12:10", fin: "15:00", cours: 420-1B3-EM, groupe: 1060 }
+    - { jour: vendredi, debut: "15:10", fin: "18:00", cours: 420-SN1-RE, groupe: 1080 }
+
+- local: D-0605
+  postes: 23
+  session: A2026
+  complet: true
+  ouverture: "08:00"
+  fermeture: "20:00"
+  occupations:
+    - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-5Y5-EM, groupe: 1010 }
+    - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-5Y5-EM, groupe: 1020 }
+    - { jour: lundi, debut: "15:10", fin: "18:00", cours: 420-1X6-EM, groupe: 1010 }
+    - { jour: mardi, debut: "08:10", fin: "11:00", cours: 420-1P6-EM, groupe: 1060 }
+    - { jour: mardi, debut: "12:10", fin: "15:00", cours: 420-1X6-EM, groupe: 1040 }
+    - { jour: mardi, debut: "15:10", fin: "18:00", cours: 420-1X6-EM, groupe: 1030 }
+    - { jour: mercredi, debut: "09:10", fin: "12:00", cours: 420-5N6-EM, groupe: 1020 }
+    - { jour: mercredi, debut: "14:10", fin: "17:00", cours: 420-1P6-EM, groupe: 1090 }
+    - { jour: jeudi, debut: "08:10", fin: "11:00", cours: 420-1P6-EM, groupe: 1010 }
+    - { jour: jeudi, debut: "12:10", fin: "15:00", cours: 420-1P6-EM, groupe: 1020 }
+    - { jour: vendredi, debut: "08:10", fin: "11:00", cours: 420-5Y5-EM, groupe: 1020 }
+    - { jour: vendredi, debut: "12:10", fin: "15:00", cours: 420-5Y5-EM, groupe: 1010 }
+    - { jour: vendredi, debut: "15:10", fin: "18:00", cours: 420-1P6-EM, groupe: 1030 }
+
+- local: D-0620
+  postes: 23
+  session: A2026
+  complet: true
+  ouverture: "08:00"
+  fermeture: "23:00"
+  occupations:
+    - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-3T5-EM, groupe: 1020 }
+    - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-3T5-EM, groupe: 1010 }
+    - { jour: lundi, debut: "15:10", fin: "18:00", cours: 420-1C5-EM, groupe: 1070 }
+    - { jour: lundi, debut: "18:00", fin: "23:00", cours: 420-AK5-RO, groupe: 6152, titre: Déploiement (AEC), horsCalendrier: true }
+    - { jour: mardi, debut: "08:10", fin: "11:00", cours: 420-3X6-EM, groupe: 1010 }
+    - { jour: mardi, debut: "11:10", fin: "13:00", cours: 420-3S4-EM, groupe: 1010 }
+    - { jour: mardi, debut: "13:10", fin: "16:00", cours: 420-3X6-EM, groupe: 1020 }
+    - { jour: mardi, debut: "18:00", fin: "22:00", cours: 420-C73-RO, groupe: 6152, titre: Scriptage (AEC), horsCalendrier: true }
+    - { jour: mardi, debut: "22:00", fin: "23:00", titre: "Occupé (cours non précisé dans le PDF)", horsCalendrier: true }
+    - { jour: mercredi, debut: "08:10", fin: "11:00", cours: 420-5V6-EM, groupe: 1020, titre: Infrastructure virtuelle }
+    - { jour: mercredi, debut: "14:10", fin: "17:00", cours: 420-1C5-EM, groupe: 1070 }
+    - { jour: mercredi, debut: "18:00", fin: "23:00", cours: 420-AD3-RO, groupe: 6152, titre: Virtualisation (AEC), horsCalendrier: true }
+    - { jour: jeudi, debut: "08:10", fin: "11:00", cours: 420-1C5-EM, groupe: 1080 }
+    - { jour: jeudi, debut: "12:10", fin: "15:00", cours: 420-3T5-EM, groupe: 1010 }
+    - { jour: jeudi, debut: "15:10", fin: "18:00", cours: 420-3T5-EM, groupe: 1020 }
+    - { jour: jeudi, debut: "18:00", fin: "23:00", cours: 420-AJ5-RO, groupe: 6152, titre: Déploiement (AEC), horsCalendrier: true }
+    - { jour: vendredi, debut: "08:10", fin: "11:00", cours: 420-3X6-EM, groupe: 1020 }
+    - { jour: vendredi, debut: "11:10", fin: "13:00", cours: 420-3S4-EM, groupe: 1020 }
+    - { jour: vendredi, debut: "13:10", fin: "16:00", cours: 420-3X6-EM, groupe: 1010 }
+    - { jour: vendredi, debut: "16:10", fin: "18:00", cours: 420-3S4-EM, groupe: 1010 }
+    - { jour: vendredi, debut: "18:00", fin: "22:00", cours: 420-C73-RO, groupe: 6152, titre: Scriptage (AEC), horsCalendrier: true }
+    - { jour: vendredi, debut: "22:00", fin: "23:00", titre: "Occupé (cours non précisé dans le PDF)", horsCalendrier: true }
+
+- local: D-0622
+  postes: 20
+  session: A2026
+  complet: true
+  ouverture: "08:00"
+  fermeture: "20:00"
+  occupations:
+    - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-5S6-EM, groupe: 1010, titre: Serveurs 4 }
+    - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-5U5-EM, groupe: 1010, titre: Cybersécurité 3 }
+    - { jour: lundi, debut: "15:10", fin: "18:00", cours: 420-5U5-EM, groupe: 1020, titre: Cybersécurité 3 }
+    - { jour: mardi, debut: "08:10", fin: "10:30", cours: 420-3C5-EM, groupe: 1010 }
+    - { jour: mardi, debut: "10:30", fin: "13:00", cours: 420-1C5-EM, groupe: 1080 }
+    - { jour: mardi, debut: "13:10", fin: "16:00", cours: 420-3C5-EM, groupe: 1020 }
+    - { jour: mardi, debut: "16:10", fin: "18:00", cours: 420-3S4-EM, groupe: 1030 }
+    - { jour: mercredi, debut: "08:10", fin: "11:00", cours: 420-5V6-EM, groupe: 1010, titre: Infrastructure virtuelle }
+    - { jour: mercredi, debut: "14:10", fin: "17:00", cours: 420-5S6-EM, groupe: 1010, titre: Serveurs 4 }
+    - { jour: jeudi, debut: "08:10", fin: "11:00", cours: 420-5U5-EM, groupe: 1020, titre: Cybersécurité 3 }
+    - { jour: jeudi, debut: "12:10", fin: "15:00", cours: 420-5U5-EM, groupe: 1010, titre: Cybersécurité 3 }
+    - { jour: jeudi, debut: "15:10", fin: "18:00", cours: 420-1C5-EM, groupe: 1060 }
+    - { jour: vendredi, debut: "08:10", fin: "10:00", cours: 420-3S4-EM, groupe: 1030 }
+    - { jour: vendredi, debut: "12:10", fin: "15:00", cours: 420-5V6-EM, groupe: 1010, titre: Infrastructure virtuelle }
+    - { jour: vendredi, debut: "15:10", fin: "18:00", cours: 420-5V6-EM, groupe: 1020, titre: Infrastructure virtuelle }
+
+- local: D-0624
+  postes: 24
+  session: A2026
+  complet: true
+  ouverture: "08:00"
+  fermeture: "20:00"
+  occupations:
+    - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-1B3-EM, groupe: 1080 }
+    - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-1X6-EM, groupe: 1050 }
+    - { jour: lundi, debut: "15:10", fin: "18:00", cours: 420-5N6-EM, groupe: 1020 }
+    - { jour: mardi, debut: "08:10", fin: "11:00", cours: 420-4W6-EM, groupe: 1010 }
+    - { jour: mardi, debut: "12:10", fin: "14:00", cours: 420-5L4-EM, groupe: 1030, titre: Soutien aux utilisateurs }
+    - { jour: mardi, debut: "14:10", fin: "16:00", cours: 420-5L4-EM, groupe: 1010, titre: Soutien aux utilisateurs }
+    - { jour: mardi, debut: "16:10", fin: "18:00", cours: 420-5L4-EM, groupe: 1020, titre: Soutien aux utilisateurs }
+    - { jour: mercredi, debut: "09:10", fin: "12:00", cours: 420-1X6-EM, groupe: 1050 }
+    - { jour: mercredi, debut: "14:10", fin: "17:00", cours: 420-1B3-EM, groupe: 1020 }
+    - { jour: jeudi, debut: "08:10", fin: "11:00", cours: 420-1X6-EM, groupe: 1040 }
+    - { jour: jeudi, debut: "12:10", fin: "14:00", cours: 420-5L4-EM, groupe: 1010, titre: Soutien aux utilisateurs }
+    - { jour: jeudi, debut: "14:10", fin: "16:00", cours: 420-5L4-EM, groupe: 1020, titre: Soutien aux utilisateurs }
+    - { jour: jeudi, debut: "16:10", fin: "18:00", cours: 420-5L4-EM, groupe: 1030, titre: Soutien aux utilisateurs }
+    - { jour: vendredi, debut: "08:10", fin: "11:00", cours: 420-1B3-EM, groupe: 1050 }
+    - { jour: vendredi, debut: "12:10", fin: "15:00", cours: 420-1X6-EM, groupe: 1060 }
+    - { jour: vendredi, debut: "15:10", fin: "18:00", cours: 420-1X6-EM, groupe: 1080 }
+
+- local: D-0704
+  postes: 24
+  session: A2026
+  complet: true
+  ouverture: "08:00"
+  fermeture: "20:00"
+  occupations:
+    - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-1P6-EM, groupe: 1090 }
+    - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-1P6-EM, groupe: 1070 }
+    - { jour: lundi, debut: "15:10", fin: "18:00", cours: 420-1P6-EM, groupe: 1080 }
+    - { jour: mardi, debut: "08:10", fin: "10:30", cours: 420-5W5-EM, groupe: 1010, titre: Programmation web avancée }
+    - { jour: mardi, debut: "10:30", fin: "13:00", cours: 420-3M5-EM, groupe: 1040 }
+    - { jour: mardi, debut: "13:10", fin: "15:30", cours: 420-5W5-EM, groupe: 1020, titre: Programmation web avancée }
+    - { jour: mardi, debut: "15:30", fin: "18:00", cours: 420-3M5-EM, groupe: 1030 }
+    - { jour: mercredi, debut: "09:10", fin: "12:00", cours: 420-1B3-EM, groupe: 1010 }
+    - { jour: mercredi, debut: "14:10", fin: "17:00", cours: 420-5N6-EM, groupe: 1010 }
+    - { jour: jeudi, debut: "08:10", fin: "11:00", cours: 420-5N6-EM, groupe: 1010 }
+    - { jour: jeudi, debut: "12:10", fin: "15:00", cours: 420-1P6-EM, groupe: 1080 }
+    - { jour: jeudi, debut: "15:10", fin: "18:00", cours: 420-1P6-EM, groupe: 1070 }
+    - { jour: vendredi, debut: "08:10", fin: "11:00", cours: 420-1X6-EM, groupe: 1070 }
+    - { jour: vendredi, debut: "12:10", fin: "15:00", cours: 420-5W5-EM, groupe: 1020, titre: Programmation web avancée }
+    - { jour: vendredi, debut: "15:10", fin: "18:00", cours: 420-5W5-EM, groupe: 1010, titre: Programmation web avancée }

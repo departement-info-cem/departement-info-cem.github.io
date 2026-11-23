@@ -1,0 +1,38 @@
+# Grille de cours : AEC Gestionnaire de réseaux, sécurité et virtualisation (LEA.A6)
+# Source : https://www.cegepmontpetit.ca/formation-adultes/attestations-etudes-collegiales/gestionnaire-reseaux-securite-virtualisation
+# Le site du cégep ne donne pas les numéros de cours ni le découpage en étapes : les cours sont listés dans l'ordre de la grille.
+nom: "AEC Gestionnaire de réseaux, sécurité et virtualisation"
+court: AEC Réseaux
+type: aec
+code: LEA.A6
+duree: "18 mois (1455 heures), soirs de semaine 18 h – 23 h"
+ordre: 5
+resume: "Une formation intensive pour adultes : Linux, Windows, réseautique, scripts, virtualisation, infonuagique et sécurité, avec un stage en entreprise. 975 heures de pratique + 480 heures de théorie."
+lien: https://www.cegepmontpetit.ca/formation-adultes/attestations-etudes-collegiales/gestionnaire-reseaux-securite-virtualisation
+source: https://www.cegepmontpetit.ca/formation-adultes/attestations-etudes-collegiales/gestionnaire-reseaux-securite-virtualisation
+remarque: "Prochaine cohorte : du 1er février 2027 au 14 juillet 2028 (date limite d'admission : 4 janvier 2027), selon le site du cégep."
+sessions:
+  - titre: "Cours de l'attestation (ordre de la grille)"
+    cours:
+      - { nom: "Installation de matériel et systèmes d'exploitation", heures: 45 }
+      - { nom: "Système d'exploitation Linux", heures: 60 }
+      - { nom: "Système d'exploitation Windows", heures: 75 }
+      - { nom: "Introduction à la réseautique", heures: 60 }
+      - { nom: "Administration système Linux", heures: 75 }
+      - { nom: "Déploiement des services de réseaux Linux", heures: 60 }
+      - { nom: "Déploiement des services des réseaux Windows", heures: 60 }
+      - { nom: "Notion de communication et de routage", heures: 45 }
+      - { nom: "Déploiement des services Web et de messagerie électronique sous Linux", heures: 75 }
+      - { nom: "Déploiement des services Web et de messagerie électronique sous Windows", heures: 75 }
+      - { nom: "Scriptage sous Linux avec Python", heures: 45 }
+      - { nom: "Virtualisation des systèmes", heures: 45 }
+      - { nom: "Exploitation d'un système de gestion de bases de données", heures: 60 }
+      - { nom: "Scriptage sous Windows avec Powershell", heures: 45 }
+      - { nom: "Sécurité des réseaux informatiques I", heures: 45 }
+      - { nom: "Stratégies de recherche d'emploi", heures: 45 }
+      - { nom: "Technologie infonuagique et stockage", heures: 45 }
+      - { nom: "Automatisation de systèmes", heures: 60 }
+      - { nom: "Projet de fin d'études", heures: 75 }
+      - { nom: "Sécurité des réseaux informatiques II", heures: 60 }
+      - { nom: "Téléphonie et télécommunication", heures: 45 }
+      - { nom: "Stage en entreprise", heures: 255 }

@@ -24,3 +24,27 @@ jobs:
       - name: Lint
         working-directory: angular
         run: npm run lint
+
+  test-react:
+    name: Test du site React
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Utiliser Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Installer les dépendances
+        working-directory: web
+        run: npm ci
+      - name: Valider les données
+        working-directory: web
+        run: npm run valider
+      - name: Lint et tests
+        working-directory: web
+        run: |
+          npm run lint
+          npm test
+      - name: Build
+        working-directory: web
+        run: npm run build

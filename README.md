@@ -2,7 +2,22 @@
 
 Ce fichier sert à expliquer comment modifier l'appli ou le contenu du site du département d'informatique du collège Edouard Montpetit.
 
-## Changer du contenu
+## Nouveau site React (`web/`, publié sous /react/)
+
+- Données en YAML : `data/profs/<courriel>.yaml` (une fiche par prof), `data/programmes/`, `data/cours.yaml`,
+  `data/cours-service.yaml`, `data/laboratoires.yaml`, `data/faq.yaml`, `data/bot.yaml`, `data/logiciels.yaml`.
+- Mode d'emploi pour les profs : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+- Développement : `cd web && npm ci && npm run dev`, puis http://localhost:3000/react
+- `data/calendrier-scolaire.yaml` est généré à partir du PDF officiel du cégep : `npm run calendrier`
+  (aussi lancé à chaque déploiement et chaque matin de semaine ; `-- --verifier` dit seulement ce qui a changé).
+- `data/laboratoires.yaml` vient du PDF « Horaire du local » publié dans le dépôt 420-SN1 (des images : à recopier à chaque session).
+  Il a servi à préremplir les fiches de profs (`prerempli: true`, à enlever une fois vérifié). Il alimente le bandeau du bas et la page `/react/maintenant/`. Les logos de l'en-tête sont dans `web/public/images/liens/`.
+- Liens directs pour les sites de cours : `/react/<prof>/horaire/` et `/react/<prof>/calendrier/`, avec `?cours=420-5N6-EM` au besoin.
+- Vérifications : `npm run valider`, `npm run lint`, `npm test`, `npm run build`
+- Tant que les deux sites cohabitent, le site Angular lit encore les fichiers JSON de `data/` :
+  un changement doit être fait aux deux endroits pour apparaître sur les deux sites.
+
+## Changer du contenu (ancien site Angular)
 
 Le contenu du site est fourni par plusieurs fichiers JSON que vous pouvez modifier sans
 toucher à l'application du site.

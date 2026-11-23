@@ -1,0 +1,42 @@
+# MODÈLE pour un nouveau prof.
+# 1. Copie ce fichier sous le nom <ton-courriel>.yaml (ex. marie.tremblay.yaml), sans @cegepmontpetit.ca
+# 2. Remplis les champs ; les lignes qui commencent par # sont des commentaires (ignorés).
+# 3. Ta page sera https://info.cegepmontpetit.ca/react/<ton-courriel>
+# Mode d'emploi complet : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+
+nom: "Prénom Nom"
+courriel: prenom.nom              # sans @cegepmontpetit.ca, identique au nom du fichier
+bureau: "E-2xx"
+# photo: prenom.jpg               # ajoute ta photo dans data/photos/ (format portrait de préférence)
+# poste: "2575"                   # poste téléphonique
+# video: abc123XYZ                # identifiant d'une vidéo YouTube de présentation
+# github: mon-pseudo
+# linkedin: mon-profil
+# site: https://mon-site.com
+# presentation: "Une ou deux phrases pour te présenter aux étudiants."
+
+cours: [420-1P6-EM]               # numéros des cours que tu donnes cette session
+session: H2027                    # A = automne, H = hiver, E = été
+
+# ---------- Horaire de la semaine ----------
+# type : cours, dispo, centre-aide, reunion ou autre
+# jour : lundi, mardi, mercredi, jeudi ou vendredi
+# heures entre guillemets : "08:00"
+horaire:
+  debut: "08:00"                  # première heure affichée
+  fin: "18:00"                    # dernière heure affichée
+  plages:
+    - { jour: lundi, debut: "08:00", fin: "11:00", type: cours, cours: 420-1P6-EM, groupe: 1010, local: D-0601 }
+    - { jour: mardi, debut: "13:00", fin: "15:00", type: dispo, local: E-2xx }
+    - { jour: mercredi, debut: "12:00", fin: "14:00", type: reunion, titre: Réunion de département }
+
+# ---------- Calendrier : tes dates à toi ----------
+# Les congés, journées pédagogiques et horaires modifiés du cégep sont ajoutés automatiquement.
+# type : remise, examen, cours, absence, deplacement, activite ou autre
+# absence : les cours et les dispos de ces jours sont annulés (ajoute cours: pour n'annuler qu'un cours)
+# deplacement : le cours du jour « remplace » est repris à « date » (souvent une journée JR)
+calendrier:
+  - { date: 2027-02-15, titre: Remise du TP1, cours: 420-1P6-EM, type: remise }
+  - { date: 2027-03-22, titre: Examen intra, cours: 420-1P6-EM, type: examen }
+  - { date: 2027-04-05, au: 2027-04-06, titre: Absent (colloque), type: absence, description: Colloque à Québec. }
+  - { date: 2027-04-07, remplace: 2027-04-05, type: deplacement, cours: 420-1P6-EM, groupe: 1010 }   # ajoute debut, fin, local si différents

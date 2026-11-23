@@ -1,0 +1,77 @@
+# Foire aux questions. Chaque entrée : question, reponse, categories (pour filtrer), liens (pages du site ou URL).
+- question: Qu'est-ce que je dois installer sur mon ordi pour les cours?
+  reponse: Dans chaque cours, les profs vont te montrer comment installer les logiciels nécessaires. Tu peux aussi visiter la page sur les logiciels gratuits.
+  categories:
+    - logiciels
+  liens:
+    - /logiciels
+- question: À quoi ressemblent les labos?
+  reponse: Nous avons des laboratoires de 24 postes où se donnent tous les cours. Même s'il y a de la théorie, tu as un poste pour mettre en pratique tout de suite ce que tu as appris.
+  categories:
+    - locaux
+  liens: []
+- question: Je cherche désespérément un local
+  reponse: Tu peux consulter cette carte interactive du cégep
+  categories:
+    - locaux
+  liens:
+    - https://montpetit-tour.cegepmontpetit.ca/plan-longueuil/
+- question: Est-ce que je dois acheter un portable?
+  reponse: Tu peux travailler chez toi avec un portable ou une tour. Au collège, nous te fournissons un ordinateur pour travailler donc ce n'est pas nécessaire d'avoir un ordinateur chez soi mais la plupart des étudiants choisissent quand même d'en avoir un.
+  categories:
+    - ordi
+  liens: []
+- question: Quelles spécifications pour acheter un ordi pour la technique?
+  reponse: Tout d'abord, tu peux faire ta technique avec les ordis fournis au collège. Tu n'es pas obligés d'avoir un ordi. Au début de la technique, les cours sont moins demandant pour ton ordi. Par contre, si tu achètes un ordi qui doit aller jusqu'à la fin de tes études, nous recommandons d'acheter un processeur Intel i5 ou Ryzen 3600 ou supérieur. Au niveau stockage, on te recommande 512 Go en SSD, tu peux t'en sortir avec 256Go en programmation mais pour réseau 512 ou même 1To. Côté mémoire vive, si tu vas en réseau ça prend 16Go, en programmation tu peux sans doute y arriver avec 8Go mais c'est moins confortable. Côté logiciel, tu verras qu'on fournit tout. Si côté argent, c'est difficile, contacte-nous et on t'indiquera des ressources.
+  categories:
+    - ordi
+  liens: []
+- question: Quelle formation si je veux faire de l'intelligence artificielle?
+  reponse: La formation habituelle pour l'IA, c'est l'université en informatique, à l'université de Montréal par exemple. Au CEGEP, nous avons le pré-universitaire et les techniques. PréU, ça prend 2 ans et tu peux continuer au bac en info, la technique prend 3 ans et tu peux aussi continuer au bac (avec des cours crédités). La grosse différence, dans la technique tu vas faire dans les 1000 heures de cours de programmation, au préU, une centaine et le reste dans d'autres matières.
+  categories:
+    - IA
+    - professions
+  liens:
+    - https://www.umontreal.ca/intelligenceartificielle/
+- question: Quelle formation si je veux faire du jeu video?
+  reponse: La formation habituelle des pros du jeu video, c'est le Bac en informatique, si possible accompagné de projets de jeux que tu as fait par toi-même. Au CEGEP, nous avons le pré-universitaire et les techniques. PréU, ça prend 2 ans et tu peux continuer au bac en info, la technique prend 3 ans et tu peux aussi continuer au bac (avec des cours crédités). La grosse différence, dans la technique vas faire dans les 1000 heures de cours de programmation, au préU, une centaine et le reste dans d'autres matières.
+  categories:
+    - jeux video
+    - professions
+  liens: []
+- question: Ça veut dire quoi copier ou plagier en info?
+  reponse: Quand on écrit du code ou qu'on monte des serveurs ou des réseaux, on peut se demander ce qu'on a le droit d'échanger avec les autres étudiants ou pas. Pour ça on a fait une page, suis le lien
+  categories:
+    - plagiat
+    - travaux
+  liens:
+    - /plagiat
+- question: Les travaux c'est seul ou en équipe?
+  reponse: Ça dépend des cours. On retrouve les travaux d'équipe plutôt à la fin de la formation. Le projet des finissant se fait intégralement en équipe. Dans tous les cas, chaque prof explique tout ça au premier cours.
+  categories:
+    - équipe
+    - travaux
+  liens: []
+- question: Est-ce que je peux travailler pendant mes études?
+  reponse: Ta présence et ton implication sont nécessaires pour tes cours. C'est impossible d'avoir un emploi à temps et suivre la formation. Par contre, de nombreux étudiants ont un emploi à temps partiel. Tu peux également commencer à travailler en info pendant ta formation, plusieurs ont déjà un emploi en 3ème année (à temps partiel).
+  categories:
+    - professions
+    - travail
+  liens: []
+# ---------- Questions sur l'IA (réponses à valider par le département) ----------
+- question: Est-ce que j'ai le droit d'utiliser ChatGPT, Copilot ou une autre IA dans mes travaux ?
+  reponse: Ça dépend du cours et du travail. Chaque prof indique dans son plan de cours et dans l'énoncé de chaque travail ce qui est permis. Dans le doute, demande avant. Remettre un travail fait par une IA quand ce n'est pas permis est traité comme du plagiat.
+  categories: [IA, plagiat, travaux]
+  liens: [/plagiat]
+- question: Est-ce que l'IA va remplacer les programmeurs ?
+  reponse: L'IA change le métier, comme l'ont fait avant elle les compilateurs, Internet ou Stack Overflow. Elle écrit du code plus vite, mais quelqu'un doit comprendre le problème, découper une solution, vérifier, tester, sécuriser et maintenir le code. Plus les outils sont puissants, plus il faut de bonnes bases pour bien s'en servir.
+  categories: [IA, professions]
+  liens: []
+- question: Est-ce qu'on apprend l'intelligence artificielle au département ?
+  reponse: "La technique t'apprend à programmer solidement, ce qui est la base pour travailler avec l'IA. En Sciences de la nature, le département donne le cours au choix « Réseaux de neurones et sciences » (420-4A4). Au DEC-BAC, le cours IFT 615 Intelligence artificielle se donne à l'Université de Sherbrooke."
+  categories: [IA, programmes]
+  liens: [/cours-service, /programmes/dec-bac]
+- question: Si l'IA peut faire mes exercices, pourquoi les faire moi-même ?
+  reponse: Pour la même raison qu'on va au gym au lieu de demander à quelqu'un de soulever les poids à notre place. Les exercices servent à construire ta compréhension. Aux examens et en stage, c'est toi qui dois comprendre ce que fait le code.
+  categories: [IA, travaux]
+  liens: []

@@ -1,0 +1,23 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Mail } from "lucide-react";
+import { Conteneur, TitrePage } from "@/components/titre-page";
+import { bouton } from "@/lib/bouton";
+
+export const metadata: Metadata = { title: "Nous joindre" };
+
+export default function PageContact() {
+  return (
+    <>
+      <TitrePage titre="Nous joindre" sousTitre="Une seule adresse pour toutes tes questions sur les programmes du département." />
+      <Conteneur className="space-y-6">
+        <a href="mailto:coordination.info@cegepmontpetit.ca" className={bouton({ size: "lg" }, "h-auto py-3 text-base")}>
+          <Mail className="size-5" /> coordination.info@cegepmontpetit.ca
+        </a>
+        <p className="max-w-2xl text-muted-foreground">
+          Tu cherches un prof en particulier ? Chaque prof a sa page avec son bureau, son courriel et ses disponibilités : <Link href="/profs" className="text-primary underline">voir les profs</Link>.
+        </p>
+      </Conteneur>
+    </>
+  );
+}
