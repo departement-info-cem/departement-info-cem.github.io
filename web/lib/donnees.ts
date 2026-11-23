@@ -160,7 +160,7 @@ export function sitesCours(): SiteCours[] {
       url: c.url!,
       places: [
         ...programmes().flatMap((p) => p.sessions.filter((s) => s.cours.some((x) => x.no === c.no)).map((s) => ({ id: p.id, court: p.court, session: s.titre }))),
-        ...coursService().filter((p) => p.cours.some((x) => x.info.no === c.no)).map((p) => ({ id: "service", court: p.court, session: "Cours de service" })),
+        ...coursService().filter((p) => p.cours.some((x) => x.info.no === c.no)).map((p) => (p.discipline ? { id: "sn", court: p.court, session: p.programme } : { id: "service", court: p.court, session: "Cours de service" })),
       ],
     }));
 }

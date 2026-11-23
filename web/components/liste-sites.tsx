@@ -16,7 +16,9 @@ export function ListeSites({ sites, filtres }: { sites: SiteCours[]; filtres: { 
     .filter((s) => !filtre || s.places.some((p) => p.id === filtre))
     .filter((s) => mots.every((m) => simplifier(`${s.no} ${s.nom}`).includes(m)))
     .map((s) => ({ s, place: s.places.find((p) => p.id === filtre) ?? s.places[0] }));
-  const groupes = [...new Set(visibles.map((v) => v.place?.session ?? "Autres"))].sort((a, b) => Number(a === "Autres" || a === "Cours de service") - Number(b === "Autres" || b === "Cours de service") || a.localeCompare(b, "fr", { numeric: true }));
+  // Les sessions d'abord, puis Sciences de la nature, les cours de service et le reste
+  const rang = (g: string) => ["Sciences de la nature", "Cours de service", "Autres"].indexOf(g);
+  const groupes = [...new Set(visibles.map((v) => v.place?.session ?? "Autres"))].sort((a, b) => rang(a) - rang(b) || a.localeCompare(b, "fr", { numeric: true }));
 
   return (
     <div>

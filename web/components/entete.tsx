@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 export const GRILLES = [
   ...GRILLES_DIRECTES,
   { href: "/programmes", texte: "Tous les programmes", sousTitre: "AEC, comparateur" },
-  { href: "/cours-service", texte: "Cours de service", sousTitre: "Sciences, TIM, TAG, Z03" },
+  { href: "/cours-service", texte: "Sciences de la nature et cours de service", sousTitre: "SN1, TIM, TAG, Z03" },
 ];
 
 export const NAVIGATION = [

@@ -9,6 +9,7 @@ export const FILTRES_SITES = [
   { id: "dec-prog", texte: "DEC Dév" },
   { id: "dec-reseau", texte: "DEC Réseau" },
   { id: "dec-bac", texte: "DEC-BAC" },
+  { id: "sn", texte: "Sciences de la nature" },
   { id: "service", texte: "Cours de service" },
 ];
 

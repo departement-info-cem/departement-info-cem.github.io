@@ -141,12 +141,14 @@ export const laboratoireSchema = z
 export const laboratoiresSchema = z.array(laboratoireSchema);
 export type Laboratoire = z.infer<typeof laboratoireSchema>;
 
-// data/cours-service.yaml : cours donnés par le département dans d'autres programmes
+// data/cours-service.yaml : Sciences de la nature (où l'informatique est une discipline) et cours de service
 export const coursServiceSchema = z.array(
   z
     .object({
       programme: z.string(),
       court: z.string(),
+      /** l'informatique est une discipline de ce programme : ce n'est pas un cours de service */
+      discipline: z.boolean().default(false),
       lien: z.url().optional(),
       description: z.string().optional(),
       cours: z.array(z.object({ no: z.string(), quand: z.array(z.string()).default([]), note: z.string().optional() }).strict()),

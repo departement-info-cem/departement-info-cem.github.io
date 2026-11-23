@@ -7,7 +7,7 @@ const PAGES: ElementRecherche[] = [
   { type: "page", titre: "Sites web des cours", href: "/sites", motsCles: "notes de cours materiel" },
   { type: "page", titre: "En ce moment : profs disponibles et laboratoires libres", href: "/maintenant", motsCles: "labo local dispo" },
   { type: "page", titre: "Calendrier scolaire", href: "/calendrier", motsCles: "relache conge JR EC examen session" },
-  { type: "page", titre: "Cours de service", href: "/cours-service", motsCles: "sciences nature SN1 TIM TAG 905 964 983 Z03" },
+  { type: "page", titre: "Sciences de la nature et cours de service", href: "/cours-service", motsCles: "sciences nature SN1 TIM TAG 905 964 983 Z03" },
   { type: "page", titre: "Mini-jeux de logique : programmation et réseau", href: "/jeux", motsCles: "test python ping robot" },
   { type: "page", titre: "Conseils aux nouveaux étudiants", href: "/nouveau", motsCles: "sauvegarde objets perdus laboratoires dispo" },
   { type: "page", titre: "Logiciels gratuits", href: "/logiciels", motsCles: "github education pack jetbrains office vmware visual studio" },

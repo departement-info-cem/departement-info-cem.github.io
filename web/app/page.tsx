@@ -124,7 +124,7 @@ export default function Accueil() {
               <Sparkles className="size-6" />
             </span>
             <span>
-              <span className="block font-bold group-hover:text-primary">Cours de service</span>
+              <span className="block font-bold group-hover:text-primary">Sciences de la nature et cours de service</span>
               <span className="mt-1 block text-sm">Programmation en sciences (SN1), TIM, TAG et cours à option Z03.</span>
             </span>
           </Link>

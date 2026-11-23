@@ -1,7 +1,9 @@
-# Cours donnés par le département d'informatique dans d'autres programmes du cégep.
+# Cours donnés par le département d'informatique en Sciences de la nature et dans d'autres programmes du cégep.
+# « discipline: true » : l'informatique est une discipline du programme (Sciences de la nature), ce n'est pas un cours de service.
 # Les numéros viennent de data/cours.yaml. Source : grilles publiées sur cegepmontpetit.ca (novembre 2026).
 - programme: Sciences de la nature
   court: SN
+  discipline: true
   lien: https://www.cegepmontpetit.ca/programmes/sciences-nature
   description: La programmation scientifique en Python, pour résoudre des problèmes de sciences avec du code.
   cours:
