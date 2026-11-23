@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BookOpen, CalendarDays, Clock, ExternalLink, Link2, Mail, MapPin, Pencil, Phone, Video } from "lucide-react";
+import { BookOpen, CalendarDays, Clock, ExternalLink, Link2, Mail, MapPin, Pencil, Phone } from "lucide-react";
 import { calendrierScolaire, indexCours, prof, profs } from "@/lib/donnees";
 import { lienEdition, photo } from "@/lib/chemins";
 import { AvatarProf } from "@/components/carte-prof";
@@ -96,11 +96,6 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
               <TabsTrigger value="calendrier">
                 <CalendarDays className="size-4" /> Calendrier
               </TabsTrigger>
-              {p.video && (
-                <TabsTrigger value="video">
-                  <Video className="size-4" /> Présentation
-                </TabsTrigger>
-              )}
             </TabsList>
             <TabsContent value="horaire">
               {session && <p className="mb-3 text-sm text-muted-foreground">Horaire de la session {session.nom}. Survole une plage pour les détails.</p>}
@@ -113,13 +108,6 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
               </p>
               <CalendrierMois scolaire={scolaire} plages={p.horaire?.plages} evenements={p.calendrier} sessionId={p.session} />
             </TabsContent>
-            {p.video && (
-              <TabsContent value="video">
-                <div className="aspect-video overflow-hidden rounded-lg border">
-                  <iframe className="size-full" src={`https://www.youtube-nocookie.com/embed/${p.video}`} title={`Présentation de ${p.nom}`} allowFullScreen />
-                </div>
-              </TabsContent>
-            )}
           </Tabs>
         </div>
 

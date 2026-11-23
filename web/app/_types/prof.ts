@@ -90,7 +90,6 @@ export const profSchema = z
     bureau: z.string().optional(),
     photo: z.string().optional(),
     poste: texteOuNombre.optional(),
-    video: z.string().optional(),
     github: z.string().optional(),
     linkedin: z.string().optional(),
     site: z.url({ error: "site : adresse web invalide (commence par https://)" }).optional(),

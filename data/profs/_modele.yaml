@@ -9,7 +9,6 @@ courriel: prenom.nom              # sans @cegepmontpetit.ca, identique au nom du
 bureau: "E-2xx"
 # photo: prenom.jpg               # ajoute ta photo dans data/photos/ (format portrait de préférence)
 # poste: "2575"                   # poste téléphonique
-# video: abc123XYZ                # identifiant d'une vidéo YouTube de présentation
 # github: mon-pseudo
 # linkedin: mon-profil
 # site: https://mon-site.com

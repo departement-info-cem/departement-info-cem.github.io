@@ -10,7 +10,6 @@ import { BotOrientation } from "@/components/bot-orientation";
 import { Apparition } from "@/components/apparition";
 import { AvatarProf } from "@/components/carte-prof";
 import { StatutProf } from "@/components/statut-prof";
-import { VideoLegere } from "@/components/video-legere";
 import { bouton } from "@/lib/bouton";
 
 const PHOTOS = ["gang.jpg", "tablo.jpg", "blond.jpg", "jo-jm.jpg", "grimace.jpg", "hugo.jpg", "home.jpg", "college.jpg"];
@@ -25,7 +24,6 @@ const ICONES_PROGRAMMES: Record<string, typeof Code2> = {
 
 export default function Accueil() {
   const listeProfs = profs();
-  const avecVideo = listeProfs.filter((p) => p.video).slice(0, 6);
   const listeProgrammes = programmes();
   const nbCours420 = new Set(listeProgrammes.flatMap((p) => p.sessions.flatMap((s) => s.cours.filter((c) => c.departement).map((c) => c.no)))).size;
 
@@ -166,13 +164,6 @@ export default function Accueil() {
               </Link>
             ))}
         </div>
-        {avecVideo.length > 0 && (
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {avecVideo.map((p) => (
-              <VideoLegere key={p.id} id={p.video!} titre={p.nom} />
-            ))}
-          </div>
-        )}
       </section>
 
       {/* ---------- Déjà étudiant ---------- */}
