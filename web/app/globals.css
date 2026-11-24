@@ -223,15 +223,14 @@ html:has(.bandeau-bas) { scroll-padding-bottom: 3rem; }
 .bandeau-piste > * { flex: 1 0 auto; min-width: 50%; }
 .bandeau-liste { display: flex; align-items: center; gap: 2rem; padding-inline: 1rem; white-space: nowrap; }
 .bandeau-liste > li { display: flex; align-items: center; gap: 0.375rem; }
-.bandeau:hover .bandeau-piste, .bandeau:focus-within .bandeau-piste, .bandeau-pause .bandeau-piste { animation-play-state: paused; }
-/* En pause, on peut faire défiler à la main */
-.bandeau-pause { overflow-x: auto; scrollbar-width: none; }
+/* :focus-visible et non :focus-within : après un clic, le lien garde le focus et le bandeau resterait arrêté */
+.bandeau:hover .bandeau-piste, .bandeau:has(:focus-visible) .bandeau-piste, .bandeau-pause .bandeau-piste { animation-play-state: paused; }
+/* À l'arrêt, on peut faire défiler à la main */
+.bandeau-pause, .bandeau-fixe { overflow-x: auto; scrollbar-width: none; }
+/* Animations réduites : une seule copie, immobile */
+.bandeau-fixe .bandeau-piste { animation: none; min-width: 100%; }
+.bandeau-fixe .bandeau-copie { display: none; }
 @keyframes bandeau { to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) {
-  .bandeau { overflow-x: auto; scrollbar-width: none; }
-  .bandeau-piste { animation: none; min-width: 100%; }
-  .bandeau-copie { display: none; }
-}
 
 /* Fenêtre terminal du bot d'orientation (voir components/bot-orientation.tsx).
    Fines lignes de balayage et lueur du texte, comme un vieil écran. Les lignes s'affichent l'une
