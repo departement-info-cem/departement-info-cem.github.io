@@ -87,7 +87,10 @@ verifier(coursServiceSchema, "cours-service.yaml")?.forEach((p) =>
   }),
 );
 verifier(faqSchema, "faq.yaml");
-verifier(logicielsSchema, "logiciels.yaml");
+const logos = new Set(fs.readdirSync(path.resolve(__dirname, "..", "public", "images", "logiciels")));
+verifier(logicielsSchema, "logiciels.yaml")?.forEach((l) => {
+  if (l.logo && !logos.has(l.logo)) signaler("erreur", "logiciels.yaml", `${l.nom} : le logo ${l.logo} n'existe pas dans web/public/images/logiciels/`);
+});
 const bot = verifier(botSchema, "bot.yaml");
 if (bot) {
   if (!bot.questions[bot.depart]) signaler("erreur", "bot.yaml", `la question de départ « ${bot.depart} » n'existe pas`);
