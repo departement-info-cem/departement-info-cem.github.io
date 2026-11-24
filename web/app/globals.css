@@ -233,6 +233,30 @@ html:has(.bandeau-bas) { scroll-padding-bottom: 3rem; }
   .bandeau-copie { display: none; }
 }
 
+/* Fenêtre terminal du bot d'orientation (voir components/bot-orientation.tsx).
+   Fines lignes de balayage et lueur du texte, comme un vieil écran. Les lignes s'affichent l'une
+   après l'autre au délai --delai, comme la sortie d'un programme, et le curseur clignote.
+   Si l'utilisateur préfère réduire les animations, tout s'affiche d'un coup et le curseur reste fixe. */
+.terminal-ecran {
+  background-image: repeating-linear-gradient(to bottom, rgb(255 255 255 / 0.03) 0 1px, transparent 1px 3px);
+  text-shadow: 0 0 6px color-mix(in srgb, currentColor 35%, transparent);
+}
+/* Barre de progression de --blocs blocs, comme [▮▮▮▮▮▯▯▯] : verts jusqu'à --progres, pâles ensuite */
+@property --progres { syntax: "<percentage>"; inherits: false; initial-value: 0%; }
+.terminal-barre {
+  background: linear-gradient(to right, var(--cem-vert) var(--progres), rgb(255 255 255 / 0.15) 0);
+  mask: repeating-linear-gradient(to right, #000 0 calc(100% / var(--blocs) - 2px), transparent 0 calc(100% / var(--blocs)));
+}
+@keyframes terminal-affiche { from { opacity: 0; } }
+@keyframes terminal-curseur { 50% { opacity: 0; } }
+@keyframes terminal-remplit { from { --progres: 0%; } }
+@media (prefers-reduced-motion: no-preference) {
+  .terminal-affiche { animation: terminal-affiche 1ms var(--delai, 0ms) both; }
+  .terminal-curseur { animation: terminal-affiche 1ms var(--delai, 0ms) both, terminal-curseur 1.1s steps(1) var(--delai, 0ms) infinite; }
+  .terminal-barre { transition: --progres 0.5s; }
+  .terminal-remplit { animation: terminal-remplit 0.6s steps(var(--blocs)) var(--delai, 0ms) both; }
+}
+
 /* Formes graphiques du pied de page (voir components/formes-pied-de-page.tsx), reprises des
    sites de cours : rondes, inclinées à 35° (guide de normes graphiques, p. 11) et disposées
    à contresens. Un aplat vert entre par le bas et un filet vert pâle part du coin supérieur
