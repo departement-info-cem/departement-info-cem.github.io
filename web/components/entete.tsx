@@ -35,6 +35,9 @@ export const RESSOURCES = [
   { href: "/contact", texte: "Nous joindre" },
 ];
 
+// La barre complète (logo, liens, icônes) tient en 985 px : elle s'affiche dès lg (1024 px), pas xl,
+// pour les portables à petit écran ou en mise à l'échelle 125-150 %. Ajout d'un lien : revérifie à 1024 px.
+
 // Tout ce qui est cliquable dans la barre a la même hauteur (36 px), le même arrondi et le même survol.
 const BOUTON = "inline-flex h-9 items-center gap-1 whitespace-nowrap rounded-md px-3 text-sm font-semibold transition-colors hover:bg-white/10";
 const BOUTON_ICONE ="inline-flex size-9 shrink-0 items-center justify-center rounded-md transition-colors hover:bg-white/10";
@@ -53,7 +56,7 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
           <Logo inverse taille={40} />
         </Link>
 
-        <nav className="ml-auto hidden items-center gap-1 xl:flex" aria-label="Navigation principale">
+        <nav className="ml-auto hidden items-center gap-1 lg:flex" aria-label="Navigation principale">
           <div className="group relative">
             <button className={cn(BOUTON, GRILLES.some((l) => actif(l.href)) && ACTIF)} aria-haspopup="true">
               Grilles <ChevronDown className="size-4" />
@@ -86,14 +89,14 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
           </div>
         </nav>
 
-        <span className="hidden h-6 w-px bg-white/20 xl:block" aria-hidden="true" />
+        <span className="hidden h-6 w-px bg-white/20 lg:block" aria-hidden="true" />
 
-        <div className="ml-auto flex shrink-0 items-center gap-1 xl:ml-0">
+        <div className="ml-auto flex shrink-0 items-center gap-1 lg:ml-0">
           <RechercheGlobale index={index} className={BOUTON_ICONE} />
           <MenuLiens />
           <ChoixTheme />
           <Sheet>
-            <SheetTrigger className={cn(BOUTON_ICONE, "xl:hidden")} aria-label="Ouvrir le menu">
+            <SheetTrigger className={cn(BOUTON_ICONE, "lg:hidden")} aria-label="Ouvrir le menu">
               <Menu className="size-5" />
             </SheetTrigger>
             <SheetContent side="right" className="w-72 overflow-y-auto">
