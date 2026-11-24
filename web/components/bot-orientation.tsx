@@ -55,12 +55,14 @@ export function BotOrientation({ bot, compact = false }: { bot: Bot; compact?: b
   }, [historique.length]);
 
   return (
-    <div className="overflow-hidden rounded-xl border border-white/10 bg-black text-cem-gris-1 shadow-xl">
-      <div className="flex items-center gap-2 border-b border-white/10 bg-cem-marine px-4 py-2">
+    // Barre de titre gris pâle et contour gris 3 : la fenêtre se détache du fond partout où le bot est affiché
+    // (bleu marine de l'accueil, page blanche, thème sombre).
+    <div className="overflow-hidden rounded-xl border border-cem-gris-3 bg-black text-cem-gris-1 shadow-xl">
+      <div className="flex items-center gap-2 bg-cem-gris-1 px-4 py-2">
         <span className="size-3 rounded-full bg-cem-rouge" />
         <span className="size-3 rounded-full bg-cem-jaune" />
         <span className="size-3 rounded-full bg-cem-vert" />
-        <span className="ml-2 font-mono text-xs text-cem-gris-2">orientation.sh : est-ce que l&apos;info est pour toi ?</span>
+        <span className="ml-2 font-mono text-xs text-cem-marine">orientation.sh : est-ce que l&apos;info est pour toi ?</span>
       </div>
       <div className="h-1 bg-white/10" role="progressbar" aria-label="Progression" aria-valuenow={progression} aria-valuemin={0} aria-valuemax={100}>
         <div className="h-full bg-cem-vert transition-all duration-500" style={{ width: `${progression}%` }} />
