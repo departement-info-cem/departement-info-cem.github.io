@@ -4,7 +4,7 @@
 
 nom: "Jean-François Paradis"
 courriel: jf.paradis  # sans @cegepmontpetit.ca
-bureau: "E-213"
+# bureau: "E-213"  # pas de cours cette session
 photo: jfp.png  # fichier dans data/photos/
 github: paradisjf
 linkedin: jean-francois-paradis-49ab782
