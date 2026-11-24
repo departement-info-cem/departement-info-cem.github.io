@@ -1,9 +1,10 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
 import { BookOpen, CircleHelp, FileText, GraduationCap, Search, User, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { AvatarProf } from "@/components/carte-prof";
 import { simplifier } from "@/lib/texte";
 
@@ -20,12 +21,22 @@ export type ElementRecherche = {
 
 const ICONES = { prof: User, cours: BookOpen, faq: CircleHelp, page: FileText, programme: GraduationCap };
 
+// Sur Mac (et iPad), le raccourci s'écrit ⌘ K. Le serveur ne connaît pas l'appareil : il suppose Ctrl.
+function useMac() {
+  return useSyncExternalStore(
+    () => () => {},
+    () => /Mac|iPhone|iPad/.test(navigator.userAgent),
+    () => false,
+  );
+}
+
 // Le bouton prend le style que lui donne l'en-tête (className).
 export function RechercheGlobale({ index, className }: { index: ElementRecherche[]; className?: string }) {
   const [ouvert, setOuvert] = useState(false);
   const [texte, setTexte] = useState("");
   const [selection, setSelection] = useState(0);
   const router = useRouter();
+  const mac = useMac();
 
   // Raccourci clavier Ctrl+K (ou Cmd+K sur Mac)
   useEffect(() => {
@@ -59,9 +70,15 @@ export function RechercheGlobale({ index, className }: { index: ElementRecherche
 
   return (
     <>
-      <button onClick={() => setOuvert(true)} className={className} aria-label="Rechercher" title="Rechercher (Ctrl K)">
-        <Search className="size-5" />
-      </button>
+      <Tooltip>
+        <TooltipTrigger onClick={() => setOuvert(true)} className={className} aria-label="Rechercher" aria-keyshortcuts={mac ? "Meta+K" : "Control+K"}>
+          <Search className="size-5" />
+        </TooltipTrigger>
+        <TooltipContent side="bottom" className="gap-0.5 px-1.5">
+          <kbd data-slot="kbd" className="bg-muted px-1 font-mono">{mac ? "⌘" : "Ctrl"}</kbd>
+          <kbd data-slot="kbd" className="bg-muted px-1 font-mono">K</kbd>
+        </TooltipContent>
+      </Tooltip>
       <Dialog open={ouvert} onOpenChange={setOuvert}>
         <DialogContent showCloseButton={false} className="top-[15%] translate-y-0 gap-0 overflow-hidden p-0 sm:max-w-xl">
           <DialogTitle className="sr-only">Rechercher sur le site</DialogTitle>
