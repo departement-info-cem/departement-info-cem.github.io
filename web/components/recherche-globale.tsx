@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
-import { BookOpen, CircleHelp, FileText, GraduationCap, Search, User } from "lucide-react";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+import { BookOpen, CircleHelp, FileText, GraduationCap, Search, User, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogClose, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { AvatarProf } from "@/components/carte-prof";
 import { simplifier } from "@/lib/texte";
@@ -80,25 +80,37 @@ export function RechercheGlobale({ index, className }: { index: ElementRecherche
         </TooltipContent>
       </Tooltip>
       <Dialog open={ouvert} onOpenChange={setOuvert}>
-        <DialogContent className="top-[15%] translate-y-0 gap-2 p-3 sm:max-w-xl">
+        <DialogContent showCloseButton={false} className="top-[15%] translate-y-0 gap-0 overflow-hidden p-0 sm:max-w-xl">
           <DialogTitle className="sr-only">Rechercher sur le site</DialogTitle>
-          <Input
-            autoFocus
-            placeholder="Un prof, un cours, une question..."
-            value={texte}
-            onChange={(e) => {
-              setTexte(e.target.value);
-              setSelection(0);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "ArrowDown") setSelection((s) => Math.min(s + 1, resultats.length - 1));
-              if (e.key === "ArrowUp") setSelection((s) => Math.max(s - 1, 0));
-              if (e.key === "Enter" && resultats[selection]) aller(resultats[selection].href);
-            }}
-            className="h-11 text-base"
-          />
-          <ul className="max-h-[60vh] overflow-y-auto" role="listbox">
-            {texte && resultats.length === 0 && <li className="p-3 text-sm text-muted-foreground">Aucun résultat pour « {texte} ».</li>}
+          {/* Loupe, champ et × sur une même rangée, séparée des résultats par un trait */}
+          <div className="flex items-center gap-3 px-4">
+            <Search className="size-5 shrink-0 text-muted-foreground" aria-hidden />
+            <input
+              autoFocus
+              aria-label="Rechercher sur le site"
+              placeholder="Un prof, un cours, une question..."
+              value={texte}
+              onChange={(e) => {
+                setTexte(e.target.value);
+                setSelection(0);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowDown") setSelection((s) => Math.min(s + 1, resultats.length - 1));
+                if (e.key === "ArrowUp") setSelection((s) => Math.max(s - 1, 0));
+                if (e.key === "Enter" && resultats[selection]) aller(resultats[selection].href);
+              }}
+              className="h-14 min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-muted-foreground"
+            />
+            <DialogClose
+              render={<Button variant="ghost" size="icon-sm" className="-mr-1 text-muted-foreground" />}
+              aria-label="Fermer"
+              title="Fermer (Échap)"
+            >
+              <X className="size-5" />
+            </DialogClose>
+          </div>
+          <ul className={`max-h-[60vh] overflow-y-auto p-2 ${texte ? "border-t" : "hidden"}`} role="listbox">
+            {texte && resultats.length === 0 && <li className="px-2 py-3 text-sm text-muted-foreground">Aucun résultat pour « {texte} ».</li>}
             {resultats.map((r, i) => {
               const Icone = ICONES[r.type];
               return (
