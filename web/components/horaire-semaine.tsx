@@ -130,7 +130,7 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
                         </div>
                       )}
                     </TooltipTrigger>
-                    <TooltipContent>
+                    <TooltipContent className="flex-col items-start gap-0.5">
                       <p className="font-semibold">{titre}</p>
                       <p>
                         {LIBELLES_JOURS[p.jourNormalise]} {p.debut}–{p.fin}

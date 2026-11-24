@@ -24,11 +24,14 @@ Quand une PR change l'apparence du site, sa description montre l'avant et l'apr�
   if git fetch -q origin captures-pr 2>/dev/null; then git worktree add -q --detach --no-checkout "$D" FETCH_HEAD && git -C "$D" reset -q
   else git worktree add -q --orphan -b captures-pr "$D"; fi  # la première fois
   mkdir -p "$D/pr-$N" && cp avant.png apres.png "$D/pr-$N/"
-  git -C "$D" add "pr-$N" && git -C "$D" commit -qm "Captures de la PR #$N" && git -C "$D" push -q origin HEAD:captures-pr
+  # --ignore-removal : le worktree est vide, sans ça les captures déjà déposées pour cette PR seraient supprimées
+  git -C "$D" add --ignore-removal "pr-$N" && git -C "$D" commit -qm "Captures de la PR #$N" && git -C "$D" push -q origin HEAD:captures-pr
   SHA=$(git -C "$D" rev-parse HEAD); git worktree remove --force "$D"; git branch -qD captures-pr 2>/dev/null || true
   ```
 
-- Dans la description de la PR, avec ce `$SHA` :
+  Pour remplacer ou ajouter des captures plus tard, relance la même commande avec seulement les nouveaux fichiers : les autres restent.
+
+- Dans la description de la PR, avec ce `$SHA` (le dernier, si tu as redéposé des captures) :
 
   ```markdown
   | Avant | Après |
