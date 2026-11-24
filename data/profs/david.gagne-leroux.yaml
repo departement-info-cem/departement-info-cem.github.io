@@ -27,13 +27,13 @@ horaire:
     - { jour: mercredi, debut: "14:00", fin: "17:00", type: cours, cours: 420-1C5-EM, groupe: 1070, local: D-0620 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
     - { jour: jeudi, debut: "08:00", fin: "10:30", type: cours, cours: 420-3M5-EM, groupe: 1030, local: D-0604 }
     - { jour: jeudi, debut: "10:30", fin: "13:00", type: cours, cours: 420-3M5-EM, groupe: 1040, local: D-0604 }
-    - { jour: lundi, debut: "13:00", fin: "15:00", type: dispo, local: E-252 }
-    - { jour: mardi, debut: "14:00", fin: "15:00", type: dispo, local: E-252 }
-    - { jour: jeudi, debut: "13:00", fin: "14:00", type: dispo, local: E-252 }
+    - { jour: lundi, debut: "13:00", fin: "15:00", type: dispo, titre: "Dispo", local: E-252 }
+    - { jour: mardi, debut: "14:00", fin: "15:00", type: dispo, titre: "Dispo", local: E-252 }
+    - { jour: jeudi, debut: "13:00", fin: "14:00", type: dispo, titre: "Dispo", local: E-252 }
 
 # ---------- Calendrier : tes dates à toi (remises, examens, absences...) ----------
 # Les congés et journées pédagogiques du cégep sont ajoutés automatiquement.
 # type : remise, examen, cours, absence, deplacement, activite ou autre
-calendrier: []
+calendrier: [remise]
   - { date: 2026-12-08, titre: Remise du TP3, cours: 420-3M5-EM, type: remise }
 #  - { date: 2026-12-01, au: 2026-12-02, titre: Absent (colloque), type: absence }
