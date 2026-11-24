@@ -10,12 +10,6 @@
   categories:
     - locaux
   liens: []
-- question: Je cherche désespérément un local
-  reponse: Tu peux consulter cette carte interactive du cégep
-  categories:
-    - locaux
-  liens:
-    - https://montpetit-tour.cegepmontpetit.ca/plan-longueuil/
 - question: Est-ce que je dois acheter un portable?
   reponse: Tu peux travailler chez toi avec un portable ou une tour. Au collège, nous te fournissons un ordinateur pour travailler donc ce n'est pas nécessaire d'avoir un ordinateur chez soi mais la plupart des étudiants choisissent quand même d'en avoir un.
   categories:
