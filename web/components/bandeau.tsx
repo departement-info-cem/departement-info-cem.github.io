@@ -1,13 +1,13 @@
 "use client";
 import Link from "next/link";
-import { CalendarOff, DoorOpen, Pause, Play, UserCheck } from "lucide-react";
+import { CalendarOff, Clock, DoorOpen, Pause, Play, UserCheck } from "lucide-react";
 import type { Laboratoire } from "@/app/_types/divers";
 import { useMaintenant } from "@/app/_hooks/use-maintenant";
 import { useStockageLocal } from "@/app/_hooks/use-stockage-local";
 import { useScolaire } from "@/app/_contexts/scolaire-context";
 import { resumeMaintenant, type ProfHoraire, type ResumeMaintenant } from "@/lib/maintenant";
 
-// Bandeau défilant fixé en bas de l'écran : seulement les profs disponibles et les locaux libres en ce moment.
+// Bandeau défilant fixé en bas de l'écran : seulement les profs disponibles, les locaux libres et les heures des labos.
 // Il s'arrête au survol, au clavier, avec le bouton pause, et ne défile pas si on a réduit les animations.
 export function Bandeau({ profs, labos }: { profs: ProfHoraire[]; labos: Laboratoire[] }) {
   const maintenant = useMaintenant(30_000);
@@ -24,8 +24,8 @@ export function Bandeau({ profs, labos }: { profs: ProfHoraire[]; labos: Laborat
     <div className="bandeau-bas no-print fixed inset-x-0 bottom-0 z-30 flex items-center border-t border-white/20 bg-cem-marine text-sm text-white shadow-[0_-2px_8px_rgb(0_0_0/0.25)]" role="region" aria-label="Profs disponibles et locaux libres en ce moment">
       <Link href="/maintenant" className="flex h-full shrink-0 items-center gap-2 bg-cem-vert px-3 font-bold text-cem-marine hover:brightness-110">
         <span className="size-2 animate-pulse rounded-full bg-cem-marine motion-reduce:animate-none" aria-hidden />
-        <span className="hidden sm:inline" aria-hidden>Locaux</span>
-        <span className="sr-only sm:hidden">Locaux</span>
+        <span className="hidden sm:inline" aria-hidden>Dispos et locaux</span>
+        <span className="sr-only sm:hidden">Dispos et locaux</span>
       </Link>
       <div className={`bandeau min-w-0 flex-1 ${pause ? "bandeau-pause" : ""}`}>
         <div className="bandeau-piste" style={{ animationDuration: `${duree}s` }}>
@@ -44,12 +44,18 @@ export function Bandeau({ profs, labos }: { profs: ProfHoraire[]; labos: Laborat
 }
 
 function Contenu({ resume }: { resume: ResumeMaintenant }) {
-  const { dispos, libres, prochainLibre, raison } = resume;
+  const { dispos, libres, prochainLibre, heures, raison } = resume;
   return (
     <ul className="bandeau-liste">
       {raison && (
         <li>
           <CalendarOff className="size-4 text-cem-jaune" /> {raison}
+        </li>
+      )}
+
+      {heures && (
+        <li>
+          <Clock className="size-4 text-cem-jaune" /> {heures}
         </li>
       )}
 
@@ -74,7 +80,7 @@ function Contenu({ resume }: { resume: ResumeMaintenant }) {
       )}
       {libres.map(({ l, e }) => (
         <li key={l.local}>
-          <Link href="/maintenant" className="hover:underline">
+          <Link href={`/locaux/${l.local}`} className="hover:underline">
             <strong>{l.local}</strong> <span className="text-cem-gris-2">jusqu&apos;à {e.jusqua}</span>
           </Link>
         </li>

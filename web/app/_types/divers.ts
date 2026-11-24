@@ -119,8 +119,8 @@ export const laboratoireSchema = z
     session: z.string().optional(),
     /** true si toutes les occupations sont inscrites : seulement alors, on ose dire « libre » */
     complet: z.boolean().default(false),
-    ouverture: heureLabo.default("08:00"),
-    fermeture: heureLabo.default("18:00"),
+    ouverture: heureLabo.default("07:00"),
+    fermeture: heureLabo.default("23:00"),
     occupations: z
       .array(
         z

@@ -3,9 +3,10 @@ import { useEffect, useRef, useState } from "react";
 import { CircleAlert, Lightbulb, Play, RotateCcw, Square, StepForward, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ChoixNiveau } from "@/components/jeux/choix-niveau";
+import { EditeurPython } from "@/components/jeux/editeur-python";
 import { SceneRobot } from "@/components/jeux/scene-robot";
 import { useStockageLocal } from "@/app/_hooks/use-stockage-local";
-import { compterLignes, ErreurPython, type Etape } from "@/lib/jeux/mini-python";
+import { compterLignes, ErreurPython, type Etape, type Suggestion } from "@/lib/jeux/mini-python";
 import { bilan, copier, creerMonde, lancer, NIVEAUX, verifier, type Monde } from "@/lib/jeux/robot";
 
 const AIDE: Record<string, string> = {
@@ -19,6 +20,7 @@ const AIDE: Record<string, string> = {
   sur_paquet: "vrai s'il y a un paquet ici",
   sur_terminal: "vrai si Octet est sur le terminal",
 };
+const estCapteur = (c: string) => c.endsWith("libre") || c.startsWith("sur_");
 const VITESSES = { Lent: 700, Normal: 350, Rapide: 110 };
 type NomVitesse = keyof typeof VITESSES;
 type Message = { type: "erreur" | "succes" | "info"; texte: string };
@@ -36,12 +38,12 @@ export function JeuRobot() {
   const [indice, setIndice] = useState(false);
   const execution = useRef<{ gen: Generator<Etape, void>; monde: Monde; carte: number } | null>(null);
   const zone = useRef<HTMLTextAreaElement>(null);
-  const numeros = useRef<HTMLDivElement>(null);
 
   const n = NIVEAUX[niveau];
   const code = codes[niveau] ?? n.depart;
   const nbLignes = compterLignes(code);
   const dernier = niveau === NIVEAUX.length - 1;
+  const commandes = n.commandes.map((c): Suggestion => ({ nom: c, type: estCapteur(c) ? "capteur" : "action", aide: AIDE[c] }));
 
   function remettre(nouveau = niveau, c = carte) {
     execution.current = null;
@@ -159,38 +161,12 @@ export function JeuRobot() {
     const debutLigne = code.lastIndexOf("\n", pos - 1) + 1;
     const ligneActuelle = code.slice(debutLigne, pos);
     const indent = /^ */.exec(ligneActuelle)![0];
-    const condition = texte.endsWith("libre") || texte.startsWith("sur_");
-    const ajout = condition ? `${texte}()` : ligneActuelle.trim() ? `\n${indent}${texte}()` : `${texte}()`;
+    const ajout = estCapteur(texte) ? `${texte}()` : ligneActuelle.trim() ? `\n${indent}${texte}()` : `${texte}()`;
     ecrire(code.slice(0, pos) + ajout + code.slice(pos));
     requestAnimationFrame(() => {
       z?.focus();
       z?.setSelectionRange(pos + ajout.length, pos + ajout.length);
     });
-  }
-
-  function surTouche(e: React.KeyboardEvent<HTMLTextAreaElement>) {
-    const z = e.currentTarget;
-    const { selectionStart: a, selectionEnd: b } = z;
-    const placer = (texte: string, pos: number) => {
-      e.preventDefault();
-      ecrire(texte);
-      requestAnimationFrame(() => z.setSelectionRange(pos, pos));
-    };
-    if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
-      e.preventDefault();
-      executerTout();
-    } else if (e.key === "Enter") {
-      const l = code.slice(code.lastIndexOf("\n", a - 1) + 1, a);
-      const indent = /^ */.exec(l)![0] + (l.trimEnd().endsWith(":") ? "    " : "");
-      placer(`${code.slice(0, a)}\n${indent}${code.slice(b)}`, a + 1 + indent.length);
-    } else if (e.key === "Backspace" && a === b) {
-      const l = code.slice(code.lastIndexOf("\n", a - 1) + 1, a);
-      if (l.length >= 4 && /^ +$/.test(l) && l.length % 4 === 0) placer(code.slice(0, a - 4) + code.slice(a), a - 4);
-    } else if (e.key === "Escape") {
-      z.blur(); // pour pouvoir quitter l'éditeur au clavier, Tab servant à décaler
-    } else if (e.key === "Tab" && !e.shiftKey) {
-      placer(`${code.slice(0, a)}    ${code.slice(b)}`, a + 4);
-    }
   }
 
   return (
@@ -227,7 +203,7 @@ export function JeuRobot() {
         </div>
 
         <div className="min-w-0">
-          <div className="overflow-hidden rounded-lg border bg-black text-cem-gris-1">
+          <div className="rounded-lg border bg-black text-cem-gris-1">
             <div className="flex items-center justify-between border-b border-white/10 px-3 py-1.5 font-mono text-xs text-cem-gris-2">
               octet.py
               <span className={n.maxLignes && nbLignes > n.maxLignes ? "text-cem-orange" : ""}>
@@ -235,28 +211,7 @@ export function JeuRobot() {
                 {n.maxLignes ? ` / ${n.maxLignes}` : ""} lignes
               </span>
             </div>
-            <div className="relative flex h-64 font-mono text-sm leading-6">
-              <div ref={numeros} className="w-9 shrink-0 select-none overflow-hidden py-2 pr-2 text-right text-cem-gris-3" aria-hidden>
-                {code.split("\n").map((_, i) => (
-                  <div key={i} className={ligne === i + 1 ? (message?.type === "erreur" ? "bg-cem-rouge text-white" : "bg-cem-vert text-cem-marine") : ""}>
-                    {i + 1}
-                  </div>
-                ))}
-              </div>
-              <textarea
-                ref={zone}
-                value={code}
-                onChange={(e) => ecrire(e.target.value)}
-                onKeyDown={surTouche}
-                onScroll={(e) => numeros.current && (numeros.current.scrollTop = e.currentTarget.scrollTop)}
-                spellCheck={false}
-                autoCapitalize="off"
-                autoCorrect="off"
-                wrap="off"
-                className="min-w-0 flex-1 resize-none overflow-auto whitespace-pre bg-transparent py-2 pr-2 outline-none"
-                aria-label="Programme Python (Échap pour quitter l'éditeur, Ctrl+Entrée pour exécuter)"
-              />
-            </div>
+            <EditeurPython code={code} ecrire={ecrire} commandes={commandes} ligne={ligne} erreur={message?.type === "erreur"} executer={executerTout} zone={zone} />
           </div>
           <div className="mt-2 flex flex-wrap gap-1.5">
             {n.commandes.map((c) => (

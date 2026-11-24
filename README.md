@@ -11,7 +11,7 @@ Ce fichier sert à expliquer comment modifier l'appli ou le contenu du site du d
 - `data/calendrier-scolaire.yaml` est généré à partir du PDF officiel du cégep : `npm run calendrier`
   (aussi lancé à chaque déploiement et chaque matin de semaine ; `-- --verifier` dit seulement ce qui a changé).
 - `data/laboratoires.yaml` vient du PDF « Horaire du local » publié dans le dépôt 420-SN1 (des images : à recopier à chaque session).
-  Il a servi à préremplir les fiches de profs (`prerempli: true`, à enlever une fois vérifié). Il alimente le bandeau du bas et la page `/react/maintenant/`. Les logos de l'en-tête sont dans `web/public/images/liens/`.
+  Il a servi à préremplir les fiches de profs (`prerempli: true`, à enlever une fois vérifié). Il alimente le bandeau du bas, la page `/react/maintenant/` et une page par local (`/react/locaux/D-0003/`). Les logos de l'en-tête sont dans `web/public/images/liens/`.
 - Liens directs pour les sites de cours : `/react/<prof>/horaire/` et `/react/<prof>/calendrier/`, avec `?cours=420-5N6-EM` au besoin.
 - Vérifications : `npm run valider`, `npm run lint`, `npm test`, `npm run build`
 - Tant que les deux sites cohabitent, le site Angular lit encore les fichiers JSON de `data/` :

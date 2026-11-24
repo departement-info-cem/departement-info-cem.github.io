@@ -51,6 +51,12 @@ export function minutesEnHeure(total: number): string {
   return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
 }
 
+/** "07:00" -> "7h00" (dans une phrase) */
+export function formaterHeure(heure: string): string {
+  const total = heureEnMinutes(heure)!;
+  return `${Math.floor(total / 60)}h${String(total % 60).padStart(2, "0")}`;
+}
+
 /** "2026-09-15" -> Date locale à midi (évite les décalages de fuseau). */
 export function dateDepuisIso(iso: string): Date {
   const [a, m, j] = iso.split("-").map(Number);

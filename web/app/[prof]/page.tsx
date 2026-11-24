@@ -100,7 +100,7 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
             <TabsContent value="horaire">
               {session && <p className="mb-3 text-sm text-muted-foreground">Horaire de la session {session.nom}. Survole une plage pour les détails.</p>}
               {p.horaire?.prerempli && <HorairePrerempli />}
-              <HoraireSemaine plages={p.horaire?.plages ?? []} debut={p.horaire?.debut} fin={p.horaire?.fin} cours={cours} />
+              <HoraireSemaine plages={p.horaire?.plages ?? []} debut={p.horaire?.debut} fin={p.horaire?.fin} cours={cours} impression={{ titre: p.nom, details: [p.bureau && `Bureau ${p.bureau}`, session?.nom] }} />
             </TabsContent>
             <TabsContent value="calendrier">
               <p className="mb-3 text-sm text-muted-foreground">

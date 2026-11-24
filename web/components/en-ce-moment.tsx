@@ -1,12 +1,13 @@
 "use client";
 import Link from "next/link";
-import { CalendarClock, CalendarOff, DoorOpen, MapPin, Monitor, UserCheck } from "lucide-react";
+import { CalendarOff, MapPin, Monitor, UserCheck } from "lucide-react";
 import type { Laboratoire } from "@/app/_types/divers";
 import { useMaintenant } from "@/app/_hooks/use-maintenant";
 import { useScolaire } from "@/app/_contexts/scolaire-context";
 import { AvatarProf } from "@/components/carte-prof";
+import { EtatLaboratoire } from "@/components/etat-laboratoire";
 import { prochainCours, resumeMaintenant, type ProfHoraire } from "@/lib/maintenant";
-import { formaterDate, heureEnMinutes, minutesEnHeure } from "@/lib/temps";
+import { formaterDate, minutesEnHeure } from "@/lib/temps";
 
 // Page « Locaux » : les profs disponibles (et surtout où), les laboratoires libres.
 export function EnCeMoment({ profs, labos }: { profs: ProfHoraire[]; labos: Laboratoire[] }) {
@@ -82,35 +83,11 @@ export function EnCeMoment({ profs, labos }: { profs: ProfHoraire[]; labos: Labo
             <Monitor className="size-5 text-primary" /> Laboratoires
           </h3>
           <ul className="grid gap-2 sm:grid-cols-2">
-            {etats.map(({ l, e }) => {
-              const prochain = prochainCours(l, profs, scolaire, maintenant);
-              return (
-                <li
-                  key={l.local}
-                  className={`rounded-md border p-2 ${e.etat === "libre" ? "border-primary bg-accent" : e.etat === "occupe" ? "border-cem-rouge bg-card" : "bg-muted"}`}
-                >
-                  <span className="flex items-center gap-1 font-bold">
-                    {e.etat === "libre" && <DoorOpen className="size-4 text-primary" />}
-                    {l.local}
-                  </span>
-                  <span className="block text-xs">
-                    {e.etat === "libre" && `Libre jusqu'à ${e.jusqua}`}
-                    {e.etat === "occupe" && `Occupé jusqu'à ${e.jusqua}${e.occupation?.cours ? ` · ${e.occupation.cours}` : e.occupation?.titre ? ` · ${e.occupation.titre}` : ""}`}
-                    {e.etat === "inconnu" && <span className="text-muted-foreground">{e.raison === "horaire incomplet" ? "Aucun cours connu (horaire incomplet)" : e.raison}</span>}
-                  </span>
-                  {prochain && (
-                    <span className="mt-1 flex items-start gap-1 text-xs text-muted-foreground">
-                      <CalendarClock className="mt-0.5 size-3 shrink-0" aria-hidden />
-                      <span>
-                        Prochain cours : {prochain.iso === iso ? "aujourd'hui" : formaterDate(prochain.iso).toLowerCase()} {minutesEnHeure(heureEnMinutes(prochain.occupation.debut)!)}–{minutesEnHeure(heureEnMinutes(prochain.occupation.fin)!)}
-                        <strong className="text-foreground"> · {prochain.occupation.cours}</strong>
-                        {prochain.occupation.groupe && ` gr. ${prochain.occupation.groupe}`}
-                      </span>
-                    </span>
-                  )}
-                </li>
-              );
-            })}
+            {etats.map(({ l, e }) => (
+              <li key={l.local}>
+                <EtatLaboratoire local={l.local} e={e} iso={iso} prochain={prochainCours(l, profs, scolaire, maintenant)} lien />
+              </li>
+            ))}
           </ul>
           <p className="mt-3 text-xs text-muted-foreground">Vérifie toujours l&apos;horaire affiché sur la porte : une réservation peut avoir été ajoutée.</p>
         </section>
