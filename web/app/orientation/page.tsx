@@ -20,7 +20,7 @@ export default function PageOrientation() {
         <BotOrientation bot={bot()} />
         <aside className="space-y-4 text-sm">
           <div className="rounded-lg border bg-card p-4">
-            <h2 className="mb-2 font-semibold">Tu veux en savoir plus ?</h2>
+            <h2 className="mb-2 font-bold">Tu veux en savoir plus ?</h2>
             <ul className="space-y-1">
               <li><Link href="/programmes" className="text-primary underline">Voir toutes les grilles de cours</Link></li>
               <li><Link href="/programmes/comparer/?a=dec-prog&b=dec-reseau" className="text-primary underline">Comparer les deux profils du DEC</Link></li>

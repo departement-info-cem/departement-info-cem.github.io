@@ -196,13 +196,13 @@ export function JeuRobot() {
   return (
     <div>
       <ChoixNiveau titres={NIVEAUX.map((x) => x.titre)} niveau={niveau} reussis={reussis} choisir={choisir} />
-      <div className="mb-4 rounded-lg border-l-4 border-l-cem-vert bg-secondary/60 p-4">
+      <div className="mb-4 rounded-lg border-l-4 border-l-cem-vert bg-muted p-4">
         <p className="text-xs font-semibold uppercase tracking-wide text-primary">{n.notion}</p>
         <p>{n.consigne}</p>
       </div>
 
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)]">
-        <div className="min-w-0 rounded-lg border bg-gradient-to-b from-[#e8f7fd] to-[#f4f7fa] p-2 dark:from-[#0b2a42] dark:to-[#071a2b]">
+        <div className="min-w-0 rounded-lg border bg-card p-2">
           <div className="flex items-center justify-between px-2 text-sm">
             <span>
               Paquets : <strong>{monde.ramasses}</strong> / {monde.total}
@@ -227,8 +227,8 @@ export function JeuRobot() {
         </div>
 
         <div className="min-w-0">
-          <div className="overflow-hidden rounded-lg border bg-[#071a2b] text-[#e6f0f7]">
-            <div className="flex items-center justify-between border-b border-white/10 px-3 py-1.5 font-mono text-xs text-white/70">
+          <div className="overflow-hidden rounded-lg border bg-black text-cem-gris-1">
+            <div className="flex items-center justify-between border-b border-white/10 px-3 py-1.5 font-mono text-xs text-cem-gris-2">
               octet.py
               <span className={n.maxLignes && nbLignes > n.maxLignes ? "text-cem-orange" : ""}>
                 {nbLignes}
@@ -236,7 +236,7 @@ export function JeuRobot() {
               </span>
             </div>
             <div className="relative flex h-64 font-mono text-sm leading-6">
-              <div ref={numeros} className="w-9 shrink-0 select-none overflow-hidden py-2 pr-2 text-right text-white/35" aria-hidden>
+              <div ref={numeros} className="w-9 shrink-0 select-none overflow-hidden py-2 pr-2 text-right text-cem-gris-3" aria-hidden>
                 {code.split("\n").map((_, i) => (
                   <div key={i} className={ligne === i + 1 ? (message?.type === "erreur" ? "bg-cem-rouge text-white" : "bg-cem-vert text-cem-marine") : ""}>
                     {i + 1}
@@ -281,8 +281,8 @@ export function JeuRobot() {
           </div>
           <div className="mt-3 space-y-2" aria-live="polite">
             {message && (
-              <div className={`flex items-start gap-2 rounded-md border p-3 text-sm ${message.type === "succes" ? "border-primary bg-accent" : "border-cem-rouge/50 bg-cem-rouge/10"}`}>
-                {message.type === "succes" ? <Trophy className="size-5 shrink-0 text-primary" /> : <CircleAlert className="size-5 shrink-0 text-cem-rouge" />}
+              <div className={`flex items-start gap-2 rounded-md border p-3 text-sm ${message.type === "succes" ? "border-primary bg-accent" : "border-cem-rouge bg-card"}`}>
+                {message.type === "succes" ? <Trophy className="size-5 shrink-0 text-primary" /> : <CircleAlert className="size-5 shrink-0 text-destructive" />}
                 <div>
                   <p>{message.texte}</p>
                   {message.type === "succes" && (dernier ? <p className="font-semibold">Tu raisonnes comme un programmeur !</p> : <Button size="sm" className="mt-2" onClick={() => choisir(niveau + 1)}>Niveau suivant</Button>)}

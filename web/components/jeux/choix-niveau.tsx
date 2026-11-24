@@ -11,7 +11,7 @@ export function ChoixNiveau({ titres, niveau, reussis, choisir }: { titres: stri
           aria-pressed={i === niveau}
           className={`flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm font-medium ${i === niveau ? "border-primary bg-primary text-primary-foreground" : "bg-card hover:bg-accent"}`}
         >
-          {reussis.includes(i) ? <Check className="size-4" aria-label="Réussi" /> : <span className="font-mono">{i + 1}</span>}
+          {reussis.includes(i) ? <Check className="size-4" aria-label="Réussi" /> : <span className="tabular-nums">{i + 1}</span>}
           {t}
         </button>
       ))}

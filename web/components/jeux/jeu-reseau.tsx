@@ -253,7 +253,7 @@ export function JeuReseau() {
   return (
     <div>
       <ChoixNiveau titres={NIVEAUX_RESEAU.map((x) => x.titre)} niveau={niveau} reussis={reussis} choisir={choisir} />
-      <div className="mb-4 rounded-lg border-l-4 border-l-cem-vert bg-secondary/60 p-4">
+      <div className="mb-4 rounded-lg border-l-4 border-l-cem-vert bg-muted p-4">
         <p className="text-xs font-semibold uppercase tracking-wide text-primary">{n.notion}</p>
         <p>{n.histoire}</p>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -368,7 +368,7 @@ export function JeuReseau() {
             {!actuel && <p className="text-sm text-muted-foreground">Approche-toi d&apos;un appareil et clique dessus pour l&apos;examiner.</p>}
             {actuel && (
               <div className="space-y-3 text-sm">
-                <h3 className="font-semibold">
+                <h3 className="font-bold">
                   {actuel.nom} <span className="font-normal text-muted-foreground">({actuel.type === "pc" ? "ordinateur" : actuel.type})</span>
                 </h3>
                 {actuel.ip && (
@@ -413,7 +413,7 @@ export function JeuReseau() {
                             </select>
                           )}
                           {actuel.type !== "pc" && (
-                            <button onClick={() => modifierPort(actuel.id, i, (x) => ({ ...x, actif: !x.actif }))} className={`rounded border px-1.5 text-xs font-semibold ${p.actif ? "border-primary text-primary" : "border-cem-orange bg-cem-orange/15 text-cem-orange"}`}>
+                            <button onClick={() => modifierPort(actuel.id, i, (x) => ({ ...x, actif: !x.actif }))} className={`rounded border px-1.5 text-xs font-semibold ${p.actif ? "border-primary text-primary" : "border-cem-orange bg-cem-orange text-black"}`}>
                               {p.actif ? "activé" : "désactivé"}
                             </button>
                           )}
@@ -428,10 +428,10 @@ export function JeuReseau() {
             )}
           </div>
 
-          <div className="h-40 overflow-y-auto rounded-lg border bg-[#071a2b] p-3 font-mono text-xs leading-5 text-[#e6f0f7]" aria-live="polite">
-            <p className="text-white/50">Invite de commandes — {appareil(n.reseau, n.source).nom}</p>
+          <div className="h-40 overflow-y-auto rounded-lg border bg-black p-3 font-mono text-xs leading-5 text-cem-gris-1" aria-live="polite">
+            <p className="text-cem-gris-3">Invite de commandes — {appareil(n.reseau, n.source).nom}</p>
             {console_.map((c, i) => (
-              <p key={i} className={c.type === "ok" ? "text-cem-vert" : c.type === "ko" ? "text-cem-orange" : c.type === "info" ? "text-white/65" : ""}>
+              <p key={i} className={c.type === "ok" ? "text-cem-vert" : c.type === "ko" ? "text-cem-orange" : c.type === "info" ? "text-cem-gris-2" : ""}>
                 {c.texte}
               </p>
             ))}

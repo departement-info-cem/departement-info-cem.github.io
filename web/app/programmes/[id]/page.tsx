@@ -28,7 +28,7 @@ export default async function PageProgramme({ params }: PageProps<"/programmes/[
     <>
       <TitrePage titre={p.nom} sousTitre={p.resume}>
         <div className="mt-4 flex flex-wrap items-center gap-2 text-sm">
-          {p.code && <span className="rounded bg-background px-2 py-1 font-mono">{p.code}</span>}
+          {p.code && <span className="rounded bg-background px-2 py-1 tabular-nums">{p.code}</span>}
           <span className="rounded bg-background px-2 py-1">{p.duree}</span>
           {famille.map((f) => (
             <Link key={f.id} href={`/programmes/${f.id}`} className={bouton({ variant: "outline", size: "sm" })}>
@@ -47,8 +47,8 @@ export default async function PageProgramme({ params }: PageProps<"/programmes/[
       </TitrePage>
       <Conteneur>
         {p.remarque && (
-          <p className="mb-6 flex gap-2 rounded-md border border-cem-ciel/40 bg-cem-ciel/10 p-3 text-sm">
-            <Info className="mt-0.5 size-4 shrink-0 text-cem-ciel" /> {p.remarque}
+          <p className="mb-6 flex gap-2 rounded-md border border-cem-ciel bg-cem-bleu-pale p-3 text-sm text-cem-marine">
+            <Info className="mt-0.5 size-4 shrink-0" /> {p.remarque}
           </p>
         )}
         <GrilleProgramme programme={p} coursCommuns={coursCommuns(p.id)} profsParCours={profsParCours()} />

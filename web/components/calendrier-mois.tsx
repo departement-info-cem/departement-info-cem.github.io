@@ -12,27 +12,28 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/compone
 // Calendrier mensuel d'un prof : congés du cégep + séances de ses cours + ses propres dates.
 // Inspiré du composant MainDocsCalendar du cours 5N6.
 
+// Couleurs officielles du cégep, avec un texte permis sur ce fond par la charte graphique.
 const STYLES: Record<string, string> = {
-  conge: "bg-cem-rouge/15 text-cem-rouge dark:text-red-300",
-  pedagogique: "bg-cem-jaune/25 text-amber-900 dark:text-amber-200",
-  "mise-a-jour": "bg-cem-jaune/25 text-amber-900 dark:text-amber-200",
-  relache: "bg-cem-vert/25 text-green-900 dark:text-green-200 font-semibold",
-  encadrement: "bg-cem-jaune/25 text-amber-900 dark:text-amber-200",
-  suspension: "bg-cem-rouge/15 text-cem-rouge dark:text-red-300",
-  "horaire-modifie": "bg-cem-ciel/20 text-sky-900 dark:text-sky-200",
-  reprise: "bg-cem-ciel/25 text-sky-900 dark:text-sky-100",
-  evaluations: "bg-purple-500/15 text-purple-900 dark:text-purple-200",
-  "evaluations-horaire": "bg-purple-500/15 text-purple-900 dark:text-purple-200",
+  conge: "bg-cem-rouge text-white",
+  pedagogique: "bg-cem-jaune-pale text-cem-marine",
+  "mise-a-jour": "bg-cem-jaune-pale text-cem-marine",
+  relache: "bg-cem-vert text-cem-marine font-semibold",
+  encadrement: "bg-cem-jaune-pale text-cem-marine",
+  suspension: "bg-cem-rouge text-white",
+  "horaire-modifie": "bg-cem-bleu-pale text-cem-marine",
+  reprise: "bg-cem-bleu-pale text-cem-marine",
+  evaluations: "bg-cem-ciel text-cem-marine",
+  "evaluations-horaire": "bg-cem-ciel text-cem-marine",
   limite: "bg-muted text-muted-foreground",
   info: "bg-muted text-muted-foreground",
   seance: "bg-accent text-accent-foreground",
-  remise: "bg-cem-orange/20 text-orange-900 dark:text-orange-200 font-semibold",
-  examen: "bg-cem-rouge/20 text-red-900 dark:text-red-200 font-semibold",
-  absence: "bg-cem-rouge/15 text-cem-rouge dark:text-red-300 font-semibold",
+  remise: "bg-cem-orange text-black font-semibold",
+  examen: "bg-cem-rouge text-white font-semibold",
+  absence: "bg-cem-rouge text-white font-semibold",
   cours: "bg-accent text-accent-foreground",
-  deplacement: "bg-cem-jaune/30 text-amber-900 dark:text-amber-100 font-semibold",
-  activite: "bg-cem-ciel/20 text-sky-900 dark:text-sky-200",
-  autre: "bg-cem-ciel/20 text-sky-900 dark:text-sky-200",
+  deplacement: "bg-cem-jaune text-cem-marine font-semibold",
+  activite: "bg-cem-bleu-pale text-cem-marine",
+  autre: "bg-cem-bleu-pale text-cem-marine",
 };
 
 type Filtre = "scolaire" | "seance" | "prof";
@@ -147,7 +148,7 @@ export function CalendrierMois({
             <Button variant="ghost" size="icon" onClick={() => changerMois(-1)} aria-label="Mois précédent">
               <ChevronLeft />
             </Button>
-            <h3 className="text-lg font-semibold first-letter:uppercase">
+            <h3 className="text-lg font-bold first-letter:uppercase">
               {MOIS[affiche.mois]} {affiche.annee}
             </h3>
             <Button variant="ghost" size="icon" onClick={() => changerMois(1)} aria-label="Mois suivant">
@@ -174,7 +175,7 @@ export function CalendrierMois({
                   <button
                     key={iso}
                     onClick={() => jour && evts.length && setJourChoisi(jour)}
-                    className={`flex min-h-24 min-w-0 flex-col items-stretch border-b border-r p-1 text-left transition hover:bg-accent/40 ${horsMois ? "opacity-40" : ""} ${finDeSemaine ? "bg-muted/40" : ""} ${
+                    className={`flex min-h-24 min-w-0 flex-col items-stretch border-b border-r p-1 text-left transition hover:bg-accent/40 ${horsMois ? "opacity-40" : ""} ${finDeSemaine ? "bg-muted" : ""} ${
                       jour?.sansCours && filtres.has("scolaire") ? "bg-[repeating-linear-gradient(135deg,transparent,transparent_6px,var(--muted)_6px,var(--muted)_8px)]" : ""
                     }`}
                   >
@@ -206,7 +207,7 @@ export function CalendrierMois({
                   {e.code && `${e.code} · `}
                   {e.titre}
                 </div>
-                {e.annulee && <div className="text-sm font-semibold text-cem-rouge dark:text-red-300">{e.annulee[0].toUpperCase() + e.annulee.slice(1)}</div>}
+                {e.annulee && <div className="text-sm font-bold uppercase">{e.annulee[0].toUpperCase() + e.annulee.slice(1)}</div>}
                 <div className="text-sm opacity-90">
                   {[e.heure, e.cours, e.groupe && `groupe ${e.groupe}`, e.local && `local ${e.local}`].filter(Boolean).join(" · ")}
                 </div>

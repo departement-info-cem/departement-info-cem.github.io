@@ -30,9 +30,9 @@ export default function PagePlagiat() {
             <li>parler et expliquer un point à un autre étudiant.</li>
           </ul>
         </section>
-        <section className="rounded-lg border border-cem-rouge/40 bg-cem-rouge/10 p-5">
+        <section className="rounded-lg border-2 border-cem-rouge bg-card p-5">
           <h2 className="mb-3 flex items-center gap-2 text-xl font-bold">
-            <XCircle className="text-cem-rouge" /> Tu ne peux PAS
+            <XCircle className="text-destructive" /> Tu ne peux PAS
           </h2>
           <ul className="ml-5 list-disc space-y-1">
             <li>faire le travail d&apos;un autre étudiant à sa place ;</li>
@@ -45,7 +45,7 @@ export default function PagePlagiat() {
         {/* Section IA : texte à valider par le département */}
         <section className="rounded-lg border bg-card p-5 md:col-span-2">
           <h2 className="mb-3 flex items-center gap-2 text-xl font-bold">
-            <Bot className="text-cem-ciel" /> Et l&apos;intelligence artificielle ?
+            <Bot className="text-primary" /> Et l&apos;intelligence artificielle ?
           </h2>
           <ul className="ml-5 list-disc space-y-1">
             <li>Ce qui est permis avec ChatGPT, Copilot ou une autre IA dépend du cours et du travail : c&apos;est indiqué dans le plan de cours et l&apos;énoncé.</li>
@@ -59,7 +59,7 @@ export default function PagePlagiat() {
         </section>
         <section className="rounded-lg border bg-card p-5">
           <h2 className="mb-3 flex items-center gap-2 text-xl font-bold">
-            <ShieldAlert className="text-cem-orange" /> Sanctions
+            <ShieldAlert className="text-destructive" /> Sanctions
           </h2>
           <ul className="ml-5 list-disc space-y-1">
             <li>Celui qui a partagé son travail est sanctionné au même titre que celui qui l&apos;a copié.</li>
@@ -73,7 +73,7 @@ export default function PagePlagiat() {
         </section>
         <section className="rounded-lg border bg-card p-5">
           <h2 className="mb-3 flex items-center gap-2 text-xl font-bold">
-            <Lock className="text-cem-marine dark:text-cem-ciel" /> Protège ton travail
+            <Lock className="text-primary" /> Protège ton travail
           </h2>
           <ul className="ml-5 list-disc space-y-1">
             <li>Si tu partages ton travail ou le laisses traîner, tu ne contrôles pas ce que les autres en feront.</li>

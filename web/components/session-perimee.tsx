@@ -11,7 +11,7 @@ export function SessionPerimee({ session }: { session?: string }) {
   const s = scolaire.sessions.find((x) => x.id === session);
   if (!maintenant || !s || isoDepuisDate(maintenant) <= s.fin) return null;
   return (
-    <p className="flex w-fit items-center gap-2 rounded-md border border-cem-jaune bg-cem-jaune/15 px-3 py-1 text-sm">
+    <p className="flex w-fit items-center gap-2 rounded-md border border-cem-jaune bg-cem-jaune-pale text-cem-marine px-3 py-1 text-sm">
       <TriangleAlert className="size-4" /> Cet horaire est celui de la session {s.nom}, maintenant terminée.
     </p>
   );

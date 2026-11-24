@@ -9,7 +9,7 @@ export function PiedDePage() {
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
         <div className="space-y-3">
           <Logo inverse taille={36} />
-          <p className="text-sm text-white/75">
+          <p className="text-sm text-cem-gris-1">
             Département d&apos;informatique
             <br />
             945, chemin de Chambly, Longueuil
@@ -20,7 +20,7 @@ export function PiedDePage() {
         </div>
         <div>
           <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-white">Le département</h2>
-          <ul className="space-y-1 text-sm text-white/80">
+          <ul className="space-y-1 text-sm text-cem-gris-1">
             <li><Link href="/programmes" className="hover:underline">Programmes et grilles de cours</Link></li>
             <li><Link href="/profs" className="hover:underline">Les profs</Link></li>
             <li><Link href="/orientation" className="hover:underline">L&apos;informatique, est-ce pour moi ?</Link></li>
@@ -29,7 +29,7 @@ export function PiedDePage() {
         </div>
         <div>
           <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-white">Liens</h2>
-          <ul className="space-y-1 text-sm text-white/80">
+          <ul className="space-y-1 text-sm text-cem-gris-1">
             <li><a href="https://www.cegepmontpetit.ca" target="_blank" rel="noreferrer" className="hover:underline">Cégep Édouard-Montpetit</a></li>
             <li><a href="https://cegepmontpetit.omnivox.ca/" target="_blank" rel="noreferrer" className="hover:underline">Omnivox</a></li>
             <li><a href="https://www.adeptinfo.ca" target="_blank" rel="noreferrer" className="hover:underline">ADEPT, l&apos;association étudiante</a></li>
@@ -40,7 +40,7 @@ export function PiedDePage() {
       </div>
       {/* Sur un écran étroit, le copyright passe à gauche pour laisser la place aux formes.
           Pas de filet au-dessus : il traverserait les formes. */}
-      <div className="py-4 pr-34 pl-4 text-xs text-white/60 md:px-4 md:text-center">
+      <div className="py-4 pr-34 pl-4 text-xs text-cem-gris-2 md:px-4 md:text-center">
         © {new Date().getFullYear()} Département d&apos;informatique du Cégep Édouard-Montpetit
       </div>
       <FormesPiedDePage />

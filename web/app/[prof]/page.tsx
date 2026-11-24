@@ -43,7 +43,7 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
 
   return (
     <>
-      <section className="border-b bg-secondary/60">
+      <section className="border-b bg-muted">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-8 md:flex-row md:items-center">
           <AvatarProf prof={p} taille={144} />
           <div className="flex-1 space-y-2">
@@ -114,7 +114,7 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
         <aside className="space-y-6">
           {coursDonnes.length > 0 && (
             <div className="rounded-lg border bg-card p-4">
-              <h2 className="mb-2 flex items-center gap-2 font-semibold">
+              <h2 className="mb-2 flex items-center gap-2 font-bold">
                 <BookOpen className="size-4" /> Cours
               </h2>
               <ul className="space-y-2 text-sm">
@@ -138,7 +138,7 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
           )}
           {dispos.length > 0 && (
             <div className="rounded-lg border bg-card p-4">
-              <h2 className="mb-2 font-semibold">Disponibilités</h2>
+              <h2 className="mb-2 font-bold">Disponibilités</h2>
               <ul className="space-y-1 text-sm">
                 {dispos.map((d, i) => (
                   <li key={i}>
@@ -151,7 +151,7 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
             </div>
           )}
           <div className="rounded-lg border bg-card p-4 text-sm">
-            <h2 className="mb-2 flex items-center gap-2 font-semibold">
+            <h2 className="mb-2 flex items-center gap-2 font-bold">
               <Link2 className="size-4" /> Liens directs
             </h2>
             <ul className="space-y-1">

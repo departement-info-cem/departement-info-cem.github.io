@@ -2,13 +2,14 @@
 import type { Plage, TypePlage } from "@/app/_types/prof";
 import { heureEnMinutes, JOURS_OUVRABLES, minutesEnHeure, normaliserJour, type Jour } from "@/lib/temps";
 
-/** Couleurs (fond / texte) par type de plage, en clair et en sombre — palette CÉM. */
-export const COULEURS_TYPES: Record<TypePlage, { fond: string; texte: string; fondSombre: string; texteSombre: string }> = {
-  cours: { fond: "#e9f3eb", texte: "#0c2811", fondSombre: "#1b4d26", texteSombre: "#e9f3eb" },
-  dispo: { fond: "#e8f7fd", texte: "#063545", fondSombre: "#0b4a63", texteSombre: "#e8f7fd" },
-  "centre-aide": { fond: "#fff8e7", texte: "#4c3806", fondSombre: "#5c4408", texteSombre: "#fff8e7" },
-  reunion: { fond: "#eeeeee", texte: "#2b2b2b", fondSombre: "#3a3f45", texteSombre: "#eeeeee" },
-  autre: { fond: "#fdebe0", texte: "#5a2408", fondSombre: "#6b2e0c", texteSombre: "#fdebe0" },
+/** Couleurs (fond / texte) par type de plage : couleurs officielles du cégep et texte permis sur ce fond
+ *  par la charte graphique. Les mêmes en thème clair et sombre. */
+export const COULEURS_TYPES: Record<TypePlage, { fond: string; texte: string }> = {
+  cours: { fond: "#cfe5ae", texte: "#0c3455" }, // vert pâle, bleu marine
+  dispo: { fond: "#8ed8f8", texte: "#0c3455" }, // bleu pâle, bleu marine
+  "centre-aide": { fond: "#ffdf5d", texte: "#0c3455" }, // jaune pâle, bleu marine
+  reunion: { fond: "#e6e6e6", texte: "#0c3455" }, // gris 1, bleu marine
+  autre: { fond: "#f37021", texte: "#000000" }, // orangé, noir
 };
 
 /** Pour distinguer les cours entre eux : une bordure de couleur différente par numéro de cours. */

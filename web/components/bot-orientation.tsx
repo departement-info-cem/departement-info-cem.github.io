@@ -55,12 +55,12 @@ export function BotOrientation({ bot, compact = false }: { bot: Bot; compact?: b
   }, [historique.length]);
 
   return (
-    <div className="overflow-hidden rounded-xl border border-white/10 bg-[#071a2b] text-[#e6f0f7] shadow-xl">
-      <div className="flex items-center gap-2 border-b border-white/10 bg-[#0c3455] px-4 py-2">
+    <div className="overflow-hidden rounded-xl border border-white/10 bg-black text-cem-gris-1 shadow-xl">
+      <div className="flex items-center gap-2 border-b border-white/10 bg-cem-marine px-4 py-2">
         <span className="size-3 rounded-full bg-cem-rouge" />
         <span className="size-3 rounded-full bg-cem-jaune" />
         <span className="size-3 rounded-full bg-cem-vert" />
-        <span className="ml-2 font-mono text-xs text-white/70">orientation.sh — est-ce que l&apos;info est pour toi ?</span>
+        <span className="ml-2 font-mono text-xs text-cem-gris-2">orientation.sh — est-ce que l&apos;info est pour toi ?</span>
       </div>
       <div className="h-1 bg-white/10" role="progressbar" aria-label="Progression" aria-valuenow={progression} aria-valuemin={0} aria-valuemax={100}>
         <div className="h-full bg-cem-vert transition-all duration-500" style={{ width: `${progression}%` }} />
@@ -82,7 +82,7 @@ export function BotOrientation({ bot, compact = false }: { bot: Bot; compact?: b
               <span className="text-cem-vert">bot&gt;</span> {question.question}
               <span className="ml-1 inline-block h-4 w-2 animate-pulse bg-cem-vert align-middle" />
             </p>
-            {question.aide && <p className="text-xs text-white/60">{question.aide}</p>}
+            {question.aide && <p className="text-xs text-cem-gris-2">{question.aide}</p>}
             <div className="flex flex-col gap-2 pt-1 font-sans">
               {question.choix.map((c, i) => (
                 <button
@@ -105,15 +105,15 @@ export function BotOrientation({ bot, compact = false }: { bot: Bot; compact?: b
               <div className="h-full bg-cem-vert transition-all duration-1000" style={{ width: `${resultat.compatibilite}%` }} />
             </div>
             <h3 className="text-lg font-bold text-white">{resultat.titre}</h3>
-            <p className="text-white/85">{resultat.texte}</p>
+            <p className="text-cem-gris-1">{resultat.texte}</p>
             <div className="flex flex-wrap gap-2">
               {resultat.liens.map((l) =>
                 l.href.startsWith("http") ? (
-                  <a key={l.href} href={l.href} target="_blank" rel="noreferrer" className={bouton({ size: "sm" })}>
+                  <a key={l.href} href={l.href} target="_blank" rel="noreferrer" className={bouton({ size: "sm" }, "bg-cem-vert text-cem-marine hover:bg-cem-vert/80")}>
                     {l.texte}
                   </a>
                 ) : (
-                  <Link key={l.href} href={l.href} className={bouton({ size: "sm" })}>
+                  <Link key={l.href} href={l.href} className={bouton({ size: "sm" }, "bg-cem-vert text-cem-marine hover:bg-cem-vert/80")}>
                     {l.texte}
                   </Link>
                 ),

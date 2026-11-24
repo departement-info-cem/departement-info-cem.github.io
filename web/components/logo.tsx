@@ -59,7 +59,7 @@ export function Logo({ variante = "binaire", taille = 40, inverse = false }: { v
       <SymboleLogo variante={variante} taille={taille} />
       <span className="flex flex-col leading-tight">
         <span className={`font-heading text-lg font-bold tracking-tight ${inverse ? "text-white" : "text-cem-marine dark:text-white"}`}>Informatique</span>
-        <span className={`text-xs ${inverse ? "hidden text-white/75 sm:inline" : "text-muted-foreground"}`}>Cégep Édouard-Montpetit</span>
+        <span className={`text-xs ${inverse ? "hidden text-cem-ciel sm:inline" : "text-muted-foreground"}`}>Cégep Édouard-Montpetit</span>
       </span>
     </span>
   );
