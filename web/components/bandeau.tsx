@@ -21,8 +21,8 @@ export function Bandeau({ profs, labos }: { profs: ProfHoraire[]; labos: Laborat
     <div className="bandeau-bas no-print fixed inset-x-0 bottom-0 z-30 flex items-center border-t border-white/20 bg-cem-marine text-sm text-white shadow-[0_-2px_8px_rgb(0_0_0/0.25)]" role="region" aria-label="Profs disponibles et locaux libres en ce moment">
       <Link href="/maintenant" className="flex h-full shrink-0 items-center gap-2 bg-cem-vert px-3 font-bold text-cem-marine hover:brightness-110">
         <span className="size-2 animate-pulse rounded-full bg-cem-marine motion-reduce:animate-none" aria-hidden />
-        <span className="hidden sm:inline" aria-hidden>Locaux</span>
-        <span className="sr-only sm:hidden">Locaux</span>
+        <span className="hidden sm:inline" aria-hidden>Dispos et locaux</span>
+        <span className="sr-only sm:hidden">Dispos et locaux</span>
       </Link>
       <div className={`bandeau min-w-0 flex-1 ${pause ? "bandeau-pause" : ""}`}>
         {resume && (
