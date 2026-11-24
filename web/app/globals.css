@@ -304,7 +304,7 @@ html:has(.bandeau-bas) { scroll-padding-bottom: 3rem; }
   body:has(.horaire-imprimable) *:not(:has(.horaire-imprimable), .horaire-imprimable, .horaire-imprimable *) { display: none !important; }
   body *:has(.horaire-imprimable) { display: block !important; max-width: none !important; margin: 0 !important; padding: 0 !important; }
   html:has(.horaire-imprimable), body:has(.horaire-imprimable) { display: block !important; height: auto !important; min-height: 0 !important; }
-  .horaire-imprimable { padding: 1cm; break-inside: avoid; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .horaire-imprimable { zoom: 95%; padding: 1cm; break-inside: avoid; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .horaire-cadre { overflow: visible; }
   .horaire-imprimable .horaire-colonne { height: 22.9cm !important; }
 }
