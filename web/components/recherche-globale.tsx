@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { BookOpen, CircleHelp, FileText, GraduationCap, Search, User } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { AvatarProf } from "@/components/carte-prof";
 import { simplifier } from "@/lib/texte";
 
@@ -59,9 +60,18 @@ export function RechercheGlobale({ index, className }: { index: ElementRecherche
 
   return (
     <>
-      <button onClick={() => setOuvert(true)} className={className} aria-label="Rechercher" title="Rechercher (Ctrl K)">
-        <Search className="size-5" />
-      </button>
+      <Tooltip>
+        <TooltipTrigger onClick={() => setOuvert(true)} className={className} aria-label="Rechercher" aria-keyshortcuts="Control+K">
+          <Search className="size-5" />
+        </TooltipTrigger>
+        <TooltipContent side="bottom">
+          Rechercher
+          <span className="flex items-center gap-0.5">
+            <kbd data-slot="kbd" className="bg-background/20 px-1 font-mono">Ctrl</kbd>
+            <kbd data-slot="kbd" className="bg-background/20 px-1 font-mono">K</kbd>
+          </span>
+        </TooltipContent>
+      </Tooltip>
       <Dialog open={ouvert} onOpenChange={setOuvert}>
         <DialogContent className="top-[15%] translate-y-0 gap-2 p-3 sm:max-w-xl">
           <DialogTitle className="sr-only">Rechercher sur le site</DialogTitle>
