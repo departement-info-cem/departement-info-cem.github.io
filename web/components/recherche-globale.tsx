@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { BookOpen, CircleHelp, FileText, GraduationCap, Search, User } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { AvatarProf } from "@/components/carte-prof";
 import { simplifier } from "@/lib/texte";
 
 export type ElementRecherche = {
@@ -13,6 +14,8 @@ export type ElementRecherche = {
   href: string;
   /** texte supplémentaire sur lequel on cherche, sans l'afficher */
   motsCles?: string;
+  /** photo du prof (fichier de data/photos) ; sans photo, on montre ses initiales */
+  photo?: string;
 };
 
 const ICONES = { prof: User, cours: BookOpen, faq: CircleHelp, page: FileText, programme: GraduationCap };
@@ -91,9 +94,15 @@ export function RechercheGlobale({ index }: { index: ElementRecherche[] }) {
                   <button
                     onClick={() => aller(r.href)}
                     onMouseEnter={() => setSelection(i)}
-                    className={`flex w-full items-start gap-3 rounded-md p-2 text-left ${i === selection ? "bg-accent" : ""}`}
+                    className={`flex w-full gap-3 rounded-md p-2 text-left ${r.type === "prof" ? "items-center" : "items-start"} ${i === selection ? "bg-accent" : ""}`}
                   >
-                    <Icone className="mt-0.5 size-4 shrink-0 text-primary" />
+                    {r.type === "prof" ? (
+                      <span className="shrink-0">
+                        <AvatarProf prof={{ nom: r.titre, photo: r.photo }} taille={32} />
+                      </span>
+                    ) : (
+                      <Icone className="mt-0.5 size-4 shrink-0 text-primary" />
+                    )}
                     <span>
                       <span className="block text-sm font-medium">{r.titre}</span>
                       {r.sousTitre && <span className="block text-xs text-muted-foreground">{r.sousTitre}</span>}
