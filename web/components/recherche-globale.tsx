@@ -20,7 +20,8 @@ export type ElementRecherche = {
 
 const ICONES = { prof: User, cours: BookOpen, faq: CircleHelp, page: FileText, programme: GraduationCap };
 
-export function RechercheGlobale({ index }: { index: ElementRecherche[] }) {
+// Le bouton prend le style que lui donne l'en-tête (className).
+export function RechercheGlobale({ index, className }: { index: ElementRecherche[]; className?: string }) {
   const [ouvert, setOuvert] = useState(false);
   const [texte, setTexte] = useState("");
   const [selection, setSelection] = useState(0);
@@ -58,14 +59,8 @@ export function RechercheGlobale({ index }: { index: ElementRecherche[] }) {
 
   return (
     <>
-      <button
-        onClick={() => setOuvert(true)}
-        className="flex items-center gap-2 rounded-md p-2 text-sm hover:bg-white/10 md:w-36 md:border md:border-white/25 md:bg-white/10 md:px-3 md:py-1.5 xl:w-auto 2xl:w-56"
-        aria-label="Rechercher"
-      >
-        <Search className="size-5 md:size-4" />
-        <span className="hidden text-cem-gris-1 md:inline xl:hidden 2xl:inline">Rechercher</span>
-        <kbd className="ml-auto hidden whitespace-nowrap rounded bg-white/15 px-1.5 text-xs xl:inline">Ctrl K</kbd>
+      <button onClick={() => setOuvert(true)} className={className} aria-label="Rechercher" title="Rechercher (Ctrl K)">
+        <Search className="size-5" />
       </button>
       <Dialog open={ouvert} onOpenChange={setOuvert}>
         <DialogContent className="top-[15%] translate-y-0 gap-2 p-3 sm:max-w-xl">
