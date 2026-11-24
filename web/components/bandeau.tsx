@@ -14,8 +14,11 @@ export function Bandeau({ profs, labos }: { profs: ProfHoraire[]; labos: Laborat
   const scolaire = useScolaire();
   const [pause, setPause] = useStockageLocal("bandeau-pause", false);
   const resume = maintenant ? resumeMaintenant(profs, labos, scolaire, maintenant) : null;
+  // Rien à montrer (hors des heures de cours, hors session, fin de semaine, congé) : pas de bandeau du tout.
+  // Avant de connaître l'heure (rendu statique), on ne l'affiche pas non plus, pour qu'il n'apparaisse pas pour rien.
+  if (!resume || (!resume.dispos.length && !resume.libres.length && !resume.prochainLibre)) return null;
   // Vitesse à peu près constante, peu importe le nombre d'éléments
-  const duree = resume ? 24 + 5 * (resume.dispos.length + resume.libres.length) : 30;
+  const duree = 24 + 5 * (resume.dispos.length + resume.libres.length);
 
   return (
     <div className="bandeau-bas no-print fixed inset-x-0 bottom-0 z-30 flex items-center border-t border-white/20 bg-cem-marine text-sm text-white shadow-[0_-2px_8px_rgb(0_0_0/0.25)]" role="region" aria-label="Profs disponibles et locaux libres en ce moment">
@@ -25,15 +28,13 @@ export function Bandeau({ profs, labos }: { profs: ProfHoraire[]; labos: Laborat
         <span className="sr-only sm:hidden">Locaux</span>
       </Link>
       <div className={`bandeau min-w-0 flex-1 ${pause ? "bandeau-pause" : ""}`}>
-        {resume && (
-          <div className="bandeau-piste" style={{ animationDuration: `${duree}s` }}>
+        <div className="bandeau-piste" style={{ animationDuration: `${duree}s` }}>
+          <Contenu resume={resume} />
+          {/* La copie assure un défilement sans trou ; elle est cachée aux lecteurs d'écran et au clavier */}
+          <div className="bandeau-copie" aria-hidden inert>
             <Contenu resume={resume} />
-            {/* La copie assure un défilement sans trou ; elle est cachée aux lecteurs d'écran et au clavier */}
-            <div className="bandeau-copie" aria-hidden inert>
-              <Contenu resume={resume} />
-            </div>
           </div>
-        )}
+        </div>
       </div>
       <button onClick={() => setPause(!pause)} className="h-full shrink-0 px-3 hover:bg-white/10 motion-reduce:hidden" aria-label={pause ? "Reprendre le défilement" : "Arrêter le défilement"} title={pause ? "Reprendre" : "Pause"}>
         {pause ? <Play className="size-4" /> : <Pause className="size-4" />}

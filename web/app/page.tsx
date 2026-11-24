@@ -1,16 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Code2, FileWarning, GitBranch, GraduationCap, Network, Package, Sparkles, Users } from "lucide-react";
-import { bot, laboratoires, profs, profsHoraire, programmes, sitesCours } from "@/lib/donnees";
-import { FILTRES_SITES, GRILLES_DIRECTES } from "@/lib/raccourcis";
-import { EnCeMoment } from "@/components/en-ce-moment";
-import { ListeSites } from "@/components/liste-sites";
+import { ArrowDown, ArrowRight, Backpack, ChevronDown, Code2, FilePen, GraduationCap, Network, School } from "lucide-react";
+import { bot, faq, profs, programmes } from "@/lib/donnees";
+import { ETUDIANT_D_UN_JOUR, PORTES_OUVERTES } from "@/lib/raccourcis";
 import { chemin } from "@/lib/chemins";
 import { BotOrientation } from "@/components/bot-orientation";
-import { Apparition } from "@/components/apparition";
 import { AvatarProf } from "@/components/carte-prof";
-import { StatutProf } from "@/components/statut-prof";
-import { bouton } from "@/lib/bouton";
+import { DateAVenir } from "@/components/date-a-venir";
+
+// L'accueil s'adresse aux futurs étudiants et à leurs parents. L'étudiant inscrit a le menu
+// (sites des cours, profs, locaux, calendrier) et la recherche de l'en-tête, qui trouve aussi le site de chaque cours.
+
+// La barre de chaque parcours est proportionnelle à sa durée (sur 5 ans) ; l'année du stage est en vert.
+const PARCOURS = [
+  { id: "dec-prog", icone: Code2, etiquette: "DEC technique · 3 ans", titre: "Développement d'applications", ans: 3, stage: true, note: "Stage en entreprise à la dernière session", apres: ["Marché du travail", "ou université"] },
+  { id: "dec-reseau", icone: Network, etiquette: "DEC technique · 3 ans", titre: "Réseaux et cybersécurité", ans: 3, stage: true, note: "Stage en entreprise à la dernière session", apres: ["Marché du travail", "ou université"] },
+  { id: "dec-bac", icone: GraduationCap, etiquette: "DEC-BAC avec l'Université de Sherbrooke · 5 ans", titre: "DEC + baccalauréat en informatique", ans: 5, stage: false, note: "3 sessions par année, avec des stages", apres: ["DEC et baccalauréat"] },
+];
 
 // Mosaïque de photos : la grande et la verticale occupent deux rangées, les autres comblent les trous.
 // Sur téléphone, les quatre premières suffisent (elles forment déjà un rectangle complet).
@@ -25,49 +31,61 @@ const PHOTOS = [
   { fichier: "college.jpg", alt: "Le cégep vu de la pelouse", tuile: "max-md:hidden" },
 ];
 
-const ICONES_PROGRAMMES: Record<string, typeof Code2> = {
-  "dec-prog": Code2,
-  "dec-reseau": Network,
-  "dec-bac": GraduationCap,
-  "aec-web": BookOpen,
-  "aec-reseaux": BookOpen,
-};
+const VISITE = [
+  {
+    icone: School,
+    titre: "Portes ouvertes",
+    date: PORTES_OUVERTES,
+    texte: "Visite les labos, rencontre les profs et les étudiants, et pose tes questions.",
+    lien: "Tous les détails",
+    href: "https://www.cegepmontpetit.ca/choisir-edouard/explorer-cegep/portes-ouvertes",
+  },
+  {
+    icone: Backpack,
+    titre: "Étudiant d'un jour",
+    date: ETUDIANT_D_UN_JOUR,
+    texte: "Passe une demi-journée dans le programme, avec les profs et les étudiants.",
+    lien: "S'inscrire",
+    href: "https://www.cegepmontpetit.ca/choisir-edouard/explorer-cegep/etudiant-dun-jour",
+  },
+  {
+    icone: FilePen,
+    titre: "Demande d'admission",
+    texte: "Elle se fait en ligne, sur le site du SRAM. Pour la rentrée d'automne, le premier tour se termine le 1er mars.",
+    lien: "Aller au SRAM",
+    href: "https://www.sram.qc.ca",
+  },
+];
 
 export default function Accueil() {
   const listeProfs = profs();
-  const listeProgrammes = programmes();
-  const nbCours420 = new Set(listeProgrammes.flatMap((p) => p.sessions.flatMap((s) => s.cours.filter((c) => c.departement).map((c) => c.no)))).size;
+  const parId = Object.fromEntries(programmes().map((p) => [p.id, p]));
+  const questions = faq()
+    .filter((q) => q.categories.includes("futurs étudiants"))
+    .slice(0, 6);
 
   return (
     <>
-      {/* ---------- Bandeau principal ---------- */}
+      {/* ---------- Bandeau principal : un message, deux actions ---------- */}
       <section className="relative overflow-hidden bg-cem-marine text-white">
         <Image src={chemin("/images/college.jpg")} alt="" fill priority className="object-cover opacity-20" sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-r from-cem-marine via-cem-marine/90 to-cem-marine/40" />
         <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 md:py-20 lg:grid-cols-2">
           <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-cem-ciel">Département d&apos;informatique</p>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-cem-ciel">Cégep Édouard-Montpetit · Longueuil</p>
             <h1 className="text-4xl font-bold leading-tight text-white md:text-5xl">
               Fais de l&apos;informatique <span className="text-cem-vert">ton métier</span>.
             </h1>
             <p className="mt-4 max-w-xl text-lg text-cem-gris-1">
-              Programmation d&apos;applications, réseaux et cybersécurité au Cégep Édouard-Montpetit : un DEC technique en 3 ans, un DEC-BAC en 5 ans avec l&apos;Université de Sherbrooke, et des AEC pour adultes.
+              Programmation, réseaux, cybersécurité : un DEC technique de 3 ans pour travailler dès la fin, ou un DEC-BAC de 5 ans avec l&apos;Université de Sherbrooke.
             </p>
-            <p className="mb-2 mt-6 text-sm font-semibold uppercase tracking-wide text-cem-gris-2">Les grilles de cours</p>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {GRILLES_DIRECTES.map((g) => (
-                <Link key={g.href} href={g.href} className="group rounded-lg bg-cem-vert p-3 text-cem-marine shadow transition hover:-translate-y-0.5 hover:brightness-110">
-                  <span className="flex items-center justify-between text-lg font-bold">
-                    {g.texte} <ArrowRight className="size-4 transition group-hover:translate-x-1" />
-                  </span>
-                  <span className="text-xs opacity-85">{g.sousTitre}</span>
-                </Link>
-              ))}
-            </div>
-            <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm">
-              <Link href="/sites" className="font-semibold text-cem-vert hover:underline">Sites web des cours</Link>
-              <Link href="/maintenant" className="font-semibold text-cem-vert hover:underline">Locaux</Link>
-              <Link href="/programmes" className="font-semibold text-cem-vert hover:underline">AEC et autres programmes</Link>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href="#parcours" className="inline-flex h-12 items-center gap-2 rounded-lg bg-cem-vert px-5 font-bold text-cem-marine shadow transition hover:brightness-110">
+                Voir les trois parcours <ArrowDown className="size-4" />
+              </a>
+              <a href="#visite" className="inline-flex h-12 items-center gap-2 rounded-lg border border-white/40 px-5 font-bold text-white transition hover:bg-white/10">
+                Venir nous visiter
+              </a>
             </div>
           </div>
           <div id="bot">
@@ -76,129 +94,141 @@ export default function Accueil() {
         </div>
       </section>
 
-      {/* ---------- Accès directs pour les étudiants ---------- */}
-      <section className="mx-auto max-w-6xl px-4 py-10">
-        <h2 className="mb-4 text-2xl font-bold">Sites web des cours</h2>
-        <ListeSites sites={sitesCours()} filtres={FILTRES_SITES} />
-      </section>
-      <section className="border-t bg-muted">
-        <div className="mx-auto max-w-6xl px-4 py-10">
-          <div className="mb-2 flex flex-wrap items-end justify-between gap-2">
-            <h2 className="text-2xl font-bold">Locaux</h2>
-            <Link href="/maintenant" className="text-sm font-semibold text-primary underline">Horaire des laboratoires</Link>
-          </div>
-          <EnCeMoment profs={profsHoraire()} labos={laboratoires()} compact />
-        </div>
-      </section>
-
-      {/* ---------- Chiffres ---------- */}
-      <section className="border-b bg-muted">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-4 px-4 py-6 text-center md:grid-cols-4">
-          {[
-            [String(listeProfs.length), "profs passionnés"],
-            [String(nbCours420), "cours d'informatique"],
-            ["24", "postes par laboratoire"],
-            ["2", "profils : programmation et réseau"],
-          ].map(([n, t]) => (
-            <div key={t}>
-              <div className="text-3xl font-bold text-primary">{n}</div>
-              <div className="text-sm text-muted-foreground">{t}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ---------- Programmes ---------- */}
-      <section className="mx-auto max-w-6xl px-4 py-14">
-        <h2 className="text-3xl font-bold">Nos programmes</h2>
-        <p className="mb-6 text-muted-foreground">Des grilles de cours présentées de la même façon, pour comparer facilement.</p>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {listeProgrammes.map((p, i) => {
-            const Icone = ICONES_PROGRAMMES[p.id] ?? BookOpen;
-            return (
-              <Apparition key={p.id} delai={i * 70}>
-                <Link href={`/programmes/${p.id}`} className="group flex h-full gap-4 rounded-lg border bg-card p-5 shadow-sm transition hover:-translate-y-1 hover:border-primary hover:shadow-md">
-                  <span className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-accent text-primary">
-                    <Icone className="size-6" />
-                  </span>
-                  <span>
-                    <span className="block font-bold group-hover:text-primary">{p.court}</span>
-                    <span className="block text-sm text-muted-foreground">{p.duree.split(/ ?[,(]/)[0]}</span>
-                    <span className="mt-1 block text-sm">{p.resume.split(".")[0]}.</span>
-                  </span>
-                </Link>
-              </Apparition>
-            );
-          })}
-          <Link href="/cours-service" className="group flex h-full gap-4 rounded-lg border bg-card p-5 shadow-sm transition hover:-translate-y-1 hover:border-primary hover:shadow-md">
-            <span className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-accent text-primary">
-              <Sparkles className="size-6" />
-            </span>
-            <span>
-              <span className="block font-bold group-hover:text-primary">Sciences de la nature et cours de service</span>
-              <span className="mt-1 block text-sm">Programmation en sciences (SN1), TIM, TAG et cours à option Z03.</span>
-            </span>
-          </Link>
-        </div>
-      </section>
-
-      {/* ---------- Photos ---------- */}
-      <section className="bg-cem-marine" aria-label="Photos du département">
-        <div className="mx-auto grid max-w-6xl auto-rows-[7rem] grid-cols-2 gap-2 px-4 py-8 sm:auto-rows-[9rem] md:grid-cols-4 md:gap-3 lg:auto-rows-[10rem]">
-          {PHOTOS.map((p) => (
-            <div key={p.fichier} className={`relative overflow-hidden rounded-md ${p.tuile}`}>
-              <Image src={chemin(`/images/${p.fichier}`)} alt={p.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className={`object-cover ${p.cadrage ?? ""}`} />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ---------- Profs ---------- */}
-      <section className="mx-auto max-w-6xl px-4 py-14">
-        <div className="mb-6 flex flex-wrap items-end justify-between gap-2">
-          <div>
-            <h2 className="text-3xl font-bold">Les profs</h2>
-            <p className="text-muted-foreground">Leur horaire, leurs disponibilités et leur calendrier sont en ligne.</p>
-          </div>
-          <Link href="/profs" className={bouton({ variant: "outline" })}>
-            <Users className="size-4" /> Tous les profs
-          </Link>
-        </div>
-        <div className="flex flex-wrap gap-4">
-          {listeProfs
-            .filter((p) => p.photo)
-            .map((p) => (
-              <Link key={p.id} href={`/${p.id}`} className="group flex w-24 flex-col items-center gap-1 text-center" title={p.nom}>
-                <span className="rounded-full ring-2 ring-transparent transition group-hover:ring-primary">
-                  <AvatarProf prof={p} taille={80} />
+      {/* ---------- Les trois parcours ---------- */}
+      <section id="parcours" className="mx-auto max-w-6xl px-4 py-14">
+        <h2 className="text-3xl font-bold">Trois parcours</h2>
+        <p className="mt-1 text-muted-foreground">Le choix dépend surtout de ce que tu veux faire après le cégep.</p>
+        <div className="mt-8 divide-y rounded-xl border bg-card shadow-sm">
+          {PARCOURS.map((c) => (
+            <div key={c.id} className="grid gap-5 p-5 md:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-center lg:gap-10">
+              <div className="flex gap-4">
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-accent text-primary">
+                  <c.icone className="size-6" />
                 </span>
-                <span className="text-xs font-medium leading-tight">{p.nom}</span>
-                <StatutProf prof={p} compact />
-              </Link>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{c.etiquette}</p>
+                  <h3 className="text-xl font-bold">{c.titre}</h3>
+                  <p className="mt-1 text-sm">{parId[c.id]?.resume}</p>
+                  <Link href={`/programmes/${c.id}`} className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+                    Voir la grille de cours <ArrowRight className="size-3.5" />
+                  </Link>
+                </div>
+              </div>
+              <div>
+                <div className="flex gap-1" style={{ width: `${(c.ans / 5) * 100}%` }} aria-hidden>
+                  {Array.from({ length: c.ans }, (_, i) => (
+                    <div key={i} className={`flex-1 rounded py-2 text-center text-xs font-bold ${c.stage && i === c.ans - 1 ? "bg-cem-vert text-cem-marine" : "bg-accent text-accent-foreground"}`}>
+                      An {i + 1}
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-1.5 text-xs text-muted-foreground">{c.note}</p>
+                <div className="mt-3 flex flex-wrap items-center gap-2 text-sm">
+                  <span className="text-muted-foreground">Et après :</span>
+                  {c.apres.map((a) => (
+                    <span key={a} className="rounded-full border px-3 py-1 font-semibold">
+                      {a}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="mt-4 text-sm text-muted-foreground">
+          Adulte ou déjà diplômé ? Les AEC se donnent le soir :{" "}
+          <Link href="/programmes/aec-web" className="font-semibold text-primary hover:underline">AEC Web</Link> (19 mois) et{" "}
+          <Link href="/programmes/aec-reseaux" className="font-semibold text-primary hover:underline">AEC Réseaux</Link> (18 mois).{" "}
+          <Link href="/programmes" className="font-semibold text-primary hover:underline">Tous les programmes</Link>
+        </p>
+      </section>
+
+      {/* ---------- À quoi ça ressemble : les photos et les visages ---------- */}
+      <section className="bg-cem-marine text-white">
+        <div className="mx-auto max-w-6xl px-4 py-14">
+          <h2 className="text-3xl font-bold text-white">À quoi ça ressemble</h2>
+          <p className="mt-1 text-cem-gris-1">Des laboratoires de 24 postes, des travaux d&apos;équipe et un projet de fin d&apos;études.</p>
+          <div className="mt-6 grid auto-rows-[7rem] grid-cols-2 gap-2 sm:auto-rows-[9rem] md:grid-cols-4 md:gap-3 lg:auto-rows-[10rem]">
+            {PHOTOS.map((p) => (
+              <div key={p.fichier} className={`relative overflow-hidden rounded-md ${p.tuile}`}>
+                <Image src={chemin(`/images/${p.fichier}`)} alt={p.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className={`object-cover ${p.cadrage ?? ""}`} />
+              </div>
             ))}
+          </div>
+          <div className="mt-12 flex flex-wrap items-end justify-between gap-2">
+            <div>
+              <h3 className="text-2xl font-bold text-white">{listeProfs.length} profs</h3>
+              <p className="text-cem-gris-1">Leur horaire, leurs disponibilités et leur bureau sont en ligne.</p>
+            </div>
+            <Link href="/profs" className="inline-flex items-center gap-1 font-semibold text-cem-vert hover:underline">
+              Tous les profs <ArrowRight className="size-4" />
+            </Link>
+          </div>
+          {/* Sur téléphone, une douzaine de visages suffit : le lien mène aux autres. */}
+          <div className="mt-5 flex flex-wrap gap-x-3 gap-y-4">
+            {listeProfs
+              .filter((p) => p.photo)
+              .map((p, i) => (
+                <Link key={p.id} href={`/${p.id}`} className={`group flex w-20 flex-col items-center gap-1 text-center ${i >= 12 ? "max-md:hidden" : ""}`}>
+                  <span className="rounded-full ring-2 ring-transparent transition group-hover:ring-cem-vert">
+                    <AvatarProf prof={p} taille={64} />
+                  </span>
+                  <span className="text-[11px] leading-tight text-cem-gris-1 group-hover:text-white">{p.nom}</span>
+                </Link>
+              ))}
+          </div>
         </div>
       </section>
 
-      {/* ---------- Déjà étudiant ---------- */}
+      {/* ---------- Les questions des futurs étudiants (catégorie « futurs étudiants » de data/faq.yaml) ---------- */}
       <section className="bg-muted">
         <div className="mx-auto max-w-6xl px-4 py-14">
-          <h2 className="mb-6 text-3xl font-bold">Déjà au département ?</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { href: "/nouveau", icone: Sparkles, titre: "Conseils aux nouveaux", texte: "Sauvegardes, labos, objets perdus..." },
-              { href: "/logiciels", icone: Package, titre: "Logiciels gratuits", texte: "GitHub Student Pack, JetBrains, Office..." },
-              { href: "/git", icone: GitBranch, titre: "Git et commits", texte: "Les règles pour tes dépôts de travaux." },
-              { href: "/plagiat", icone: FileWarning, titre: "Plagiat et IA", texte: "S'aider oui, tricher non." },
-            ].map((l, i) => (
-              <Apparition key={l.href} delai={i * 70}>
-                <Link href={l.href} className="group block h-full rounded-lg border bg-card p-5 shadow-sm transition hover:-translate-y-1 hover:border-primary">
-                  <l.icone className="mb-2 size-6 text-primary" />
-                  <span className="block font-bold group-hover:text-primary">{l.titre}</span>
-                  <span className="text-sm text-muted-foreground">{l.texte}</span>
-                </Link>
-              </Apparition>
+          <h2 className="text-3xl font-bold">Les questions qu&apos;on nous pose</h2>
+          <p className="mt-1 text-muted-foreground">Des parents autant que des élèves.</p>
+          <div className="mt-6 grid items-start gap-3 md:grid-cols-2">
+            {questions.map((q, i) => (
+              <details key={q.question} open={i < 2} className="group rounded-lg border bg-card p-4">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-semibold [&::-webkit-details-marker]:hidden">
+                  {q.question}
+                  <ChevronDown className="size-4 shrink-0 transition group-open:rotate-180" />
+                </summary>
+                <p className="mt-2 text-sm text-muted-foreground">{q.reponse}</p>
+              </details>
             ))}
           </div>
+          <Link href="/faq" className="mt-5 inline-flex items-center gap-1 font-semibold text-primary hover:underline">
+            Toutes les questions <ArrowRight className="size-4" />
+          </Link>
+        </div>
+      </section>
+
+      {/* ---------- La prochaine étape ---------- */}
+      <section id="visite" className="bg-cem-vert text-cem-marine">
+        <div className="mx-auto max-w-6xl px-4 py-14">
+          <h2 className="text-3xl font-bold text-cem-marine">Viens voir par toi-même</h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {VISITE.map((c) => (
+              <div key={c.titre} className="flex flex-col rounded-lg bg-cem-marine p-5 text-white shadow">
+                <c.icone className="mb-2 size-6 text-cem-vert" />
+                <h3 className="text-lg font-bold text-white">{c.titre}</h3>
+                {c.date && (
+                  <DateAVenir iso={c.date.iso}>
+                    <p className="text-sm font-semibold text-cem-vert">{c.date.texte}</p>
+                  </DateAVenir>
+                )}
+                <p className="mt-1 flex-1 text-sm text-cem-gris-1">{c.texte}</p>
+                <a href={c.href} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-cem-vert hover:underline">
+                  {c.lien} <ArrowRight className="size-3.5" />
+                </a>
+              </div>
+            ))}
+          </div>
+          <p className="mt-6 text-sm">
+            Une autre question ?{" "}
+            <Link href="/contact" className="font-bold underline">
+              Écris-nous
+            </Link>
+          </p>
         </div>
       </section>
     </>
