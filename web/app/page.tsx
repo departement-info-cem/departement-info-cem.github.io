@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowRight, Backpack, ChevronDown, Code2, FilePen, GraduationCap, Network, School } from "lucide-react";
+import { ArrowDown, ArrowRight, Backpack, Briefcase, ChevronDown, Code2, FilePen, GraduationCap, Network, School } from "lucide-react";
 import { bot, faq, profs, programmes } from "@/lib/donnees";
-import { ETUDIANT_D_UN_JOUR, PORTES_OUVERTES } from "@/lib/raccourcis";
+import { ETUDIANT_D_UN_JOUR, PORTES_OUVERTES, STAGES } from "@/lib/raccourcis";
 import { chemin } from "@/lib/chemins";
 import { BotOrientation } from "@/components/bot-orientation";
 import { AvatarProf } from "@/components/carte-prof";
@@ -87,6 +87,10 @@ export default function Accueil() {
                 Venir nous visiter
               </a>
             </div>
+            {/* Pour les entreprises : peu de visiteurs, donc une ligne en retrait plutôt qu'un bouton. */}
+            <a href={STAGES} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-1.5 text-sm text-cem-gris-1 hover:text-white hover:underline">
+              <Briefcase className="size-4" /> Entreprises : offrir un stage à nos finissants
+            </a>
           </div>
           <div id="bot">
             <BotOrientation bot={bot()} compact />
