@@ -8,7 +8,7 @@ import { AvatarProf } from "@/components/carte-prof";
 import { prochainCours, resumeMaintenant, type ProfHoraire } from "@/lib/maintenant";
 import { formaterDate, heureEnMinutes, minutesEnHeure } from "@/lib/temps";
 
-// « En ce moment » : les profs disponibles (et surtout où), les laboratoires libres.
+// Page « Locaux » : les profs disponibles (et surtout où), les laboratoires libres.
 export function EnCeMoment({ profs, labos, compact = false }: { profs: ProfHoraire[]; labos: Laboratoire[]; compact?: boolean }) {
   const maintenant = useMaintenant();
   const scolaire = useScolaire();

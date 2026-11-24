@@ -5,12 +5,12 @@ import { HoraireLabos } from "@/components/horaire-labos";
 import { indexCours, laboratoires, profsHoraire } from "@/lib/donnees";
 import { lienEdition } from "@/lib/chemins";
 
-export const metadata: Metadata = { title: "En ce moment : profs et laboratoires" };
+export const metadata: Metadata = { title: "Locaux : profs et laboratoires" };
 
 export default function PageMaintenant() {
   return (
     <>
-      <TitrePage titre="En ce moment" sousTitre="Quels profs sont disponibles, et où ? Quels laboratoires sont libres ?" />
+      <TitrePage titre="Locaux" sousTitre="Quels profs sont disponibles, et où ? Quels laboratoires sont libres ?" />
       <Conteneur className="space-y-10">
         <EnCeMoment profs={profsHoraire()} labos={laboratoires()} />
         <section>

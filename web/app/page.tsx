@@ -55,7 +55,7 @@ export default function Accueil() {
             </div>
             <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm">
               <Link href="/sites" className="font-semibold text-cem-vert hover:underline">Sites web des cours</Link>
-              <Link href="/maintenant" className="font-semibold text-cem-vert hover:underline">Profs et labos en ce moment</Link>
+              <Link href="/maintenant" className="font-semibold text-cem-vert hover:underline">Locaux</Link>
               <Link href="/programmes" className="font-semibold text-cem-vert hover:underline">AEC et autres programmes</Link>
             </div>
           </div>
@@ -73,7 +73,7 @@ export default function Accueil() {
       <section className="border-t bg-muted">
         <div className="mx-auto max-w-6xl px-4 py-10">
           <div className="mb-2 flex flex-wrap items-end justify-between gap-2">
-            <h2 className="text-2xl font-bold">En ce moment</h2>
+            <h2 className="text-2xl font-bold">Locaux</h2>
             <Link href="/maintenant" className="text-sm font-semibold text-primary underline">Horaire des laboratoires</Link>
           </div>
           <EnCeMoment profs={profsHoraire()} labos={laboratoires()} compact />

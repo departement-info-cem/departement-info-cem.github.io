@@ -1,4 +1,4 @@
-// « En ce moment » : où sont les profs et quels laboratoires sont libres, en tenant compte du calendrier
+// Page « Locaux » : où sont les profs et quels laboratoires sont libres, en tenant compte du calendrier
 // scolaire (congés, JR, horaires modifiés) et des absences inscrites par les profs.
 import type { CalendrierScolaire, Laboratoire } from "@/app/_types/divers";
 import type { EvenementProf, Plage, Prof } from "@/app/_types/prof";
@@ -162,7 +162,7 @@ export function prochainCours(labo: Laboratoire, profs: ProfHoraire[], scolaire:
   return undefined;
 }
 
-// ---------- Résumé (bandeau et page « En ce moment ») ----------
+// ---------- Résumé (bandeau et page « Locaux ») ----------
 
 export type ResumeMaintenant = ReturnType<typeof resumeMaintenant>;
 

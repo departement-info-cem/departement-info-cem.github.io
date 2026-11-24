@@ -144,7 +144,7 @@ export function coursService(): ServiceAffiche[] {
   );
 }
 
-/** Version légère des profs (pour « en ce moment »). */
+/** Version légère des profs (pour la page « Locaux »). */
 export function profsHoraire(): ProfHoraire[] {
   return profs().map((p) => ({ id: p.id, nom: p.nom, session: p.session, calendrier: p.calendrier, bureau: p.bureau, photo: p.photo, plages: p.horaire?.plages ?? [] }));
 }
