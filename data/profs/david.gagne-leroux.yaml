@@ -34,6 +34,6 @@ horaire:
 # ---------- Calendrier : tes dates à toi (remises, examens, absences...) ----------
 # Les congés et journées pédagogiques du cégep sont ajoutés automatiquement.
 # type : remise, examen, cours, absence, deplacement, activite ou autre
-calendrier: [remise]
-  - { date: 2026-12-08, titre: Remise du TP3, cours: 420-3M5-EM, type: remise }
+calendrier: []
+#  - { date: 2026-12-08, titre: Remise du TP3, cours: 420-3M5-EM, type: remise }
 #  - { date: 2026-12-01, au: 2026-12-02, titre: Absent (colloque), type: absence }
