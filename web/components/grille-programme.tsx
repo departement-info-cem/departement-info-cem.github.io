@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { ExternalLink, FileText, Globe } from "lucide-react";
 import type { CoursAffiche, Programme } from "@/app/_types/programme";
@@ -8,6 +8,72 @@ import { IconeTag, LIBELLES_TAGS } from "@/components/icone-tag";
 import { totalHeures } from "@/lib/programmes";
 
 export type ProfsParCours = Record<string, { id: string; nom: string }[]>;
+
+const DUREE_ANIMATION = 700;
+
+/** Nombre qui défile jusqu'à sa nouvelle valeur, avec un petit rebond, quand il change. */
+function ChiffreAnime({ valeur, delai }: { valeur: number; delai: number }) {
+  const [affiche, setAffiche] = useState(valeur);
+  const courant = useRef(valeur);
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    const depart = courant.current;
+    if (depart === valeur) return;
+    const reduit = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const duree = reduit ? 0 : DUREE_ANIMATION;
+    if (!reduit) {
+      ref.current?.animate([{ transform: "scale(1)" }, { transform: "scale(1.15)" }, { transform: "scale(1)" }], { duration: 450, delay: delai, easing: "ease-out" });
+    }
+    const debut = performance.now() + (reduit ? 0 : delai);
+    let id = requestAnimationFrame(function etape(t) {
+      const p = duree ? Math.min(1, Math.max(0, (t - debut) / duree)) : 1;
+      courant.current = Math.round(depart + (valeur - depart) * (1 - (1 - p) ** 3));
+      setAffiche(courant.current);
+      if (p < 1) id = requestAnimationFrame(etape);
+    });
+    return () => cancelAnimationFrame(id);
+  }, [valeur, delai]);
+  return (
+    <>
+      {/* Les lecteurs d'écran lisent seulement la valeur finale, pas chaque étape du défilement */}
+      <span ref={ref} aria-hidden className="inline-block tabular-nums">
+        {affiche}
+      </span>
+      <span className="sr-only">{valeur}</span>
+    </>
+  );
+}
+
+/** Carte de chiffre en haut de la grille. Avec un filtre, montre la part du programme qui y correspond. */
+function Statistique({ valeur, total, unite, filtre, delai, children }: { valeur: number | null; total: number; unite?: string; filtre: boolean; delai: number; children: React.ReactNode }) {
+  const part = valeur === null || !total ? 0 : valeur / total;
+  return (
+    <div className="rounded-lg border bg-card p-3">
+      <div className="flex items-baseline gap-1.5 text-2xl font-bold text-primary">
+        <span>
+          {valeur === null ? "-" : <ChiffreAnime valeur={valeur} delai={delai} />}
+          {valeur !== null && unite ? ` ${unite}` : ""}
+        </span>
+        {valeur !== null && (
+          <span
+            aria-hidden={!filtre}
+            className={`text-sm font-normal text-muted-foreground transition-opacity duration-500 motion-reduce:transition-none ${filtre ? "opacity-100" : "opacity-0"}`}
+          >
+            sur {total}
+            {unite ? ` ${unite}` : ""}
+          </span>
+        )}
+      </div>
+      <div className="text-sm text-muted-foreground">{children}</div>
+      <div className="mt-2 h-1 overflow-hidden rounded-full bg-muted" aria-hidden>
+        <div
+          className="h-full origin-left rounded-full bg-primary transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+          style={{ transform: `scaleX(${part})`, transitionDelay: `${delai}ms` }}
+        />
+      </div>
+    </div>
+  );
+}
 
 function CarteCours({ c, attenue, commun, onClick }: { c: CoursAffiche; attenue: boolean; commun?: boolean; onClick: () => void }) {
   const ecole = c.ecole === "UdeS";
@@ -68,27 +134,34 @@ export function GrilleProgramme({
   const tous = programme.sessions.flatMap((s) => s.cours);
   // Les listes « au choix » ne comptent pas dans les totaux (on n'en suit qu'un)
   const suivis = programme.sessions.filter((s) => !s.auChoix).flatMap((s) => s.cours);
-  const nbChoix = programme.sessions.filter((s) => s.auChoix).length;
+  const choix = programme.sessions.filter((s) => s.auChoix);
   const tags = useMemo(() => [...new Set(tous.flatMap((c) => c.tags))].filter((t) => t !== "fg" && t !== "choix").sort(), [tous]);
-  const heuresDep = totalHeures(suivis.filter((c) => c.departement));
-  const total = totalHeures(suivis);
   const parColonnes = programme.sessions.length <= 6 && programme.sessions.every((s) => s.cours.length <= 8);
+
+  // Chiffres du programme entier, puis seulement des cours qui ont le tag du filtre.
+  // Une liste « au choix » compte si au moins une de ses options a le tag.
+  const chiffres = (garde: (c: CoursAffiche) => boolean) => {
+    const cours = suivis.filter(garde);
+    const dep = cours.filter((c) => c.departement);
+    return { nbChoix: choix.filter((s) => s.cours.some(garde)).length, nb: cours.length, heures: totalHeures(cours), heuresDep: totalHeures(dep), nbDep: dep.length };
+  };
+  const prog = chiffres(() => true);
+  const vus = tag ? chiffres((c) => c.tags.includes(tag)) : prog;
+  const filtre = tag !== null;
 
   return (
     <div>
       <div className="mb-4 grid gap-3 sm:grid-cols-3">
-        <div className="rounded-lg border bg-card p-3">
-          <div className="text-2xl font-bold text-primary">{suivis.length + nbChoix}</div>
-          <div className="text-sm text-muted-foreground">cours{nbChoix ? ` (dont ${nbChoix} au choix)` : ""}</div>
-        </div>
-        <div className="rounded-lg border bg-card p-3">
-          <div className="text-2xl font-bold text-primary">{total ? `${total} h` : "-"}</div>
-          <div className="text-sm text-muted-foreground">heures de cours{programme.type === "dec-bac" ? " au cégep" : ""}</div>
-        </div>
-        <div className="rounded-lg border bg-card p-3">
-          <div className="text-2xl font-bold text-primary">{heuresDep ? `${heuresDep} h` : suivis.filter((c) => c.departement).length}</div>
-          <div className="text-sm text-muted-foreground">{heuresDep ? "en informatique (420)" : "cours d'informatique"}{nbChoix ? ", sans les cours au choix" : ""}</div>
-        </div>
+        <Statistique valeur={vus.nb + vus.nbChoix} total={prog.nb + prog.nbChoix} filtre={filtre} delai={0}>
+          cours{vus.nbChoix ? ` (dont ${vus.nbChoix} au choix)` : ""}
+        </Statistique>
+        <Statistique valeur={prog.heures ? vus.heures : null} total={prog.heures} unite="h" filtre={filtre} delai={90}>
+          heures de cours{programme.type === "dec-bac" ? " au cégep" : ""}
+        </Statistique>
+        <Statistique valeur={prog.heuresDep ? vus.heuresDep : vus.nbDep} total={prog.heuresDep || prog.nbDep} unite={prog.heuresDep ? "h" : undefined} filtre={filtre} delai={180}>
+          {prog.heuresDep ? "en informatique (420)" : "cours d'informatique"}
+          {choix.length ? ", sans les cours au choix" : ""}
+        </Statistique>
       </div>
 
       {tags.length > 0 && (

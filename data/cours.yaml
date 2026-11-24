@@ -75,6 +75,7 @@
   heures: 75
   tags:
     - mobile
+    - git
   url: https://info.cegepmontpetit.ca/3M5-Intro-Mobile/
 - no: 420-3W6-EM
   nom: Programmation web transactionnelle
@@ -82,6 +83,7 @@
   tags:
     - web
     - bd
+    - git
   url: https://departement-info-cem.github.io/3W6-Web-Transactionelle/
 - no: 420-3T5-EM
   nom: Automatisation de tâches
@@ -121,12 +123,14 @@
   heures: 90
   tags:
     - mobile
+    - git
   url: https://github.com/departement-info-cem/4N6-Mobile/
 - no: 420-4W6-EM
   nom: Programmation web orientée services
   heures: 90
   tags:
     - web
+    - git
   url: https://info.cegepmontpetit.ca/4W6-WebServices/
 - no: 420-4S5-EM
   nom: Architecture et cybersécurité
@@ -171,6 +175,7 @@
   tags:
     - mobile
     - web
+    - git
   url: https://departement-info-cem.github.io/5N6-mobile-2/
   alias:
     - 420-5N6-EM
@@ -180,6 +185,7 @@
   tags:
     - web
     - prog
+    - git
   url: https://departement-info-cem.github.io/5W5-Web-Avancee/
   alias:
     - { no: 420-5W5-EM, nom: "Prog. Web Avancée" }   # ancien programme
