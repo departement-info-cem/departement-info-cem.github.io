@@ -22,12 +22,11 @@ export const GRILLES = [
 export const NAVIGATION = [
   { href: "/sites", texte: "Sites des cours" },
   { href: "/profs", texte: "Profs" },
+  { href: "/maintenant", texte: "Locaux" },
+  { href: "/calendrier", texte: "Calendrier" },
 ];
 
-// « En ce moment » est aussi dans le bandeau en bas de chaque page.
 export const RESSOURCES = [
-  { href: "/maintenant", texte: "En ce moment" },
-  { href: "/calendrier", texte: "Calendrier scolaire" },
   { href: "/faq", texte: "FAQ" },
   { href: "/nouveau", texte: "Conseils aux nouveaux" },
   { href: "/logiciels", texte: "Logiciels gratuits" },
