@@ -1,5 +1,5 @@
 import type { ElementRecherche } from "@/components/recherche-globale";
-import { SHAREPOINT } from "@/lib/raccourcis";
+import { SHAREPOINT, STAGES } from "@/lib/raccourcis";
 import { catalogue, faq, laboratoires, profs, programmes } from "@/lib/donnees";
 import { normaliserLocal } from "@/lib/maintenant";
 
@@ -15,6 +15,7 @@ const PAGES: ElementRecherche[] = [
   { type: "page", titre: "Git et commits", href: "/git", motsCles: "depot repo commit" },
   { type: "page", titre: "Plagiat et IA", href: "/plagiat", motsCles: "triche chatgpt copilot" },
   { type: "page", titre: "Nous joindre", href: "/contact", motsCles: "courriel coordination" },
+  { type: "page", titre: "Entreprises : offrir un stage", href: STAGES, motsCles: "stage stagiaire employeur recruter finissant emploi offre" },
   { type: "page", titre: "L'informatique, est-ce pour moi ?", href: "/orientation", motsCles: "bot orientation choisir" },
   { type: "page", titre: "Profs : modifier ma page", href: "/modifier-mon-profil", motsCles: "horaire calendrier yaml" },
 ];

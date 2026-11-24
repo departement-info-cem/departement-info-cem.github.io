@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FormesPiedDePage } from "@/components/formes-pied-de-page";
 import { Logo } from "@/components/logo";
 import { DEPOT } from "@/lib/chemins";
+import { STAGES } from "@/lib/raccourcis";
 
 export function PiedDePage() {
   return (
@@ -27,6 +28,7 @@ export function PiedDePage() {
             <li><Link href="/profs" className="hover:underline">Les profs</Link></li>
             <li><Link href="/orientation" className="hover:underline">L&apos;informatique, est-ce pour moi ?</Link></li>
             <li><Link href="/faq" className="hover:underline">Foire aux questions</Link></li>
+            <li><a href={STAGES} target="_blank" rel="noreferrer" className="hover:underline">Entreprises : offrir un stage</a></li>
           </ul>
         </div>
         <div>

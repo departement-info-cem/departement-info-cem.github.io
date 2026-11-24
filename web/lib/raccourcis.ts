@@ -15,6 +15,9 @@ export const FILTRES_SITES = [
 
 export const SHAREPOINT = "https://cegepedouardmontpetit.sharepoint.com/teams/PED-INFO";
 
+// Site des stages, tenu à part : dates, formulaire d'offre et contacts pour les entreprises.
+export const STAGES = "https://info.cegepmontpetit.ca/stages/";
+
 // Les logos à droite de l'en-tête. Les fichiers sont dans public/images/liens/.
 export const LIENS_LOGOS = [
   { href: SHAREPOINT, texte: "SharePoint du département", logo: "sharepoint.png" },

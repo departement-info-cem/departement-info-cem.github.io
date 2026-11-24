@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Code2, FileWarning, GitBranch, GraduationCap, Network, Package, Sparkles, Users } from "lucide-react";
+import { ArrowRight, BookOpen, Briefcase, Code2, FileWarning, GitBranch, GraduationCap, Network, Package, Sparkles, Users } from "lucide-react";
 import { bot, laboratoires, profs, profsHoraire, programmes, sitesCours } from "@/lib/donnees";
-import { FILTRES_SITES, GRILLES_DIRECTES } from "@/lib/raccourcis";
+import { FILTRES_SITES, GRILLES_DIRECTES, STAGES } from "@/lib/raccourcis";
 import { EnCeMoment } from "@/components/en-ce-moment";
 import { ListeSites } from "@/components/liste-sites";
 import { chemin } from "@/lib/chemins";
@@ -69,6 +69,10 @@ export default function Accueil() {
               <Link href="/maintenant" className="font-semibold text-cem-vert hover:underline">Locaux</Link>
               <Link href="/programmes" className="font-semibold text-cem-vert hover:underline">AEC et autres programmes</Link>
             </div>
+            {/* Pour les entreprises : peu de visiteurs, donc une ligne en retrait plutôt qu'un bouton. */}
+            <a href={STAGES} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-1.5 text-sm text-cem-gris-1 hover:text-white hover:underline">
+              <Briefcase className="size-4" /> Entreprises : offrir un stage à nos finissants
+            </a>
           </div>
           <div id="bot">
             <BotOrientation bot={bot()} compact />
