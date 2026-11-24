@@ -46,7 +46,23 @@ export function SceneRobot({ monde, erreur, vitesse }: { monde: Monde; erreur: b
   const robot = iso(monde.x, monde.y);
   const cases = monde.carte.flatMap((ligne, y) => ligne.map((c, x) => ({ c, x, y }))).sort((a, b) => a.x + a.y - (b.x + b.y));
   const transition = { transition: `transform ${vitesse * 0.8}ms ease-in-out` };
-  // Octet est dessiné au bon rang pour passer derrière les serveurs plus proches de nous
+  // Serveurs et paquets, du plus loin au plus proche de nous : chacun cache ceux dessinés avant lui
+  const objets = cases.flatMap(({ c, x, y }) => {
+    const rang = x + y;
+    if (c === "#") return [{ rang, el: <Serveur key={`m${x},${y}`} x={x} y={y} /> }];
+    if (!monde.paquets.has(`${x},${y}`)) return [];
+    const paquet = (
+      // La ref recale le flottement sur l'horloge de la page : un paquet qui passe devant ou derrière Octet
+      // est recréé, et sans ça il repartirait de zéro, décalé par rapport aux autres
+      <g key={`p${x},${y}`} ref={(g) => g?.getAnimations().forEach((a) => (a.startTime = 0))} style={{ animation: "flotte 1.6s ease-in-out infinite" }}>
+        <g transform="translate(0 -6)">
+          <Bloc x={x} y={y} h={16} dessus="#ffe08a" gauche="#f37021" droite="#fdb913" t={0.36} />
+        </g>
+      </g>
+    );
+    return [{ rang, el: paquet }];
+  });
+  // Octet se glisse entre les objets de son rang (ou plus loin) et ceux plus proches de nous
   const rang = monde.x + monde.y;
 
   const octet = (
@@ -83,31 +99,20 @@ export function SceneRobot({ monde, erreur, vitesse }: { monde: Monde; erreur: b
             <Bloc x={x} y={y} h={0} dessus={c === "T" ? "#278637" : pair ? "#dbe6ee" : "#cbdae6"} gauche="" droite="" />
             <polygon points={`${px - 32},${py} ${px},${py + 16} ${px},${py + 26} ${px - 32},${py + 10}`} fill="#8aa3b8" />
             <polygon points={`${px + 32},${py} ${px},${py + 16} ${px},${py + 26} ${px + 32},${py + 10}`} fill="#7390a8" />
+            {/* « >_ » tracé plutôt qu'écrit : centré pile sur la tuile, quelle que soit la police du système */}
             {c === "T" && (
-              <text x={px} y={py + 5} textAnchor="middle" fontSize={13} fontWeight={800} fill="#fff" fontFamily="monospace">
-                &gt;_
-              </text>
+              <g fill="none" stroke="#fff" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+                <polyline points={`${px - 7},${py - 3.5} ${px - 1.5},${py} ${px - 7},${py + 3.5}`} />
+                <line x1={px + 1.5} y1={py + 3.5} x2={px + 7} y2={py + 3.5} />
+              </g>
             )}
           </g>
         );
       })}
-      {cases.map(({ c, x, y }) => {
-        const elements = [];
-        if (c === "#") elements.push(<Serveur key={`m${x},${y}`} x={x} y={y} />);
-        if (monde.paquets.has(`${x},${y}`)) {
-          elements.push(
-            <g key={`p${x},${y}`} style={{ animation: "flotte 1.6s ease-in-out infinite" }}>
-              <g transform="translate(0 -6)">
-                <Bloc x={x} y={y} h={16} dessus="#ffe08a" gauche="#f37021" droite="#fdb913" t={0.36} />
-              </g>
-            </g>,
-          );
-        }
-        return elements;
-      }).flat()}
+      {objets.filter((o) => o.rang <= rang).map((o) => o.el)}
+      {/* Octet reste toujours au même endroit dans le SVG : déplacé, il perdrait son animation de déplacement */}
       {octet}
-      {/* serveurs devant Octet, redessinés par-dessus */}
-      {cases.filter(({ c, x, y }) => c === "#" && x + y > rang).map(({ x, y }) => <Serveur key={`d${x},${y}`} x={x} y={y} />)}
+      {objets.filter((o) => o.rang > rang).map((o) => o.el)}
     </svg>
   );
 }

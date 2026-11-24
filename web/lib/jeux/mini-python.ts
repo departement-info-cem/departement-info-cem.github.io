@@ -249,6 +249,88 @@ export function analyser(source: string): Instr[] {
   return new Analyseur(decouper(source)).programme();
 }
 
+// --- Pour l'éditeur : coloration et suggestions ---
+
+export type Jeton = { texte: string; type: "mot" | "constante" | "nombre" | "texte" | "commentaire" | "fonction" | "nom" | "autre" };
+
+/** Découpe une ligne pour la colorer. Contrairement à l'analyseur, accepte n'importe quel texte. */
+export function colorier(ligne: string): Jeton[] {
+  const jetons: Jeton[] = [];
+  const re = /(#.*)|("[^"]*"?|'[^']*'?)|(\d+(?:\.\d+)?)|([A-Za-z_À-ÿ][\wÀ-ÿ]*)|\s+|./g;
+  let precedent = "";
+  for (const m of ligne.matchAll(re)) {
+    const [texte, commentaire, chaine, nombre, nom] = m;
+    let type: Jeton["type"] = "autre";
+    if (commentaire) type = "commentaire";
+    else if (chaine) type = "texte";
+    else if (nombre) type = "nombre";
+    else if (nom && MOTS.has(nom)) type = ["True", "False", "None"].includes(nom) ? "constante" : "mot";
+    else if (nom) type = precedent === "def" || /^\s*\(/.test(ligne.slice(m.index + texte.length)) ? "fonction" : "nom";
+    if (texte.trim()) precedent = texte;
+    const dernier = jetons.at(-1);
+    if (type === "autre" && dernier?.type === "autre") dernier.texte += texte;
+    else jetons.push({ texte, type });
+  }
+  return jetons;
+}
+
+/** Les fonctions (def) et les variables que le programme crée. */
+export function nomsDefinis(source: string): { fonctions: Map<string, number>; variables: Set<string> } {
+  const fonctions = new Map<string, number>();
+  const variables = new Set<string>();
+  const NOM = "[A-Za-z_À-ÿ][\\wÀ-ÿ]*";
+  for (const brut of source.split("\n")) {
+    const l = brut.replace(/#.*$/, "");
+    const def = new RegExp(`^\\s*def\\s+(${NOM})\\s*\\(([^)]*)`).exec(l);
+    if (def) {
+      const params = def[2].split(",").map((p) => p.trim()).filter(Boolean);
+      fonctions.set(def[1], params.length);
+      params.forEach((p) => variables.add(p));
+    }
+    const pour = new RegExp(`^\\s*for\\s+(${NOM})`).exec(l);
+    if (pour) variables.add(pour[1]);
+    const aff = new RegExp(`^\\s*(${NOM})\\s*[-+*]?=(?!=)`).exec(l);
+    if (aff) variables.add(aff[1]);
+  }
+  for (const m of MOTS) variables.delete(m);
+  return { fonctions, variables };
+}
+
+/** Les mots de Python que l'éditeur propose, avec une courte explication. */
+export const AIDE_PYTHON: Record<string, string> = {
+  if: "si la condition est vraie, exécute les lignes décalées en dessous",
+  elif: "sinon, si cette autre condition est vraie…",
+  else: "sinon : quand aucune condition au-dessus n'était vraie",
+  while: "répète les lignes décalées tant que la condition est vraie",
+  for: "répète un nombre de fois : for i in range(3):",
+  in: "s'utilise avec for : for i in range(3):",
+  range: "range(3) donne 0, 1 et 2 : avec for, ça répète 3 fois",
+  not: "inverse une condition : not devant_libre()",
+  and: "vrai si les deux conditions sont vraies",
+  or: "vrai si au moins une des deux conditions est vraie",
+  True: "vrai",
+  False: "faux",
+  break: "sort tout de suite de la boucle",
+  continue: "passe tout de suite au tour suivant de la boucle",
+  pass: "ne fait rien (pour un bloc encore vide)",
+  def: "crée ta propre fonction : def nom():",
+  return: "termine la fonction et renvoie une valeur",
+};
+
+export type Suggestion = { nom: string; type: "action" | "capteur" | "fonction" | "mot" | "variable"; aide?: string; arguments?: boolean };
+
+/**
+ * Ce qui commence par le préfixe, puis ce dont une partie (après un « _ ») commence par lui : « libre » trouve devant_libre.
+ * Un mot ou une variable déjà écrit au complet n'a plus rien à compléter ; une fonction, elle, gagne encore ses parenthèses.
+ */
+export function suggerer(prefixe: string, candidats: Suggestion[]): Suggestion[] {
+  const p = prefixe.toLowerCase();
+  const restants = candidats.filter((c) => !(c.nom === prefixe && (c.type === "mot" || c.type === "variable")));
+  const debut = restants.filter((c) => c.nom.toLowerCase().startsWith(p));
+  const partie = restants.filter((c) => !debut.includes(c) && c.nom.toLowerCase().split("_").some((s) => s.startsWith(p)));
+  return [...debut, ...partie];
+}
+
 /** Nombre de lignes de code (sans les lignes vides ni les commentaires). */
 export function compterLignes(source: string): number {
   return source.split("\n").filter((l) => l.replace(/#.*$/, "").trim()).length;
