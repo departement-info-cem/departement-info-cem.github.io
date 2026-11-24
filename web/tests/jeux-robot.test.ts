@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { analyser, compterLignes, ErreurPython, executer } from "@/lib/jeux/mini-python";
+import { analyser, colorier, compterLignes, ErreurPython, executer, nomsDefinis, suggerer, type Suggestion } from "@/lib/jeux/mini-python";
 import { NIVEAUX, verifier } from "@/lib/jeux/robot";
 
 function calculer(source: string) {
@@ -38,6 +38,34 @@ describe("mini Python", () => {
     expect(erreur("afficher(y)")).toContain("je ne connais pas « y »");
     expect(erreur("  x = 1")).toContain("première ligne");
     expect(erreur("def f():\n    f()\nf()")).toContain("récursion");
+  });
+});
+
+describe("éditeur", () => {
+  const types = (ligne: string) => colorier(ligne).map((j) => `${j.type}:${j.texte}`);
+  it("colore les mots, les appels, les nombres et les commentaires", () => {
+    expect(types("while not sur_terminal():  # encore")).toEqual(["mot:while", "autre: ", "mot:not", "autre: ", "fonction:sur_terminal", "autre:():  ", "commentaire:# encore"]);
+    expect(types("for i in range(6):")).toEqual(["mot:for", "autre: ", "nom:i", "autre: ", "mot:in", "autre: ", "fonction:range", "autre:(", "nombre:6", "autre:):"]);
+    expect(types("def tour(n): x = True")).toContain("fonction:tour");
+    expect(types("x = 'a#b'")).toEqual(["nom:x", "autre: = ", "texte:'a#b'"]);
+    // Une ligne à moitié écrite se colore quand même, et rien ne se perd
+    for (const l of ["if devant_libre(", "x = \"pas fini", "é@ ?"]) expect(colorier(l).map((j) => j.texte).join("")).toBe(l);
+  });
+  it("retrouve les fonctions et les variables du programme", () => {
+    const { fonctions, variables } = nomsDefinis("def deux(a, b):\n    pass\nfor i in range(3):\n    total += i\nif x == 2:\n    pass");
+    expect([...fonctions]).toEqual([["deux", 2]]);
+    expect([...variables].sort()).toEqual(["a", "b", "i", "total"]);
+  });
+  it("suggère ce qui commence par le préfixe, puis ce qui le contient après un _", () => {
+    const c: Suggestion[] = ["avancer", "devant_libre", "droite_libre", "sur_paquet"].map((nom) => ({ nom, type: "action" }));
+    const noms = (p: string, liste = c) => suggerer(p, liste).map((s) => s.nom);
+    expect(noms("d")).toEqual(["devant_libre", "droite_libre"]);
+    expect(noms("libre")).toEqual(["devant_libre", "droite_libre"]);
+    expect(noms("PAQ")).toEqual(["sur_paquet"]);
+    expect(noms("avancer")).toEqual(["avancer"]); // gagne encore ses parenthèses
+    const mots: Suggestion[] = [{ nom: "if", type: "mot" }, { nom: "in", type: "mot" }, { nom: "i", type: "variable" }];
+    expect(noms("i", mots)).toEqual(["if", "in"]);
+    expect(noms("if", mots)).toEqual([]);
   });
 });
 
