@@ -22,10 +22,11 @@ function CarteCours({ c, attenue, commun, onClick }: { c: CoursAffiche; attenue:
       } ${attenue ? "opacity-25" : ""}`}
     >
       <div className="flex items-start justify-between gap-2">
-        <span className="text-sm font-semibold leading-snug group-hover:text-primary">{c.nom}</span>
+        {/* Le fond vert pâle des cours UdeS ne change pas en thème sombre : on y garde les textes permis sur ce fond */}
+        <span className={`text-sm font-semibold leading-snug ${ecole ? "" : "group-hover:text-primary"}`}>{c.nom}</span>
         {lien && <span className="h-5 w-14 shrink-0" aria-hidden />}
       </div>
-      <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
+      <div className={`mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs ${ecole ? "text-cem-gris-4" : "text-muted-foreground"}`}>
         {c.no && <span className="tabular-nums">{c.no}</span>}
         {c.heures ? <span>{c.heures} h</span> : null}
         {ecole && <span className="rounded bg-cem-foret px-1 text-white">UdeS</span>}
