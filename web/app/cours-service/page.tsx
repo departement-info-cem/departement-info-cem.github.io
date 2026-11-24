@@ -51,7 +51,7 @@ function Programme({ p, profs }: { p: ServiceAffiche; profs: ReturnType<typeof p
               )}
             </div>
             <div className="text-xs text-muted-foreground">
-              <span className="font-mono">{c.info.no}</span>
+              <span className="tabular-nums">{c.info.no}</span>
               {c.info.ponderation && ` · ${c.info.ponderation}`}
               {c.info.heures && ` · ${c.info.heures} h`}
             </div>

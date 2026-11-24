@@ -6,7 +6,6 @@ import { LIBELLES_TYPES_PLAGE } from "@/app/_types/prof";
 import { COULEURS_TYPES, couleurBordure, positionnerPlages } from "@/lib/horaire";
 import { heureEnMinutes, JOURS_OUVRABLES, jourDeLaSemaine, LIBELLES_JOURS, minutesEnHeure } from "@/lib/temps";
 import { useMaintenant } from "@/app/_hooks/use-maintenant";
-import { useTheme } from "@/app/_contexts/theme-context";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 
@@ -17,7 +16,6 @@ const PIXELS_PAR_MINUTE = 1.1;
 // Horaire de la semaine d'un prof. Porté du composant WeeklySchedule du cours 5N6.
 export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours = {}, vide = "Aucun horaire publié pour l'instant." }: { plages: Plage[]; debut?: string; fin?: string; cours?: InfoCours; vide?: string }) {
   const maintenant = useMaintenant();
-  const { theme } = useTheme();
   const [types, setTypes] = useState<Set<TypePlage>>(new Set(["cours", "dispo", "centre-aide", "reunion", "autre"]));
 
   const parJour = useMemo(() => positionnerPlages(plages.filter((p) => types.has(p.type))), [plages, types]);
@@ -34,7 +32,6 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
 
   const jourActuel = maintenant ? jourDeLaSemaine(maintenant) : null;
   const minutesActuelles = maintenant ? maintenant.getHours() * 60 + maintenant.getMinutes() : null;
-  const sombre = theme === "sombre";
 
   function basculerType(t: TypePlage) {
     setTypes((avant) => {
@@ -59,7 +56,7 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
             aria-pressed={types.has(t)}
             className={`flex items-center gap-2 rounded-full border px-3 py-1 text-sm transition ${types.has(t) ? "" : "opacity-40 line-through"}`}
           >
-            <span className="size-3 rounded-full border" style={{ background: sombre ? COULEURS_TYPES[t].fondSombre : COULEURS_TYPES[t].fond }} />
+            <span className="size-3 rounded-full border" style={{ background: COULEURS_TYPES[t].fond }} />
             {LIBELLES_TYPES_PLAGE[t]}
           </button>
         ))}
@@ -110,8 +107,8 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
                         height: (p.finMin - p.debutMin) * PIXELS_PAR_MINUTE - 2,
                         left: `calc(${p.colonne * largeur}% + 2px)`,
                         width: `calc(${largeur}% - 4px)`,
-                        background: sombre ? couleurs.fondSombre : couleurs.fond,
-                        color: sombre ? couleurs.texteSombre : couleurs.texte,
+                        background: couleurs.fond,
+                        color: couleurs.texte,
                         borderLeftColor: p.type === "cours" ? couleurBordure(p, coursOrdonnes) : "rgb(0 0 0 / 15%)",
                       }}
                       tabIndex={0}

@@ -18,7 +18,7 @@ function CarteCours({ c, attenue, commun, onClick }: { c: CoursAffiche; attenue:
     <button
       onClick={onClick}
       className={`group w-full rounded-md border p-2.5 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${
-        ecole ? "border-cem-foret/50 bg-cem-vert/15" : c.departement ? "border-l-4 border-l-primary bg-card" : "bg-muted/50"
+        ecole ? "border-cem-vert bg-cem-vert-pale text-cem-marine" : c.departement ? "border-l-4 border-l-primary bg-card" : "bg-muted"
       } ${attenue ? "opacity-25" : ""}`}
     >
       <div className="flex items-start justify-between gap-2">
@@ -26,7 +26,7 @@ function CarteCours({ c, attenue, commun, onClick }: { c: CoursAffiche; attenue:
         {lien && <span className="h-5 w-14 shrink-0" aria-hidden />}
       </div>
       <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
-        {c.no && <span className="font-mono">{c.no}</span>}
+        {c.no && <span className="tabular-nums">{c.no}</span>}
         {c.heures ? <span>{c.heures} h</span> : null}
         {ecole && <span className="rounded bg-cem-foret px-1 text-white">UdeS</span>}
         {commun && <span className="rounded bg-secondary px-1 text-secondary-foreground">tronc commun</span>}
@@ -109,7 +109,7 @@ export function GrilleProgramme({
 
       <div className={parColonnes ? "grid gap-4 md:grid-cols-2 xl:grid-cols-3" : "space-y-6"}>
         {programme.sessions.map((s) => (
-          <section key={s.titre} className="rounded-lg border bg-secondary/40 p-3">
+          <section key={s.titre} className="rounded-lg border bg-muted p-3">
             <header className="mb-2 flex items-baseline justify-between gap-2">
               <h3 className="font-bold">{s.titre}</h3>
               {s.auChoix ? (
@@ -137,7 +137,7 @@ export function GrilleProgramme({
         </span>
         {tous.some((c) => c.ecole === "UdeS") && (
           <span className="flex items-center gap-1">
-            <span className="inline-block h-3 w-4 rounded-sm bg-cem-vert/30" /> Université de Sherbrooke (campus Longueuil)
+            <span className="inline-block h-3 w-4 rounded-sm border border-cem-vert bg-cem-vert-pale" /> Université de Sherbrooke (campus Longueuil)
           </span>
         )}
         <span className="flex items-center gap-1">
@@ -170,7 +170,7 @@ export function GrilleProgramme({
           )}
           {choisi?.no && profsParCours[choisi.no.toUpperCase()]?.length ? (
             <div>
-              <h4 className="mb-1 text-sm font-semibold">Profs qui le donnent cette session</h4>
+              <h4 className="mb-1 text-sm font-bold">Profs qui le donnent cette session</h4>
               <ul className="flex flex-wrap gap-2">
                 {profsParCours[choisi.no.toUpperCase()].map((p) => (
                   <li key={p.id}>

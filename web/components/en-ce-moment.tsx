@@ -24,21 +24,21 @@ export function EnCeMoment({ profs, labos, compact = false }: { profs: ProfHorai
         {situation.raison && ` — ${situation.raison}`}
       </p>
       {(situation.sansCours || !situation.session) && (
-        <p className="flex items-center gap-2 rounded-lg border border-cem-jaune bg-cem-jaune/15 p-3 text-sm">
+        <p className="flex items-center gap-2 rounded-lg border border-cem-jaune bg-cem-jaune-pale text-cem-marine p-3 text-sm">
           <CalendarOff className="size-4 shrink-0" />
           {situation.session ? "Pas de cours réguliers aujourd'hui : les horaires habituels ne s'appliquent pas." : "Nous sommes hors session."}
         </p>
       )}
       <div className="grid gap-4 md:grid-cols-2">
         <section className="rounded-lg border bg-card p-4">
-          <h3 className="mb-3 flex items-center gap-2 font-semibold">
+          <h3 className="mb-3 flex items-center gap-2 font-bold">
             <UserCheck className="size-5 text-primary" /> Profs disponibles
           </h3>
           {dispos.length === 0 && <p className="mb-3 text-sm text-muted-foreground">Personne n&apos;est inscrit comme disponible en ce moment.</p>}
           <ul className="space-y-2">
             {dispos.map(({ p, e }) => (
               <li key={p.id}>
-                <Link href={`/${p.id}`} className="flex items-center gap-3 rounded-md border border-primary/40 bg-accent/60 p-2 hover:border-primary">
+                <Link href={`/${p.id}`} className="flex items-center gap-3 rounded-md border border-primary/40 bg-accent p-2 hover:border-primary">
                   <AvatarProf prof={p} taille={44} />
                   <span className="flex-1">
                     <span className="block font-semibold">{p.nom}</span>
@@ -56,7 +56,7 @@ export function EnCeMoment({ profs, labos, compact = false }: { profs: ProfHorai
           </ul>
           {bientot.length > 0 && (
             <>
-              <h4 className="mb-1 mt-4 text-sm font-semibold text-muted-foreground">Prochaines disponibilités</h4>
+              <h4 className="mb-1 mt-4 text-sm font-bold text-muted-foreground">Prochaines disponibilités</h4>
               <ul className="space-y-1 text-sm">
                 {bientot.map(({ p, d }) => (
                   <li key={p.id} className="flex flex-wrap justify-between gap-x-3">
@@ -78,14 +78,14 @@ export function EnCeMoment({ profs, labos, compact = false }: { profs: ProfHorai
         </section>
 
         <section className="rounded-lg border bg-card p-4">
-          <h3 className="mb-3 flex items-center gap-2 font-semibold">
+          <h3 className="mb-3 flex items-center gap-2 font-bold">
             <Monitor className="size-5 text-primary" /> Laboratoires
           </h3>
           <ul className={compact ? "grid grid-cols-2 gap-2" : "grid gap-2 sm:grid-cols-2"}>
             {etats.map(({ l, e }) => (
               <li
                 key={l.local}
-                className={`rounded-md border p-2 ${e.etat === "libre" ? "border-primary bg-accent" : e.etat === "occupe" ? "border-cem-rouge/40 bg-cem-rouge/10" : "bg-muted/40"}`}
+                className={`rounded-md border p-2 ${e.etat === "libre" ? "border-primary bg-accent" : e.etat === "occupe" ? "border-cem-rouge bg-card" : "bg-muted"}`}
               >
                 <span className="flex items-center gap-1 font-bold">
                   {e.etat === "libre" && <DoorOpen className="size-4 text-primary" />}

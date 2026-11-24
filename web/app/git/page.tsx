@@ -41,7 +41,7 @@ export default function PageGit() {
         <section>
           <h2 className="mb-2 text-2xl font-bold">Exemple</h2>
           <p className="mb-2">Tu as implanté la sauvegarde dans un fichier texte ; les modifications touchent 3 fichiers.</p>
-          <pre className="overflow-x-auto rounded-md bg-[#071a2b] p-4 font-mono text-sm text-[#e6f0f7]">
+          <pre className="overflow-x-auto rounded-md bg-black p-4 font-mono text-sm text-cem-gris-1">
             <span className="text-cem-vert">$</span> git commit -m &quot;FCT sauvegarde de configuration dans fichier&quot; \{"\n"}
             {"    "}-m &quot;J&apos;ai utilisé la librairie Guava pour simplifier la sauvegarde. Le format est décrit à https://exemple.com/format&quot;
           </pre>

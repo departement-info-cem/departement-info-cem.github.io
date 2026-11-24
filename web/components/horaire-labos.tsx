@@ -33,7 +33,7 @@ export function HoraireLabos({ labos, profs, cours }: { labos: Laboratoire[]; pr
         ))}
       </div>
       {labo && !(labo.complet && labo.session === session?.id) && (
-        <p className="mb-3 rounded-md border border-cem-jaune bg-cem-jaune/15 p-2 text-sm">Horaire incomplet : d&apos;autres cours peuvent avoir lieu dans ce local.</p>
+        <p className="mb-3 rounded-md border border-cem-jaune bg-cem-jaune-pale text-cem-marine p-2 text-sm">Horaire incomplet : d&apos;autres cours peuvent avoir lieu dans ce local.</p>
       )}
       <HoraireSemaine
         plages={occupations.map((o) => ({ jour: o.jour, debut: o.debut, fin: o.fin, type: o.cours ? ("cours" as const) : ("autre" as const), cours: o.cours, groupe: o.groupe, titre: o.titre, local: o.prof }))}

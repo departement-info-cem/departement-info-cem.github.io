@@ -18,7 +18,7 @@ export function AvatarProf({ prof, taille }: { prof: Pick<Prof, "nom" | "photo">
     return <Image src={photo(prof.photo)} alt={`Photo de ${prof.nom}`} width={taille} height={taille} className="aspect-square rounded-full object-cover" style={{ width: taille, height: taille }} />;
   }
   return (
-    <span className="flex aspect-square items-center justify-center rounded-full bg-cem-marine font-bold text-white" style={{ width: taille, height: taille, fontSize: taille / 2.6 }} aria-hidden>
+    <span className="flex aspect-square items-center justify-center rounded-full bg-cem-marine font-bold text-white dark:bg-cem-vert dark:text-cem-marine" style={{ width: taille, height: taille, fontSize: taille / 2.6 }} aria-hidden>
       {initiales(prof.nom)}
     </span>
   );

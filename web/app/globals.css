@@ -9,12 +9,21 @@
   --color-cadre: var(--cadre);
   --color-cadre-texte: var(--cadre-texte);
   --color-cem-marine: var(--cem-bleu-marine);
+  --color-cem-marine-fonce: var(--cem-bleu-marine-fonce);
   --color-cem-ciel: var(--cem-bleu-ciel);
   --color-cem-vert: var(--cem-vert);
+  --color-cem-bleu-pale: var(--cem-bleu-pale);
   --color-cem-foret: var(--cem-vert-foret);
+  --color-cem-vert-pomme: var(--cem-vert-pomme);
+  --color-cem-vert-pale: var(--cem-vert-pale);
   --color-cem-jaune: var(--cem-jaune-or);
+  --color-cem-jaune-pale: var(--cem-jaune-pale);
   --color-cem-orange: var(--cem-orange);
   --color-cem-rouge: var(--cem-rouge);
+  --color-cem-gris-1: var(--cem-gris-1);
+  --color-cem-gris-2: var(--cem-gris-2);
+  --color-cem-gris-3: var(--cem-gris-3);
+  --color-cem-gris-4: var(--cem-gris-4);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
@@ -59,13 +68,21 @@
 }
 
 :root {
-  /* Palette officielle du Cégep Édouard-Montpetit (Guide de normes graphiques v2.0, août 2023),
-     la même que celle des sites de cours (5N6, SN1). Sur fond blanc : texte noir, bleu marine,
-     vert forêt, rouge ou gris 4 — jamais vert, bleu ciel ou bleu pâle. */
+  /* Charte graphique du Cégep Édouard-Montpetit (Guide de normes graphiques v2.0, août 2023) :
+     - Couleurs principales en priorité : bleu marine, vert, bleu ciel. Les secondaires
+       (vert forêt, gris, jaunes, orangé, rouge…) avec parcimonie, pour distinguer des catégories.
+     - Seulement les codes ci-dessous ; la transparence sert aux survols, bordures et photos.
+     - Texte sur fond, seulement les « mariages de couleurs permis pour le web » (p. 10) :
+         blanc .................. noir, bleu marine, vert forêt, rouge, gris 4
+         bleu marine ............ blanc, gris 1-2, vert, vert pomme, vert pâle, bleu ciel, bleu pâle, jaunes
+         vert, bleu ciel, pâles . noir, bleu marine (gris 4 aussi sur les pâles et le gris 1)
+         rouge, vert forêt ...... blanc, noir ; orangé : noir seulement
+       Donc jamais de texte vert, bleu ciel, jaune ou orangé sur blanc, ni rouge ou orangé sur bleu marine.
+     - Police Montserrat (Arial en remplacement) : Regular pour le texte, Medium ou Bold pour les titres. */
   --cem-bleu-marine: #0c3455;
-  --cem-bleu-marine-fonce: #05223a;
   --cem-bleu-ciel: #14b1e7;
   --cem-vert: #8dc640;
+  --cem-noir: #000000;
   --cem-bleu-pale: #8ed8f8;
   --cem-vert-foret: #278637;
   --cem-gris-4: #545454;
@@ -78,24 +95,26 @@
   --cem-jaune-or: #fdb913;
   --cem-gris-1: #e6e6e6;
   --cem-jaune-pale: #ffdf5d;
+  /* Absent du guide : le bleu marine plus foncé de cegepmontpetit.ca, pour le fond du thème sombre */
+  --cem-bleu-marine-fonce: #05223a;
 
   --background: #ffffff;
-  --foreground: #1a1a1a;
+  --foreground: var(--cem-noir);
   --card: #ffffff;
-  --card-foreground: #1a1a1a;
+  --card-foreground: var(--cem-noir);
   --popover: #ffffff;
-  --popover-foreground: #1a1a1a;
-  --primary: var(--cem-vert-foret);
+  --popover-foreground: var(--cem-noir);
+  --primary: var(--cem-bleu-marine);       /* boutons et liens, comme sur cegepmontpetit.ca */
   --primary-foreground: #ffffff;
-  --secondary: #eef3f7;
+  --secondary: var(--cem-gris-1);
   --secondary-foreground: var(--cem-bleu-marine);
-  --muted: #f3f4f4;
+  --muted: var(--cem-gris-1);
   --muted-foreground: var(--cem-gris-4);
-  --accent: #e9f3eb;
-  --accent-foreground: #0c2811;
+  --accent: var(--cem-vert-pale);
+  --accent-foreground: var(--cem-bleu-marine);
   --destructive: var(--cem-rouge);
-  --border: #dcdfe2;
-  --input: #c8ccd0;
+  --border: var(--cem-gris-1);
+  --input: var(--cem-gris-2);
   --ring: var(--cem-bleu-ciel);
   --chart-1: var(--cem-vert-foret);
   --chart-2: var(--cem-bleu-ciel);
@@ -105,11 +124,11 @@
   --radius: 0.5rem;
   --sidebar: #ffffff;
   --sidebar-foreground: var(--cem-bleu-marine);
-  --sidebar-primary: var(--cem-vert-foret);
+  --sidebar-primary: var(--cem-bleu-marine);
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #eef3f7;
+  --sidebar-accent: var(--cem-vert-pale);
   --sidebar-accent-foreground: var(--cem-bleu-marine);
-  --sidebar-border: #dcdfe2;
+  --sidebar-border: var(--cem-gris-1);
   --sidebar-ring: var(--cem-bleu-ciel);
 
   /* Couleurs propres au site */
@@ -118,35 +137,37 @@
   --cadre-texte: #ffffff;
 }
 
+/* Le guide n'a pas de thème sombre : on garde le bleu marine et les textes permis sur ce fond.
+   Les fonds discrets (muted, accent) sont du blanc transparent, pour rester bleu marine dessous. */
 .dark {
-  --background: #071a2b;
-  --foreground: #eef2f5;
-  --card: #0c2a44;
-  --card-foreground: #eef2f5;
-  --popover: #0c2a44;
-  --popover-foreground: #eef2f5;
+  --background: var(--cem-bleu-marine-fonce);
+  --foreground: #ffffff;
+  --card: var(--cem-bleu-marine);
+  --card-foreground: #ffffff;
+  --popover: var(--cem-bleu-marine);
+  --popover-foreground: #ffffff;
   --primary: var(--cem-vert);
-  --primary-foreground: #0c2811;
-  --secondary: #123a5c;
-  --secondary-foreground: #eef2f5;
-  --muted: #0f3150;
-  --muted-foreground: #a9b8c6;
-  --accent: #2a3b13;
-  --accent-foreground: #f4f9ec;
-  --destructive: #e4664f;
-  --border: rgb(255 255 255 / 12%);
-  --input: rgb(255 255 255 / 18%);
+  --primary-foreground: var(--cem-bleu-marine);
+  --secondary: var(--cem-bleu-marine);
+  --secondary-foreground: #ffffff;
+  --muted: rgb(255 255 255 / 8%);
+  --muted-foreground: var(--cem-gris-2);
+  --accent: rgb(255 255 255 / 12%);
+  --accent-foreground: #ffffff;
+  --destructive: var(--cem-jaune-or);      /* le rouge n'est pas permis sur le bleu marine */
+  --border: rgb(255 255 255 / 15%);
+  --input: rgb(255 255 255 / 25%);
   --ring: var(--cem-bleu-ciel);
-  --sidebar: var(--cem-bleu-marine-fonce);
-  --sidebar-foreground: #eef2f5;
+  --sidebar: var(--cem-bleu-marine);
+  --sidebar-foreground: #ffffff;
   --sidebar-primary: var(--cem-vert);
-  --sidebar-primary-foreground: #0c2811;
-  --sidebar-accent: #123a5c;
-  --sidebar-accent-foreground: #eef2f5;
-  --sidebar-border: rgb(255 255 255 / 12%);
+  --sidebar-primary-foreground: var(--cem-bleu-marine);
+  --sidebar-accent: rgb(255 255 255 / 12%);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgb(255 255 255 / 15%);
   --sidebar-ring: var(--cem-bleu-ciel);
   --titre: #ffffff;
-  --cadre: var(--cem-bleu-marine-fonce);
+  --cadre: var(--cem-bleu-marine);
   --cadre-texte: #ffffff;
 }
 

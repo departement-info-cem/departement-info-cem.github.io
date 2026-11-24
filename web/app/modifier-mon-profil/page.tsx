@@ -49,7 +49,7 @@ export default function PageModifier() {
             {ETAPES.map((e, i) => (
               <li key={e.titre} className="rounded-lg border bg-card p-4">
                 <span className="mb-2 flex size-8 items-center justify-center rounded-full bg-primary font-bold text-primary-foreground">{i + 1}</span>
-                <h3 className="mb-1 font-semibold">{e.titre}</h3>
+                <h3 className="mb-1 font-bold">{e.titre}</h3>
                 <p className="text-sm text-muted-foreground">{e.texte}</p>
               </li>
             ))}
@@ -96,7 +96,7 @@ https://info.cegepmontpetit.ca/react/prenom.nom/calendrier/?cours=420-5N6-EM`}</
           <h2 className="mb-2 text-2xl font-bold">Aide-mémoire du format</h2>
           <div className="grid gap-4 text-sm *:min-w-0 md:grid-cols-3">
             <div className="rounded-lg border bg-card p-4">
-              <h3 className="mb-2 font-semibold">Une plage de l&apos;horaire</h3>
+              <h3 className="mb-2 font-bold">Une plage de l&apos;horaire</h3>
               <pre className="overflow-x-auto rounded bg-muted p-2 font-mono text-xs">{`- { jour: lundi, debut: "08:00", fin: "11:00",
     type: cours, cours: 420-1P6-EM,
     groupe: 1010, local: D-0601 }`}</pre>
@@ -105,7 +105,7 @@ https://info.cegepmontpetit.ca/react/prenom.nom/calendrier/?cours=420-5N6-EM`}</
               </p>
             </div>
             <div className="rounded-lg border bg-card p-4">
-              <h3 className="mb-2 font-semibold">Une date du calendrier</h3>
+              <h3 className="mb-2 font-bold">Une date du calendrier</h3>
               <pre className="overflow-x-auto rounded bg-muted p-2 font-mono text-xs">{`- { date: 2027-02-15, titre: Remise TP1,
     cours: 420-1P6-EM, type: remise }
 - { date: 2027-04-05, au: 2027-04-06,
@@ -120,7 +120,7 @@ https://info.cegepmontpetit.ca/react/prenom.nom/calendrier/?cours=420-5N6-EM`}</
               </p>
             </div>
             <div className="rounded-lg border bg-card p-4">
-              <h3 className="mb-2 font-semibold">Pièges fréquents</h3>
+              <h3 className="mb-2 font-bold">Pièges fréquents</h3>
               <ul className="ml-4 list-disc space-y-1 text-muted-foreground">
                 <li>Heures entre guillemets : <code>&quot;08:00&quot;</code></li>
                 <li>Dates au format <code>AAAA-MM-JJ</code></li>

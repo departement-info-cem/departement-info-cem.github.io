@@ -61,7 +61,7 @@ function Contenu({ resume }: { resume: ResumeMaintenant }) {
         <li key={p.id}>
           <Link href={`/${p.id}`} className="hover:underline">
             <strong>{p.nom}</strong> · {e.local ?? p.bureau ?? "local à confirmer"}
-            {e.centreAide && " (centre d'aide)"} <span className="text-white/75">jusqu&apos;à {e.fin}</span>
+            {e.centreAide && " (centre d'aide)"} <span className="text-cem-gris-2">jusqu&apos;à {e.fin}</span>
           </Link>
         </li>
       ))}
@@ -74,7 +74,7 @@ function Contenu({ resume }: { resume: ResumeMaintenant }) {
       {libres.map(({ l, e }) => (
         <li key={l.local}>
           <Link href="/maintenant" className="hover:underline">
-            <strong>{l.local}</strong> <span className="text-white/75">jusqu&apos;à {e.jusqua}</span>
+            <strong>{l.local}</strong> <span className="text-cem-gris-2">jusqu&apos;à {e.jusqua}</span>
           </Link>
         </li>
       ))}

@@ -35,17 +35,17 @@ export default function Accueil() {
         <div className="absolute inset-0 bg-gradient-to-r from-cem-marine via-cem-marine/90 to-cem-marine/40" />
         <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 md:py-20 lg:grid-cols-2">
           <div>
-            <p className="mb-3 font-mono text-sm text-cem-vert">&gt; département d&apos;informatique_</p>
-            <h1 className="text-4xl font-extrabold leading-tight text-white md:text-5xl">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-cem-ciel">Département d&apos;informatique</p>
+            <h1 className="text-4xl font-bold leading-tight text-white md:text-5xl">
               Fais de l&apos;informatique <span className="text-cem-vert">ton métier</span>.
             </h1>
-            <p className="mt-4 max-w-xl text-lg text-white/85">
+            <p className="mt-4 max-w-xl text-lg text-cem-gris-1">
               Programmation d&apos;applications, réseaux et cybersécurité au Cégep Édouard-Montpetit : un DEC technique en 3 ans, un DEC-BAC en 5 ans avec l&apos;Université de Sherbrooke, et des AEC pour adultes.
             </p>
-            <p className="mb-2 mt-6 text-sm font-semibold uppercase tracking-wide text-white/70">Les grilles de cours</p>
+            <p className="mb-2 mt-6 text-sm font-semibold uppercase tracking-wide text-cem-gris-2">Les grilles de cours</p>
             <div className="grid gap-3 sm:grid-cols-3">
               {GRILLES_DIRECTES.map((g) => (
-                <Link key={g.href} href={g.href} className="group rounded-lg bg-primary p-3 text-primary-foreground shadow transition hover:-translate-y-0.5 hover:brightness-110">
+                <Link key={g.href} href={g.href} className="group rounded-lg bg-cem-vert p-3 text-cem-marine shadow transition hover:-translate-y-0.5 hover:brightness-110">
                   <span className="flex items-center justify-between text-lg font-bold">
                     {g.texte} <ArrowRight className="size-4 transition group-hover:translate-x-1" />
                   </span>
@@ -70,7 +70,7 @@ export default function Accueil() {
         <h2 className="mb-4 text-2xl font-bold">Sites web des cours</h2>
         <ListeSites sites={sitesCours()} filtres={FILTRES_SITES} />
       </section>
-      <section className="border-t bg-secondary/40">
+      <section className="border-t bg-muted">
         <div className="mx-auto max-w-6xl px-4 py-10">
           <div className="mb-2 flex flex-wrap items-end justify-between gap-2">
             <h2 className="text-2xl font-bold">En ce moment</h2>
@@ -81,7 +81,7 @@ export default function Accueil() {
       </section>
 
       {/* ---------- Chiffres ---------- */}
-      <section className="border-b bg-secondary/60">
+      <section className="border-b bg-muted">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-4 px-4 py-6 text-center md:grid-cols-4">
           {[
             [String(listeProfs.length), "profs passionnés"],
@@ -90,7 +90,7 @@ export default function Accueil() {
             ["2", "profils : programmation et réseau"],
           ].map(([n, t]) => (
             <div key={t}>
-              <div className="text-3xl font-extrabold text-primary">{n}</div>
+              <div className="text-3xl font-bold text-primary">{n}</div>
               <div className="text-sm text-muted-foreground">{t}</div>
             </div>
           ))}
@@ -167,7 +167,7 @@ export default function Accueil() {
       </section>
 
       {/* ---------- Déjà étudiant ---------- */}
-      <section className="bg-secondary/60">
+      <section className="bg-muted">
         <div className="mx-auto max-w-6xl px-4 py-14">
           <h2 className="mb-6 text-3xl font-bold">Déjà au département ?</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

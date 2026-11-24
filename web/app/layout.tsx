@@ -11,8 +11,9 @@ import { calendrierScolaire, laboratoires, profsHoraire } from "@/lib/donnees";
 import { profsUtiles } from "@/lib/maintenant";
 import { indexRecherche } from "@/lib/index-recherche";
 
-// Montserrat est la police web prévue par le guide de normes graphiques du cégep (comme les sites de cours).
-const montserrat = Montserrat({ variable: "--font-sans", subsets: ["latin"] });
+// Le guide de normes graphiques du cégep impose Montserrat, et Arial quand elle n'est pas disponible.
+const montserrat = Montserrat({ variable: "--font-sans", subsets: ["latin"], fallback: ["Arial", "sans-serif"] });
+// Police à chasse fixe réservée au code (commandes, YAML, terminaux).
 const mono = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {

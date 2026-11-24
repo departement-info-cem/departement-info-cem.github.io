@@ -90,10 +90,10 @@ export function Comparateur({ programmes }: { programmes: Programme[] }) {
           </thead>
           <tbody>
             {lignes.map(({ cours, sessionA, sessionB }) => (
-              <tr key={cours.no ?? cours.nom} className={`border-t ${sessionA && sessionB ? "bg-accent/40" : ""}`}>
+              <tr key={cours.no ?? cours.nom} className={`border-t ${sessionA && sessionB ? "bg-accent" : ""}`}>
                 <td className="p-2">
                   <span className="font-medium">{cours.nom}</span>
-                  {cours.no && <span className="ml-2 font-mono text-xs text-muted-foreground">{cours.no}</span>}
+                  {cours.no && <span className="ml-2 text-xs tabular-nums text-muted-foreground">{cours.no}</span>}
                 </td>
                 {[sessionA, sessionB].map((s, i) => (
                   <td key={i} className="p-2 text-center text-xs">

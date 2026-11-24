@@ -57,7 +57,7 @@ export function ApercuYaml({
             </p>
           )}
           {problemes.map((p, i) => (
-            <p key={i} className={`flex items-start gap-2 text-sm ${p.niveau === "erreur" ? "text-destructive" : "text-amber-700 dark:text-amber-300"}`}>
+            <p key={i} className={`flex items-start gap-2 text-sm ${p.niveau === "erreur" ? "text-destructive" : "text-cem-marine dark:text-cem-jaune-pale"}`}>
               {p.niveau === "erreur" ? <XCircle className="mt-0.5 size-4 shrink-0" /> : <AlertTriangle className="mt-0.5 size-4 shrink-0" />}
               <span>
                 {p.ligne && <strong>Ligne {p.ligne} : </strong>}

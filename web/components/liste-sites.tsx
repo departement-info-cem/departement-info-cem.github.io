@@ -49,7 +49,7 @@ export function ListeSites({ sites, filtres }: { sites: SiteCours[]; filtres: { 
                 .map(({ s }) => (
                   <li key={s.no}>
                     <a href={s.url} target="_blank" rel="noreferrer" className="group flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-sm transition hover:border-primary hover:shadow-sm">
-                      <span className="w-20 shrink-0 font-mono text-xs text-primary">{s.no.replace(/^420-/, "").replace(/-(EM|RE)$/, "")}</span>
+                      <span className="w-20 shrink-0 text-xs font-semibold tabular-nums text-primary">{s.no.replace(/^420-/, "").replace(/-(EM|RE)$/, "")}</span>
                       <span className="flex-1 font-medium group-hover:text-primary">{s.nom}</span>
                       <ExternalLink className="size-3.5 shrink-0 text-muted-foreground" />
                     </a>

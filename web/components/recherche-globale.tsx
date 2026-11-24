@@ -61,7 +61,7 @@ export function RechercheGlobale({ index }: { index: ElementRecherche[] }) {
         aria-label="Rechercher"
       >
         <Search className="size-5 md:size-4" />
-        <span className="hidden text-white/80 md:inline xl:hidden 2xl:inline">Rechercher</span>
+        <span className="hidden text-cem-gris-1 md:inline xl:hidden 2xl:inline">Rechercher</span>
         <kbd className="ml-auto hidden whitespace-nowrap rounded bg-white/15 px-1.5 text-xs xl:inline">Ctrl K</kbd>
       </button>
       <Dialog open={ouvert} onOpenChange={setOuvert}>
