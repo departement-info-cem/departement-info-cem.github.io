@@ -4,7 +4,7 @@ import { calendrierScolaire, laboratoires, profs, profsHoraire } from "@/lib/don
 import { positionnerPlages } from "@/lib/horaire";
 import { analyserCalendrier, type TextePdf } from "@/lib/calendrier-pdf";
 import { fusionnerDispos } from "@/lib/horaire";
-import { etatLabo, etatProf, occupationsLocal, normaliserLocal, prochaineDispo, profsUtiles, resumeMaintenant } from "@/lib/maintenant";
+import { etatLabo, etatProf, occupationsLocal, normaliserLocal, prochainCours, prochaineDispo, profsUtiles, resumeMaintenant } from "@/lib/maintenant";
 import fixture from "./fixtures/calendrier-2026-2027.json";
 import type { Plage } from "@/app/_types/prof";
 
@@ -150,6 +150,24 @@ describe("horaire officiel des locaux (A2026)", () => {
   it("les groupes du soir occupent leur local même un jour sans cours réguliers", () => {
     expect(a(11, 19).etats.find(({ l }) => l.local === "D-0620")!.e).toMatchObject({ etat: "occupe", jusqua: "23:00" });
     expect(a(11, 12).etats.find(({ l }) => l.local === "D-0620")!.e.etat).toBe("inconnu");
+  });
+  it("donne le prochain cours de chaque local", () => {
+    const prochain = (local: string, mois: number, jour: number, h: number, m = 0) =>
+      prochainCours(laboratoires().find((l) => l.local === local)!, profsHoraire(), scolaire, new Date(2026, mois - 1, jour, h, m));
+    expect(prochain("D-0003", 11, 23, 7)).toMatchObject({ iso: "2026-11-23", occupation: { debut: "08:10", groupe: "1030" } });
+    expect(prochain("D-0003", 11, 23, 9)).toMatchObject({ iso: "2026-11-23", occupation: { debut: "10:30", groupe: "1040" } });
+    // À 8:02, le cours de 8:10 est déjà affiché comme « occupé »
+    expect(prochain("D-0003", 11, 23, 8, 2)).toMatchObject({ iso: "2026-11-23", occupation: { debut: "10:30" } });
+    expect(prochain("D-0003", 11, 23, 16)).toMatchObject({ iso: "2026-11-24", occupation: { debut: "09:10" } });
+    // La fin de semaine, puis un JR (2026-12-10) : on passe à la prochaine journée de cours
+    expect(prochain("D-0003", 11, 28, 12)).toMatchObject({ iso: "2026-11-30" });
+    expect(prochain("D-0003", 12, 9, 18)).toMatchObject({ iso: "2026-12-11" });
+    // Le 6 octobre (mardi) suit l'horaire du lundi ; le soir (AEC) suit le vrai jour
+    expect(prochain("D-0003", 10, 6, 7)).toMatchObject({ iso: "2026-10-06", occupation: { debut: "08:10", groupe: "1030" } });
+    expect(prochain("D-0620", 10, 6, 17, 30)).toMatchObject({ iso: "2026-10-06", occupation: { cours: "420-C73-RO" } });
+    expect(prochain("D-0620", 11, 11, 12)).toMatchObject({ iso: "2026-11-11", occupation: { debut: "18:00" } });
+    // Hors session
+    expect(prochain("D-0003", 12, 30, 12)).toBeUndefined();
   });
   it("le soir, n'annonce pas un local qui se libère à la fermeture", () => {
     expect(a(23, 21)).toMatchObject({ libres: [], prochainLibre: undefined, raison: "En dehors des heures de cours" });

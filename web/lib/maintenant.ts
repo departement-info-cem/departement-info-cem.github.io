@@ -140,6 +140,28 @@ export function etatLabo(labo: Laboratoire, profs: ProfHoraire[], scolaire: Cale
   return { etat: "libre", jusqua: minutesEnHeure(prochain) };
 }
 
+/** Le prochain cours dans un local (autre que celui en cours) dans les 14 prochains jours. */
+export function prochainCours(labo: Laboratoire, profs: ProfHoraire[], scolaire: CalendrierScolaire, date: Date): { iso: string; occupation: Occupation } | undefined {
+  const m = minutes(date);
+  // Un cours qui commence dans moins de 10 minutes est déjà affiché comme « occupé »
+  const actuel = etatLabo(labo, profs, scolaire, date).occupation;
+  const debutApres = actuel ? Math.max(m, heureEnMinutes(actuel.debut)!) : m;
+  for (let i = 0; i < 14; i++) {
+    const d = dateDepuisIso(isoDepuisDate(date));
+    d.setDate(d.getDate() + i);
+    const iso = isoDepuisDate(d);
+    const s = situationDuJour(scolaire, iso);
+    if (!s.session) continue;
+    const occupation = occupationsLocal(labo.local, s.session, labo, profs)
+      // Les groupes du soir (AEC) suivent le vrai jour de la semaine, même un jour sans cours réguliers
+      .filter((o) => o.cours && (o.horsCalendrier ? normaliserJour(o.jour) === jourDeLaSemaine(d) : !s.sansCours && normaliserJour(o.jour) === s.horaireSuivi))
+      .filter((o) => i > 0 || heureEnMinutes(o.debut)! > debutApres)
+      .sort((a, b) => heureEnMinutes(a.debut)! - heureEnMinutes(b.debut)!)[0];
+    if (occupation) return { iso, occupation };
+  }
+  return undefined;
+}
+
 // ---------- Résumé (bandeau et page « En ce moment ») ----------
 
 export type ResumeMaintenant = ReturnType<typeof resumeMaintenant>;
