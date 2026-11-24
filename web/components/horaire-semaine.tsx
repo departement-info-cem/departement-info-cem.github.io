@@ -14,6 +14,8 @@ export type InfoCours = Record<string, { no: string; nom: string; url?: string }
 const PIXELS_PAR_MINUTE = 1.1;
 // Espace en haut et en bas des colonnes : les heures sont centrées sur leur ligne et déborderaient sur l'en-tête.
 const MARGE = 12;
+// Au-delà, le bloc est assez haut pour tout afficher : pas besoin d'infobulle.
+const DUREE_MAX_INFOBULLE = 60;
 
 // Horaire de la semaine d'un prof. Porté du composant WeeklySchedule du cours 5N6.
 export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours = {}, vide = "Aucun horaire publié pour l'instant." }: { plages: Plage[]; debut?: string; fin?: string; cours?: InfoCours; vide?: string }) {
@@ -100,51 +102,53 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
                 const info = p.cours ? cours[p.cours.toUpperCase()] : undefined;
                 const titre = p.titre ?? info?.nom ?? (p.type === "cours" ? p.cours : LIBELLES_TYPES_PLAGE[p.type]);
                 const largeur = 100 / p.colonnes;
+                const contenu = (
+                  <>
+                    <div className="font-semibold leading-tight">{titre}</div>
+                    <div className="opacity-80">
+                      {p.debut}–{p.fin}
+                    </div>
+                    {p.cours && (
+                      <div className="opacity-80">
+                        {p.cours}
+                        {p.groupe && ` gr. ${p.groupe}`}
+                      </div>
+                    )}
+                    {info && info.nom !== titre && <div className="opacity-80">{info.nom}</div>}
+                    {p.local && (
+                      <div className="flex items-center gap-0.5 opacity-80">
+                        <MapPin className="size-3" />
+                        {p.local}
+                      </div>
+                    )}
+                  </>
+                );
+                const bloc = {
+                  className: "absolute z-10 overflow-hidden break-words rounded-md hyphens-auto border-l-4 px-1.5 py-1 text-left text-xs shadow-sm",
+                  style: {
+                    top: y(p.debutMin) + 1,
+                    height: (p.finMin - p.debutMin) * PIXELS_PAR_MINUTE - 2,
+                    left: `calc(${p.colonne * largeur}% + 2px)`,
+                    width: `calc(${largeur}% - 4px)`,
+                    background: couleurs.fond,
+                    color: couleurs.texte,
+                    borderLeftColor: p.type === "cours" ? couleurBordure(p, coursOrdonnes) : "rgb(0 0 0 / 15%)",
+                  },
+                };
+                // Un bloc court coupe son texte (souvent le local) : l'infobulle le montre en entier.
+                if (p.finMin - p.debutMin > DUREE_MAX_INFOBULLE) {
+                  return (
+                    <div key={i} {...bloc}>
+                      {contenu}
+                    </div>
+                  );
+                }
                 return (
                   <Tooltip key={i}>
-                    <TooltipTrigger
-                      render={<div />}
-                      className="absolute z-10 overflow-hidden break-words rounded-md hyphens-auto border-l-4 px-1.5 py-1 text-left text-xs shadow-sm transition hover:z-30 hover:shadow-md"
-                      style={{
-                        top: y(p.debutMin) + 1,
-                        height: (p.finMin - p.debutMin) * PIXELS_PAR_MINUTE - 2,
-                        left: `calc(${p.colonne * largeur}% + 2px)`,
-                        width: `calc(${largeur}% - 4px)`,
-                        background: couleurs.fond,
-                        color: couleurs.texte,
-                        borderLeftColor: p.type === "cours" ? couleurBordure(p, coursOrdonnes) : "rgb(0 0 0 / 15%)",
-                      }}
-                      tabIndex={0}
-                    >
-                      <div className="font-semibold leading-tight">{titre}</div>
-                      <div className="opacity-80">
-                        {p.debut}–{p.fin}
-                      </div>
-                      {p.cours && (
-                        <div className="opacity-80">
-                          {p.cours}
-                          {p.groupe && ` gr. ${p.groupe}`}
-                        </div>
-                      )}
-                      {p.local && (
-                        <div className="flex items-center gap-0.5 opacity-80">
-                          <MapPin className="size-3" />
-                          {p.local}
-                        </div>
-                      )}
+                    <TooltipTrigger render={<div />} {...bloc} className={`${bloc.className} transition hover:z-30 hover:shadow-md`} tabIndex={0}>
+                      {contenu}
                     </TooltipTrigger>
-                    <TooltipContent className="flex-col items-start gap-0.5">
-                      <p className="font-semibold">{titre}</p>
-                      <p>
-                        {LIBELLES_JOURS[p.jourNormalise]} {p.debut}–{p.fin}
-                        {p.local && ` · ${p.local}`}
-                      </p>
-                      {p.cours && (
-                        <p>
-                          {p.cours}{info && info.nom !== titre && ` : ${info.nom}`} {p.groupe && `· groupe ${p.groupe}`}
-                        </p>
-                      )}
-                    </TooltipContent>
+                    <TooltipContent className="flex-col items-start gap-0.5">{contenu}</TooltipContent>
                   </Tooltip>
                 );
               })}
