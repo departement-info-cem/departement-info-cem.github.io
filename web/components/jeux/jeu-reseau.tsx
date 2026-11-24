@@ -429,7 +429,7 @@ export function JeuReseau() {
           </div>
 
           <div className="h-40 overflow-y-auto rounded-lg border bg-black p-3 font-mono text-xs leading-5 text-cem-gris-1" aria-live="polite">
-            <p className="text-cem-gris-3">Invite de commandes — {appareil(n.reseau, n.source).nom}</p>
+            <p className="text-cem-gris-3">Invite de commandes ({appareil(n.reseau, n.source).nom})</p>
             {console_.map((c, i) => (
               <p key={i} className={c.type === "ok" ? "text-cem-vert" : c.type === "ko" ? "text-cem-orange" : c.type === "info" ? "text-cem-gris-2" : ""}>
                 {c.texte}

@@ -52,7 +52,7 @@ export function ListeProfs({ profs, cours }: { profs: Prof[]; cours: InfoCours }
           <option value="">Tous les cours</option>
           {coursDonnes.map((c) => (
             <option key={c} value={c}>
-              {c} {cours[c] ? `— ${cours[c].nom}` : ""}
+              {c}{cours[c] ? ` : ${cours[c].nom}` : ""}
             </option>
           ))}
         </select>

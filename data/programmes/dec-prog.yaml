@@ -1,6 +1,6 @@
 # Grille de cours : DEC Dév
 # Les cours sont des numéros du catalogue data/cours.yaml, ou un objet { nom, heures } pour un cours hors catalogue.
-nom: DEC technique en informatique — Développement d’applications
+nom: "DEC technique en informatique : Développement d’applications"
 court: DEC Dév
 type: dec
 code: 420.B0

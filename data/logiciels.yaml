@@ -2,7 +2,7 @@
 # identifiant : comment se connecter ; lien : où s'inscrire ou télécharger.
 - nom: GitHub Student Developer Pack
   identifiant: ton courriel matricule@cegepmontpetit.ca
-  description: Le pack étudiant de GitHub Education — GitHub Pro, GitHub Copilot gratuit, et des dizaines d'outils pros offerts (hébergement, domaines, IDE...). On utilise GitHub dans la plupart des cours pour gérer le code source.
+  description: "Le pack étudiant de GitHub Education : GitHub Pro, GitHub Copilot gratuit et des dizaines d'outils pros offerts (hébergement, domaines, IDE...). On utilise GitHub dans la plupart des cours pour gérer le code source."
   lien: https://education.github.com/pack
   bouton: Obtenir le pack étudiant
   vedette: true

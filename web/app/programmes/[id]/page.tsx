@@ -15,7 +15,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps<"/programmes/[id]">): Promise<Metadata> {
   const p = programme((await params).id);
-  return p ? { title: `Grille de cours — ${p.court}`, description: p.resume } : {};
+  return p ? { title: `Grille de cours : ${p.court}`, description: p.resume } : {};
 }
 
 export default async function PageProgramme({ params }: PageProps<"/programmes/[id]">) {

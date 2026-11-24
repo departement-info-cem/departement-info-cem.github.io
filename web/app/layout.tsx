@@ -18,7 +18,7 @@ const mono = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://info.cegepmontpetit.ca"),
-  title: { default: "Département d'informatique — Cégep Édouard-Montpetit", template: "%s — Informatique Montpetit" },
+  title: { default: "Département d'informatique | Cégep Édouard-Montpetit", template: "%s | Informatique Montpetit" },
   description: "DEC en informatique, DEC-BAC, AEC, profs, horaires et ressources du département d'informatique du Cégep Édouard-Montpetit.",
   icons: { icon: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/icon.svg` },
 };

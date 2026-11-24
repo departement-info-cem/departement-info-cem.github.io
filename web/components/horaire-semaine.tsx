@@ -138,7 +138,7 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
                       </p>
                       {p.cours && (
                         <p>
-                          {p.cours} {info && info.nom !== titre && `— ${info.nom}`} {p.groupe && `· groupe ${p.groupe}`}
+                          {p.cours}{info && info.nom !== titre && ` : ${info.nom}`} {p.groupe && `· groupe ${p.groupe}`}
                         </p>
                       )}
                     </TooltipContent>

@@ -41,7 +41,7 @@ const LIBELLES_FILTRES: Record<Filtre, string> = { prof: "Dates du prof", seance
 
 function Pastille({ e, compacte }: { e: EvenementJour; compacte?: boolean }) {
   const texte = e.source === "seance" ? `${e.heure?.split("–")[0]} ${e.cours ?? e.titre}${e.groupe ? ` gr.${e.groupe}` : ""}` : `${e.code ? `${e.code} · ` : e.type === "deplacement" && e.heure ? `${e.heure.split("–")[0]} ` : ""}${e.titre}`;
-  return <div title={e.annulee ? `${texte} — ${e.annulee}` : texte} className={`truncate rounded ${e.annulee ? "line-through opacity-50" : ""} px-1 py-0.5 text-[11px] leading-tight ${STYLES[e.type] ?? STYLES.autre} ${compacte ? "" : "text-xs"}`}>{texte}</div>;
+  return <div title={e.annulee ? `${texte} : ${e.annulee}` : texte} className={`truncate rounded ${e.annulee ? "line-through opacity-50" : ""} px-1 py-0.5 text-[11px] leading-tight ${STYLES[e.type] ?? STYLES.autre} ${compacte ? "" : "text-xs"}`}>{texte}</div>;
 }
 
 export function CalendrierMois({

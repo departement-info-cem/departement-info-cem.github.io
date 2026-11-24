@@ -1,6 +1,6 @@
 # Grille de cours : DEC Réseau
 # Les cours sont des numéros du catalogue data/cours.yaml, ou un objet { nom, heures } pour un cours hors catalogue.
-nom: DEC technique en informatique — Administration d’infrastructure TI
+nom: "DEC technique en informatique : Administration d’infrastructure TI"
 court: DEC Réseau
 type: dec
 code: 420.B0

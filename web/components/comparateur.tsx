@@ -29,7 +29,7 @@ export function Comparateur({ programmes }: { programmes: Programme[] }) {
       for (const s of p.sessions)
         for (const c of s.cours) {
           const l = index.get(cle(c)) ?? { cours: c };
-          l[cote] ??= s.titre.split(" — ")[0];
+          l[cote] ??= s.titre.split(" : ")[0];
           index.set(cle(c), l);
         }
     }
@@ -68,7 +68,7 @@ export function Comparateur({ programmes }: { programmes: Programme[] }) {
               </div>
               <div>
                 <dt className="text-xs text-muted-foreground">Heures</dt>
-                <dd className="text-sm font-semibold">{totalHeures(cours) || "—"}</dd>
+                <dd className="text-sm font-semibold">{totalHeures(cours) || "-"}</dd>
               </div>
             </dl>
           </div>

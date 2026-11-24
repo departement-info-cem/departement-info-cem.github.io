@@ -21,7 +21,7 @@ export function EnCeMoment({ profs, labos, compact = false }: { profs: ProfHorai
     <div className="space-y-4">
       <p className="text-sm text-muted-foreground" suppressHydrationWarning>
         {formaterDate(iso)}, {minutesEnHeure(maintenant.getHours() * 60 + maintenant.getMinutes())}
-        {situation.raison && ` — ${situation.raison}`}
+        {situation.raison && ` (${situation.raison})`}
       </p>
       {(situation.sansCours || !situation.session) && (
         <p className="flex items-center gap-2 rounded-lg border border-cem-jaune bg-cem-jaune-pale text-cem-marine p-3 text-sm">
