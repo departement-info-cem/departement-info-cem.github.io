@@ -12,6 +12,8 @@ import { Button } from "@/components/ui/button";
 export type InfoCours = Record<string, { no: string; nom: string; url?: string }>;
 
 const PIXELS_PAR_MINUTE = 1.1;
+// Espace en haut et en bas des colonnes : les heures sont centrées sur leur ligne et déborderaient sur l'en-tête.
+const MARGE = 12;
 
 // Horaire de la semaine d'un prof. Porté du composant WeeklySchedule du cours 5N6.
 export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours = {}, vide = "Aucun horaire publié pour l'instant." }: { plages: Plage[]; debut?: string; fin?: string; cours?: InfoCours; vide?: string }) {
@@ -27,7 +29,8 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
   const maxFin = Math.max(heureEnMinutes(fin) ?? 1080, ...plages.map((p) => heureEnMinutes(p.fin) ?? 0));
   const debutGrille = Math.floor(minDebut / 60) * 60;
   const finGrille = Math.ceil(maxFin / 60) * 60;
-  const hauteur = (finGrille - debutGrille) * PIXELS_PAR_MINUTE;
+  const hauteur = (finGrille - debutGrille) * PIXELS_PAR_MINUTE + 2 * MARGE;
+  const y = (minutes: number) => MARGE + (minutes - debutGrille) * PIXELS_PAR_MINUTE;
   const heures = Array.from({ length: (finGrille - debutGrille) / 60 + 1 }, (_, i) => debutGrille + i * 60);
 
   const jourActuel = maintenant ? jourDeLaSemaine(maintenant) : null;
@@ -66,7 +69,7 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
       </div>
 
       <div className="overflow-x-auto rounded-lg border bg-card">
-        <div className="grid min-w-[640px] pb-3" style={{ gridTemplateColumns: `56px repeat(${JOURS_OUVRABLES.length}, 1fr)` }}>
+        <div className="grid min-w-[640px]" style={{ gridTemplateColumns: `56px repeat(${JOURS_OUVRABLES.length}, 1fr)` }}>
           <div className="border-b" />
           {JOURS_OUVRABLES.map((j) => (
             <div key={j} className={`border-b border-l px-2 py-2 text-center text-sm font-semibold ${j === jourActuel ? "bg-accent text-accent-foreground" : ""}`}>
@@ -76,7 +79,7 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
 
           <div className="relative" style={{ height: hauteur }}>
             {heures.map((h) => (
-              <span key={h} className="absolute right-2 -translate-y-1/2 text-xs text-muted-foreground" style={{ top: (h - debutGrille) * PIXELS_PAR_MINUTE }}>
+              <span key={h} className="absolute right-2 -translate-y-1/2 text-xs text-muted-foreground" style={{ top: y(h) }}>
                 {minutesEnHeure(h)}
               </span>
             ))}
@@ -85,10 +88,10 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
           {JOURS_OUVRABLES.map((j) => (
             <div key={j} className={`relative border-l ${j === jourActuel ? "bg-accent/30" : ""}`} style={{ height: hauteur }}>
               {heures.map((h) => (
-                <div key={h} className="absolute inset-x-0 border-t border-dashed border-border/70" style={{ top: (h - debutGrille) * PIXELS_PAR_MINUTE }} />
+                <div key={h} className="absolute inset-x-0 border-t border-dashed border-border/70" style={{ top: y(h) }} />
               ))}
               {j === jourActuel && minutesActuelles !== null && minutesActuelles >= debutGrille && minutesActuelles <= finGrille && (
-                <div className="absolute inset-x-0 z-20 h-0.5 bg-cem-rouge" style={{ top: (minutesActuelles - debutGrille) * PIXELS_PAR_MINUTE }} aria-label="Maintenant">
+                <div className="absolute inset-x-0 z-20 h-0.5 bg-cem-rouge" style={{ top: y(minutesActuelles) }} aria-label="Maintenant">
                   <span className="absolute -left-1 -top-1 size-2.5 rounded-full bg-cem-rouge" />
                 </div>
               )}
@@ -103,7 +106,7 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
                       render={<div />}
                       className="absolute z-10 overflow-hidden break-words rounded-md hyphens-auto border-l-4 px-1.5 py-1 text-left text-xs shadow-sm transition hover:z-30 hover:shadow-md"
                       style={{
-                        top: (p.debutMin - debutGrille) * PIXELS_PAR_MINUTE + 1,
+                        top: y(p.debutMin) + 1,
                         height: (p.finMin - p.debutMin) * PIXELS_PAR_MINUTE - 2,
                         left: `calc(${p.colonne * largeur}% + 2px)`,
                         width: `calc(${largeur}% - 4px)`,
