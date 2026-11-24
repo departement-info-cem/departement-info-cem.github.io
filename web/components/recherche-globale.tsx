@@ -75,8 +75,8 @@ export function RechercheGlobale({ index, className }: { index: ElementRecherche
           <Search className="size-5" />
         </TooltipTrigger>
         <TooltipContent side="bottom" className="gap-0.5 px-1.5">
-          <kbd data-slot="kbd" className="bg-background/20 px-1 font-mono">{mac ? "⌘" : "Ctrl"}</kbd>
-          <kbd data-slot="kbd" className="bg-background/20 px-1 font-mono">K</kbd>
+          <kbd data-slot="kbd" className="bg-muted px-1 font-mono">{mac ? "⌘" : "Ctrl"}</kbd>
+          <kbd data-slot="kbd" className="bg-muted px-1 font-mono">K</kbd>
         </TooltipContent>
       </Tooltip>
       <Dialog open={ouvert} onOpenChange={setOuvert}>
