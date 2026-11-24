@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { FormesPiedDePage } from "@/components/formes-pied-de-page";
 import { Logo } from "@/components/logo";
 import { DEPOT } from "@/lib/chemins";
 
 export function PiedDePage() {
   return (
-    <footer className="mt-16 bg-cadre text-cadre-texte">
+    <footer className="relative mt-16 overflow-hidden bg-cadre text-cadre-texte">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
         <div className="space-y-3">
           <Logo inverse taille={36} />
@@ -37,9 +38,12 @@ export function PiedDePage() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-white/10 py-4 text-center text-xs text-white/60">
+      {/* Sur un écran étroit, le copyright passe à gauche pour laisser la place aux formes.
+          Pas de filet au-dessus : il traverserait les formes. */}
+      <div className="py-4 pr-34 pl-4 text-xs text-white/60 md:px-4 md:text-center">
         © {new Date().getFullYear()} Département d&apos;informatique du Cégep Édouard-Montpetit
       </div>
+      <FormesPiedDePage />
     </footer>
   );
 }
