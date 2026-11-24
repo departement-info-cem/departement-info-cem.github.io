@@ -37,8 +37,7 @@ export function HoraireLabos({ labos, profs, cours }: { labos: Laboratoire[]; pr
       )}
       <HoraireSemaine
         plages={occupations.map((o) => ({ jour: o.jour, debut: o.debut, fin: o.fin, type: o.cours ? ("cours" as const) : ("autre" as const), cours: o.cours, groupe: o.groupe, titre: o.titre, local: o.prof }))}
-        debut={labo?.ouverture}
-        fin={labo?.fermeture}
+        fin="20:00"
         cours={cours}
         vide="Aucun cours connu dans ce local pour cette session."
       />

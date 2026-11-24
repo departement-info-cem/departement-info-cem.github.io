@@ -4,7 +4,7 @@ import type { CalendrierScolaire, Laboratoire } from "@/app/_types/divers";
 import type { EvenementProf, Plage, Prof } from "@/app/_types/prof";
 import { situationDuJour } from "@/lib/calendrier";
 import { estDispo, fusionnerDispos } from "@/lib/horaire";
-import { heureEnMinutes, isoDepuisDate, jourDeLaSemaine, dateDepuisIso, minutesEnHeure, normaliserJour } from "@/lib/temps";
+import { formaterHeure, heureEnMinutes, isoDepuisDate, jourDeLaSemaine, dateDepuisIso, minutesEnHeure, normaliserJour } from "@/lib/temps";
 
 export type ProfHoraire = Pick<Prof, "id" | "nom" | "session" | "calendrier" | "bureau" | "photo"> & { plages: Plage[] };
 
@@ -135,7 +135,7 @@ export function etatLabo(labo: Laboratoire, profs: ProfHoraire[], scolaire: Cale
   }
   if (!labo.complet || labo.session !== s.session) return { etat: "inconnu", raison: "horaire incomplet" };
   const [ouvre, ferme] = [heureEnMinutes(labo.ouverture)!, heureEnMinutes(labo.fermeture)!];
-  if (m < ouvre || m >= ferme) return { etat: "inconnu", raison: "en dehors des heures de cours" };
+  if (m < ouvre || m >= ferme) return { etat: "inconnu", raison: `fermé de ${formaterHeure(labo.fermeture)} à ${formaterHeure(labo.ouverture)}` };
   const prochain = Math.min(ferme, ...duJour.map((o) => heureEnMinutes(o.debut)!).filter((d) => d > m));
   return { etat: "libre", jusqua: minutesEnHeure(prochain) };
 }
@@ -160,6 +160,24 @@ export function prochainCours(labo: Laboratoire, profs: ProfHoraire[], scolaire:
     if (occupation) return { iso, occupation };
   }
   return undefined;
+}
+
+/** « Les labos ferment à 23h00. » ou « Les labos rouvrent à 7h00. », les jours de cours seulement. */
+export function heuresLabos(labos: Laboratoire[], scolaire: CalendrierScolaire, date: Date): string | undefined {
+  const jourDeCours = (d: Date) => {
+    const s = situationDuJour(scolaire, isoDepuisDate(d));
+    return Boolean(s.session) && !s.sansCours && !["samedi", "dimanche"].includes(jourDeLaSemaine(d));
+  };
+  if (!labos.length || !jourDeCours(date)) return undefined;
+  const ouverture = labos.map((l) => l.ouverture).sort()[0];
+  const fermeture = labos.map((l) => l.fermeture).sort().at(-1)!;
+  const m = minutes(date);
+  if (m >= heureEnMinutes(ouverture)! && m < heureEnMinutes(fermeture)!) return `Les labos ferment à ${formaterHeure(fermeture)}.`;
+  const demain = dateDepuisIso(isoDepuisDate(date));
+  demain.setDate(demain.getDate() + 1);
+  // La veille d'une fin de semaine ou d'un congé, on ne sait pas quand ils rouvrent
+  if (m >= heureEnMinutes(fermeture)! && !jourDeCours(demain)) return "Les labos sont fermés.";
+  return `Les labos rouvrent à ${formaterHeure(ouverture)}.`;
 }
 
 // ---------- Résumé (bandeau et page « Locaux ») ----------
@@ -194,10 +212,9 @@ export function resumeMaintenant(profs: ProfHoraire[], labos: Laboratoire[], sco
   else if (situation.sansCours) raison = `${situation.raison ? `${situation.raison} : ` : ""}pas de cours réguliers aujourd'hui`;
   else if (situation.raison) raison = situation.raison;
   else if (["samedi", "dimanche"].includes(jourDeLaSemaine(date))) raison = "C'est la fin de semaine";
-  else if (labos.length > 0 && !libres.length && !premier && etats.some(({ e }) => e.raison === "en dehors des heures de cours")) raison = "En dehors des heures de cours";
   else if (labos.length > 0 && etats.every(({ e }) => e.raison === "horaire incomplet")) raison = "L'horaire des locaux de cette session n'est pas encore inscrit";
 
-  return { iso, situation, nbAvecDispos, dispos, bientot, etats, libres, prochainLibre: premier && { local: premier.l.local, heure: premier.e.jusqua! }, raison };
+  return { iso, situation, nbAvecDispos, dispos, bientot, etats, libres, prochainLibre: premier && { local: premier.l.local, heure: premier.e.jusqua! }, heures: heuresLabos(labos, scolaire, date), raison };
 }
 
 /** Le bandeau est sur toutes les pages : on garde seulement les profs qui y changent quelque chose. */

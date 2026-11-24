@@ -16,8 +16,8 @@
   postes: 24
   session: A2026
   complet: true
-  ouverture: "08:00"
-  fermeture: "20:00"
+  ouverture: "07:00"
+  fermeture: "23:00"
   occupations:
     - { jour: lundi, debut: "08:10", fin: "10:30", cours: 420-905-EM, groupe: 1030 }
     - { jour: lundi, debut: "10:30", fin: "13:00", cours: 420-905-EM, groupe: 1040 }
@@ -39,8 +39,8 @@
   postes: 24
   session: A2026
   complet: true
-  ouverture: "08:00"
-  fermeture: "20:00"
+  ouverture: "07:00"
+  fermeture: "23:00"
   occupations:
     - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-SN1-RE, groupe: 1110 }
     - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-983-EM, groupe: 1130 }
@@ -61,8 +61,8 @@
   postes: 24
   session: A2026
   complet: true
-  ouverture: "08:00"
-  fermeture: "20:00"
+  ouverture: "07:00"
+  fermeture: "23:00"
   occupations:
     - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-983-EM, groupe: 1010 }
     - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-983-EM, groupe: 1020 }
@@ -79,8 +79,8 @@
   postes: 24
   session: A2026
   complet: true
-  ouverture: "08:00"
-  fermeture: "20:00"
+  ouverture: "07:00"
+  fermeture: "23:00"
   occupations:
     - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-1C5-EM, groupe: 1050 }
     - { jour: lundi, debut: "11:10", fin: "13:00", cours: 420-3S4-EM, groupe: 1050 }
@@ -105,8 +105,8 @@
   postes: 23
   session: A2026
   complet: true
-  ouverture: "08:00"
-  fermeture: "20:00"
+  ouverture: "07:00"
+  fermeture: "23:00"
   occupations:
     - { jour: lundi, debut: "09:10", fin: "12:00", cours: 420-1X6-EM, groupe: 1020 }
     - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-SN1-RE, groupe: 1030 }
@@ -126,8 +126,8 @@
   postes: 23
   session: A2026
   complet: true
-  ouverture: "08:00"
-  fermeture: "20:00"
+  ouverture: "07:00"
+  fermeture: "23:00"
   occupations:
     - { jour: lundi, debut: "08:10", fin: "10:30", cours: 420-3M5-EM, groupe: 1010 }
     - { jour: lundi, debut: "10:30", fin: "13:00", cours: 420-3M5-EM, groupe: 1020 }
@@ -147,8 +147,8 @@
   postes: 23
   session: A2026
   complet: true
-  ouverture: "08:00"
-  fermeture: "20:00"
+  ouverture: "07:00"
+  fermeture: "23:00"
   occupations:
     - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-1P6-EM, groupe: 1020 }
     - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-1P6-EM, groupe: 1010 }
@@ -169,8 +169,8 @@
   postes: 23
   session: A2026
   complet: true
-  ouverture: "08:00"
-  fermeture: "20:00"
+  ouverture: "07:00"
+  fermeture: "23:00"
   occupations:
     - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-5Y5-EM, groupe: 1010 }
     - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-5Y5-EM, groupe: 1020 }
@@ -190,7 +190,7 @@
   postes: 23
   session: A2026
   complet: true
-  ouverture: "08:00"
+  ouverture: "07:00"
   fermeture: "23:00"
   occupations:
     - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-3T5-EM, groupe: 1020 }
@@ -220,8 +220,8 @@
   postes: 20
   session: A2026
   complet: true
-  ouverture: "08:00"
-  fermeture: "20:00"
+  ouverture: "07:00"
+  fermeture: "23:00"
   occupations:
     - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-5S6-EM, groupe: 1010, titre: Serveurs 4 }
     - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-5U5-EM, groupe: 1010, titre: Cybersécurité 3 }
@@ -243,8 +243,8 @@
   postes: 24
   session: A2026
   complet: true
-  ouverture: "08:00"
-  fermeture: "20:00"
+  ouverture: "07:00"
+  fermeture: "23:00"
   occupations:
     - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-1B3-EM, groupe: 1080 }
     - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-1X6-EM, groupe: 1050 }
@@ -267,8 +267,8 @@
   postes: 24
   session: A2026
   complet: true
-  ouverture: "08:00"
-  fermeture: "20:00"
+  ouverture: "07:00"
+  fermeture: "23:00"
   occupations:
     - { jour: lundi, debut: "08:10", fin: "11:00", cours: 420-1P6-EM, groupe: 1090 }
     - { jour: lundi, debut: "12:10", fin: "15:00", cours: 420-1P6-EM, groupe: 1070 }

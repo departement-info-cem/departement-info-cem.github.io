@@ -169,8 +169,21 @@ describe("horaire officiel des locaux (A2026)", () => {
     // Hors session
     expect(prochain("D-0003", 12, 30, 12)).toBeUndefined();
   });
-  it("le soir, n'annonce pas un local qui se libère à la fermeture", () => {
-    expect(a(23, 21)).toMatchObject({ libres: [], prochainLibre: undefined, raison: "En dehors des heures de cours" });
+  it("le soir, les locaux sans cours sont libres jusqu'à la fermeture", () => {
+    expect(a(23, 21).libres.length).toBeGreaterThan(0);
+    expect(a(23, 21).libres.every(({ e }) => e.jusqua === "23:00")).toBe(true);
+    expect(a(23, 21)).toMatchObject({ prochainLibre: undefined, raison: undefined, heures: "Les labos ferment à 23h00." });
+  });
+  it("dit quand les labos ferment et rouvrent", () => {
+    for (const [jour, h, m] of [[23, 23, 0], [24, 0, 30], [24, 6, 59]]) expect(a(jour, h, m)).toMatchObject({ libres: [], prochainLibre: undefined, raison: undefined, heures: "Les labos rouvrent à 7h00." });
+    expect(a(24, 7)).toMatchObject({ heures: "Les labos ferment à 23h00." });
+    expect(a(24, 22, 59)).toMatchObject({ heures: "Les labos ferment à 23h00." });
+    // Vendredi soir et veille de JR : pas de promesse pour le lendemain
+    expect(a(27, 23, 30).heures).toBe("Les labos sont fermés.");
+    expect(a(10, 23, 30).heures).toBe("Les labos sont fermés.");
+    // Fin de semaine et JR : rien
+    expect(a(28, 12).heures).toBeUndefined();
+    expect(a(11, 12).heures).toBeUndefined();
   });
   it("un groupe n'est jamais dans deux locaux à la fois", () => {
     const vus = new Map<string, string[]>();
