@@ -12,7 +12,18 @@ import { AvatarProf } from "@/components/carte-prof";
 import { StatutProf } from "@/components/statut-prof";
 import { bouton } from "@/lib/bouton";
 
-const PHOTOS = ["gang.jpg", "tablo.jpg", "blond.jpg", "jo-jm.jpg", "grimace.jpg", "hugo.jpg", "home.jpg", "college.jpg"];
+// Mosaïque de photos : la grande et la verticale occupent deux rangées, les autres comblent les trous.
+// Sur téléphone, les quatre premières suffisent (elles forment déjà un rectangle complet).
+const PHOTOS = [
+  { fichier: "gang.jpg", alt: "Un groupe d'étudiants au laboratoire", tuile: "col-span-2 row-span-2" },
+  { fichier: "tablo.jpg", alt: "Explications au tableau blanc", tuile: "" },
+  { fichier: "hugo.jpg", alt: "Un étudiant concentré devant son écran", tuile: "row-span-2", cadrage: "object-[center_20%]" },
+  { fichier: "blond.jpg", alt: "Discussion entre étudiants au laboratoire", tuile: "" },
+  { fichier: "jo-jm.jpg", alt: "Deux profs du département", tuile: "max-md:hidden" },
+  { fichier: "grimace.jpg", alt: "Deux étudiants qui font des grimaces", tuile: "max-md:hidden" },
+  { fichier: "home.jpg", alt: "Un laboratoire du département", tuile: "max-md:hidden" },
+  { fichier: "college.jpg", alt: "Le cégep vu de la pelouse", tuile: "max-md:hidden" },
+];
 
 const ICONES_PROGRAMMES: Record<string, typeof Code2> = {
   "dec-prog": Code2,
@@ -132,10 +143,12 @@ export default function Accueil() {
       </section>
 
       {/* ---------- Photos ---------- */}
-      <section className="bg-cem-marine py-6" aria-label="Photos du département">
-        <div className="flex gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:thin]">
+      <section className="bg-cem-marine" aria-label="Photos du département">
+        <div className="mx-auto grid max-w-6xl auto-rows-[7rem] grid-cols-2 gap-2 px-4 py-8 sm:auto-rows-[9rem] md:grid-cols-4 md:gap-3 lg:auto-rows-[10rem]">
           {PHOTOS.map((p) => (
-            <Image key={p} src={chemin(`/images/${p}`)} alt="La vie au département" width={300} height={200} className="h-48 w-auto shrink-0 rounded-md object-cover" />
+            <div key={p.fichier} className={`relative overflow-hidden rounded-md ${p.tuile}`}>
+              <Image src={chemin(`/images/${p.fichier}`)} alt={p.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className={`object-cover ${p.cadrage ?? ""}`} />
+            </div>
           ))}
         </div>
       </section>
