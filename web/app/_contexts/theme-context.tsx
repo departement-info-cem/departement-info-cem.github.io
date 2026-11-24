@@ -12,7 +12,7 @@ export const ThemeContext = createContext<ThemeContextType>({ theme: "clair", pr
 const SYSTEME_SOMBRE = "(prefers-color-scheme: dark)";
 
 // Pas de valeur enregistrée = suivre le système (c'est aussi ce que fait le script dans layout.tsx).
-// L'ancien site Angular, sur le même domaine, enregistrait la valeur entre guillemets.
+// Comme ce script, on accepte aussi la valeur en JSON (entre guillemets).
 function lirePreference(): Preference {
   try {
     const valeur = localStorage.getItem("theme")?.replaceAll('"', "");
