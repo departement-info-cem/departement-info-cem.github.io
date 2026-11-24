@@ -2,11 +2,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Menu, Moon, Sun } from "lucide-react";
+import { ChevronDown, LayoutGrid, Menu, Monitor, Moon, Sun } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { RechercheGlobale, type ElementRecherche } from "@/components/recherche-globale";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { useTheme } from "@/app/_contexts/theme-context";
+import { useTheme, type Preference } from "@/app/_contexts/theme-context";
 import { GRILLES_DIRECTES, LIENS_LOGOS } from "@/lib/raccourcis";
 import { chemin } from "@/lib/chemins";
 import { cn } from "@/lib/utils";
@@ -15,16 +16,17 @@ export const GRILLES = [
   ...GRILLES_DIRECTES,
   { href: "/programmes", texte: "Tous les programmes", sousTitre: "AEC, comparateur" },
   { href: "/cours-service", texte: "Sciences de la nature et cours de service", sousTitre: "SN1, TIM, TAG, Z03" },
+  { href: "/orientation", texte: "Est-ce pour moi ?", sousTitre: "Quelques questions pour t'orienter" },
 ];
 
 export const NAVIGATION = [
   { href: "/sites", texte: "Sites des cours" },
   { href: "/profs", texte: "Profs" },
-  { href: "/maintenant", texte: "En ce moment" },
-  { href: "/orientation", texte: "Est-ce pour moi ?" },
 ];
 
+// « En ce moment » est aussi dans le bandeau en bas de chaque page.
 export const RESSOURCES = [
+  { href: "/maintenant", texte: "En ce moment" },
   { href: "/calendrier", texte: "Calendrier scolaire" },
   { href: "/faq", texte: "FAQ" },
   { href: "/nouveau", texte: "Conseils aux nouveaux" },
@@ -34,9 +36,15 @@ export const RESSOURCES = [
   { href: "/contact", texte: "Nous joindre" },
 ];
 
+// Tout ce qui est cliquable dans la barre a la même hauteur (36 px), le même arrondi et le même survol.
+const BOUTON = "inline-flex h-9 items-center gap-1 whitespace-nowrap rounded-md px-3 text-sm font-semibold transition-colors hover:bg-white/10";
+const BOUTON_ICONE ="inline-flex size-9 shrink-0 items-center justify-center rounded-md transition-colors hover:bg-white/10";
+const ACTIF = "bg-white/10 text-cem-vert";
+const SOUS_MENU =
+  "invisible absolute top-full z-50 rounded-md border bg-popover p-1 text-popover-foreground opacity-0 shadow-lg transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100";
+
 export function Entete({ index }: { index: ElementRecherche[] }) {
   const chemin = usePathname();
-  const { theme, basculer } = useTheme();
   const actif = (href: string) => chemin === href || chemin.startsWith(`${href}/`);
 
   return (
@@ -46,12 +54,12 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
           <Logo inverse taille={40} />
         </Link>
 
-        <nav className="ml-auto hidden items-center xl:flex" aria-label="Navigation principale">
+        <nav className="ml-auto hidden items-center gap-1 xl:flex" aria-label="Navigation principale">
           <div className="group relative">
-            <button className={cn("flex items-center gap-1 rounded-md px-2 py-2 text-sm font-semibold 2xl:px-3 hover:bg-white/10", (actif("/programmes") || actif("/cours-service")) && "bg-white/10 text-cem-vert")} aria-haspopup="true">
+            <button className={cn(BOUTON, GRILLES.some((l) => actif(l.href)) && ACTIF)} aria-haspopup="true">
               Grilles <ChevronDown className="size-4" />
             </button>
-            <div className="invisible absolute left-0 top-full z-50 w-64 rounded-md border bg-popover p-1 text-popover-foreground opacity-0 shadow-lg transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+            <div className={cn(SOUS_MENU, "left-0 w-64")}>
               {GRILLES.map((l) => (
                 <Link key={l.href} href={l.href} className="block rounded px-3 py-2 text-sm hover:bg-accent">
                   <span className="block font-semibold">{l.texte}</span>
@@ -61,22 +69,15 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
             </div>
           </div>
           {NAVIGATION.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={cn(
-                "whitespace-nowrap rounded-md px-2 py-2 text-sm font-semibold 2xl:px-3 transition-colors hover:bg-white/10",
-                actif(l.href) && "bg-white/10 text-cem-vert",
-              )}
-            >
+            <Link key={l.href} href={l.href} className={cn(BOUTON, actif(l.href) && ACTIF)}>
               {l.texte}
             </Link>
           ))}
           <div className="group relative">
-            <button className="flex items-center gap-1 rounded-md px-2 py-2 text-sm font-semibold 2xl:px-3 hover:bg-white/10" aria-haspopup="true">
+            <button className={cn(BOUTON, RESSOURCES.some((l) => actif(l.href)) && ACTIF)} aria-haspopup="true">
               Étudiants <ChevronDown className="size-4" />
             </button>
-            <div className="invisible absolute right-0 top-full z-50 w-56 rounded-md border bg-popover p-1 text-popover-foreground opacity-0 shadow-lg transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+            <div className={cn(SOUS_MENU, "right-0 w-56")}>
               {RESSOURCES.map((l) => (
                 <Link key={l.href} href={l.href} className="block rounded px-3 py-2 text-sm hover:bg-accent">
                   {l.texte}
@@ -86,25 +87,15 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
           </div>
         </nav>
 
-        <div className="ml-auto flex shrink-0 items-center gap-1 xl:ml-2">
-          <RechercheGlobale index={index} />
-          {/* SharePoint reste visible même sur un petit écran ; les autres logos passent dans le menu */}
-          {LIENS_LOGOS.map((l, i) => (
-            <a key={l.href} href={l.href} target="_blank" rel="noreferrer" title={l.texte} aria-label={l.texte} className={cn("rounded-md p-1 transition hover:bg-white/15", i > 0 && "hidden md:block")}>
-              <LogoLien lien={l} />
-            </a>
-          ))}
-          <button
-            onClick={basculer}
-            className="rounded-md p-2 hover:bg-white/10"
-            aria-label={theme === "clair" ? "Passer au thème sombre" : "Passer au thème clair"}
-            title={theme === "clair" ? "Thème sombre" : "Thème clair"}
-          >
-            {theme === "clair" ? <Moon className="size-5" /> : <Sun className="size-5" />}
-          </button>
+        <span className="hidden h-6 w-px bg-white/20 xl:block" aria-hidden="true" />
+
+        <div className="ml-auto flex shrink-0 items-center gap-1 xl:ml-0">
+          <RechercheGlobale index={index} className={BOUTON_ICONE} />
+          <MenuLiens />
+          <ChoixTheme />
           <Sheet>
-            <SheetTrigger className="rounded-md p-2 hover:bg-white/10 xl:hidden" aria-label="Ouvrir le menu">
-              <Menu className="size-6" />
+            <SheetTrigger className={cn(BOUTON_ICONE, "xl:hidden")} aria-label="Ouvrir le menu">
+              <Menu className="size-5" />
             </SheetTrigger>
             <SheetContent side="right" className="w-72 overflow-y-auto">
               <SheetTitle className="px-4 pt-4">Menu</SheetTitle>
@@ -114,14 +105,6 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
                     {l.texte}
                   </Link>
                 ))}
-                <hr className="my-2" />
-                <div className="space-y-1 rounded-lg bg-cadre p-2 text-cadre-texte">
-                  {LIENS_LOGOS.map((l) => (
-                    <a key={l.href} href={l.href} target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-md px-2 py-1.5 text-sm hover:bg-white/10">
-                      <LogoLien lien={l} /> {l.texte}
-                    </a>
-                  ))}
-                </div>
               </nav>
             </SheetContent>
           </Sheet>
@@ -131,6 +114,54 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
   );
 }
 
-function LogoLien({ lien }: { lien: (typeof LIENS_LOGOS)[number] }) {
-  return <Image src={chemin(`/images/liens/${lien.logo}`)} alt="" width={28} height={28} unoptimized className="size-7 object-contain xl:size-8" />;
+// SharePoint, Omnivox, etc. : un seul bouton au lieu de cinq logos dans la barre.
+function MenuLiens() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className={BOUTON_ICONE} aria-label="Liens utiles" title="Liens utiles">
+        <LayoutGrid className="size-5" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-auto">
+        {LIENS_LOGOS.map((l) => (
+          <DropdownMenuItem key={l.href} render={<a href={l.href} target="_blank" rel="noreferrer" />} className="gap-2.5 py-1.5 pr-3">
+            {/* Pastille foncée : certains logos (GitHub) sont blancs */}
+            <span className="rounded bg-cadre p-1">
+              <Image src={chemin(`/images/liens/${l.logo}`)} alt="" width={20} height={20} unoptimized className="size-5 object-contain" />
+            </span>
+            {l.texte}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+const THEMES = [
+  { valeur: "clair", texte: "Clair", Icone: Sun },
+  { valeur: "sombre", texte: "Sombre", Icone: Moon },
+  { valeur: "systeme", texte: "Système", Icone: Monitor },
+] as const;
+
+// Le bouton montre le thème affiché (soleil ou lune), même en mode Système : c'est plus parlant qu'un écran.
+function ChoixTheme() {
+  const { theme, preference, choisir } = useTheme();
+  const actuel = THEMES.find((t) => t.valeur === preference) ?? THEMES[2];
+  const IconeBouton = theme === "sombre" ? Moon : Sun;
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className={BOUTON_ICONE} aria-label={`Thème : ${actuel.texte}`} title="Thème">
+        <IconeBouton className="size-5" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuRadioGroup value={preference} onValueChange={(valeur: Preference) => choisir(valeur)}>
+          {THEMES.map(({ valeur, texte, Icone }) => (
+            <DropdownMenuRadioItem key={valeur} value={valeur}>
+              <Icone /> {texte}
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
 }
