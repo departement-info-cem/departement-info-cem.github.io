@@ -24,14 +24,14 @@ horaire:
   plages:
     - { jour: lundi, debut: "12:00", fin: "15:00", type: cours, cours: 420-SN1-RE, groupe: 1030, local: D-0602 }
     - { jour: lundi, debut: "15:00", fin: "18:00", type: cours, cours: 420-SN1-RE, groupe: 1040, local: D-0602 }
-    - { jour: mardi, debut: "08:00", fin: "11:00", type: cours, cours: 360-4A3-EM, groupe: 1010, local: D-0007, titre: "Projet sc. info" }
+    - { jour: mardi, debut: "08:00", fin: "11:00", type: cours, cours: 360-4A3-EM, groupe: 1010, local: D-0007, titre: "Projet scientifique de fin d'études en informatique" }
     - { jour: mercredi, debut: "09:00", fin: "12:00", type: cours, cours: 420-SN1-RE, groupe: 1010, local: D-0007 }
     - { jour: mercredi, debut: "14:00", fin: "17:00", type: cours, cours: 420-SN1-RE, groupe: 1020, local: D-0007 }
-    - { jour: lundi, debut: "11:30", fin: "12:00", type: dispo, local: C-125 }
+    - { jour: lundi, debut: "11:30", fin: "12:00", type: dispo, local: C-125, titre: "Disponibilité (C-125)" }
     - { jour: mardi, debut: "11:00", fin: "12:00", type: dispo, local: D-0008 }
     - { jour: mardi, debut: "12:00", fin: "13:30", type: dispo, local: C-125 }
     - { jour: mercredi, debut: "08:15", fin: "09:00", type: dispo, local: D-0007 }
-    - { jour: jeudi, debut: "09:00", fin: "12:00", type: reunion, cours: Comités - Sciences de la nature }
+    - { jour: jeudi, debut: "09:00", fin: "12:00", type: reunion, titre: "Comités - Sciences de la nature" }
 
 # ---------- Calendrier : tes dates à toi (remises, examens, absences...) ----------
 # Les congés et journées pédagogiques du cégep sont ajoutés automatiquement.

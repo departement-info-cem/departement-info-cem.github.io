@@ -75,7 +75,7 @@ export function ApercuYaml({
               <TabsTrigger value="calendrier">Calendrier</TabsTrigger>
             </TabsList>
             <TabsContent value="horaire">
-              <HoraireSemaine plages={prof.horaire?.plages ?? []} debut={prof.horaire?.debut} fin={prof.horaire?.fin} cours={cours} />
+              <HoraireSemaine plages={prof.horaire?.plages ?? []} debut={prof.horaire?.debut} fin={prof.horaire?.fin} cours={cours} impression={{ titre: prof.nom, details: [prof.bureau && `Bureau ${prof.bureau}`, scolaire.sessions.find((s) => s.id === prof.session)?.nom] }} />
             </TabsContent>
             <TabsContent value="calendrier">
               <CalendrierMois scolaire={scolaire} plages={prof.horaire?.plages} evenements={prof.calendrier} sessionId={prof.session} />

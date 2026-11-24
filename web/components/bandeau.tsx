@@ -79,7 +79,7 @@ function Contenu({ resume }: { resume: ResumeMaintenant }) {
       )}
       {libres.map(({ l, e }) => (
         <li key={l.local}>
-          <Link href="/maintenant" className="hover:underline">
+          <Link href={`/locaux/${l.local}`} className="hover:underline">
             <strong>{l.local}</strong> <span className="text-cem-gris-2">jusqu&apos;à {e.jusqua}</span>
           </Link>
         </li>

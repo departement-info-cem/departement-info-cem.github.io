@@ -283,7 +283,20 @@ html { scroll-padding-top: 5rem; scroll-padding-bottom: 3rem; }
   .formes-pied-de-page:not([data-visibles])::after { transform: rotate(-35deg) translateX(100%); }
 }
 
+/* Impression. Si la page contient l'horaire d'un prof, on imprime seulement cet horaire, sur une page lettre. */
 @media print {
   header, footer, .no-print { display: none !important; }
   body { padding-bottom: 0; }
+
+  html:has(.horaire-imprimable) {
+    /* Papier blanc, même en thème sombre */
+    --background: #ffffff; --foreground: var(--cem-noir); --card: #ffffff; --muted-foreground: var(--cem-gris-4); --border: var(--cem-gris-2);
+    color-scheme: light;
+  }
+  body:has(.horaire-imprimable) *:not(:has(.horaire-imprimable), .horaire-imprimable, .horaire-imprimable *) { display: none !important; }
+  body *:has(.horaire-imprimable) { display: block !important; max-width: none !important; margin: 0 !important; padding: 0 !important; }
+  html:has(.horaire-imprimable), body:has(.horaire-imprimable) { display: block !important; height: auto !important; min-height: 0 !important; }
+  .horaire-imprimable { padding: 1cm; break-inside: avoid; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .horaire-cadre { overflow: visible; }
+  .horaire-imprimable .horaire-colonne { height: 22.9cm !important; }
 }
