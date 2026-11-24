@@ -148,20 +148,24 @@ export function GrilleProgramme({
   const prog = chiffres(() => true);
   const vus = tag ? chiffres((c) => c.tags.includes(tag)) : prog;
   const filtre = tag !== null;
+  // Les grilles d'AEC n'ont pas les numéros de cours : on ne sait pas lesquels sont en 420, alors on n'affiche pas ce chiffre
+  const avecDep = prog.nbDep > 0;
 
   return (
     <div>
-      <div className="mb-4 grid gap-3 sm:grid-cols-3">
+      <div className={`mb-4 grid gap-3 ${avecDep ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
         <Statistique valeur={vus.nb + vus.nbChoix} total={prog.nb + prog.nbChoix} filtre={filtre} delai={0}>
           cours{vus.nbChoix ? ` (dont ${vus.nbChoix} au choix)` : ""}
         </Statistique>
         <Statistique valeur={prog.heures ? vus.heures : null} total={prog.heures} unite="h" filtre={filtre} delai={90}>
           heures de cours{programme.type === "dec-bac" ? " au cégep" : ""}
         </Statistique>
-        <Statistique valeur={prog.heuresDep ? vus.heuresDep : vus.nbDep} total={prog.heuresDep || prog.nbDep} unite={prog.heuresDep ? "h" : undefined} filtre={filtre} delai={180}>
-          {prog.heuresDep ? "en informatique (420)" : "cours d'informatique"}
-          {choix.length ? ", sans les cours au choix" : ""}
-        </Statistique>
+        {avecDep && (
+          <Statistique valeur={prog.heuresDep ? vus.heuresDep : vus.nbDep} total={prog.heuresDep || prog.nbDep} unite={prog.heuresDep ? "h" : undefined} filtre={filtre} delai={180}>
+            {prog.heuresDep ? "en informatique (420)" : "cours d'informatique"}
+            {choix.length ? ", sans les cours au choix" : ""}
+          </Statistique>
+        )}
       </div>
 
       {tags.length > 0 && (
