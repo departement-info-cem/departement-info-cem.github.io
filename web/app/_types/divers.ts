@@ -95,6 +95,8 @@ export const logicielsSchema = z.array(
   z
     .object({
       nom: z.string(),
+      /** fichier dans web/public/images/logiciels/ */
+      logo: z.string().optional(),
       identifiant: z.string(),
       description: z.string(),
       lien: z.url(),
