@@ -191,6 +191,12 @@
   }
 }
 
+/* Défilement doux vers une section de la page (ex. « Voir les trois parcours » sur l'accueil).
+   Next le coupe pendant les changements de page grâce à data-scroll-behavior="smooth" sur <html> (layout.tsx). */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
 /* Apparition douce au défilement (voir components/apparition.tsx) */
 .apparition {
   opacity: 0;
@@ -206,10 +212,12 @@
 }
 
 /* Bandeau défilant (voir components/bandeau.tsx) */
-/* Fixé en bas : la page garde la place en dessous pour ne rien cacher */
+/* Fixé en bas : la page garde la place en dessous pour ne rien cacher, seulement quand il est affiché */
 .bandeau-bas { --hauteur: 2.25rem; height: calc(var(--hauteur) + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom); }
-body { padding-bottom: calc(2.25rem + env(safe-area-inset-bottom)); }
-html { scroll-padding-top: 5rem; scroll-padding-bottom: 3rem; }
+body:has(.bandeau-bas) { padding-bottom: calc(2.25rem + env(safe-area-inset-bottom)); }
+/* Les ancres s'arrêtent sous l'en-tête collant (et au-dessus du bandeau) */
+html { scroll-padding-top: 5rem; }
+html:has(.bandeau-bas) { scroll-padding-bottom: 3rem; }
 .bandeau { overflow: hidden; }
 .bandeau-piste { display: flex; width: max-content; min-width: 200%; animation: bandeau linear infinite; }
 .bandeau-piste > * { flex: 1 0 auto; min-width: 50%; }

@@ -10,13 +10,13 @@ import { prochainCours, resumeMaintenant, type ProfHoraire } from "@/lib/mainten
 import { formaterDate, minutesEnHeure } from "@/lib/temps";
 
 // Page « Locaux » : les profs disponibles (et surtout où), les laboratoires libres.
-export function EnCeMoment({ profs, labos, compact = false }: { profs: ProfHoraire[]; labos: Laboratoire[]; compact?: boolean }) {
+export function EnCeMoment({ profs, labos }: { profs: ProfHoraire[]; labos: Laboratoire[] }) {
   const maintenant = useMaintenant();
   const scolaire = useScolaire();
   if (!maintenant) return <div className="h-40 animate-pulse rounded-lg bg-muted" aria-label="Chargement" />;
 
   const { iso, situation, nbAvecDispos, dispos, etats, ...resume } = resumeMaintenant(profs, labos, scolaire, maintenant);
-  const bientot = compact ? [] : resume.bientot.slice(0, 8);
+  const bientot = resume.bientot.slice(0, 8);
 
   return (
     <div className="space-y-4">
@@ -82,14 +82,14 @@ export function EnCeMoment({ profs, labos, compact = false }: { profs: ProfHorai
           <h3 className="mb-3 flex items-center gap-2 font-bold">
             <Monitor className="size-5 text-primary" /> Laboratoires
           </h3>
-          <ul className={compact ? "grid grid-cols-2 gap-2" : "grid gap-2 sm:grid-cols-2"}>
+          <ul className="grid gap-2 sm:grid-cols-2">
             {etats.map(({ l, e }) => (
               <li key={l.local}>
-                <EtatLaboratoire local={l.local} e={e} iso={iso} prochain={compact ? undefined : prochainCours(l, profs, scolaire, maintenant)} lien />
+                <EtatLaboratoire local={l.local} e={e} iso={iso} prochain={prochainCours(l, profs, scolaire, maintenant)} lien />
               </li>
             ))}
           </ul>
-          {!compact && <p className="mt-3 text-xs text-muted-foreground">Vérifie toujours l&apos;horaire affiché sur la porte : une réservation peut avoir été ajoutée.</p>}
+          <p className="mt-3 text-xs text-muted-foreground">Vérifie toujours l&apos;horaire affiché sur la porte : une réservation peut avoir été ajoutée.</p>
         </section>
       </div>
     </div>

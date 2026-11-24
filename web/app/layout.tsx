@@ -28,7 +28,7 @@ const scriptTheme = `try{var t=localStorage.getItem("theme");if(t==='"sombre"'||
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="fr-CA" className={`${montserrat.variable} ${mono.variable} h-full antialiased`} suppressHydrationWarning>
+    <html lang="fr-CA" data-scroll-behavior="smooth" className={`${montserrat.variable} ${mono.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: scriptTheme }} />
       </head>

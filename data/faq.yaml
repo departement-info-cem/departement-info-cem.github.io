@@ -1,4 +1,17 @@
 # Foire aux questions. Chaque entrée : question, reponse, categories (pour filtrer), liens (pages du site ou URL).
+# La page d'accueil affiche, dans l'ordre du fichier, les questions de la catégorie « futurs étudiants ».
+- question: Est-ce que ça mène à un emploi ?
+  reponse: Oui, c'est le but d'un DEC technique. Il prépare directement au marché du travail et se termine par un stage en entreprise à la dernière session. Plusieurs étudiants travaillent déjà en informatique à temps partiel en 3e année. Le diplôme permet aussi de poursuivre à l'université.
+  categories: [futurs étudiants, professions]
+  liens: []
+- question: Quels cours de maths faut-il au secondaire ?
+  reponse: "Pour être admis au DEC en informatique, il faut l'un de ces cours : Mathématique TS ou SN de 4e secondaire, Mathématique CST de 5e secondaire, ou l'ancien cours Mathématique 436."
+  categories: [futurs étudiants]
+  liens: []
+- question: DEC technique ou DEC-BAC ?
+  reponse: Le DEC technique dure 3 ans et mène au marché du travail ; on peut ensuite aller à l'université. Le DEC-BAC donne un DEC et un baccalauréat de l'Université de Sherbrooke en 5 ans. Des cours « en double » disparaissent, et on fait 3 sessions par année.
+  categories: [futurs étudiants, programmes]
+  liens: [/programmes/comparer]
 - question: Qu'est-ce que je dois installer sur mon ordi pour les cours?
   reponse: Dans chaque cours, les profs vont te montrer comment installer les logiciels nécessaires. Tu peux aussi visiter la page sur les logiciels gratuits.
   categories:
@@ -10,9 +23,10 @@
   categories:
     - locaux
   liens: []
-- question: Est-ce que je dois acheter un portable?
+- question: Est-ce que je dois acheter un portable ?
   reponse: Tu peux travailler chez toi avec un portable ou une tour. Au collège, nous te fournissons un ordinateur pour travailler donc ce n'est pas nécessaire d'avoir un ordinateur chez soi mais la plupart des étudiants choisissent quand même d'en avoir un.
   categories:
+    - futurs étudiants
     - ordi
   liens: []
 - question: Quelles spécifications pour acheter un ordi pour la technique?
@@ -46,9 +60,10 @@
     - équipe
     - travaux
   liens: []
-- question: Est-ce que je peux travailler pendant mes études?
+- question: Est-ce que je peux travailler pendant mes études ?
   reponse: Ta présence et ton implication sont nécessaires pour tes cours. C'est impossible d'avoir un emploi à temps et suivre la formation. Par contre, de nombreux étudiants ont un emploi à temps partiel. Tu peux également commencer à travailler en info pendant ta formation, plusieurs ont déjà un emploi en 3ème année (à temps partiel).
   categories:
+    - futurs étudiants
     - professions
     - travail
   liens: []
@@ -59,7 +74,7 @@
   liens: [/plagiat]
 - question: Est-ce que l'IA va remplacer les programmeurs ?
   reponse: L'IA change le métier, comme l'ont fait avant elle les compilateurs, Internet ou Stack Overflow. Elle écrit du code plus vite, mais quelqu'un doit comprendre le problème, découper une solution, vérifier, tester, sécuriser et maintenir le code. Plus les outils sont puissants, plus il faut de bonnes bases pour bien s'en servir.
-  categories: [IA, professions]
+  categories: [futurs étudiants, IA, professions]
   liens: []
 - question: Est-ce qu'on apprend l'intelligence artificielle au département ?
   reponse: "La technique t'apprend à programmer solidement, ce qui est la base pour travailler avec l'IA. En Sciences de la nature, le département donne le cours au choix « Réseaux de neurones et sciences » (420-4A4). Au DEC-BAC, le cours IFT 615 Intelligence artificielle se donne à l'Université de Sherbrooke."

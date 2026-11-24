@@ -2,12 +2,13 @@ import Link from "next/link";
 import { FormesPiedDePage } from "@/components/formes-pied-de-page";
 import { Logo } from "@/components/logo";
 import { DEPOT } from "@/lib/chemins";
+import { STAGES } from "@/lib/raccourcis";
 
 export function PiedDePage() {
   return (
-    // La marge détache le pied de page du contenu, sauf si la page finit déjà par une bande grise (l'accueil) :
+    // La marge détache le pied de page du contenu, sauf si la page finit déjà par une bande de couleur (la verte de l'accueil) :
     // elle n'y laisserait qu'une bande blanche vide.
-    <footer className="relative mt-16 overflow-hidden bg-cadre text-cadre-texte [main:has(>section.bg-muted:last-child)+&]:mt-0">
+    <footer className="relative mt-16 overflow-hidden bg-cadre text-cadre-texte [main:has(>section.bg-cem-vert:last-child)+&]:mt-0">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
         <div className="space-y-3">
           <Logo inverse taille={36} />
@@ -27,6 +28,7 @@ export function PiedDePage() {
             <li><Link href="/profs" className="hover:underline">Les profs</Link></li>
             <li><Link href="/orientation" className="hover:underline">L&apos;informatique, est-ce pour moi ?</Link></li>
             <li><Link href="/faq" className="hover:underline">Foire aux questions</Link></li>
+            <li><a href={STAGES} target="_blank" rel="noreferrer" className="hover:underline">Entreprises : offrir un stage</a></li>
           </ul>
         </div>
         <div>
