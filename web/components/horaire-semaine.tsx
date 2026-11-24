@@ -11,12 +11,15 @@ import { Button } from "@/components/ui/button";
 
 export type InfoCours = Record<string, { no: string; nom: string; url?: string }>;
 
+/** Titre de l'horaire imprimé seul, en pleine page (voir « Impression » dans globals.css) */
+export type Impression = { titre: string; details: (string | undefined)[] };
+
 const PIXELS_PAR_MINUTE = 1.1;
 // Espace en haut et en bas des colonnes : les heures sont centrées sur leur ligne et déborderaient sur l'en-tête.
 const MARGE = 12;
 
 // Horaire de la semaine d'un prof. Porté du composant WeeklySchedule du cours 5N6.
-export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours = {}, vide = "Aucun horaire publié pour l'instant." }: { plages: Plage[]; debut?: string; fin?: string; cours?: InfoCours; vide?: string }) {
+export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours = {}, vide = "Aucun horaire publié pour l'instant.", impression }: { plages: Plage[]; debut?: string; fin?: string; cours?: InfoCours; vide?: string; impression?: Impression }) {
   const maintenant = useMaintenant();
   const [types, setTypes] = useState<Set<TypePlage>>(new Set(["cours", "dispo", "centre-aide", "reunion", "autre"]));
 
@@ -30,7 +33,9 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
   const debutGrille = Math.floor(minDebut / 60) * 60;
   const finGrille = Math.ceil(maxFin / 60) * 60;
   const hauteur = (finGrille - debutGrille) * PIXELS_PAR_MINUTE + 2 * MARGE;
-  const y = (minutes: number) => MARGE + (minutes - debutGrille) * PIXELS_PAR_MINUTE;
+  // Par rapport à la hauteur de la colonne : à l'impression, la grille s'étire sur toute la page
+  const longueur = (minutes: number) => `(100% - ${2 * MARGE}px) * ${minutes / (finGrille - debutGrille)}`;
+  const y = (minutes: number) => `calc(${MARGE}px + ${longueur(minutes - debutGrille)})`;
   const heures = Array.from({ length: (finGrille - debutGrille) / 60 + 1 }, (_, i) => debutGrille + i * 60);
 
   const jourActuel = maintenant ? jourDeLaSemaine(maintenant) : null;
@@ -50,7 +55,17 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
   }
 
   return (
-    <div>
+    <div className={impression && "horaire-imprimable"}>
+      {impression && (
+        <>
+          {/* Sans marge, le navigateur n'ajoute ni date ni adresse ; la marge est dans .horaire-imprimable */}
+          <style>{"@page { size: letter portrait; margin: 0; }"}</style>
+          <div className="mb-3 hidden items-baseline justify-between gap-4 print:flex">
+            <span className="text-2xl font-bold">{impression.titre}</span>
+            <span className="text-base">{impression.details.filter(Boolean).join(" · ")}</span>
+          </div>
+        </>
+      )}
       <div className="no-print mb-3 flex flex-wrap items-center gap-2">
         {typesPresents.map((t) => (
           <button
@@ -68,16 +83,16 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
         </Button>
       </div>
 
-      <div className="overflow-x-auto rounded-lg border bg-card">
-        <div className="grid min-w-[640px]" style={{ gridTemplateColumns: `56px repeat(${JOURS_OUVRABLES.length}, 1fr)` }}>
+      <div className="horaire-cadre overflow-x-auto rounded-lg border bg-card">
+        <div className="grid min-w-[640px] print:min-w-0" style={{ gridTemplateColumns: `56px repeat(${JOURS_OUVRABLES.length}, 1fr)` }}>
           <div className="border-b" />
           {JOURS_OUVRABLES.map((j) => (
-            <div key={j} className={`border-b border-l px-2 py-2 text-center text-sm font-semibold ${j === jourActuel ? "bg-accent text-accent-foreground" : ""}`}>
+            <div key={j} className={`border-b border-l px-2 py-2 text-center text-sm font-semibold ${j === jourActuel ? "bg-accent text-accent-foreground print:bg-transparent print:text-inherit" : ""}`}>
               {LIBELLES_JOURS[j]}
             </div>
           ))}
 
-          <div className="relative" style={{ height: hauteur }}>
+          <div className="horaire-colonne relative" style={{ height: hauteur }}>
             {heures.map((h) => (
               <span key={h} className="absolute right-2 -translate-y-1/2 text-xs text-muted-foreground" style={{ top: y(h) }}>
                 {minutesEnHeure(h)}
@@ -86,12 +101,12 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
           </div>
 
           {JOURS_OUVRABLES.map((j) => (
-            <div key={j} className={`relative border-l ${j === jourActuel ? "bg-accent/30" : ""}`} style={{ height: hauteur }}>
+            <div key={j} className={`horaire-colonne relative border-l ${j === jourActuel ? "bg-accent/30 print:bg-transparent" : ""}`} style={{ height: hauteur }}>
               {heures.map((h) => (
                 <div key={h} className="absolute inset-x-0 border-t border-dashed border-border/70" style={{ top: y(h) }} />
               ))}
               {j === jourActuel && minutesActuelles !== null && minutesActuelles >= debutGrille && minutesActuelles <= finGrille && (
-                <div className="absolute inset-x-0 z-20 h-0.5 bg-cem-rouge" style={{ top: y(minutesActuelles) }} aria-label="Maintenant">
+                <div className="no-print absolute inset-x-0 z-20 h-0.5 bg-cem-rouge" style={{ top: y(minutesActuelles) }} aria-label="Maintenant">
                   <span className="absolute -left-1 -top-1 size-2.5 rounded-full bg-cem-rouge" />
                 </div>
               )}
@@ -106,8 +121,8 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
                       render={<div />}
                       className="absolute z-10 overflow-hidden break-words rounded-md hyphens-auto border-l-4 px-1.5 py-1 text-left text-xs shadow-sm transition hover:z-30 hover:shadow-md"
                       style={{
-                        top: y(p.debutMin) + 1,
-                        height: (p.finMin - p.debutMin) * PIXELS_PAR_MINUTE - 2,
+                        top: `calc(${y(p.debutMin)} + 1px)`,
+                        height: `calc(${longueur(p.finMin - p.debutMin)} - 2px)`,
                         left: `calc(${p.colonne * largeur}% + 2px)`,
                         width: `calc(${largeur}% - 4px)`,
                         background: couleurs.fond,

@@ -44,7 +44,7 @@ const SOUS_MENU =
 
 export function Entete({ index }: { index: ElementRecherche[] }) {
   const chemin = usePathname();
-  const actif = (href: string) => chemin === href || chemin.startsWith(`${href}/`);
+  const actif = (href: string) => chemin === href || chemin.startsWith(`${href}/`) || (href === "/maintenant" && chemin.startsWith("/locaux/")); // une page par labo
 
   return (
     <header className="sticky top-0 z-40 bg-cadre text-cadre-texte shadow-md">

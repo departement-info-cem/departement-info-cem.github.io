@@ -16,6 +16,7 @@ export function VueDirecte({ prof, vue, cours }: { prof: Prof; vue: "horaire" | 
   const garder = (no?: string) => !demande || !no || canonique(no) === canonique(demande);
   const plages = (prof.horaire?.plages ?? []).filter((p) => garder(p.cours));
   const evenements = (prof.calendrier ?? []).filter((e) => garder(e.cours));
+  const session = scolaire.sessions.find((s) => s.id === prof.session);
   const info = demande ? cours[demande] : undefined;
 
   return (
@@ -30,7 +31,7 @@ export function VueDirecte({ prof, vue, cours }: { prof: Prof; vue: "horaire" | 
       {vue === "horaire" ? (
         <>
           {prof.horaire?.prerempli && <HorairePrerempli />}
-          <HoraireSemaine plages={plages} debut={prof.horaire?.debut} fin={prof.horaire?.fin} cours={cours} />
+          <HoraireSemaine plages={plages} debut={prof.horaire?.debut} fin={prof.horaire?.fin} cours={cours} impression={{ titre: prof.nom, details: [prof.bureau && `Bureau ${prof.bureau}`, session?.nom, demande] }} />
         </>
       ) : (
         <CalendrierMois scolaire={scolaire} plages={plages} evenements={evenements} sessionId={prof.session} />

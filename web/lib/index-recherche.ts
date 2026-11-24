@@ -1,6 +1,7 @@
 import type { ElementRecherche } from "@/components/recherche-globale";
 import { SHAREPOINT } from "@/lib/raccourcis";
-import { catalogue, faq, profs, programmes } from "@/lib/donnees";
+import { catalogue, faq, laboratoires, profs, programmes } from "@/lib/donnees";
+import { normaliserLocal } from "@/lib/maintenant";
 
 const PAGES: ElementRecherche[] = [
   { type: "page", titre: "SharePoint du département", href: SHAREPOINT, motsCles: "profs documents teams" },
@@ -47,5 +48,6 @@ export function indexRecherche(): ElementRecherche[] {
     }),
     ...faq().map((q) => ({ type: "faq" as const, titre: q.question, sousTitre: q.categories.join(", "), href: "/faq", motsCles: q.reponse })),
     ...PAGES,
+    ...laboratoires().map((l) => ({ type: "page" as const, titre: `Laboratoire ${l.local}`, sousTitre: l.postes ? `${l.postes} postes` : undefined, href: `/locaux/${l.local}`, motsCles: `labo local horaire ${normaliserLocal(l.local)}` })),
   ];
 }
