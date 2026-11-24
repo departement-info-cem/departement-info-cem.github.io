@@ -7,9 +7,9 @@ import { chemin } from "@/lib/chemins";
 export const metadata: Metadata = { title: "Propositions de logo", robots: { index: false } };
 
 const PROPOSITIONS: { variante: VarianteLogo; nom: string; idee: string }[] = [
-  { variante: "binaire", nom: "A — Binaire", idee: "L'évolution de l'ancien logo : la colonne blanche avec le 0 et le 1, et une invite de commande >_ aux couleurs du cégep. C'est celle utilisée sur le site." },
-  { variante: "accolades", nom: "B — Accolades", idee: "Un « i » d'informatique entre deux accolades de code, simple et lisible même en tout petit." },
-  { variante: "pixels", nom: "C — Pixels", idee: "Le M de Montpetit dessiné en pixels ; les pixels verts tracent un V comme dans le symbole du cégep." },
+  { variante: "binaire", nom: "A. Binaire", idee: "L'évolution de l'ancien logo : la colonne blanche avec le 0 et le 1, et une invite de commande >_ aux couleurs du cégep. C'est celle utilisée sur le site." },
+  { variante: "accolades", nom: "B. Accolades", idee: "Un « i » d'informatique entre deux accolades de code, simple et lisible même en tout petit." },
+  { variante: "pixels", nom: "C. Pixels", idee: "Le M de Montpetit dessiné en pixels ; les pixels verts tracent un V comme dans le symbole du cégep." },
 ];
 
 export default function PageLogo() {

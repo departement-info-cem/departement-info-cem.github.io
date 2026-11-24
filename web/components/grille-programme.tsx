@@ -81,7 +81,7 @@ export function GrilleProgramme({
           <div className="text-sm text-muted-foreground">cours{nbChoix ? ` (dont ${nbChoix} au choix)` : ""}</div>
         </div>
         <div className="rounded-lg border bg-card p-3">
-          <div className="text-2xl font-bold text-primary">{total ? `${total} h` : "—"}</div>
+          <div className="text-2xl font-bold text-primary">{total ? `${total} h` : "-"}</div>
           <div className="text-sm text-muted-foreground">heures de cours{programme.type === "dec-bac" ? " au cégep" : ""}</div>
         </div>
         <div className="rounded-lg border bg-card p-3">

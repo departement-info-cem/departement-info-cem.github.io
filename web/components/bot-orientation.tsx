@@ -60,7 +60,7 @@ export function BotOrientation({ bot, compact = false }: { bot: Bot; compact?: b
         <span className="size-3 rounded-full bg-cem-rouge" />
         <span className="size-3 rounded-full bg-cem-jaune" />
         <span className="size-3 rounded-full bg-cem-vert" />
-        <span className="ml-2 font-mono text-xs text-cem-gris-2">orientation.sh — est-ce que l&apos;info est pour toi ?</span>
+        <span className="ml-2 font-mono text-xs text-cem-gris-2">orientation.sh : est-ce que l&apos;info est pour toi ?</span>
       </div>
       <div className="h-1 bg-white/10" role="progressbar" aria-label="Progression" aria-valuenow={progression} aria-valuemin={0} aria-valuemax={100}>
         <div className="h-full bg-cem-vert transition-all duration-500" style={{ width: `${progression}%` }} />
@@ -100,7 +100,7 @@ export function BotOrientation({ bot, compact = false }: { bot: Bot; compact?: b
 
         {resultat && (
           <div className="space-y-3 rounded-lg border border-cem-vert/40 bg-white/5 p-4 font-sans">
-            <p className="font-mono text-xs text-cem-vert">Diagnostic terminé — compatibilité {resultat.compatibilite} %</p>
+            <p className="font-mono text-xs text-cem-vert">Diagnostic terminé. Compatibilité : {resultat.compatibilite} %</p>
             <div className="h-2 overflow-hidden rounded bg-white/10">
               <div className="h-full bg-cem-vert transition-all duration-1000" style={{ width: `${resultat.compatibilite}%` }} />
             </div>

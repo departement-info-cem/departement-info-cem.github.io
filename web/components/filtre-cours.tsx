@@ -23,7 +23,7 @@ export function VueDirecte({ prof, vue, cours }: { prof: Prof; vue: "horaire" | 
       {demande && (
         <p className="mb-3 text-sm">
           Seulement le cours <strong>{demande}</strong>
-          {info && ` — ${info.nom}`}
+          {info && ` (${info.nom})`}
           {vue === "horaire" && ", avec les disponibilités"}.
         </p>
       )}

@@ -72,7 +72,7 @@ async function main() {
       console.log(`✅ ${e.annee} (révisé le ${e.revise ?? "?"}) : ${e.journees.length} journées`);
       e.avertissements.forEach((a) => console.log(`   ℹ️  ${a}`));
     } catch (e) {
-      avertir(`PDF illisible, ignoré : ${url} — ${(e as Error).message}`);
+      avertir(`PDF illisible, ignoré : ${url} (${(e as Error).message})`);
     }
   }
   if (!extraits.length) throw new Error("aucun PDF n'a pu être lu");

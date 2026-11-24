@@ -8,39 +8,39 @@ ordre: 3
 resume: "Un DEC du Cégep Édouard-Montpetit et un baccalauréat de l’Université de Sherbrooke en 5 ans : des cours « en double » disparaissent et tu fais 3 sessions par an."
 lien: https://www.usherbrooke.ca/longueuil/campus/acces/
 sessions:
-  - titre: Session 1 — Année 1, Automne
+  - titre: "Session 1 : année 1, automne"
     cours:
       - 420-1B3-EM
       - 420-1X6-EM
       - 420-1P6-EM
       - 420-1C5-EM
       - 420-2D5-EM
-  - titre: Session 2 — Année 1, Hiver
+  - titre: "Session 2 : année 1, hiver"
     cours:
       - 201-924-EM
       - 420-2P6-EM
       - 420-2W6-EM
-  - titre: Session 3 — Année 1, Été
+  - titre: "Session 3 : année 1, été"
     cours:
       - 420-3W6-EM
     note: Les cours d’été durent 5 semaines, de la fin mai au début juillet.
-  - titre: Session 4 — Année 2, Automne
+  - titre: "Session 4 : année 2, automne"
     cours:
       - 350-944-EM
       - 420-3M5-EM
       - 420-4W6-EM
       - 582-914-EM
-  - titre: Session 5 — Année 2, Hiver
+  - titre: "Session 5 : année 2, hiver"
     cours:
       - 420-4D6-EM
       - 420-4M6-EM
       - 420-5W6-EM
-  - titre: Session 6 — Année 2, Été
+  - titre: "Session 6 : année 2, été"
     cours:
       - 420-5M6-EM
       - MAT 099i
     note: Fin des cours au Cégep Édouard-Montpetit. La suite se donne au campus Longueuil de l’Université de Sherbrooke (ou au campus de Sherbrooke sur demande). Le DEC sera complet après la session 9.
-  - titre: Session 7 — Année 3, Automne
+  - titre: "Session 7 : année 3, automne"
     cours:
       - IFT 203
       - IFT 209
@@ -48,10 +48,10 @@ sessions:
       - MAT 115
       - MAT 193
       - MAT 099f
-  - titre: Session 8 — Année 3, Hiver
+  - titre: "Session 8 : année 3, hiver"
     cours:
       - 420-6GF-EM
-  - titre: Session 9 — Année 3, Été
+  - titre: "Session 9 : année 3, été"
     cours:
       - IFT 436
       - IFT 585
@@ -59,27 +59,27 @@ sessions:
       - IGL 601
       - IFT 595
       - 420-6P3-EM
-  - titre: Session 10 — Année 4, Automne
+  - titre: "Session 10 : année 4, automne"
     cours:
       - nom: Stage 2
         ecole: UdeS
         tags:
           - pro
     note: "Félicitations, tu es titulaire d’un DEC en informatique ! Si tu t’arrêtes ici, tu peux aussi obtenir un certificat en technologies de l’information de l’UdeS. Cours universitaires qui remplacent des cours collégiaux : 420-3U4 (IFT 606 + IFT 585), 420-4E4 (IGL 601), 420-4M3 (IFT 203 + IGL 601), 420-5Y5 (IGL 601 + IFT 595), 420-5L4 (IFT 203), 420-6P8 (IFT 595)."
-  - titre: Session 11 — Année 4, Hiver
+  - titre: "Session 11 : année 4, hiver"
     cours:
       - IFT 232
       - IFT 313
       - IFT 615
       - IMN 428
       - STT 418
-  - titre: Session 12 — Année 4, Été
+  - titre: "Session 12 : année 4, été"
     cours:
       - nom: Stage 3
         ecole: UdeS
         tags:
           - pro
-  - titre: Session 13 — Année 5, Automne
+  - titre: "Session 13 : année 5, automne"
     cours:
       - IFT 320
       - IFT 359
@@ -89,7 +89,7 @@ sessions:
         ecole: UdeS
       - nom: Cours au choix
         ecole: UdeS
-  - titre: Session 14 — Année 5, Hiver
+  - titre: "Session 14 : année 5, hiver"
     cours:
       - IFT 630
       - nom: Cours au choix
