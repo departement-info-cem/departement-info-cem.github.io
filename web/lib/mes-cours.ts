@@ -121,3 +121,43 @@ export function garderMonGroupe<T extends { cours?: string; groupe?: string }>(l
     return Boolean(m) && (!x.groupe || !m!.groupe || x.groupe === m!.groupe);
   });
 }
+
+// ---------- Liens avec des cours : /react/centre-aide/?cours=SN1-1050,5N6-1020,3W6 ----------
+
+/** Paramètre d'URL qui donne une liste de cours, pour montrer une page « comme si » on suivait ces cours. */
+export const PARAM_COURS = "cours";
+
+/**
+ * Lit « SN1-1050,5N6-1020,3W6 » : un sigle court ou un numéro complet (420-5N6-EM), et le groupe après un tiret
+ * ou un deux-points. Un ancien numéro donne le nouveau. Le prof vient du groupe ; sans groupe, le cours est seul.
+ */
+export function lireParamCours(texte: string, donnees: Pick<DonneesMesCours, "groupes" | "cours">): { cours: MonCours[]; inconnus: string[] } {
+  const parSigle = new Map<string, string>();
+  for (const [no, info] of Object.entries(donnees.cours)) {
+    parSigle.set(no.toUpperCase(), info.no.toUpperCase());
+    if (!parSigle.has(court(no).toUpperCase()) || no === info.no) parSigle.set(court(no).toUpperCase(), info.no.toUpperCase());
+  }
+  let resultat: MonCours[] = [];
+  const inconnus: string[] = [];
+  for (const brut of texte.split(/[,;\s]+/).filter(Boolean)) {
+    const m = /^(.+?)(?:[-:](\d{3,5}))?$/.exec(brut.trim().toUpperCase())!;
+    const no = parSigle.get(m[1]);
+    if (!no) {
+      inconnus.push(brut);
+      continue;
+    }
+    if (!m[2]) {
+      resultat = basculer(resultat, { cours: no });
+      continue;
+    }
+    const g = donnees.groupes[no]?.find((x) => x.groupe === m[2]);
+    if (g) resultat = basculer(resultat, choixDe(g));
+    else inconnus.push(brut);
+  }
+  return { cours: resultat, inconnus };
+}
+
+/** L'inverse : mes cours en « SN1-1050,5M6-1020,3W6 », à ajouter à n'importe quelle adresse du site. */
+export function ecrireParamCours(mesCours: MonCours[]): string {
+  return mesCours.map((m) => `${court(m.cours)}${m.groupe ? `-${m.groupe}` : ""}`).join(",");
+}

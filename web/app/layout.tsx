@@ -3,6 +3,7 @@ import { JetBrains_Mono, Montserrat } from "next/font/google";
 import "./globals.css";
 import { Bandeau } from "@/components/bandeau";
 import { Entete } from "@/components/entete";
+import { BandeauApercu } from "@/components/bandeau-apercu";
 import { PiedDePage } from "@/components/pied-de-page";
 import { ThemeProvider } from "@/app/_contexts/theme-context";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               Aller au contenu
             </a>
             <Entete index={indexRecherche()} />
+            <BandeauApercu />
             <main id="contenu" className="flex-1">
               {children}
             </main>

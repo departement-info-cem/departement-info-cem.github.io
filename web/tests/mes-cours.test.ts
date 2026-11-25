@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { donneesMesCours } from "@/lib/donnees";
-import { aVenir, basculer, garderMonGroupe, court, estPerime, evenementsPourMoi, libelle, lienAvecMoi, nettoyer, trierPourMoi, type InfoProfMesCours, type MonCours } from "@/lib/mes-cours";
+import { aVenir, basculer, garderMonGroupe, court, ecrireParamCours, estPerime, lireParamCours, evenementsPourMoi, libelle, lienAvecMoi, nettoyer, trierPourMoi, type InfoProfMesCours, type MonCours } from "@/lib/mes-cours";
 import { construireCalendrier } from "@/lib/calendrier";
 import { calendrierScolaire } from "@/lib/donnees";
 import { dateDepuisIso } from "@/lib/temps";
@@ -108,4 +108,35 @@ describe("calendrier d'un prof vu par son étudiant", () => {
     expect(garderMonGroupe(dates, [{ cours: "420-5M6-EM", prof: "joris.deguet", groupe: "1030" }], canonique).map((d) => d.titre)).toEqual(["Absence"]);
   });
   it("groupe inconnu : tous les groupes de mon cours", () => expect(garderMonGroupe(dates, [{ cours: "420-SN1-RE", prof: "joris.deguet" }], canonique)).toHaveLength(4));
+});
+
+describe("lien avec des cours (?cours=)", () => {
+  const donnees = {
+    cours: {
+      "420-5M6-EM": { no: "420-5M6-EM", nom: "Applications mobiles avancées" },
+      "420-5N6-EM": { no: "420-5M6-EM", nom: "Applications mobiles avancées" },
+      "420-SN1-RE": { no: "420-SN1-RE", nom: "Programmation en sciences" },
+      "420-SN1-EM": { no: "420-SN1-RE", nom: "Programmation en sciences" },
+      "420-3W6-EM": { no: "420-3W6-EM", nom: "Programmation web transactionnelle" },
+    },
+    groupes: {
+      "420-SN1-RE": [{ cours: "420-SN1-RE", prof: "joris.deguet", groupe: "1050", session: "A2026", seances: [] }],
+      "420-5M6-EM": [{ cours: "420-5M6-EM", prof: "po.brillant", groupe: "1010", session: "A2026", seances: [] }],
+    },
+  };
+  it("lit les sigles, les anciens numéros, les groupes et le prof", () =>
+    expect(lireParamCours("sn1-1050, 5N6:1010,420-3W6-EM", donnees)).toEqual({
+      cours: [
+        { cours: "420-SN1-RE", prof: "joris.deguet", groupe: "1050", session: "A2026" },
+        { cours: "420-5M6-EM", prof: "po.brillant", groupe: "1010", session: "A2026" },
+        { cours: "420-3W6-EM" },
+      ],
+      inconnus: [],
+    }));
+  it("signale ce qu'il ne trouve pas", () => expect(lireParamCours("XYZ,SN1-9999,SN1", donnees)).toEqual({ cours: [{ cours: "420-SN1-RE" }], inconnus: ["XYZ", "SN1-9999"] }));
+  it("écrit et relit la même liste", () => {
+    const cours = lireParamCours("SN1-1050,3W6", donnees).cours;
+    expect(ecrireParamCours(cours)).toBe("SN1-1050,3W6");
+    expect(lireParamCours(ecrireParamCours(cours), donnees).cours).toEqual(cours);
+  });
 });
