@@ -28,7 +28,7 @@ export default async function PageLabo({ params }: PageProps<"/locaux/[local]">)
 
   return (
     <>
-      <TitrePage titre={`Laboratoire ${labo.local}`} sousTitre={[labo.nom, labo.postes && `${labo.postes} postes`, labo.description].filter(Boolean).join(" · ")}>
+      <TitrePage titre={`Laboratoire ${labo.local}`} sousTitre={[labo.centreAide && "★ Centre d'aide", labo.nom, labo.postes && `${labo.postes} postes`, labo.description].filter(Boolean).join(" · ")}>
         <Link href="/maintenant" className="mt-2 inline-block text-sm text-primary underline">
           Tous les locaux
         </Link>

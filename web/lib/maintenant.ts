@@ -107,6 +107,13 @@ export function occupationsLocal(local: string, session: string, labo: Laboratoi
   return [...resultat.values()];
 }
 
+/** Présences au centre d'aide dans un local. À part des occupations : le local reste ouvert à tous. */
+export function presencesCentreAide(local: string, session: string, profs: ProfHoraire[]): Plage[] {
+  return profs
+    .filter((p) => p.session === session)
+    .flatMap((p) => p.plages.filter((x) => x.type === "centre-aide" && x.local && normaliserLocal(x.local) === normaliserLocal(local)).map((x) => ({ ...x, titre: p.nom, local: undefined })));
+}
+
 export type EtatLabo = { etat: "libre" | "occupe" | "inconnu"; occupation?: Occupation; jusqua?: string; raison?: string };
 
 export function etatLabo(labo: Laboratoire, profs: ProfHoraire[], scolaire: CalendrierScolaire, date: Date): EtatLabo {

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { aidants, aidantsHorsCentre, horaireCentreAide } from "@/lib/centre-aide";
 import { donneesMesCours } from "@/lib/donnees";
+import { occupationsLocal, presencesCentreAide } from "@/lib/maintenant";
 import type { InfoProfMesCours } from "@/lib/mes-cours";
 import { dateDepuisIso } from "@/lib/temps";
 import { validerYamlProf } from "@/lib/validation";
@@ -34,4 +35,14 @@ describe("centre d'aide", () => {
     expect(erreurs("[1P6]")).toContain("420-");
     expect(erreurs("[420-4E4-EM, 360-4A3-EM]")).toBe("");
   });
+});
+
+describe("présences dans un local", () => {
+  const p = { id: "a.b", nom: "A B", session: "A2026", plages: [{ jour: "lundi", debut: "11:00", fin: "12:00", type: "centre-aide" as const, local: "D0008" }, { jour: "mardi", debut: "11:00", fin: "12:00", type: "dispo" as const, local: "D-0008" }] };
+  it("garde le centre d'aide de ce local et de cette session, avec le nom du prof", () => {
+    expect(presencesCentreAide("D-0008", "A2026", [p])).toMatchObject([{ jour: "lundi", titre: "A B", type: "centre-aide" }]);
+    expect(presencesCentreAide("D-0007", "A2026", [p])).toEqual([]);
+    expect(presencesCentreAide("D-0008", "H2027", [p])).toEqual([]);
+  });
+  it("ne rend pas le local occupé", () => expect(occupationsLocal("D-0008", "A2026", undefined, [p])).toEqual([]));
 });

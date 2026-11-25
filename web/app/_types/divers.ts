@@ -118,6 +118,8 @@ export const laboratoireSchema = z
     nom: z.string().optional(),
     postes: z.number().optional(),
     description: z.string().optional(),
+    /** true pour le local du centre d'aide (étoile dans la liste des labos) */
+    centreAide: z.boolean().optional(),
     /** session de l'horaire ci-dessous (ex. A2026) */
     session: z.string().optional(),
     /** true si toutes les occupations sont inscrites : seulement alors, on ose dire « libre » */

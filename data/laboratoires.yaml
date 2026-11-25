@@ -10,7 +10,8 @@
 # (cadres rouges), on coupe au milieu : 08:10-10:30 puis 10:30-13:00. Sinon on garde la réservation de 3 h.
 # « horsCalendrier: true » : groupe du soir (AEC) qui ne suit pas le calendrier scolaire (JR, relâche, horaire modifié...).
 # « complet: true » dit que toutes les occupations de la session sont connues.
-# Les cours inscrits dans les fiches des profs (data/profs) sont ajoutés automatiquement.
+# « centreAide: true » : le local du centre d'aide, marqué d'une étoile.
+# Les cours et les plages « centre-aide » inscrits dans les fiches des profs (data/profs) sont ajoutés automatiquement.
 
 - local: D-0003
   postes: 24
@@ -59,6 +60,7 @@
 
 - local: D-0008
   postes: 24
+  centreAide: true
   session: A2026
   complet: true
   ouverture: "07:00"
