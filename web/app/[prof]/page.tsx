@@ -7,6 +7,7 @@ import { lienEdition, photo } from "@/lib/chemins";
 import { AvatarProf } from "@/components/carte-prof";
 import { SessionPerimee } from "@/components/session-perimee";
 import { StatutProf } from "@/components/statut-prof";
+import { BoutonChoixGroupe } from "@/components/choix-groupe";
 import { HorairePrerempli } from "@/components/horaire-prerempli";
 import { HoraireSemaine } from "@/components/horaire-semaine";
 import { CalendrierMois } from "@/components/calendrier-mois";
@@ -53,6 +54,7 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
             <SessionPerimee session={p.session} />
             {p.presentation && <p className="max-w-2xl text-muted-foreground">{p.presentation}</p>}
             <div className="flex flex-wrap gap-2 pt-2">
+              <BoutonChoixGroupe prof={p.id} />
               <a href={`mailto:${p.courriel}@cegepmontpetit.ca`} className={bouton({ size: "sm" })}>
                 <Mail className="size-4" /> {p.courriel}@cegepmontpetit.ca
               </a>

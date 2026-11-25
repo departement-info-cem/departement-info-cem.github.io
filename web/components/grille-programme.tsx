@@ -6,6 +6,7 @@ import type { CoursAffiche, Programme } from "@/app/_types/programme";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { IconeTag, LIBELLES_TAGS } from "@/components/icone-tag";
 import { totalHeures } from "@/lib/programmes";
+import { ChoixGroupeDeplie } from "@/components/choix-groupe";
 
 export type ProfsParCours = Record<string, { id: string; nom: string }[]>;
 
@@ -260,6 +261,7 @@ export function GrilleProgramme({
               </ul>
             </div>
           ) : null}
+          {choisi?.no && choisi.departement && <ChoixGroupeDeplie cours={choisi.no.toUpperCase()} />}
           {choisi?.url && (
             <a href={choisi.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline">
               Site du cours <ExternalLink className="size-4" />

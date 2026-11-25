@@ -39,9 +39,14 @@ const STYLES: Record<string, string> = {
 type Filtre = "scolaire" | "seance" | "prof";
 const LIBELLES_FILTRES: Record<Filtre, string> = { prof: "Dates du prof", seance: "Séances de cours", scolaire: "Calendrier du cégep" };
 
+const LIBELLES_EVALUATION = { sommative: "Sommative", formative: "Formative" };
+
+/** Une évaluation sommative est encadrée : c'est la date à ne pas manquer. */
+const encadre = (e: EvenementJour) => (e.evaluation === "sommative" ? "ring-2 ring-cem-marine ring-inset dark:ring-white" : "");
+
 function Pastille({ e, compacte }: { e: EvenementJour; compacte?: boolean }) {
-  const texte = e.source === "seance" ? `${e.heure?.split("–")[0]} ${e.cours ?? e.titre}${e.groupe ? ` gr.${e.groupe}` : ""}` : `${e.code ? `${e.code} · ` : e.type === "deplacement" && e.heure ? `${e.heure.split("–")[0]} ` : ""}${e.titre}`;
-  return <div title={e.annulee ? `${texte} : ${e.annulee}` : texte} className={`truncate rounded ${e.annulee ? "line-through opacity-50" : ""} px-1 py-0.5 text-[11px] leading-tight ${STYLES[e.type] ?? STYLES.autre} ${compacte ? "" : "text-xs"}`}>{texte}</div>;
+  const texte = (e.evaluation ? `${e.evaluation === "sommative" ? "S" : "F"} · ` : "") + e.source === "seance" ? `${e.heure?.split("–")[0]} ${e.cours ?? e.titre}${e.groupe ? ` gr.${e.groupe}` : ""}` : `${e.code ? `${e.code} · ` : e.type === "deplacement" && e.heure ? `${e.heure.split("–")[0]} ` : ""}${e.titre}`;
+  return <div title={e.annulee ? `${texte} : ${e.annulee}` : texte} className={`truncate rounded ${encadre(e)} ${e.annulee ? "line-through opacity-50" : ""} px-1 py-0.5 text-[11px] leading-tight ${STYLES[e.type] ?? STYLES.autre} ${compacte ? "" : "text-xs"}`}>{texte}</div>;
 }
 
 export function CalendrierMois({
@@ -130,8 +135,9 @@ export function CalendrierMois({
                 {filtrer(j)
                   .filter((e) => e.source !== "seance")
                   .map((e, i) => (
-                    <span key={i} className={`rounded px-2 py-0.5 text-sm ${STYLES[e.type] ?? STYLES.autre}`}>
+                    <span key={i} className={`rounded px-2 py-0.5 text-sm ${encadre(e)} ${STYLES[e.type] ?? STYLES.autre}`}>
                       {e.code && <strong className="mr-1">{e.code}</strong>}
+                      {e.evaluation && <strong className="mr-1">{LIBELLES_EVALUATION[e.evaluation]} ·</strong>}
                       {e.titre}
                       {e.heure && ` · ${e.heure}`}
                       {e.local && ` · ${e.local}`}
@@ -202,9 +208,10 @@ export function CalendrierMois({
           </DialogDescription>
           <ul className="space-y-2">
             {filtrer(jourChoisi ?? undefined).map((e, i) => (
-              <li key={i} className={`rounded-md p-2 ${STYLES[e.type] ?? STYLES.autre}`}>
+              <li key={i} className={`rounded-md p-2 ${encadre(e)} ${STYLES[e.type] ?? STYLES.autre}`}>
                 <div className={`font-semibold ${e.annulee ? "line-through" : ""}`}>
                   {e.code && `${e.code} · `}
+                  {e.evaluation && `Évaluation ${e.evaluation} · `}
                   {e.titre}
                 </div>
                 {e.annulee && <div className="text-sm font-bold uppercase">{e.annulee[0].toUpperCase() + e.annulee.slice(1)}</div>}

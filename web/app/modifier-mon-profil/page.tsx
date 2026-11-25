@@ -107,7 +107,8 @@ https://info.cegepmontpetit.ca/react/prenom.nom/calendrier/?cours=420-5N6-EM`}</
             <div className="rounded-lg border bg-card p-4">
               <h3 className="mb-2 font-bold">Une date du calendrier</h3>
               <pre className="overflow-x-auto rounded bg-muted p-2 font-mono text-xs">{`- { date: 2027-02-15, titre: Remise TP1,
-    cours: 420-1P6-EM, type: remise }
+    cours: 420-1P6-EM, type: remise,
+    evaluation: sommative }
 - { date: 2027-04-05, au: 2027-04-06,
     titre: Colloque, type: absence }
 - { date: 2027-04-07, remplace: 2027-04-05,
@@ -116,6 +117,7 @@ https://info.cegepmontpetit.ca/react/prenom.nom/calendrier/?cours=420-5N6-EM`}</
                 type : <code>remise</code>, <code>examen</code>, <code>cours</code>, <code>absence</code>, <code>deplacement</code>, <code>activite</code> ou <code>autre</code>.
               </p>
               <p className="mt-2 text-muted-foreground">
+                <strong>evaluation</strong> : <code>sommative</code> ou <code>formative</code>. Avec <code>cours</code> (et <code>groupe</code> au besoin), la date paraît dans le calendrier et les rappels de tes étudiants (page Mes cours), tout comme tes absences et tes cours déplacés.{" "}
                 <strong>absence</strong> annule les cours et les dispos de ces jours. <strong>deplacement</strong> reprend le cours du jour <code>remplace</code> à <code>date</code>, souvent une journée JR (même heure et même local, sauf si tu ajoutes <code>debut</code>, <code>fin</code>, <code>local</code>).
               </p>
             </div>

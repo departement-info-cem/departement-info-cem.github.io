@@ -1,12 +1,14 @@
 "use client";
 import { useRef } from "react";
 import Link from "next/link";
-import { CalendarOff, Clock, DoorOpen, Pause, Play, UserCheck } from "lucide-react";
+import { CalendarOff, Clock, DoorOpen, Pause, Play, Star, UserCheck } from "lucide-react";
 import type { Laboratoire } from "@/app/_types/divers";
 import { useAnimationsReduites } from "@/app/_hooks/use-animations-reduites";
 import { useMaintenant } from "@/app/_hooks/use-maintenant";
 import { useStockageLocal } from "@/app/_hooks/use-stockage-local";
 import { useScolaire } from "@/app/_contexts/scolaire-context";
+import { useMesCours } from "@/app/_contexts/mes-cours-context";
+import { court, trierPourMoi, type Lien } from "@/lib/mes-cours";
 import { resumeMaintenant, type ProfHoraire, type ResumeMaintenant } from "@/lib/maintenant";
 
 // Bandeau défilant fixé en bas de l'écran : seulement les profs disponibles, les locaux libres et les heures des labos.
@@ -20,7 +22,10 @@ export function Bandeau({ profs, labos }: { profs: ProfHoraire[]; labos: Laborat
   const [choix, setChoix] = useStockageLocal<boolean | null>("bandeau-defile", null);
   const defile = choix ?? !animationsReduites;
   const zone = useRef<HTMLDivElement>(null);
-  const resume = maintenant ? resumeMaintenant(profs, labos, scolaire, maintenant) : null;
+  const { lien } = useMesCours();
+  const calcul = maintenant ? resumeMaintenant(profs, labos, scolaire, maintenant) : null;
+  // Mes profs et ceux de mes cours en tête (« Mes cours »)
+  const resume = calcul && { ...calcul, dispos: trierPourMoi(calcul.dispos, ({ p }) => lien(p.id)) };
   // Rien à montrer (hors des heures de cours, hors session, fin de semaine, congé) : pas de bandeau du tout.
   // Avant de connaître l'heure (rendu statique), on ne l'affiche pas non plus, pour qu'il n'apparaisse pas pour rien.
   if (!resume || (!resume.dispos.length && !resume.libres.length && !resume.prochainLibre)) return null;
@@ -42,10 +47,10 @@ export function Bandeau({ profs, labos }: { profs: ProfHoraire[]; labos: Laborat
       </Link>
       <div ref={zone} className={`bandeau min-w-0 flex-1 ${defile ? "" : animationsReduites ? "bandeau-fixe" : "bandeau-pause"}`}>
         <div className="bandeau-piste" style={{ animationDuration: `${duree}s` }}>
-          <Contenu resume={resume} />
+          <Contenu resume={resume} lien={lien} />
           {/* La copie assure un défilement sans trou ; elle est cachée aux lecteurs d'écran et au clavier */}
           <div className="bandeau-copie" aria-hidden inert>
-            <Contenu resume={resume} />
+            <Contenu resume={resume} lien={lien} />
           </div>
         </div>
       </div>
@@ -56,7 +61,7 @@ export function Bandeau({ profs, labos }: { profs: ProfHoraire[]; labos: Laborat
   );
 }
 
-function Contenu({ resume }: { resume: ResumeMaintenant }) {
+function Contenu({ resume, lien }: { resume: ResumeMaintenant; lien: (id: string) => Lien }) {
   const { dispos, libres, prochainLibre, heures, raison } = resume;
   return (
     <ul className="bandeau-liste">
@@ -77,14 +82,19 @@ function Contenu({ resume }: { resume: ResumeMaintenant }) {
           <UserCheck className="size-4" /> Profs disponibles
         </li>
       )}
-      {dispos.map(({ p, e }) => (
+      {dispos.map(({ p, e }) => {
+        const l = lien(p.id);
+        return (
         <li key={p.id}>
           <Link href={`/${p.id}`} className="hover:underline">
-            <strong>{p.nom}</strong> · {e.local ?? p.bureau ?? "local à confirmer"}
+            {l.niveau === "mon-prof" && <Star className="size-3.5 fill-cem-jaune text-cem-jaune" aria-label="Ton prof" />}
+            <strong>{p.nom}</strong>
+            {l.niveau === "meme-cours" && <span className="text-cem-gris-2"> ({l.cours.map(court).join(", ")})</span>} · {e.local ?? p.bureau ?? "local à confirmer"}
             {e.centreAide && " (centre d'aide)"} <span className="text-cem-gris-2">jusqu&apos;à {e.fin}</span>
           </Link>
         </li>
-      ))}
+        );
+      })}
 
       {libres.length > 0 && (
         <li className="font-bold text-cem-vert">

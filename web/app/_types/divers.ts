@@ -102,6 +102,9 @@ export const logicielsSchema = z.array(
       lien: z.url(),
       bouton: z.string(),
       vedette: z.boolean().default(false),
+      /** cours où il sert : numéros, ou tags des cours de data/cours.yaml (os, reseau, web...) */
+      cours: z.array(z.string()).optional(),
+      tags: z.array(z.string()).optional(),
     })
     .strict(),
 );

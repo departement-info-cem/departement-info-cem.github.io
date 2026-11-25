@@ -34,7 +34,36 @@ horaire:
 # ---------- Calendrier : tes dates à toi (remises, examens, absences...) ----------
 # Les congés et journées pédagogiques du cégep sont ajoutés automatiquement.
 # type : remise, examen, cours, absence, deplacement, activite ou autre
-calendrier: []
+calendrier:
+  # 420-SN1 : évaluations reprises du site du cours (sidebars.js du dépôt 420-SN1), une ligne par groupe
+  - { date: 2026-09-29, titre: "TP1 (15 %)", cours: 420-SN1-RE, groupe: 1050, type: remise, evaluation: sommative }
+  - { date: 2026-09-29, titre: "TP1 (15 %)", cours: 420-SN1-RE, groupe: 1060, type: remise, evaluation: sommative }
+  - { date: 2026-10-02, titre: "TP1 (15 %)", cours: 420-SN1-RE, groupe: 1070, type: remise, evaluation: sommative }
+  - { date: 2026-10-02, titre: "TP1 (15 %)", cours: 420-SN1-RE, groupe: 1080, type: remise, evaluation: sommative }
+  - { date: 2026-10-20, titre: "Examen intra formatif", cours: 420-SN1-RE, groupe: 1050, type: examen, evaluation: formative }
+  - { date: 2026-10-20, titre: "Examen intra formatif", cours: 420-SN1-RE, groupe: 1060, type: examen, evaluation: formative }
+  - { date: 2026-10-09, titre: "Examen intra formatif", cours: 420-SN1-RE, groupe: 1070, type: examen, evaluation: formative }
+  - { date: 2026-10-09, titre: "Examen intra formatif", cours: 420-SN1-RE, groupe: 1080, type: examen, evaluation: formative }
+  - { date: 2026-10-27, titre: "Examen intra (20 %)", cours: 420-SN1-RE, groupe: 1050, type: examen, evaluation: sommative }
+  - { date: 2026-10-27, titre: "Examen intra (20 %)", cours: 420-SN1-RE, groupe: 1060, type: examen, evaluation: sommative }
+  - { date: 2026-10-23, titre: "Examen intra (20 %)", cours: 420-SN1-RE, groupe: 1070, type: examen, evaluation: sommative }
+  - { date: 2026-10-23, titre: "Examen intra (20 %)", cours: 420-SN1-RE, groupe: 1080, type: examen, evaluation: sommative }
+  - { date: 2026-11-24, titre: "Remise partielle TP2 (10 %)", cours: 420-SN1-RE, groupe: 1050, type: remise, evaluation: sommative }
+  - { date: 2026-11-24, titre: "Remise partielle TP2 (10 %)", cours: 420-SN1-RE, groupe: 1060, type: remise, evaluation: sommative }
+  - { date: 2026-11-20, titre: "Remise partielle TP2 (10 %)", cours: 420-SN1-RE, groupe: 1070, type: remise, evaluation: sommative }
+  - { date: 2026-11-20, titre: "Remise partielle TP2 (10 %)", cours: 420-SN1-RE, groupe: 1080, type: remise, evaluation: sommative }
+  - { date: 2026-12-01, titre: "Examen final formatif", cours: 420-SN1-RE, groupe: 1050, type: examen, evaluation: formative }
+  - { date: 2026-12-01, titre: "Examen final formatif", cours: 420-SN1-RE, groupe: 1060, type: examen, evaluation: formative }
+  - { date: 2026-11-27, titre: "Examen final formatif", cours: 420-SN1-RE, groupe: 1070, type: examen, evaluation: formative }
+  - { date: 2026-11-27, titre: "Examen final formatif", cours: 420-SN1-RE, groupe: 1080, type: examen, evaluation: formative }
+  - { date: 2026-12-08, titre: "Examen final (30 %)", cours: 420-SN1-RE, groupe: 1050, type: examen, evaluation: sommative }
+  - { date: 2026-12-08, titre: "Examen final (30 %)", cours: 420-SN1-RE, groupe: 1060, type: examen, evaluation: sommative }
+  - { date: 2026-12-04, titre: "Examen final (30 %)", cours: 420-SN1-RE, groupe: 1070, type: examen, evaluation: sommative }
+  - { date: 2026-12-04, titre: "Examen final (30 %)", cours: 420-SN1-RE, groupe: 1080, type: examen, evaluation: sommative }
+  - { date: 2026-12-22, titre: "Remise finale TP2 (15 %)", cours: 420-SN1-RE, groupe: 1050, type: remise, evaluation: sommative }
+  - { date: 2026-12-22, titre: "Remise finale TP2 (15 %)", cours: 420-SN1-RE, groupe: 1060, type: remise, evaluation: sommative }
+  - { date: 2026-12-11, titre: "Remise finale TP2 (15 %)", cours: 420-SN1-RE, groupe: 1070, type: remise, evaluation: sommative }
+  - { date: 2026-12-11, titre: "Remise finale TP2 (15 %)", cours: 420-SN1-RE, groupe: 1080, type: remise, evaluation: sommative }
 #  - { date: 2026-10-20, titre: Examen intra, cours: 420-5N6-EM, type: examen }
 #  - { date: 2026-11-03, au: 2026-11-06, titre: Absent (colloque), type: absence }
 #  - { date: 2026-12-10, remplace: 2026-12-04, type: deplacement, cours: 420-SN1-RE, groupe: 1070 }   # cours repris en JR

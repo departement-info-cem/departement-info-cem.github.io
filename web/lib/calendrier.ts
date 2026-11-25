@@ -23,6 +23,7 @@ export type EvenementJour = {
   code?: string;
   /** séance annulée (absence) ou déplacée à une autre date */
   annulee?: string;
+  evaluation?: "sommative" | "formative";
 };
 
 export type JourCalendrier = {
@@ -125,6 +126,7 @@ export function construireCalendrier(
         heure: e.debut && (e.fin ? `${e.debut}–${e.fin}` : e.debut),
         local: e.local,
         description: e.description,
+        evaluation: e.evaluation,
       });
     });
   }

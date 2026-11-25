@@ -3,6 +3,8 @@ import Link from "next/link";
 import type { Prof } from "@/app/_types/prof";
 import { photo } from "@/lib/chemins";
 import { StatutProf } from "@/components/statut-prof";
+import { PastilleLien } from "@/components/choix-groupe";
+import type { Lien } from "@/lib/mes-cours";
 
 export function initiales(nom: string): string {
   return nom
@@ -24,14 +26,16 @@ export function AvatarProf({ prof, taille }: { prof: Pick<Prof, "nom" | "photo">
   );
 }
 
-export function CarteProf({ prof }: { prof: Prof }) {
+// lien : mon prof (encadré vert) ou prof d'un de mes cours, selon « Mes cours »
+export function CarteProf({ prof, lien }: { prof: Prof; lien?: Lien }) {
   return (
-    <Link href={`/${prof.id}`} className="group flex items-center gap-4 rounded-lg border bg-card p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-primary hover:shadow-md">
+    <Link href={`/${prof.id}`} className={`group flex items-center gap-4 rounded-lg border bg-card p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-primary hover:shadow-md ${lien?.niveau === "mon-prof" ? "border-cem-vert ring-2 ring-cem-vert" : ""}`}>
       <AvatarProf prof={prof} taille={64} />
       <div className="min-w-0">
         <div className="font-semibold group-hover:text-primary">{prof.nom}</div>
         {prof.bureau && <div className="text-sm text-muted-foreground">Bureau {prof.bureau}</div>}
         <div className="mt-1 flex flex-wrap gap-1">
+          {lien && <PastilleLien lien={lien} />}
           <StatutProf prof={prof} compact />
           {prof.horaire?.plages.length ? <span className="rounded-full bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">Horaire</span> : null}
         </div>

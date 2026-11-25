@@ -7,6 +7,9 @@ import { Input } from "@/components/ui/input";
 import { useTwoWayBinding } from "@/app/_hooks/use-two-way-binding";
 import { useMaintenant } from "@/app/_hooks/use-maintenant";
 import { useScolaire } from "@/app/_contexts/scolaire-context";
+import { useMesCours } from "@/app/_contexts/mes-cours-context";
+import { ResumeMesCours } from "@/components/resume-mes-cours";
+import { trierPourMoi } from "@/lib/mes-cours";
 import { etatProf } from "@/lib/maintenant";
 import { simplifier } from "@/lib/texte";
 import type { InfoCours } from "@/components/horaire-semaine";
@@ -18,6 +21,7 @@ export function ListeProfs({ profs, actifs, cours }: { profs: Prof[]; actifs: st
   const [dispoSeulement, setDispoSeulement] = useState(false);
   const maintenant = useMaintenant();
   const scolaire = useScolaire();
+  const { lien } = useMesCours();
 
   const coursDonnes = useMemo(() => {
     const nos = new Set(profs.flatMap((p) => [...(p.cours ?? []), ...(p.horaire?.plages.map((x) => x.cours ?? "") ?? [])]).filter(Boolean).map((c) => c.toUpperCase()));
@@ -36,11 +40,13 @@ export function ListeProfs({ profs, actifs, cours }: { profs: Prof[]; actifs: st
     }
     return true;
   });
-  const enPoste = filtres.filter((p) => actifs.includes(p.id));
+  // Mes profs d'abord, puis ceux de mes cours (« Mes cours »)
+  const enPoste = trierPourMoi(filtres.filter((p) => actifs.includes(p.id)), (p) => lien(p.id));
   const inactifs = filtres.filter((p) => !actifs.includes(p.id));
 
   return (
     <div>
+      <ResumeMesCours />
       <div className="mb-6 flex flex-col gap-3 md:flex-row md:items-center">
         <div className="relative md:w-80">
           <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -67,7 +73,7 @@ export function ListeProfs({ profs, actifs, cours }: { profs: Prof[]; actifs: st
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {enPoste.map((p) => (
-          <CarteProf key={p.id} prof={p} />
+          <CarteProf key={p.id} prof={p} lien={lien(p.id)} />
         ))}
       </div>
       {inactifs.length > 0 && (

@@ -3,6 +3,7 @@ import { ExternalLink, Globe } from "lucide-react";
 import { Conteneur, TitrePage } from "@/components/titre-page";
 import { coursService, profsParCours, type ServiceAffiche } from "@/lib/donnees";
 import Link from "next/link";
+import { BoutonChoixGroupe } from "@/components/choix-groupe";
 
 export const metadata: Metadata = { title: "Sciences de la nature et cours de service" };
 
@@ -73,6 +74,7 @@ function Programme({ p, profs }: { p: ServiceAffiche; profs: ReturnType<typeof p
                 ))}
               </p>
             )}
+            <BoutonChoixGroupe cours={c.info.no!.toUpperCase()} className="mt-2" />
           </li>
         ))}
       </ul>

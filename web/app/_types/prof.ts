@@ -54,6 +54,8 @@ export type Plage = z.infer<typeof plageSchema>;
 export const TYPES_EVENEMENT = ["remise", "examen", "cours", "absence", "deplacement", "activite", "autre"] as const;
 export type TypeEvenement = (typeof TYPES_EVENEMENT)[number];
 
+export const TYPES_EVALUATION = ["sommative", "formative"] as const;
+
 export const evenementProfSchema = z
   .object({
     date: z.string({ error: "date manquante (format AAAA-MM-JJ, ex. 2026-09-15)" }).regex(DATE, { error: "date invalide (format AAAA-MM-JJ, ex. 2026-09-15)" }),
@@ -68,9 +70,13 @@ export const evenementProfSchema = z
     fin: heure.optional(),
     local: z.string().optional(),
     description: z.string().optional(),
+    /** évaluation sommative (comptée) ou formative : mise en avant dans le calendrier des étudiants du cours */
+    evaluation: z.enum(TYPES_EVALUATION, { error: "evaluation : sommative ou formative" }).optional(),
   })
   .strict()
   .superRefine((e, ctx) => {
+    if (e.evaluation && (e.type === "absence" || e.type === "deplacement")) ctx.addIssue({ code: "custom", path: ["evaluation"], message: "« evaluation » ne va pas avec une absence ou un déplacement" });
+    if (e.evaluation && !e.cours) ctx.addIssue({ code: "custom", path: ["cours"], message: "une évaluation doit indiquer son cours (ex. cours: 420-5N6-EM), pour paraître dans le calendrier des étudiants" });
     if (!e.titre && e.type !== "deplacement" && e.type !== "absence") ctx.addIssue({ code: "custom", path: ["titre"], message: "titre manquant" });
     if (e.type === "deplacement" && !e.remplace) ctx.addIssue({ code: "custom", path: ["remplace"], message: "un déplacement doit indiquer la date du cours d'origine, ex. remplace: 2026-11-05" });
     if (e.type === "deplacement" && !e.cours) ctx.addIssue({ code: "custom", path: ["cours"], message: "un déplacement doit indiquer le cours déplacé" });

@@ -9,6 +9,8 @@ import { profSchema, type Prof } from "@/app/_types/prof";
 import { coursSchema, programmeSchema, type Cours, type CoursAffiche, type Programme } from "@/app/_types/programme";
 import { botSchema, calendrierScolaireSchema, coursServiceSchema, faqSchema, laboratoiresSchema, logicielsSchema, type Bot, type CalendrierScolaire, type CoursService, type Laboratoire, type Logiciel, type Question } from "@/app/_types/divers";
 import type { ProfHoraire } from "@/lib/maintenant";
+import type { DonneesMesCours, GroupeCours } from "@/lib/mes-cours";
+import { JOURS, normaliserJour } from "@/lib/temps";
 import { estActif } from "@/lib/actif";
 import { formaterErreurs } from "@/lib/erreurs";
 
@@ -55,9 +57,8 @@ export function prof(id: string): Prof | undefined {
 }
 
 /** Identifiants des profs actifs en ce moment (cours cette session, ou « actif: true » dans la fiche). */
-export function idsProfsActifs(): string[] {
-  const aujourdhui = new Date();
-  return profs().filter((p) => estActif(p, calendrierScolaire(), aujourdhui)).map((p) => p.id);
+export function idsProfsActifs(date = new Date()): string[] {
+  return profs().filter((p) => estActif(p, calendrierScolaire(), date)).map((p) => p.id);
 }
 
 // ---------- Cours et programmes ----------
@@ -197,6 +198,67 @@ export function indexCours(): Record<string, { no: string; nom: string; url?: st
     for (const a of c.alias ?? []) index[a.no.toUpperCase()] = { ...info, nom: a.nom ?? c.nom };
   }
   return index;
+}
+
+/** Numéro canonique d'un cours (un ancien numéro donne le nouveau), en majuscules. */
+export function numeroCanonique(no: string): string {
+  return (trouverCours(no)?.no ?? no).toUpperCase();
+}
+
+/** Les cours d'un prof (sa liste « cours » et ceux de son horaire), en numéros canoniques. */
+export function coursDuProf(p: Prof): string[] {
+  return [...new Set([...(p.cours ?? []), ...(p.horaire?.plages.flatMap((x) => (x.cours ? [x.cours] : [])) ?? [])].map(numeroCanonique))];
+}
+
+/** Pour « Mes cours » : les groupes de chaque cours (d'après les horaires des profs actifs), les cours et les dispos des profs. */
+export function donneesMesCours(date = new Date()): DonneesMesCours {
+  const actifs = new Set(idsProfsActifs(date));
+  const groupes: DonneesMesCours["groupes"] = {};
+  const infos: DonneesMesCours["profs"] = {};
+  const rangJour = (j: string) => JOURS.indexOf(normaliserJour(j) ?? "dimanche");
+  for (const p of profs().filter((x) => actifs.has(x.id))) {
+    const cours = coursDuProf(p);
+    const plages = p.horaire?.plages ?? [];
+    infos[p.id] = {
+      nom: p.nom,
+      session: p.session,
+      cours,
+      dispos: plages.filter((x) => x.type === "dispo" || x.type === "centre-aide"),
+      calendrier: (p.calendrier ?? []).map((e) => (e.cours ? { ...e, cours: numeroCanonique(e.cours) } : e)),
+    };
+    const siens = new Map<string, GroupeCours>();
+    for (const x of plages) {
+      if (x.type !== "cours" || !x.cours) continue;
+      const no = numeroCanonique(x.cours);
+      const cle = `${no}|${x.groupe ?? ""}`;
+      if (!siens.has(cle)) siens.set(cle, { cours: no, prof: p.id, groupe: x.groupe, session: p.session, seances: [] });
+      siens.get(cle)!.seances.push({ jour: normaliserJour(x.jour) ?? x.jour, debut: x.debut, fin: x.fin, local: x.local });
+    }
+    // Un cours de sa liste sans horaire inscrit : on peut quand même dire que c'est son prof
+    for (const no of cours) if (![...siens.values()].some((g) => g.cours === no)) siens.set(no, { cours: no, prof: p.id, session: p.session, seances: [] });
+    const parGroupe = [...siens.values()].sort((a, b) => (a.groupe ?? "").localeCompare(b.groupe ?? "", "fr", { numeric: true }));
+    for (const g of parGroupe) {
+      g.seances.sort((a, b) => rangJour(a.jour) - rangJour(b.jour) || a.debut.padStart(5, "0").localeCompare(b.debut.padStart(5, "0")));
+      (groupes[g.cours] ??= []).push(g);
+    }
+  }
+  // Ordre : profs par nom (profs() est trié), puis groupes par numéro
+  return { groupes, profs: infos, cours: indexCours() };
+}
+
+export type LogicielAffiche = Logiciel & { coursLies: string[] };
+
+/** Les logiciels, avec les cours où ils servent (champ cours, ou tags en commun avec les cours du catalogue). */
+export function logicielsAvecCours(): LogicielAffiche[] {
+  return logiciels().map((l) => ({
+    ...l,
+    coursLies: [
+      ...new Set([
+        ...(l.cours ?? []).map(numeroCanonique),
+        ...catalogue().filter((c) => c.tags?.some((t) => l.tags?.includes(t))).map((c) => c.no.toUpperCase()),
+      ]),
+    ],
+  }));
 }
 
 /** Numéro de cours -> profs qui le donnent (selon leurs fiches). */

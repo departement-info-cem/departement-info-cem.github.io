@@ -27,6 +27,7 @@ export const NAVIGATION = [
 ];
 
 export const RESSOURCES = [
+  { href: "/mes-cours", texte: "Mes cours" },
   { href: "/faq", texte: "FAQ" },
   { href: "/nouveau", texte: "Conseils aux nouveaux" },
   { href: "/logiciels", texte: "Logiciels gratuits" },

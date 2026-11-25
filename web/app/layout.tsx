@@ -7,7 +7,8 @@ import { PiedDePage } from "@/components/pied-de-page";
 import { ThemeProvider } from "@/app/_contexts/theme-context";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ScolaireProvider } from "@/app/_contexts/scolaire-context";
-import { calendrierScolaire, laboratoires, profsHoraire } from "@/lib/donnees";
+import { calendrierScolaire, donneesMesCours, laboratoires, profsHoraire } from "@/lib/donnees";
+import { MesCoursProvider } from "@/app/_contexts/mes-cours-context";
 import { profsUtiles } from "@/lib/maintenant";
 import { indexRecherche } from "@/lib/index-recherche";
 
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col">
         <ThemeProvider>
           <ScolaireProvider calendrier={calendrierScolaire()}>
+          <MesCoursProvider donnees={donneesMesCours()}>
           <TooltipProvider>
             <a href="#contenu" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-background focus:p-2">
               Aller au contenu
@@ -46,6 +48,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <PiedDePage />
             <Bandeau profs={profsUtiles(profsHoraire(), laboratoires())} labos={laboratoires()} />
           </TooltipProvider>
+          </MesCoursProvider>
           </ScolaireProvider>
         </ThemeProvider>
       </body>

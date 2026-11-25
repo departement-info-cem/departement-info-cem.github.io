@@ -40,6 +40,7 @@ function verifier<T extends z.ZodType>(schema: T, fichier: string): z.infer<T> |
 // 1. Catalogue des cours
 const catalogue = verifier(coursSchema.array(), "cours.yaml") ?? [];
 const coursConnus = new Set(catalogue.flatMap((c) => [c.no, ...(c.alias ?? []).map((a) => a.no)].map((n) => n.toUpperCase())));
+const tagsConnus = new Set(catalogue.flatMap((c) => c.tags ?? []));
 const doublons = catalogue.map((c) => c.no).filter((no, i, t) => t.indexOf(no) !== i);
 for (const d of doublons) signaler("erreur", "cours.yaml", `le cours ${d} est défini deux fois`);
 
@@ -90,6 +91,8 @@ verifier(faqSchema, "faq.yaml");
 const logos = new Set(fs.readdirSync(path.resolve(__dirname, "..", "public", "images", "logiciels")));
 verifier(logicielsSchema, "logiciels.yaml")?.forEach((l) => {
   if (l.logo && !logos.has(l.logo)) signaler("erreur", "logiciels.yaml", `${l.nom} : le logo ${l.logo} n'existe pas dans web/public/images/logiciels/`);
+  for (const t of l.tags ?? []) if (!tagsConnus.has(t)) signaler("erreur", "logiciels.yaml", `${l.nom} : aucun cours n'a le tag « ${t} » (tags de data/cours.yaml : ${[...tagsConnus].sort().join(", ")})`);
+  for (const no of l.cours ?? []) if (!coursConnus.has(no.toUpperCase())) signaler("erreur", "logiciels.yaml", `${l.nom} : le cours ${no} n'existe pas dans data/cours.yaml`);
 });
 const bot = verifier(botSchema, "bot.yaml");
 if (bot) {

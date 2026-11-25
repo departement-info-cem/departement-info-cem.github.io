@@ -1,6 +1,8 @@
 # Logiciels gratuits pour les étudiants du département (page /logiciels).
 # identifiant : comment se connecter ; lien : où s'inscrire ou télécharger.
 # logo (facultatif) : nom d'un fichier placé dans web/public/images/logiciels/.
+# tags ou cours (facultatifs) : les cours où il sert, mis en avant pour l'étudiant qui a indiqué ses cours (page Mes cours).
+#   tags : ceux de data/cours.yaml (prog, web, mobile, os, reseau, serveurs, bd...) ; cours : [420-5N6-EM, ...]
 - nom: GitHub Student Developer Pack
   logo: github.svg
   identifiant: ton courriel matricule@cegepmontpetit.ca
@@ -14,6 +16,7 @@
   description: Toutes les versions « Ultimate » des IDE JetBrains, gratuites pendant ta technique. Utilisés pour Java, Python, le web, Android...
   lien: https://www.jetbrains.com/student/
   bouton: Licence étudiante JetBrains
+  tags: [prog, python, web, mobile]
 - nom: Windows et Visual Studio (Azure Dev Tools for Teaching)
   logo: visual-studio.svg
   identifiant: matricule@cegepmontpetit.ca
@@ -32,9 +35,11 @@
   description: Pour rouler des machines virtuelles à la maison. Utile dans les cours de systèmes d'exploitation et de réseau.
   lien: https://support.broadcom.com/group/ecx/productdownloads?subfamily=VMware%20Workstation%20Pro&freeDownloads=true
   bouton: Télécharger VMware
+  tags: [os, reseau]
 - nom: MobaXterm
   logo: mobaxterm.png
   identifiant: aucun
   description: Un terminal pour Windows qui permet de se connecter à des serveurs distants (SSH, RDP, VNC...).
   lien: https://mobaxterm.mobatek.net/
   bouton: Télécharger MobaXterm
+  tags: [serveurs, reseau]

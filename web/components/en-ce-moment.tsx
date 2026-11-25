@@ -4,6 +4,9 @@ import { CalendarOff, MapPin, Monitor, UserCheck } from "lucide-react";
 import type { Laboratoire } from "@/app/_types/divers";
 import { useMaintenant } from "@/app/_hooks/use-maintenant";
 import { useScolaire } from "@/app/_contexts/scolaire-context";
+import { useMesCours } from "@/app/_contexts/mes-cours-context";
+import { PastilleLien } from "@/components/choix-groupe";
+import { trierPourMoi } from "@/lib/mes-cours";
 import { AvatarProf } from "@/components/carte-prof";
 import { EtatLaboratoire } from "@/components/etat-laboratoire";
 import { prochainCours, resumeMaintenant, type ProfHoraire } from "@/lib/maintenant";
@@ -13,10 +16,13 @@ import { formaterDate, minutesEnHeure } from "@/lib/temps";
 export function EnCeMoment({ profs, labos }: { profs: ProfHoraire[]; labos: Laboratoire[] }) {
   const maintenant = useMaintenant();
   const scolaire = useScolaire();
+  const { lien } = useMesCours();
   if (!maintenant) return <div className="h-40 animate-pulse rounded-lg bg-muted" aria-label="Chargement" />;
 
-  const { iso, situation, nbAvecDispos, dispos, etats, ...resume } = resumeMaintenant(profs, labos, scolaire, maintenant);
-  const bientot = resume.bientot.slice(0, 8);
+  const { iso, situation, nbAvecDispos, etats, ...resume } = resumeMaintenant(profs, labos, scolaire, maintenant);
+  // Mes profs et ceux de mes cours d'abord (« Mes cours »), même si leur dispo est plus tard
+  const dispos = trierPourMoi(resume.dispos, ({ p }) => lien(p.id));
+  const bientot = trierPourMoi(resume.bientot, ({ p }) => lien(p.id)).slice(0, 8);
 
   return (
     <div className="space-y-4">
@@ -42,7 +48,9 @@ export function EnCeMoment({ profs, labos }: { profs: ProfHoraire[]; labos: Labo
                 <Link href={`/${p.id}`} className="flex items-center gap-3 rounded-md border border-primary/40 bg-accent p-2 hover:border-primary">
                   <AvatarProf prof={p} taille={44} />
                   <span className="flex-1">
-                    <span className="block font-semibold">{p.nom}</span>
+                    <span className="flex flex-wrap items-center gap-x-2 font-semibold">
+                      {p.nom} <PastilleLien lien={lien(p.id)} />
+                    </span>
                     <span className="text-sm text-muted-foreground">
                       {e.centreAide && "Centre d'aide · "}jusqu&apos;à {e.fin}
                     </span>
@@ -61,9 +69,12 @@ export function EnCeMoment({ profs, labos }: { profs: ProfHoraire[]; labos: Labo
               <ul className="space-y-1 text-sm">
                 {bientot.map(({ p, d }) => (
                   <li key={p.id} className="flex flex-wrap justify-between gap-x-3">
-                    <Link href={`/${p.id}`} className="font-medium hover:text-primary hover:underline">
-                      {p.nom}
-                    </Link>
+                    <span className="flex flex-wrap items-center gap-x-2">
+                      <Link href={`/${p.id}`} className="font-medium hover:text-primary hover:underline">
+                        {p.nom}
+                      </Link>
+                      <PastilleLien lien={lien(p.id)} />
+                    </span>
                     <span className="text-muted-foreground">
                       {d.iso === iso ? "aujourd'hui" : formaterDate(d.iso).toLowerCase()} {d.debut}–{d.fin}
                       {d.local && <strong className="text-foreground"> · {d.local}</strong>}
