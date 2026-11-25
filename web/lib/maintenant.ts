@@ -107,11 +107,23 @@ export function occupationsLocal(local: string, session: string, labo: Laboratoi
   return [...resultat.values()];
 }
 
-/** Présences au centre d'aide dans un local. À part des occupations : le local reste ouvert à tous. */
+/**
+ * Présences au centre d'aide dans un local : « Centre d'aide : Joris Deguet, Mathieu Dupont ». Les profs présents
+ * à la même heure partagent une plage. À part des occupations : le local reste ouvert à tous.
+ */
 export function presencesCentreAide(local: string, session: string, profs: ProfHoraire[]): Plage[] {
-  return profs
-    .filter((p) => p.session === session)
-    .flatMap((p) => p.plages.filter((x) => x.type === "centre-aide" && x.local && normaliserLocal(x.local) === normaliserLocal(local)).map((x) => ({ ...x, titre: p.nom, local: undefined })));
+  const parPlage = new Map<string, { plage: Plage; noms: string[] }>();
+  for (const p of profs) {
+    if (p.session !== session) continue;
+    for (const x of p.plages) {
+      if (x.type !== "centre-aide" || !x.local || normaliserLocal(x.local) !== normaliserLocal(local)) continue;
+      const cle = [normaliserJour(x.jour), heureEnMinutes(x.debut), heureEnMinutes(x.fin)].join("|");
+      const deja = parPlage.get(cle);
+      if (!deja) parPlage.set(cle, { plage: x, noms: [p.nom] });
+      else if (!deja.noms.includes(p.nom)) deja.noms.push(p.nom);
+    }
+  }
+  return [...parPlage.values()].map(({ plage, noms }) => ({ ...plage, titre: `Centre d'aide : ${noms.join(", ")}`, local: undefined }));
 }
 
 export type EtatLabo = { etat: "libre" | "occupe" | "inconnu"; occupation?: Occupation; jusqua?: string; raison?: string };

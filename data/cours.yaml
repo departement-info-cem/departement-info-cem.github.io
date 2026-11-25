@@ -5,6 +5,7 @@
 #   tags: technos/thèmes pour les filtres       ecole: UdeS si le cours est donné par l'Université de Sherbrooke
 #   fiche: fiche officielle du cours (ex. sur le site de l'UdeS), affichée dans la grille mais pas dans « Sites des cours »
 #   alias: autres numéros acceptés (ex. ancien numéro utilisé dans un horaire)
+#     « ancien programme » : anciens numéros, utilisés pour la dernière fois à l'automne 2026
 - no: 420-1B3-EM
   nom: Bureautique
   heures: 45
@@ -36,6 +37,8 @@
   heures: 75
   tags:
     - bd
+  alias:
+    - { no: 420-1D5-EM, nom: "Intro aux bases de données" }   # ancien programme
 - no: 420-2P6-EM
   nom: Programmation orientée objet
   heures: 90
@@ -43,6 +46,8 @@
     - git
     - prog
   url: https://info.cegepmontpetit.ca/2P6/
+  alias:
+    - { no: 420-2N6-EM, nom: "Prog. 2" }   # ancien programme
 - no: 420-2T6-EM
   nom: Programmation objet en TI
   heures: 90
@@ -54,11 +59,15 @@
   heures: 90
   tags:
     - web
+  alias:
+    - { no: 420-2W5-EM, nom: "Prog. Web serveur" }   # ancien programme
 - no: 420-2X5-EM
   nom: Serveurs intranet
   heures: 75
   tags:
     - serveurs
+  alias:
+    - { no: 420-2S5-EM, nom: "Serveurs 1 : Services Intranet" }   # ancien programme
 - no: 350-944-EM
   nom: Communiquer en milieux professionnels
   heures: 60
@@ -107,17 +116,23 @@
   heures: 45
   tags:
     - pro
+  alias:
+    - { no: 420-4M3-EM, nom: "Méthodologie" }   # ancien programme
 - no: 420-4N4-EM
   nom: Solutions applicatives
   heures: 60
   tags:
     - solutions
+  alias:
+    - { no: 420-4E4-EM, nom: "Solutions technologiques en programmation" }   # ancien programme
 - no: 420-4D6-EM
   nom: Bases de données et programmation Web
   heures: 90
   tags:
     - bd
   url: https://info.cegepmontpetit.ca/4D5-Base-De-Donnees-Et-Prog-Web/
+  alias:
+    - { no: 420-4D5-EM, nom: "Bases de données et prog. Web" }   # ancien programme
 - no: 420-4M6-EM
   nom: Applications mobiles
   heures: 90
@@ -125,6 +140,8 @@
     - mobile
     - git
   url: https://github.com/departement-info-cem/4N6-Mobile/
+  alias:
+    - { no: 420-4N6-EM, nom: "Applications mobiles" }   # ancien programme
 - no: 420-4W6-EM
   nom: Programmation web orientée services
   heures: 90
@@ -137,21 +154,29 @@
   heures: 75
   tags:
     - securite
+  alias:
+    - { no: 420-4U5-EM, nom: "Cybersécurité 2 : Architecture" }   # ancien programme
 - no: 420-4L4-EM
   nom: Solutions d'infrastructure TI
   heures: 60
   tags:
     - solutions
+  alias:
+    - { no: 420-4T4-EM, nom: "Solutions technologiques en réseautique" }   # ancien programme
 - no: 420-4C5-EM
   nom: Réseaux étendus
   heures: 75
   tags:
     - reseau
+  alias:
+    - { no: 420-4R5-EM, nom: "Réseaux étendus" }   # ancien programme
 - no: 420-4X6-EM
   nom: Administration centralisée
   heures: 90
   tags:
     - serveurs
+  alias:
+    - { no: 420-4S6-EM, nom: "Serveurs 3 : Administration centralisée" }   # ancien programme
 - no: 420-5F3-EM
   nom: Professions et soutien aux utilisateurs
   heures: 45

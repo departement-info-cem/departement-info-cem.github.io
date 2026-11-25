@@ -40,9 +40,13 @@ describe("centre d'aide", () => {
 describe("présences dans un local", () => {
   const p = { id: "a.b", nom: "A B", session: "A2026", plages: [{ jour: "lundi", debut: "11:00", fin: "12:00", type: "centre-aide" as const, local: "D0008" }, { jour: "mardi", debut: "11:00", fin: "12:00", type: "dispo" as const, local: "D-0008" }] };
   it("garde le centre d'aide de ce local et de cette session, avec le nom du prof", () => {
-    expect(presencesCentreAide("D-0008", "A2026", [p])).toMatchObject([{ jour: "lundi", titre: "A B", type: "centre-aide" }]);
+    expect(presencesCentreAide("D-0008", "A2026", [p])).toMatchObject([{ jour: "lundi", titre: "Centre d'aide : A B", type: "centre-aide" }]);
     expect(presencesCentreAide("D-0007", "A2026", [p])).toEqual([]);
     expect(presencesCentreAide("D-0008", "H2027", [p])).toEqual([]);
+  });
+  it("réunit les profs présents à la même heure", () => {
+    const q = { ...p, id: "c.d", nom: "C D", plages: [{ ...p.plages[0], debut: "11h00", local: "D-0008" }] };
+    expect(presencesCentreAide("D-0008", "A2026", [p, q]).map((x) => x.titre)).toEqual(["Centre d'aide : A B, C D"]);
   });
   it("ne rend pas le local occupé", () => expect(occupationsLocal("D-0008", "A2026", undefined, [p])).toEqual([]));
 });
