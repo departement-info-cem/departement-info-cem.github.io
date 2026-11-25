@@ -131,7 +131,7 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
                     )}
                     {info && info.nom !== titre && <div className="opacity-80">{info.nom}</div>}
                     {p.local && (
-                      <div className="flex items-center gap-0.5 opacity-80">
+                      <div className="flex items-center justify-center gap-0.5 opacity-80">
                         <MapPin className="size-3" />
                         {p.local}
                       </div>
@@ -139,7 +139,7 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
                   </>
                 );
                 const bloc = {
-                  className: "absolute z-10 overflow-hidden break-words rounded-md hyphens-auto border-l-4 px-1.5 py-1 text-left text-xs shadow-sm",
+                  className: "absolute z-10 overflow-hidden break-words rounded-md hyphens-auto border-l-4 px-1.5 py-1 flex flex-col justify-center text-center text-xs shadow-sm",
                   style: {
                     top: `calc(${y(p.debutMin)} + 1px)`,
                     height: `calc(${longueur(p.finMin - p.debutMin)} - 2px)`,
