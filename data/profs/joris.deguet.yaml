@@ -35,6 +35,15 @@ horaire:
 # Les congés et journées pédagogiques du cégep sont ajoutés automatiquement.
 # type : remise, examen, cours, absence, deplacement, activite ou autre
 calendrier:
+  # 420-5N6 : examens et remises de TP repris du site du cours (sidebars.js du dépôt 5N6-mobile-2)
+  - { date: 2026-08-26, titre: "Remise TP1 · Idée d'application", cours: 420-5N6-EM, groupe: 1020, type: remise, evaluation: sommative }
+  - { date: 2026-09-21, titre: "Remise TP2 · Interface graphique", cours: 420-5N6-EM, groupe: 1020, type: remise, evaluation: sommative }
+  - { date: 2026-10-07, titre: "Examen intra formatif", cours: 420-5N6-EM, groupe: 1020, type: examen, evaluation: formative }
+  - { date: 2026-10-19, titre: "Examen intra (20 %)", cours: 420-5N6-EM, groupe: 1020, type: examen, evaluation: sommative }
+  - { date: 2026-11-04, titre: "Remise TP3 · 5 récits", cours: 420-5N6-EM, groupe: 1020, type: remise, evaluation: sommative }
+  - { date: 2026-12-09, titre: "Remise TP4 · Version finale (sprint et présentation)", cours: 420-5N6-EM, groupe: 1020, type: remise, evaluation: sommative }
+  - { date: 2026-12-14, titre: "Examen final formatif", cours: 420-5N6-EM, groupe: 1020, type: examen, evaluation: formative }
+  - { date: 2026-12-23, titre: "Examen final", cours: 420-5N6-EM, groupe: 1020, type: examen, evaluation: sommative }
   # 420-SN1 : évaluations reprises du site du cours (sidebars.js du dépôt 420-SN1), une ligne par groupe
   - { date: 2026-09-08, titre: "Contrôle 1 (10 min, début de cours)", cours: 420-SN1-RE, groupe: 1050, type: examen, evaluation: sommative }
   - { date: 2026-09-08, titre: "Contrôle 1 (10 min, début de cours)", cours: 420-SN1-RE, groupe: 1060, type: examen, evaluation: sommative }
@@ -60,10 +69,10 @@ calendrier:
   - { date: 2026-11-17, titre: "Contrôle 3 (10 min, début de cours)", cours: 420-SN1-RE, groupe: 1060, type: examen, evaluation: sommative }
   - { date: 2026-11-13, titre: "Contrôle 3 (10 min, début de cours)", cours: 420-SN1-RE, groupe: 1070, type: examen, evaluation: sommative }
   - { date: 2026-11-13, titre: "Contrôle 3 (10 min, début de cours)", cours: 420-SN1-RE, groupe: 1080, type: examen, evaluation: sommative }
-  - { date: 2026-11-24, titre: "Remise partielle TP2 (10 %)", cours: 420-SN1-RE, groupe: 1050, type: remise, evaluation: sommative }
-  - { date: 2026-11-24, titre: "Remise partielle TP2 (10 %)", cours: 420-SN1-RE, groupe: 1060, type: remise, evaluation: sommative }
-  - { date: 2026-11-20, titre: "Remise partielle TP2 (10 %)", cours: 420-SN1-RE, groupe: 1070, type: remise, evaluation: sommative }
-  - { date: 2026-11-20, titre: "Remise partielle TP2 (10 %)", cours: 420-SN1-RE, groupe: 1080, type: remise, evaluation: sommative }
+  - { date: 2026-11-30, titre: "Remise TP2 partie 1 (10 %)", cours: 420-SN1-RE, groupe: 1050, type: remise, evaluation: sommative, debut: "23:59" }
+  - { date: 2026-11-30, titre: "Remise TP2 partie 1 (10 %)", cours: 420-SN1-RE, groupe: 1060, type: remise, evaluation: sommative, debut: "23:59" }
+  - { date: 2026-11-26, titre: "Remise TP2 partie 1 (10 %)", cours: 420-SN1-RE, groupe: 1070, type: remise, evaluation: sommative, debut: "23:59" }
+  - { date: 2026-11-26, titre: "Remise TP2 partie 1 (10 %)", cours: 420-SN1-RE, groupe: 1080, type: remise, evaluation: sommative, debut: "23:59" }
   - { date: 2026-12-01, titre: "Examen final formatif", cours: 420-SN1-RE, groupe: 1050, type: examen, evaluation: formative }
   - { date: 2026-12-01, titre: "Examen final formatif", cours: 420-SN1-RE, groupe: 1060, type: examen, evaluation: formative }
   - { date: 2026-11-27, titre: "Examen final formatif", cours: 420-SN1-RE, groupe: 1070, type: examen, evaluation: formative }
