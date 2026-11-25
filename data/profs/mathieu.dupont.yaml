@@ -27,7 +27,7 @@ horaire:
     - { jour: mardi, debut: "08:00", fin: "11:00", type: cours, cours: 360-4A3-EM, groupe: 1010, local: D-0007, titre: "Projet scientifique de fin d'études en informatique" }
     - { jour: mercredi, debut: "09:00", fin: "12:00", type: cours, cours: 420-SN1-RE, groupe: 1010, local: D-0007 }
     - { jour: mercredi, debut: "14:00", fin: "17:00", type: cours, cours: 420-SN1-RE, groupe: 1020, local: D-0007 }
-    - { jour: lundi, debut: "11:30", fin: "12:00", type: dispo, local: C-126, titre: "Disponibilité (C-126)" }
+    - { jour: lundi, debut: "11:30", fin: "12:00", type: dispo, titre: "Dispo (C-126)" }
     - { jour: mardi, debut: "11:00", fin: "12:00", type: centre-aide, local: D-0008 }
     - { jour: mardi, debut: "12:00", fin: "13:30", type: dispo, local: C-126 }
     - { jour: mercredi, debut: "08:15", fin: "09:00", type: centre-aide, local: D-0007 }
