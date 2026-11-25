@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 // Applique le thème sombre avant l'affichage pour éviter un flash blanc.
-const scriptTheme = `try{var t=localStorage.getItem("theme");if(t==='"sombre"'||t==="sombre"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}`;
+const scriptTheme = `try{var t=localStorage.getItem("theme-depinfo");if(t==='"sombre"'||t==="sombre"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
