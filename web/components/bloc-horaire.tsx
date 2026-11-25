@@ -30,7 +30,7 @@ export function textesPlage(p: PlageAffichee, cours: InfoCours) {
 export function ContenuBloc({ p, cours }: { p: PlageAffichee; cours: InfoCours }) {
   const t = textesPlage(p, cours);
   return (
-    <span className="flex h-full w-full flex-col flex-wrap content-start gap-x-8 overflow-clip leading-[14px] @max-[6rem]:text-[11px]">
+    <span className="flex h-full w-full flex-col flex-wrap justify-center content-start gap-x-8 overflow-clip leading-[14px] @max-[6rem]:text-[11px]">
       <Ligne className="font-semibold">{t.titreCourt}</Ligne>
       {t.noms.length > 0 && <Ligne>{t.noms.map(nomCourt).join(", ")}</Ligne>}
       <Ligne>
