@@ -9,13 +9,17 @@ type ThemeContextType = { theme: Theme; preference: Preference; choisir: (prefer
 
 export const ThemeContext = createContext<ThemeContextType>({ theme: "clair", preference: "systeme", choisir: () => {} });
 
+// Clé propre à ce site : le stockage local est partagé par tous les sites de info.cegepmontpetit.ca,
+// et la clé « theme » est utilisée (avec d'autres valeurs) par les autres sites de cours.
+// Doit rester identique à celle du script dans layout.tsx.
+const CLE_THEME = "theme-depinfo";
 const SYSTEME_SOMBRE = "(prefers-color-scheme: dark)";
 
 // Pas de valeur enregistrée = suivre le système (c'est aussi ce que fait le script dans layout.tsx).
 // Comme ce script, on accepte aussi la valeur en JSON (entre guillemets).
 function lirePreference(): Preference {
   try {
-    const valeur = localStorage.getItem("theme")?.replaceAll('"', "");
+    const valeur = localStorage.getItem(CLE_THEME)?.replaceAll('"', "");
     return valeur === "clair" || valeur === "sombre" ? valeur : "systeme";
   } catch {
     return "systeme";
@@ -52,8 +56,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setPreference(nouvelle);
     setTheme(appliquer(nouvelle === "sombre" || (nouvelle === "systeme" && matchMedia(SYSTEME_SOMBRE).matches)));
     try {
-      if (nouvelle === "systeme") localStorage.removeItem("theme");
-      else localStorage.setItem("theme", nouvelle);
+      if (nouvelle === "systeme") localStorage.removeItem(CLE_THEME);
+      else localStorage.setItem(CLE_THEME, nouvelle);
     } catch {}
   }
 
