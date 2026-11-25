@@ -5,6 +5,7 @@
 nom: "Christian Farley"
 courriel: christian.farley  # sans @cegepmontpetit.ca
 bureau: ""
+actif: false  # pas actif cette session : enlève cette ligne au retour
 photo: cf.png  # fichier dans data/photos/
 # github: mon-pseudo
 # linkedin: mon-profil

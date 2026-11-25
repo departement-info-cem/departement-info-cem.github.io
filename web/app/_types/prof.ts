@@ -94,6 +94,8 @@ export const profSchema = z
     linkedin: z.string().optional(),
     site: z.url({ error: "site : adresse web invalide (commence par https://)" }).optional(),
     presentation: z.string().optional(),
+    /** Remplace le calcul de lib/actif.ts (cours cette session). À true pour la coordination. */
+    actif: z.boolean({ error: "actif : écris true ou false, sans guillemets" }).optional(),
     cours: z.array(z.string()).optional(),
     session: z.string().regex(/^[AHE]\d{4}$/, { error: "session invalide (ex. A2026 pour automne 2026, H2027 pour hiver 2027)" }).optional(),
     horaire: z

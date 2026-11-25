@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Conteneur, TitrePage } from "@/components/titre-page";
 import { ListeProfs } from "@/components/liste-profs";
-import { indexCours, profs } from "@/lib/donnees";
+import { idsProfsActifs, indexCours, profs } from "@/lib/donnees";
 
 export const metadata: Metadata = { title: "Les profs" };
 
@@ -15,7 +15,7 @@ export default function PageProfs() {
         </p>
       </TitrePage>
       <Conteneur>
-        <ListeProfs profs={profs()} cours={indexCours()} />
+        <ListeProfs profs={profs()} actifs={idsProfsActifs()} cours={indexCours()} />
       </Conteneur>
     </>
   );

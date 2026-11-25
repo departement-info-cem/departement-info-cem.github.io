@@ -5,6 +5,7 @@
 nom: "Dominic Proulx"
 courriel: dominic.proulx  # sans @cegepmontpetit.ca
 bureau: "E-210"
+actif: true  # décharge à la coordination : actif même sans cours ici (enlève cette ligne pour revenir au calcul automatique)
 photo: dp.png  # fichier dans data/photos/
 # github: mon-pseudo
 # linkedin: mon-profil

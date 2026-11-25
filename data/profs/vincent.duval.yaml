@@ -5,6 +5,7 @@
 nom: "Vincent Duval"
 courriel: vincent.duval  # sans @cegepmontpetit.ca
 bureau: "E-210"
+actif: false  # pas actif cette session : enlève cette ligne au retour
 photo: vd.jpg  # fichier dans data/photos/
 # github: mon-pseudo
 # linkedin: mon-profil

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowRight, Backpack, Briefcase, ChevronDown, Code2, FilePen, GraduationCap, Network, School } from "lucide-react";
-import { bot, faq, profs, programmes } from "@/lib/donnees";
+import { bot, faq, idsProfsActifs, profs, programmes } from "@/lib/donnees";
 import { ETUDIANT_D_UN_JOUR, PORTES_OUVERTES, STAGES } from "@/lib/raccourcis";
 import { chemin } from "@/lib/chemins";
 import { BotOrientation } from "@/components/bot-orientation";
@@ -58,7 +58,8 @@ const VISITE = [
 ];
 
 export default function Accueil() {
-  const listeProfs = profs();
+  const actifs = idsProfsActifs();
+  const listeProfs = profs().filter((p) => actifs.includes(p.id));
   const parId = Object.fromEntries(programmes().map((p) => [p.id, p]));
   const questions = faq()
     .filter((q) => q.categories.includes("futurs étudiants"))

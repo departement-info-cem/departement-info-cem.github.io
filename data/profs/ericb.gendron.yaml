@@ -5,6 +5,7 @@
 nom: "Éric B. Gendron"
 courriel: ericb.gendron  # sans @cegepmontpetit.ca
 bureau: "E-210"
+actif: true  # coordination à temps plein : actif même sans cours (enlève cette ligne pour revenir au calcul automatique)
 photo: eg.jpg  # fichier dans data/photos/
 # github: mon-pseudo
 linkedin: ericb-gendron

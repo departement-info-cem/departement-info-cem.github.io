@@ -11,7 +11,8 @@ import { etatProf } from "@/lib/maintenant";
 import { simplifier } from "@/lib/texte";
 import type { InfoCours } from "@/components/horaire-semaine";
 
-export function ListeProfs({ profs, cours }: { profs: Prof[]; cours: InfoCours }) {
+// « actifs » : les identifiants des profs actifs cette session ; les autres vont dans une section à part, en bas.
+export function ListeProfs({ profs, actifs, cours }: { profs: Prof[]; actifs: string[]; cours: InfoCours }) {
   const recherche = useTwoWayBinding("");
   const [coursChoisi, setCoursChoisi] = useState("");
   const [dispoSeulement, setDispoSeulement] = useState(false);
@@ -35,6 +36,8 @@ export function ListeProfs({ profs, cours }: { profs: Prof[]; cours: InfoCours }
     }
     return true;
   });
+  const enPoste = filtres.filter((p) => actifs.includes(p.id));
+  const inactifs = filtres.filter((p) => !actifs.includes(p.id));
 
   return (
     <div>
@@ -60,13 +63,23 @@ export function ListeProfs({ profs, cours }: { profs: Prof[]; cours: InfoCours }
           <input type="checkbox" checked={dispoSeulement} onChange={(e) => setDispoSeulement(e.target.checked)} className="size-4 accent-[var(--primary)]" />
           Disponibles maintenant
         </label>
-        <span className="text-sm text-muted-foreground md:ml-auto">{filtres.length} prof(s)</span>
+        <span className="text-sm text-muted-foreground md:ml-auto">{enPoste.length} prof(s)</span>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {filtres.map((p) => (
+        {enPoste.map((p) => (
           <CarteProf key={p.id} prof={p} />
         ))}
       </div>
+      {inactifs.length > 0 && (
+        <section className={enPoste.length > 0 ? "mt-10" : undefined}>
+          <h2 className="mb-4 text-xl font-bold text-muted-foreground">Pas actifs cette session</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {inactifs.map((p) => (
+              <CarteProf key={p.id} prof={p} />
+            ))}
+          </div>
+        </section>
+      )}
       {filtres.length === 0 && <p className="py-10 text-center text-muted-foreground">Aucun prof ne correspond à ta recherche.</p>}
     </div>
   );

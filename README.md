@@ -7,6 +7,8 @@ Ce fichier sert à expliquer comment modifier l'appli ou le contenu du site du d
 - Données en YAML : `data/profs/<courriel>.yaml` (une fiche par prof), `data/programmes/`, `data/cours.yaml`,
   `data/cours-service.yaml`, `data/laboratoires.yaml`, `data/faq.yaml`, `data/bot.yaml`, `data/logiciels.yaml`.
 - Mode d'emploi pour les profs : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+- Profs actifs : calculé (`web/lib/actif.ts`) d'après les cours et la session de la fiche, avec 30 jours de grâce en début de session.
+  Le champ `actif: true` (coordination sans cours) ou `actif: false` (congé, départ) de la fiche l'emporte sur le calcul.
 - Développement : `cd web && npm ci && npm run dev`, puis http://localhost:3000/react
 - `data/calendrier-scolaire.yaml` est généré à partir du PDF officiel du cégep : `npm run calendrier`
   (aussi lancé à chaque déploiement et chaque matin de semaine ; `-- --verifier` dit seulement ce qui a changé).

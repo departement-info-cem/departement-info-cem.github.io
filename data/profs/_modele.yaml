@@ -14,6 +14,10 @@ bureau: "E-2xx"
 # site: https://mon-site.com
 # presentation: "Une ou deux phrases pour te présenter aux étudiants."
 
+# Tu es « actif » si tu as des cours cette session. Pour forcer l'un ou l'autre :
+# actif: true                     # ex. coordination, sans cours
+# actif: false                    # ex. congé, départ
+
 cours: [420-1P6-EM]               # numéros des cours que tu donnes cette session
 session: H2027                    # A = automne, H = hiver, E = été
 

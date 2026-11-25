@@ -5,6 +5,7 @@
 nom: "Hector Bustillo"
 courriel: hector.bustillo  # sans @cegepmontpetit.ca
 # bureau: "E-214"  # pas de cours cette session
+actif: false  # pas actif cette session : enlève cette ligne au retour
 photo: hb.png  # fichier dans data/photos/
 # github: mon-pseudo
 # linkedin: mon-profil

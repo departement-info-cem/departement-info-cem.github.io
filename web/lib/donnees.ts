@@ -9,6 +9,7 @@ import { profSchema, type Prof } from "@/app/_types/prof";
 import { coursSchema, programmeSchema, type Cours, type CoursAffiche, type Programme } from "@/app/_types/programme";
 import { botSchema, calendrierScolaireSchema, coursServiceSchema, faqSchema, laboratoiresSchema, logicielsSchema, type Bot, type CalendrierScolaire, type CoursService, type Laboratoire, type Logiciel, type Question } from "@/app/_types/divers";
 import type { ProfHoraire } from "@/lib/maintenant";
+import { estActif } from "@/lib/actif";
 import { formaterErreurs } from "@/lib/erreurs";
 
 export const DOSSIER_DONNEES = path.resolve(process.cwd(), process.env.DOSSIER_DONNEES ?? "../data");
@@ -51,6 +52,12 @@ export function profs(): Prof[] {
 
 export function prof(id: string): Prof | undefined {
   return profs().find((p) => p.id === id);
+}
+
+/** Identifiants des profs actifs en ce moment (cours cette session, ou « actif: true » dans la fiche). */
+export function idsProfsActifs(): string[] {
+  const aujourdhui = new Date();
+  return profs().filter((p) => estActif(p, calendrierScolaire(), aujourdhui)).map((p) => p.id);
 }
 
 // ---------- Cours et programmes ----------
