@@ -11,6 +11,7 @@ photo: vt.png  # fichier dans data/photos/
 
 cours: [420-1B3-EM, 420-3W6-EM]   # numéros des cours que tu donnes cette session
 session: A2026   # session de l'horaire ci-dessous (A = automne, H = hiver)
+aide: [420-1B3-EM, 420-1P6-EM, 420-2P6-EM, 420-2W5-EM, 420-3W6-EM, 420-4M3-EM, 420-4D5-EM]   # cours pour lesquels tu peux aider (ceux de « cours » comptent d'office)
 
 # ---------- Horaire de la semaine ----------
 # PRÉREMPLI à partir de l'horaire officiel des laboratoires (PDF RPHOR020 du 2026-08-19) : il peut manquer des cours

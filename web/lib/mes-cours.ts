@@ -13,8 +13,8 @@ export type Seance = { jour: string; debut: string; fin: string; local?: string 
 /** Un groupe d'un cours, tel qu'inscrit dans l'horaire d'un prof. Sans séances : le prof donne le cours, sans horaire inscrit. */
 export type GroupeCours = { cours: string; prof: string; groupe?: string; session?: string; seances: Seance[] };
 
-/** calendrier : les dates du prof, numéros de cours canoniques */
-export type InfoProfMesCours = { nom: string; session?: string; cours: string[]; dispos: Plage[]; calendrier: EvenementProf[] };
+/** aide : les cours pour lesquels il peut aider (ceux qu'il donne compris) ; calendrier : ses dates. Numéros de cours canoniques. */
+export type InfoProfMesCours = { nom: string; session?: string; cours: string[]; aide: string[]; dispos: Plage[]; calendrier: EvenementProf[] };
 
 /** Ce que le serveur prépare au build (profs actifs seulement), passé une fois dans le layout. */
 export type DonneesMesCours = {
@@ -108,4 +108,16 @@ export function aVenir(jours: Map<string, JourCalendrier>, aujourdhui: string, n
     .sort((a, b) => a.iso.localeCompare(b.iso))
     .map((j) => ({ iso: j.iso, evenements: j.evenements.filter((e) => (e.source === "seance" ? Boolean(e.annulee) : e.type !== "info")) }))
     .filter((j) => j.evenements.length > 0);
+}
+
+/**
+ * Calendrier d'un prof vu par un de ses étudiants : seulement les cours qu'il suit avec ce prof et, si le groupe est connu,
+ * ce groupe. Restent aussi les dates du cours sans groupe (communes à tous) et celles sans cours (absences, activités).
+ */
+export function garderMonGroupe<T extends { cours?: string; groupe?: string }>(liste: T[], miens: MonCours[], canonique: (no: string) => string): T[] {
+  return liste.filter((x) => {
+    if (!x.cours) return true;
+    const m = miens.find((m) => m.cours === canonique(x.cours!));
+    return Boolean(m) && (!x.groupe || !m!.groupe || x.groupe === m!.groupe);
+  });
 }

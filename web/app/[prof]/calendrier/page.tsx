@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Conteneur, TitrePage } from "@/components/titre-page";
 import { VueDirecte } from "@/components/filtre-cours";
 import { StatutProf } from "@/components/statut-prof";
+import { BoutonPartager } from "@/components/bouton-partager";
 import { indexCours, prof, profs } from "@/lib/donnees";
 
 // Adresse directe /react/<prof>/calendrier/ (avec ?cours=... au besoin), pour les liens des sites de cours.
@@ -33,6 +34,7 @@ export default async function Page({ params }: PageProps<"/[prof]/calendrier">) 
           <Link href={`/${p.id}/horaire`} className="text-primary underline">
             Horaire
           </Link>
+          <BoutonPartager titre={`Calendrier de ${p.nom}`} />
         </div>
       </TitrePage>
       <Conteneur>

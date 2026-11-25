@@ -6,6 +6,7 @@ nom: "Maude Sabourin"
 courriel: maude.sabourin  # sans @cegepmontpetit.ca
 bureau: "E-213"
 actif: false  # pas actif cette session : enlève cette ligne au retour
+aide: [420-1B3-EM, 420-2W5-EM, 420-5L4-EM]   # cours pour lesquels tu peux aider (ceux de « cours » comptent d'office)
 # photo: prenom.jpg     # ajoute ta photo dans data/photos/
 # github: mon-pseudo
 # linkedin: mon-profil

@@ -19,10 +19,12 @@ bureau: "E-2xx"
 # actif: false                    # ex. congé, départ
 
 cours: [420-1P6-EM]               # numéros des cours que tu donnes cette session
+aide: [420-2P6-EM]                # autres cours pour lesquels tu peux aider au centre d'aide
 session: H2027                    # A = automne, H = hiver, E = été
 
 # ---------- Horaire de la semaine ----------
 # type : cours, dispo, centre-aide, reunion ou autre
+#   dispo : pour tes étudiants ; centre-aide : pour tous, selon « cours » et « aide » (page Centre d'aide)
 # jour : lundi, mardi, mercredi, jeudi ou vendredi
 # heures entre guillemets : "08:00"
 horaire:

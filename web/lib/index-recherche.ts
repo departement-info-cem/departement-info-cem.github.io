@@ -18,6 +18,7 @@ const PAGES: ElementRecherche[] = [
   { type: "page", titre: "Entreprises : offrir un stage", href: STAGES, motsCles: "stage stagiaire employeur recruter finissant emploi offre" },
   { type: "page", titre: "L'informatique, est-ce pour moi ?", href: "/orientation", motsCles: "bot orientation choisir" },
   { type: "page", titre: "Mes cours : mes profs, leurs dispos et mon horaire", href: "/mes-cours", motsCles: "groupe mon prof horaire personnaliser" },
+  { type: "page", titre: "Centre d'aide en informatique", href: "/centre-aide", motsCles: "tutorat soutien question dispo D-0008" },
   { type: "page", titre: "Profs : modifier ma page", href: "/modifier-mon-profil", motsCles: "horaire calendrier yaml" },
 ];
 

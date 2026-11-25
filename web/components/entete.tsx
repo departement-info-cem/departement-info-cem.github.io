@@ -11,6 +11,7 @@ import { useTheme, type Preference } from "@/app/_contexts/theme-context";
 import { GRILLES_DIRECTES, LIENS_LOGOS } from "@/lib/raccourcis";
 import { chemin } from "@/lib/chemins";
 import { cn } from "@/lib/utils";
+import { useMesCours } from "@/app/_contexts/mes-cours-context";
 
 export const GRILLES = [
   ...GRILLES_DIRECTES,
@@ -28,6 +29,7 @@ export const NAVIGATION = [
 
 export const RESSOURCES = [
   { href: "/mes-cours", texte: "Mes cours" },
+  { href: "/centre-aide", texte: "Centre d'aide" },
   { href: "/faq", texte: "FAQ" },
   { href: "/nouveau", texte: "Conseils aux nouveaux" },
   { href: "/logiciels", texte: "Logiciels gratuits" },
@@ -48,6 +50,9 @@ const SOUS_MENU =
 
 export function Entete({ index }: { index: ElementRecherche[] }) {
   const chemin = usePathname();
+  const { mesCours } = useMesCours();
+  // Le centre d'aide devient « Mon centre d'aide » quand l'étudiant a entré ses cours
+  const texteLien = (l: { href: string; texte: string }) => (l.href === "/centre-aide" && mesCours.length ? "Mon centre d'aide" : l.texte);
   const actif = (href: string) => chemin === href || chemin.startsWith(`${href}/`) || (href === "/maintenant" && chemin.startsWith("/locaux/")); // une page par labo
 
   return (
@@ -83,7 +88,7 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
             <div className={cn(SOUS_MENU, "right-0 w-56")}>
               {RESSOURCES.map((l) => (
                 <Link key={l.href} href={l.href} className="block rounded px-3 py-2 text-sm hover:bg-accent">
-                  {l.texte}
+                  {texteLien(l)}
                 </Link>
               ))}
             </div>
@@ -105,7 +110,7 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
               <nav className="flex flex-col gap-1 p-4">
                 {[{ href: "/", texte: "Accueil" }, ...GRILLES, ...NAVIGATION, ...RESSOURCES].map((l) => (
                   <Link key={l.href} href={l.href} className={cn("rounded-md px-3 py-2 font-medium hover:bg-accent", actif(l.href) && l.href !== "/" && "bg-accent")}>
-                    {l.texte}
+                    {texteLien(l)}
                   </Link>
                 ))}
               </nav>

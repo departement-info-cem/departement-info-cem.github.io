@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ExternalLink, FileText } from "lucide-react";
 import { Conteneur, TitrePage } from "@/components/titre-page";
-import { CalendrierMois } from "@/components/calendrier-mois";
+import { CalendrierEtudiant } from "@/components/calendrier-etudiant";
 import { calendrierScolaire } from "@/lib/donnees";
 import { formaterDate } from "@/lib/temps";
 import { bouton } from "@/lib/bouton";
@@ -32,7 +32,7 @@ export default function PageCalendrier() {
         </p>
       </TitrePage>
       <Conteneur>
-        <CalendrierMois scolaire={c} />
+        <CalendrierEtudiant scolaire={c} />
         <dl className="mt-6 grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2 lg:grid-cols-3">
           {[
             ["JR", "Journée particulière d'enseignement : reprise de cours ou d'examen"],

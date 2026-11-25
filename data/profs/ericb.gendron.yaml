@@ -7,6 +7,7 @@ courriel: ericb.gendron  # sans @cegepmontpetit.ca
 bureau: "E-210"
 actif: true  # coordination à temps plein : actif même sans cours (enlève cette ligne pour revenir au calcul automatique)
 photo: eg.jpg  # fichier dans data/photos/
+aide: [420-1X6-EM, 420-1C5-EM, 420-2S5-EM, 420-3C5-EM, 420-3X6-EM, 420-4U5-EM]   # cours pour lesquels tu peux aider (ceux de « cours » comptent d'office)
 # github: mon-pseudo
 linkedin: ericb-gendron
 

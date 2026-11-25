@@ -1,15 +1,11 @@
 "use client";
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Trash2, TriangleAlert, X } from "lucide-react";
-import type { Plage } from "@/app/_types/prof";
 import { useMesCours, useMonCalendrier } from "@/app/_contexts/mes-cours-context";
-import { useScolaire } from "@/app/_contexts/scolaire-context";
 import { AVenir } from "@/components/a-venir";
-import { CalendrierMois } from "@/components/calendrier-mois";
+import { MonCalendrier, MonHoraire } from "@/components/mon-horaire";
 import { AjoutCours, texteSeances } from "@/components/choix-groupe";
-import { HoraireSemaine } from "@/components/horaire-semaine";
 import { bouton } from "@/lib/bouton";
 import { chemin } from "@/lib/chemins";
 import { court, libelle, type MonCours } from "@/lib/mes-cours";
@@ -18,19 +14,10 @@ import type { LogicielAffiche } from "@/lib/donnees";
 // Page « Mes cours » : les choix de l'étudiant, son horaire avec les dispos de ses profs, les logiciels de ses cours.
 export function GestionMesCours({ logiciels }: { logiciels: LogicielAffiche[] }) {
   const { tous, mesCours, groupes, profs, cours: index, perime, retirer, vider } = useMesCours();
-  const [autresProfs, setAutresProfs] = useState(false);
   const groupeDe = (m: MonCours) => (m.prof ? groupes[m.cours]?.find((g) => g.prof === m.prof && g.groupe === m.groupe) : undefined);
   const perimes = tous.filter(perime);
 
-  const { seances, evenements, session, jours } = useMonCalendrier();
-  const scolaire = useScolaire();
-  // Mon horaire : les séances de mes groupes, puis les dispos de mes profs (et, au choix, des autres profs de mes cours)
-  const mesProfs = new Set(mesCours.flatMap((m) => (m.prof ? [m.prof] : [])));
-  const profsDeMesCours = new Set(mesCours.flatMap((m) => (groupes[m.cours] ?? []).map((g) => g.prof)).filter((id) => !mesProfs.has(id)));
-  const plages: Plage[] = [
-    ...seances,
-    ...[...mesProfs, ...(autresProfs ? profsDeMesCours : [])].flatMap((id) => (profs[id]?.dispos ?? []).map((d) => ({ ...d, titre: `${d.type === "centre-aide" ? "Centre d'aide" : "Dispo"} · ${profs[id].nom}` }))),
-  ];
+  const { jours } = useMonCalendrier();
   const mesNumeros = new Set(mesCours.map((m) => m.cours));
   const utiles = logiciels.filter((l) => l.coursLies.some((no) => mesNumeros.has(no)));
 
@@ -98,25 +85,15 @@ export function GestionMesCours({ logiciels }: { logiciels: LogicielAffiche[] })
 
       {mesCours.length > 0 && (
         <section>
-          <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-            <h2 className="text-2xl font-bold">Mon horaire</h2>
-            {profsDeMesCours.size > 0 && (
-              <label className="flex items-center gap-2 text-sm">
-                <input type="checkbox" checked={autresProfs} onChange={(e) => setAutresProfs(e.target.checked)} className="size-4 accent-[var(--primary)]" />
-                Ajouter les dispos des autres profs de mes cours
-              </label>
-            )}
-          </div>
-          <p className="mb-3 text-sm text-muted-foreground">Tes cours et les disponibilités de tes profs. Les congés et les horaires modifiés sont dans le calendrier de chaque prof.</p>
-          <HoraireSemaine plages={plages} cours={index} vide="Tes profs n'ont pas encore inscrit l'horaire de tes groupes." impression={{ titre: "Mon horaire", details: mesCours.map(libelle) }} />
+          <h2 id="horaire" className="mb-1 text-2xl font-bold">Mon horaire</h2>
+          <MonHoraire />
         </section>
       )}
 
       {mesCours.length > 0 && (
         <section>
-          <h2 className="mb-1 text-2xl font-bold">Mon calendrier</h2>
-          <p className="mb-3 text-sm text-muted-foreground">Tes séances, les dates que tes profs ont inscrites pour tes cours et ton groupe, et le calendrier du cégep. Les évaluations sommatives sont encadrées.</p>
-          <CalendrierMois scolaire={scolaire} plages={seances} evenements={evenements} sessionId={session} />
+          <h2 id="calendrier" className="mb-1 text-2xl font-bold">Mon calendrier</h2>
+          <MonCalendrier />
         </section>
       )}
 

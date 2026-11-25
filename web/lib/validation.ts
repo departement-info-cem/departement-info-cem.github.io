@@ -10,7 +10,7 @@ export type Probleme = { niveau: "erreur" | "avertissement"; ligne?: number; mes
 /** Noms de pages du site : un prof ne peut pas avoir l'un de ces identifiants. */
 export const ROUTES_RESERVEES = [
   "profs", "programmes", "orientation", "faq", "nouveau", "git", "logiciels", "plagiat",
-  "contact", "modifier-mon-profil", "logo", "photos", "_next", "index", "maintenant", "calendrier", "cours-service", "sites", "jeux", "images", "mes-cours",
+  "contact", "modifier-mon-profil", "logo", "photos", "_next", "index", "maintenant", "calendrier", "cours-service", "sites", "jeux", "images", "mes-cours", "centre-aide",
 ];
 
 function cheminLisible(chemin: PropertyKey[]): string {

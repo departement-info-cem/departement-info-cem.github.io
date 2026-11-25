@@ -103,6 +103,10 @@ export const profSchema = z
     /** Remplace le calcul de lib/actif.ts (cours cette session). À true pour la coordination. */
     actif: z.boolean({ error: "actif : écris true ou false, sans guillemets" }).optional(),
     cours: z.array(z.string()).optional(),
+    /** cours pour lesquels il peut aider (centre d'aide) ; ceux qu'il donne comptent d'office */
+    aide: z
+      .array(z.string({ error: "numéro de cours complet attendu, ex. 420-1P6-EM" }).regex(/^\d{3}-[0-9A-Z]{3}-[A-Z]{2}$/i, { error: (i) => `numéro de cours invalide « ${i.input} » (écris-le au complet, ex. 420-1P6-EM)` }))
+      .optional(),
     session: z.string().regex(/^[AHE]\d{4}$/, { error: "session invalide (ex. A2026 pour automne 2026, H2027 pour hiver 2027)" }).optional(),
     horaire: z
       .object({

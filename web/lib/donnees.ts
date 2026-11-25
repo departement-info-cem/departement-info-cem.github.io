@@ -210,6 +210,11 @@ export function coursDuProf(p: Prof): string[] {
   return [...new Set([...(p.cours ?? []), ...(p.horaire?.plages.flatMap((x) => (x.cours ? [x.cours] : [])) ?? [])].map(numeroCanonique))];
 }
 
+/** Les cours pour lesquels un prof peut aider : ceux qu'il donne et ceux du champ « aide », en numéros canoniques. */
+export function coursAide(p: Prof): string[] {
+  return [...new Set([...coursDuProf(p), ...(p.aide ?? []).map(numeroCanonique)])];
+}
+
 /** Pour « Mes cours » : les groupes de chaque cours (d'après les horaires des profs actifs), les cours et les dispos des profs. */
 export function donneesMesCours(date = new Date()): DonneesMesCours {
   const actifs = new Set(idsProfsActifs(date));
@@ -223,6 +228,7 @@ export function donneesMesCours(date = new Date()): DonneesMesCours {
       nom: p.nom,
       session: p.session,
       cours,
+      aide: coursAide(p),
       dispos: plages.filter((x) => x.type === "dispo" || x.type === "centre-aide"),
       calendrier: (p.calendrier ?? []).map((e) => (e.cours ? { ...e, cours: numeroCanonique(e.cours) } : e)),
     };

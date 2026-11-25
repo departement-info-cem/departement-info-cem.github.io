@@ -2,7 +2,7 @@
 import { useSearchParams } from "next/navigation";
 import type { Prof } from "@/app/_types/prof";
 import { useScolaire } from "@/app/_contexts/scolaire-context";
-import { CalendrierMois } from "@/components/calendrier-mois";
+import { CalendrierProf } from "@/components/calendrier-prof";
 import { HorairePrerempli } from "@/components/horaire-prerempli";
 import { HoraireSemaine, type InfoCours } from "@/components/horaire-semaine";
 
@@ -34,7 +34,7 @@ export function VueDirecte({ prof, vue, cours }: { prof: Prof; vue: "horaire" | 
           <HoraireSemaine plages={plages} debut={prof.horaire?.debut} fin={prof.horaire?.fin} cours={cours} impression={{ titre: prof.nom, details: [prof.bureau && `Bureau ${prof.bureau}`, session?.nom, demande] }} />
         </>
       ) : (
-        <CalendrierMois scolaire={scolaire} plages={plages} evenements={evenements} sessionId={prof.session} />
+        <CalendrierProf prof={prof.id} plages={plages} evenements={evenements} sessionId={prof.session} />
       )}
     </>
   );

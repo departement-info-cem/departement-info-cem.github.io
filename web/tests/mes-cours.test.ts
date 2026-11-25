@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { donneesMesCours } from "@/lib/donnees";
-import { aVenir, basculer, court, estPerime, evenementsPourMoi, libelle, lienAvecMoi, nettoyer, trierPourMoi, type InfoProfMesCours, type MonCours } from "@/lib/mes-cours";
+import { aVenir, basculer, garderMonGroupe, court, estPerime, evenementsPourMoi, libelle, lienAvecMoi, nettoyer, trierPourMoi, type InfoProfMesCours, type MonCours } from "@/lib/mes-cours";
 import { construireCalendrier } from "@/lib/calendrier";
 import { calendrierScolaire } from "@/lib/donnees";
 import { dateDepuisIso } from "@/lib/temps";
@@ -35,7 +35,7 @@ describe("mes cours", () => {
     expect(trierPourMoi(ids, (id) => lienAvecMoi(id, cours[id], mes))).toEqual(["joris", "b", "d", "a", "c"]);
   });
   it("un choix d'une autre session est périmé", () => {
-    const profs = { "joris.deguet": { nom: "Joris", session: "H2027", cours: [], dispos: [], calendrier: [] } };
+    const profs = { "joris.deguet": { nom: "Joris", session: "H2027", cours: [], aide: [], dispos: [], calendrier: [] } };
     expect(estPerime(cinqN6, profs)).toBe(true);
     expect(estPerime({ ...cinqN6, session: "H2027" }, profs)).toBe(false);
     expect(estPerime({ ...cinqN6, prof: "parti" }, profs)).toBe(true);
@@ -64,6 +64,7 @@ describe("mon calendrier", () => {
     nom: "Joris Deguet",
     session: "A2026",
     cours: ["420-5N6-EM", "420-SN1-RE"],
+    aide: [],
     dispos: [],
     calendrier: [
       { date: "2026-11-30", titre: "Examen final", type: "examen", cours: "420-5N6-EM", evaluation: "sommative" },
@@ -89,4 +90,22 @@ describe("mon calendrier", () => {
     // Le lundi 30, le cours a lieu normalement : il n'est pas dans « à venir »
     expect(liste.find((j) => j.iso === "2026-11-30")?.evenements.some((e) => e.source === "seance")).toBe(false);
   });
+});
+
+describe("calendrier d'un prof vu par son étudiant", () => {
+  const canonique = (no: string) => (no === "420-5N6-EM" ? "420-5M6-EM" : no);
+  const dates = [
+    { titre: "Examen gr. 1050", cours: "420-SN1-RE", groupe: "1050" },
+    { titre: "Examen gr. 1070", cours: "420-SN1-RE", groupe: "1070" },
+    { titre: "Pour tous les groupes", cours: "420-SN1-RE" },
+    { titre: "Absence" },
+    { titre: "Autre cours", cours: "420-5N6-EM", groupe: "1020" },
+  ];
+  it("garde mon groupe et les dates communes, pas les autres groupes ni les autres cours", () =>
+    expect(garderMonGroupe(dates, [{ cours: "420-SN1-RE", prof: "joris.deguet", groupe: "1070" }], canonique).map((d) => d.titre)).toEqual(["Examen gr. 1070", "Pour tous les groupes", "Absence"]));
+  it("compare les numéros canoniques (5N6 = 5M6)", () => {
+    expect(garderMonGroupe(dates, [{ cours: "420-5M6-EM", prof: "joris.deguet", groupe: "1020" }], canonique).map((d) => d.titre)).toEqual(["Absence", "Autre cours"]);
+    expect(garderMonGroupe(dates, [{ cours: "420-5M6-EM", prof: "joris.deguet", groupe: "1030" }], canonique).map((d) => d.titre)).toEqual(["Absence"]);
+  });
+  it("groupe inconnu : tous les groupes de mon cours", () => expect(garderMonGroupe(dates, [{ cours: "420-SN1-RE", prof: "joris.deguet" }], canonique)).toHaveLength(4));
 });

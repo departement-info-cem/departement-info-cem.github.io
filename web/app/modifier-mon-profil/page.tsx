@@ -103,6 +103,9 @@ https://info.cegepmontpetit.ca/react/prenom.nom/calendrier/?cours=420-5N6-EM`}</
               <p className="mt-2 text-muted-foreground">
                 type : <code>cours</code>, <code>dispo</code>, <code>centre-aide</code>, <code>reunion</code> ou <code>autre</code>.
               </p>
+              <p className="mt-2 text-muted-foreground">
+                <strong>centre-aide</strong> paraît sur la page Centre d&apos;aide, pour tes cours et ceux de <code>aide: [420-1P6-EM, 420-2P6-EM]</code> (en haut de ta fiche). <strong>dispo</strong> n&apos;y paraît pas comme présence.
+              </p>
             </div>
             <div className="rounded-lg border bg-card p-4">
               <h3 className="mb-2 font-bold">Une date du calendrier</h3>
