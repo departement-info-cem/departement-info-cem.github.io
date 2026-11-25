@@ -21,7 +21,10 @@ export function couleurBordure(plage: Pick<Plage, "type" | "cours">, coursOrdonn
   return BORDURES_COURS[(i < 0 ? 0 : i) % BORDURES_COURS.length];
 }
 
-export type PlagePositionnee = Plage & {
+/** Une plage à afficher dans un horaire qui n'est pas celui d'un seul prof : avec qui, et pour quoi. */
+export type PlageAffichee = Plage & { noms?: string[]; precision?: string };
+
+export type PlagePositionnee = PlageAffichee & {
   jourNormalise: Jour;
   debutMin: number;
   finMin: number;
@@ -31,7 +34,7 @@ export type PlagePositionnee = Plage & {
 };
 
 /** Regroupe les plages par jour et calcule les colonnes pour les chevauchements. */
-export function positionnerPlages(plages: Plage[]): Record<Jour, PlagePositionnee[]> {
+export function positionnerPlages(plages: PlageAffichee[]): Record<Jour, PlagePositionnee[]> {
   const parJour = Object.fromEntries(JOURS_OUVRABLES.map((j) => [j, [] as PlagePositionnee[]])) as Record<Jour, PlagePositionnee[]>;
 
   for (const p of plages) {

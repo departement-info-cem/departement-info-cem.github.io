@@ -3,7 +3,7 @@
 import type { CalendrierScolaire, Laboratoire } from "@/app/_types/divers";
 import type { EvenementProf, Plage, Prof } from "@/app/_types/prof";
 import { situationDuJour } from "@/lib/calendrier";
-import { estDispo, fusionnerDispos } from "@/lib/horaire";
+import { estDispo, fusionnerDispos, type PlageAffichee } from "@/lib/horaire";
 import { formaterHeure, heureEnMinutes, isoDepuisDate, jourDeLaSemaine, dateDepuisIso, minutesEnHeure, normaliserJour } from "@/lib/temps";
 
 export type ProfHoraire = Pick<Prof, "id" | "nom" | "session" | "calendrier" | "bureau" | "photo"> & { plages: Plage[] };
@@ -108,10 +108,10 @@ export function occupationsLocal(local: string, session: string, labo: Laboratoi
 }
 
 /**
- * Présences au centre d'aide dans un local : « Centre d'aide : Joris Deguet, Mathieu Dupont ». Les profs présents
+ * Présences au centre d'aide dans un local : « Centre d'aide » et les noms des profs. Ceux qui sont présents
  * à la même heure partagent une plage. À part des occupations : le local reste ouvert à tous.
  */
-export function presencesCentreAide(local: string, session: string, profs: ProfHoraire[]): Plage[] {
+export function presencesCentreAide(local: string, session: string, profs: ProfHoraire[]): PlageAffichee[] {
   const parPlage = new Map<string, { plage: Plage; noms: string[] }>();
   for (const p of profs) {
     if (p.session !== session) continue;
@@ -123,7 +123,7 @@ export function presencesCentreAide(local: string, session: string, profs: ProfH
       else if (!deja.noms.includes(p.nom)) deja.noms.push(p.nom);
     }
   }
-  return [...parPlage.values()].map(({ plage, noms }) => ({ ...plage, titre: `Centre d'aide : ${noms.join(", ")}`, local: undefined }));
+  return [...parPlage.values()].map(({ plage, noms }) => ({ ...plage, titre: "Centre d'aide", noms, local: undefined }));
 }
 
 export type EtatLabo = { etat: "libre" | "occupe" | "inconnu"; occupation?: Occupation; jusqua?: string; raison?: string };

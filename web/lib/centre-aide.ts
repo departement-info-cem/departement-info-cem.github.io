@@ -1,5 +1,6 @@
 // Centre d'aide : qui y est, quand, et pour quels cours. Logique pure, testée.
 import type { Plage } from "@/app/_types/prof";
+import type { PlageAffichee } from "@/lib/horaire";
 import { court, type DonneesMesCours } from "@/lib/mes-cours";
 
 type Profs = DonneesMesCours["profs"];
@@ -19,9 +20,9 @@ export function aidants(profs: Profs, options: { cours?: string[]; session?: str
   });
 }
 
-/** L'horaire du centre d'aide. Avec des cours choisis, chaque présence dit pour lesquels : « Joris Deguet · 5M6, SN1 ». */
-export function horaireCentreAide(liste: Aidant[], avecCours: boolean): Plage[] {
-  return liste.flatMap((a) => a.plages.map((p) => ({ ...p, titre: avecCours ? `${a.nom} · ${a.cours.map(court).join(", ")}` : a.nom })));
+/** L'horaire du centre d'aide : le nom du prof et, avec des cours choisis, pour lesquels (« 5M6, SN1 »). */
+export function horaireCentreAide(liste: Aidant[], avecCours: boolean): PlageAffichee[] {
+  return liste.flatMap((a) => a.plages.map((p) => ({ ...p, titre: undefined, noms: [a.nom], precision: avecCours ? a.cours.map(court).join(", ") : undefined })));
 }
 
 /** Les profs qui peuvent aider dans un cours mais ne sont pas au centre d'aide : leurs dispos au bureau restent une solution. */

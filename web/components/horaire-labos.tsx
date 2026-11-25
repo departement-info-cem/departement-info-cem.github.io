@@ -68,7 +68,7 @@ export function HoraireLabo({ labo, profs, cours }: { labo: Laboratoire; profs: 
         <p className="mb-3 rounded-md border border-cem-jaune bg-cem-jaune-pale text-cem-marine p-2 text-sm">Horaire incomplet : d&apos;autres cours peuvent avoir lieu dans ce local.</p>
       )}
       <HoraireSemaine
-        plages={[...presences, ...occupations.map((o) => ({ jour: o.jour, debut: o.debut, fin: o.fin, type: o.cours ? ("cours" as const) : ("autre" as const), cours: o.cours, groupe: o.groupe, titre: o.titre, local: o.prof }))]}
+        plages={[...presences, ...occupations.map((o) => ({ jour: o.jour, debut: o.debut, fin: o.fin, type: o.cours ? ("cours" as const) : ("autre" as const), cours: o.cours, groupe: o.groupe, titre: o.titre, noms: o.prof?.split(", ") }))]}
         fin="20:00"
         cours={cours}
         vide="Aucun cours connu dans ce local pour cette session."

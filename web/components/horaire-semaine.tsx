@@ -1,13 +1,15 @@
 "use client";
 import { useMemo, useState } from "react";
 import { MapPin, Printer } from "lucide-react";
-import type { Plage, TypePlage } from "@/app/_types/prof";
+import type { TypePlage } from "@/app/_types/prof";
 import { LIBELLES_TYPES_PLAGE } from "@/app/_types/prof";
-import { COULEURS_TYPES, couleurBordure, positionnerPlages } from "@/lib/horaire";
+import { COULEURS_TYPES, couleurBordure, positionnerPlages, type PlageAffichee, type PlagePositionnee } from "@/lib/horaire";
 import { heureEnMinutes, JOURS_OUVRABLES, jourDeLaSemaine, LIBELLES_JOURS, minutesEnHeure } from "@/lib/temps";
 import { useMaintenant } from "@/app/_hooks/use-maintenant";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
+import { ContenuBloc, textesPlage } from "@/components/bloc-horaire";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 
 export type InfoCours = Record<string, { no: string; nom: string; url?: string }>;
 
@@ -17,13 +19,15 @@ export type Impression = { titre: string; details: (string | undefined)[] };
 const PIXELS_PAR_MINUTE = 1.1;
 // Espace en haut et en bas des colonnes : les heures sont centrées sur leur ligne et déborderaient sur l'en-tête.
 const MARGE = 12;
-// Au-delà, le bloc est assez haut pour tout afficher : pas besoin d'infobulle.
+// Au-delà, le bloc est assez haut pour tout afficher : pas besoin d'infobulle (un clic donne le détail de tous les blocs).
 const DUREE_MAX_INFOBULLE = 60;
 
 // Horaire de la semaine d'un prof. Porté du composant WeeklySchedule du cours 5N6.
-export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours = {}, vide = "Aucun horaire publié pour l'instant.", impression }: { plages: Plage[]; debut?: string; fin?: string; cours?: InfoCours; vide?: string; impression?: Impression }) {
+export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours = {}, vide = "Aucun horaire publié pour l'instant.", impression }: { plages: PlageAffichee[]; debut?: string; fin?: string; cours?: InfoCours; vide?: string; impression?: Impression }) {
   const maintenant = useMaintenant();
   const [types, setTypes] = useState<Set<TypePlage>>(new Set(["cours", "dispo", "centre-aide", "reunion", "autre"]));
+
+  const [detail, setDetail] = useState<PlagePositionnee | null>(null);
 
   const parJour = useMemo(() => positionnerPlages(plages.filter((p) => types.has(p.type))), [plages, types]);
   const coursOrdonnes = useMemo(() => [...new Set(plages.filter((p) => p.cours).map((p) => p.cours!.toUpperCase()))], [plages]);
@@ -113,36 +117,17 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
                 </div>
               )}
               {parJour[j]?.map((p, i) => {
+                const duree = p.finMin - p.debutMin;
                 const couleurs = COULEURS_TYPES[p.type];
-                const info = p.cours ? cours[p.cours.toUpperCase()] : undefined;
-                const titre = p.titre ?? info?.nom ?? (p.type === "cours" ? p.cours : LIBELLES_TYPES_PLAGE[p.type]);
                 const largeur = 100 / p.colonnes;
-                const contenu = (
-                  <>
-                    <div className="font-semibold leading-tight">{titre}</div>
-                    <div className="opacity-80">
-                      {p.debut}–{p.fin}
-                    </div>
-                    {p.cours && (
-                      <div className="opacity-80">
-                        {p.cours}
-                        {p.groupe && ` gr. ${p.groupe}`}
-                      </div>
-                    )}
-                    {info && info.nom !== titre && <div className="opacity-80">{info.nom}</div>}
-                    {p.local && (
-                      <div className="flex items-center justify-center gap-0.5 opacity-80">
-                        <MapPin className="size-3" />
-                        {p.local}
-                      </div>
-                    )}
-                  </>
-                );
                 const bloc = {
-                  className: "absolute z-10 overflow-hidden break-words rounded-md hyphens-auto border-l-4 px-1.5 py-1 flex flex-col justify-center text-center text-xs shadow-sm",
+                  type: "button" as const,
+                  onClick: () => setDetail(p),
+                  "aria-haspopup": "dialog" as const,
+                  className: `@container absolute z-10 flex flex-col overflow-hidden rounded-md border-l-4 px-1 ${duree <= 45 ? "py-px" : "py-1"} text-center text-xs shadow-sm cursor-pointer transition hover:z-30 hover:shadow-md`,
                   style: {
                     top: `calc(${y(p.debutMin)} + 1px)`,
-                    height: `calc(${longueur(p.finMin - p.debutMin)} - 2px)`,
+                    height: `calc(${longueur(duree)} - 2px)`,
                     left: `calc(${p.colonne * largeur}% + 2px)`,
                     width: `calc(${largeur}% - 4px)`,
                     background: couleurs.fond,
@@ -150,20 +135,22 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
                     borderLeftColor: p.type === "cours" ? couleurBordure(p, coursOrdonnes) : "rgb(0 0 0 / 15%)",
                   },
                 };
-                // Un bloc court coupe son texte (souvent le local) : l'infobulle le montre en entier.
-                if (p.finMin - p.debutMin > DUREE_MAX_INFOBULLE) {
+                const contenu = <ContenuBloc p={p} cours={cours} />;
+                if (duree > DUREE_MAX_INFOBULLE) {
                   return (
-                    <div key={i} {...bloc}>
+                    <button key={i} {...bloc}>
                       {contenu}
-                    </div>
+                    </button>
                   );
                 }
                 return (
                   <Tooltip key={i}>
-                    <TooltipTrigger render={<div />} {...bloc} className={`${bloc.className} transition hover:z-30 hover:shadow-md`} tabIndex={0}>
+                    <TooltipTrigger render={<button />} {...bloc}>
                       {contenu}
                     </TooltipTrigger>
-                    <TooltipContent className="flex-col items-start gap-0.5">{contenu}</TooltipContent>
+                    <TooltipContent className="flex-col items-start gap-0.5">
+                      <DetailPlage p={p} cours={cours} />
+                    </TooltipContent>
                   </Tooltip>
                 );
               })}
@@ -171,6 +158,49 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
           ))}
         </div>
       </div>
+
+      <Dialog open={detail !== null} onOpenChange={(o) => !o && setDetail(null)}>
+        <DialogContent>
+          {detail && (
+            <>
+              <DialogTitle>{textesPlage(detail, cours).titre}</DialogTitle>
+              <DialogDescription>
+                {LIBELLES_JOURS[detail.jourNormalise]}, {detail.debut}–{detail.fin}
+              </DialogDescription>
+              <div className="space-y-1">
+                <DetailPlage p={detail} cours={cours} sansTitre />
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
+  );
+}
+
+// Tout ce qu'on sait d'une plage, sans abréger (infobulle et fenêtre de détails).
+function DetailPlage({ p, cours, sansTitre = false }: { p: PlageAffichee; cours: InfoCours; sansTitre?: boolean }) {
+  const t = textesPlage(p, cours);
+  const type = LIBELLES_TYPES_PLAGE[p.type];
+  return (
+    <>
+      {!sansTitre && <div className="font-semibold">{t.titre}</div>}
+      {!sansTitre && (
+        <div>
+          {p.debut}–{p.fin}
+        </div>
+      )}
+      {type !== t.titre && <div>{type}</div>}
+      {t.noms.length > 0 && <div>{t.noms.join(", ")}</div>}
+      {p.precision && <div>{p.precision}</div>}
+      {t.sigle && <div>{t.sigle}</div>}
+      {t.nomCours && <div>{t.nomCours}</div>}
+      {p.local && (
+        <div className="flex items-center gap-1">
+          <MapPin className="size-3.5" />
+          {p.local}
+        </div>
+      )}
+    </>
   );
 }

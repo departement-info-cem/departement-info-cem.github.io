@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
-import type { Plage } from "@/app/_types/prof";
 import { useMesCours, useMonCalendrier } from "@/app/_contexts/mes-cours-context";
 import { useScolaire } from "@/app/_contexts/scolaire-context";
 import { CalendrierMois } from "@/components/calendrier-mois";
 import { HoraireSemaine } from "@/components/horaire-semaine";
-import { libelle } from "@/lib/mes-cours";
+import { LIBELLES_TYPES_PLAGE } from "@/app/_types/prof";
+import type { PlageAffichee } from "@/lib/horaire";
+import { court, libelle } from "@/lib/mes-cours";
 
 // L'horaire et le calendrier de l'étudiant, d'après « Mes cours » (page Mes cours et page Calendrier).
 
@@ -16,9 +17,9 @@ export function MonHoraire() {
   const [autresProfs, setAutresProfs] = useState(false);
   const mesProfs = new Set(mesCours.flatMap((m) => (m.prof ? [m.prof] : [])));
   const profsDeMesCours = new Set(mesCours.flatMap((m) => (groupes[m.cours] ?? []).map((g) => g.prof)).filter((id) => !mesProfs.has(id)));
-  const plages: Plage[] = [
-    ...seances,
-    ...[...mesProfs, ...(autresProfs ? profsDeMesCours : [])].flatMap((id) => (profs[id]?.dispos ?? []).map((d) => ({ ...d, titre: `${d.type === "centre-aide" ? "Centre d'aide" : "Dispo"} · ${profs[id].nom}` }))),
+  const plages: PlageAffichee[] = [
+    ...mesCours.flatMap((m) => seances.filter((s) => s.cours === m.cours && s.groupe === m.groupe).map((s) => ({ ...s, titre: court(m.cours), noms: m.prof && profs[m.prof] ? [profs[m.prof].nom] : [] }))),
+    ...[...mesProfs, ...(autresProfs ? profsDeMesCours : [])].flatMap((id) => (profs[id]?.dispos ?? []).map((d) => ({ ...d, titre: d.type === "centre-aide" ? LIBELLES_TYPES_PLAGE["centre-aide"] : "Dispo", noms: [profs[id].nom] }))),
   ];
   return (
     <>
