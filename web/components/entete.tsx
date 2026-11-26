@@ -20,6 +20,7 @@ export const GRILLES = [
   { href: "/programmes", texte: "Tous les programmes", sousTitre: "AEC, comparateur" },
   { href: "/cours-service", texte: "Sciences de la nature et cours de service", sousTitre: "SN1, TIM, TAG, Z03" },
   { href: "/orientation", texte: "Est-ce pour moi ?", sousTitre: "Quelques questions pour t'orienter" },
+  { href: "/jeux", texte: "Mini-jeux", sousTitre: "Programme un robot, répare un réseau" },
 ];
 
 export const NAVIGATION = [

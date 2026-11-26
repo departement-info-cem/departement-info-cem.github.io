@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import fs from "node:fs";
 import path from "node:path";
+import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { Conteneur, TitrePage } from "@/components/titre-page";
 import { ApercuYaml } from "@/components/apercu-yaml";
@@ -142,6 +143,13 @@ https://info.cegepmontpetit.ca/react/prenom.nom/calendrier/?cours=420-5N6-EM`}</
           <h2 className="mb-2 text-2xl font-bold">Aperçu en direct</h2>
           <p className="mb-4 text-muted-foreground">Rien n&apos;est envoyé nulle part : tout se passe dans ton navigateur.</p>
           <ApercuYaml modele={modeleProf()} exemples={exemples} scolaire={calendrierScolaire()} cours={indexCours()} photos={photos} />
+        </section>
+        <section>
+          <h2 className="mb-2 text-2xl font-bold">Entre profs</h2>
+          <p className="text-muted-foreground">
+            Une rencontre à organiser ? <Link href="/profs/rencontre" className="font-semibold text-primary underline">Trouve un moment où tout le monde est libre</Link>, d&apos;après
+            l&apos;horaire des fiches. Plus ton horaire est complet, plus le résultat est juste.
+          </p>
         </section>
       </Conteneur>
     </>

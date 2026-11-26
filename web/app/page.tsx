@@ -1,21 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowRight, Backpack, Briefcase, ChevronDown, Code2, FilePen, GraduationCap, Network, School } from "lucide-react";
+import { ArrowDown, ArrowRight, Backpack, Briefcase, ChevronDown, Code2, FilePen, Gamepad2, GraduationCap, Network, School } from "lucide-react";
 import { bot, faq, idsProfsActifs, profs, programmes } from "@/lib/donnees";
 import { ETUDIANT_D_UN_JOUR, PORTES_OUVERTES, STAGES } from "@/lib/raccourcis";
 import { chemin } from "@/lib/chemins";
 import { BotOrientation } from "@/components/bot-orientation";
 import { AvatarProf } from "@/components/carte-prof";
 import { DateAVenir } from "@/components/date-a-venir";
+import { CartesJeux } from "@/components/jeux/cartes-jeux";
 
 // L'accueil s'adresse aux futurs étudiants et à leurs parents. L'étudiant inscrit a le menu
 // (sites des cours, profs, locaux, calendrier) et la recherche de l'en-tête, qui trouve aussi le site de chaque cours.
 
 // La barre de chaque parcours est proportionnelle à sa durée (sur 5 ans) ; l'année du stage est en vert.
 const PARCOURS = [
-  { id: "dec-prog", icone: Code2, etiquette: "DEC technique · 3 ans", titre: "Développement d'applications", ans: 3, stage: true, note: "Stage en entreprise à la dernière session", apres: ["Marché du travail", "ou université"] },
-  { id: "dec-reseau", icone: Network, etiquette: "DEC technique · 3 ans", titre: "Réseaux et cybersécurité", ans: 3, stage: true, note: "Stage en entreprise à la dernière session", apres: ["Marché du travail", "ou université"] },
-  { id: "dec-bac", icone: GraduationCap, etiquette: "DEC-BAC avec l'Université de Sherbrooke · 5 ans", titre: "DEC + baccalauréat en informatique", ans: 5, stage: false, note: "3 sessions par année, avec des stages", apres: ["DEC et baccalauréat"] },
+  { id: "dec-prog", icone: Code2, etiquette: "DEC technique · 3 ans", titre: "Développement d'applications", ans: 3, stage: true, note: "Stage en entreprise à la dernière session", apres: ["Marché du travail", "ou université"], jeu: { href: "/jeux/programmation", texte: "Essayer : programme un robot" } },
+  { id: "dec-reseau", icone: Network, etiquette: "DEC technique · 3 ans", titre: "Réseaux et cybersécurité", ans: 3, stage: true, note: "Stage en entreprise à la dernière session", apres: ["Marché du travail", "ou université"], jeu: { href: "/jeux/reseau", texte: "Essayer : répare un réseau" } },
+  { id: "dec-bac", icone: GraduationCap, etiquette: "DEC-BAC avec l'Université de Sherbrooke · 5 ans", titre: "DEC + baccalauréat en informatique", ans: 5, stage: false, note: "3 sessions par année, avec des stages", apres: ["DEC et baccalauréat"], jeu: undefined },
 ];
 
 // Mosaïque de photos : la grande et la verticale occupent deux rangées, les autres comblent les trous.
@@ -114,9 +115,16 @@ export default function Accueil() {
                   <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{c.etiquette}</p>
                   <h3 className="text-xl font-bold">{c.titre}</h3>
                   <p className="mt-1 text-sm">{parId[c.id]?.resume}</p>
-                  <Link href={`/programmes/${c.id}`} className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
-                    Voir la grille de cours <ArrowRight className="size-3.5" />
-                  </Link>
+                  <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1">
+                    <Link href={`/programmes/${c.id}`} className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+                      Voir la grille de cours <ArrowRight className="size-3.5" />
+                    </Link>
+                    {c.jeu && (
+                      <Link href={c.jeu.href} className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+                        <Gamepad2 className="size-4" /> {c.jeu.texte}
+                      </Link>
+                    )}
+                  </div>
                 </div>
               </div>
               <div>
@@ -149,6 +157,24 @@ export default function Accueil() {
       </section>
 
       {/* ---------- À quoi ça ressemble : les photos et les visages ---------- */}
+      {/* ---------- Les mini-jeux : goûter à la programmation et au réseau avant de choisir ---------- */}
+      <section id="jeux" className="mx-auto max-w-6xl px-4 pb-14">
+        <div className="flex flex-wrap items-end justify-between gap-2">
+          <div>
+            <h2 className="flex items-center gap-2 text-3xl font-bold">
+              <Gamepad2 className="size-8 text-primary" /> Essaie avant de choisir
+            </h2>
+            <p className="mt-1 text-muted-foreground">Deux petits jeux, cinq niveaux chacun, sans rien connaître d&apos;avance. Si tu y prends plaisir, c&apos;est bon signe.</p>
+          </div>
+          <Link href="/jeux" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+            Tous les jeux <ArrowRight className="size-3.5" />
+          </Link>
+        </div>
+        <div className="mt-6">
+          <CartesJeux />
+        </div>
+      </section>
+
       <section className="bg-cem-marine text-white">
         <div className="mx-auto max-w-6xl px-4 py-14">
           <h2 className="text-3xl font-bold text-white">À quoi ça ressemble</h2>
