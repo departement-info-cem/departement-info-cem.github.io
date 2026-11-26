@@ -52,12 +52,14 @@
   nom: Programmation objet en TI
   heures: 90
   tags:
+    - prog
     - git
     - python
 - no: 420-2W6-EM
   nom: Programmation Web serveur
   heures: 90
   tags:
+    - prog
     - web
   alias:
     - { no: 420-2W5-EM, nom: "Prog. Web serveur" }   # ancien programme
@@ -83,6 +85,7 @@
   nom: Introduction à la programmation mobile
   heures: 75
   tags:
+    - prog
     - mobile
     - git
   url: https://info.cegepmontpetit.ca/3M5-Intro-Mobile/
@@ -90,6 +93,7 @@
   nom: Programmation web transactionnelle
   heures: 90
   tags:
+    - prog
     - web
     - bd
     - git
@@ -98,6 +102,7 @@
   nom: Automatisation de tâches
   heures: 75
   tags:
+    - prog
     - automatisation
   url: https://info.cegepmontpetit.ca/3t5-automatisation/
 - no: 420-3C5-EM
@@ -122,6 +127,7 @@
   nom: Solutions applicatives
   heures: 60
   tags:
+    - prog
     - solutions
   alias:
     - { no: 420-4E4-EM, nom: "Solutions technologiques en programmation" }   # ancien programme
@@ -129,6 +135,7 @@
   nom: Bases de données et programmation Web
   heures: 90
   tags:
+    - prog
     - bd
   url: https://info.cegepmontpetit.ca/4D5-Base-De-Donnees-Et-Prog-Web/
   alias:
@@ -137,6 +144,7 @@
   nom: Applications mobiles
   heures: 90
   tags:
+    - prog
     - mobile
     - git
   url: https://github.com/departement-info-cem/4N6-Mobile/
@@ -146,6 +154,7 @@
   nom: Programmation web orientée services
   heures: 90
   tags:
+    - prog
     - web
     - git
   url: https://info.cegepmontpetit.ca/4W6-WebServices/
@@ -198,6 +207,7 @@
   nom: Applications mobiles avancées
   heures: 90
   tags:
+    - prog
     - mobile
     - web
     - git
@@ -251,6 +261,7 @@
 - no: 420-6P5-EM
   nom: Projet en développement d'applications
   tags:
+    - prog
     - pro
   url: https://info.cegepmontpetit.ca/projet-prog/
 - no: MAT 099i
@@ -276,6 +287,7 @@
   ecole: UdeS
   fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT339
   tags:
+    - prog
     - algo
 - no: MAT 115
   nom: Logique et mathématiques discrètes
@@ -333,12 +345,14 @@
 - no: 420-6P3-EM
   nom: Projet de fin d'études en programmation
   tags:
+    - prog
     - pro
 - no: IFT 232
   nom: Méthodes de conception orientée objet
   ecole: UdeS
   fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT232
   tags:
+    - prog
     - algo
 - no: IFT 313
   nom: Introduction aux langages formels
@@ -372,6 +386,8 @@
     - os
 - no: IFT 359
   nom: Programmation fonctionnelle
+  tags:
+    - prog
   ecole: UdeS
   fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT359
 - no: IFT 630
@@ -379,6 +395,7 @@
   ecole: UdeS
   fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT630
   tags:
+    - prog
     - algo
 - no: 420-SN1-RE
   nom: Programmation en sciences
@@ -421,5 +438,6 @@
 - no: 420-Z03-EM
   nom: Introduction à la programmation web
   tags:
+    - prog
     - web
   url: https://info.cegepmontpetit.ca/z03/
