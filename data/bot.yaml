@@ -68,6 +68,7 @@ resultats:
     texte: "Développer des apps, c'est ici. En 3 ans, tu programmes des applications web et mobiles et tu es prêt pour le marché du travail."
     liens:
       - { texte: "Voir la grille DEC Dév", href: /programmes/dec-prog }
+      - { texte: "Essayer : programme un robot", href: /jeux/programmation }
   dec-prog-peut-etre:
     titre: "DEC technique, profil programmation"
     compatibilite: 100
@@ -88,6 +89,7 @@ resultats:
     texte: "Le réseau, c'est ici : serveurs Windows et Linux, Cisco, virtualisation, infonuagique et scripts."
     liens:
       - { texte: "Voir la grille DEC Réseau", href: /programmes/dec-reseau }
+      - { texte: "Essayer : répare un réseau", href: /jeux/reseau }
   cyber:
     titre: "La cybersécurité, dans les deux profils"
     compatibilite: 100
@@ -101,6 +103,7 @@ resultats:
     texte: "Le support technique, c'est souvent le début d'une carrière en réseau. La technique profil réseau est faite pour toi."
     liens:
       - { texte: "Voir la grille DEC Réseau", href: /programmes/dec-reseau }
+      - { texte: "Essayer : répare un réseau", href: /jeux/reseau }
   jeux:
     titre: "La technique, puis l'université"
     compatibilite: 70
@@ -135,6 +138,7 @@ resultats:
     compatibilite: 50
     texte: "Tu ne connais pas encore trop l'informatique. Regarde les cours des grilles pour te faire une idée, et viens aux portes ouvertes du cégep."
     liens:
+      - { texte: "Essayer les mini-jeux", href: /jeux }
       - { texte: "Toutes les grilles", href: /programmes }
   pas-info:
     titre: "0 % de compatibilité"
