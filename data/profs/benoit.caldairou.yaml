@@ -25,9 +25,14 @@ horaire:
   plages:
     - { jour: lundi, debut: "08:00", fin: "10:30", type: cours, cours: 420-3M5-EM, groupe: 1010, local: D-0603 }
     - { jour: lundi, debut: "10:30", fin: "13:00", type: cours, cours: 420-3M5-EM, groupe: 1020, local: D-0603 }
+    - { jour: mardi, debut: "11:00", fin: "12:00", type: dispo, local: E-252}
     - { jour: mardi, debut: "12:00", fin: "15:00", type: cours, cours: 420-1X6-EM, groupe: 1060, local: D-0602 }
-    - { jour: mercredi, debut: "09:00", fin: "12:00", type: cours, cours: 420-3M5-EM, groupe: 1020, local: D-0604 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
-    - { jour: mercredi, debut: "14:00", fin: "17:00", type: cours, cours: 420-3M5-EM, groupe: 1010, local: D-0604 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
+    - { jour: mardi, debut: "15:00", fin: "16:00", type: dispo, local: E-252}
+    - { jour: mercredi, debut: "09:00", fin: "09:30", type: dispo, local: D-0604}
+    - { jour: mercredi, debut: "09:30", fin: "12:00", type: cours, cours: 420-3M5-EM, groupe: 1020, local: D-0604 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
+    - { jour: mercredi, debut: "14:00", fin: "16:30", type: cours, cours: 420-3M5-EM, groupe: 1010, local: D-0604 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
+    - { jour: mercredi, debut: "16:30", fin: "17:00", type: dispo, local: D-0604}
+    - { jour: vendredi, debut: "11:00", fin: "12:00", type: dispo, local: D-0008}
     - { jour: vendredi, debut: "12:00", fin: "15:00", type: cours, cours: 420-1X6-EM, groupe: 1060, local: D-0624 }
 #    - { jour: mardi, debut: "13:00", fin: "15:00", type: dispo, local: E-2xx }   # exemple de disponibilité
 
