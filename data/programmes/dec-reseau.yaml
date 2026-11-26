@@ -7,7 +7,7 @@ code: 420.B0
 famille: dec-technique
 duree: 3 ans (6 sessions)
 ordre: 2
-resume: "Mettre en place réseaux et infrastructures : Cisco, serveurs Windows et Linux, scripts, et une infra impossible à pirater."
+resume: "Installer, configurer et gérer les systèmes et les réseaux d’une entreprise : postes et serveurs Windows et Linux, équipements Cisco, virtualisation, infonuagique, scripts d’automatisation, et une infra impossible à pirater."
 sessions:
   - titre: Session 1
     cours:

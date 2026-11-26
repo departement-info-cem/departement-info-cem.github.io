@@ -85,7 +85,7 @@ function CarteCours({ c, attenue, commun, onClick }: { c: CoursAffiche; attenue:
     <button
       onClick={onClick}
       className={`group w-full rounded-md border p-2.5 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${
-        ecole ? "border-cem-vert bg-cem-vert-pale text-cem-marine" : c.departement ? "border-l-4 border-l-primary bg-card" : "bg-muted"
+        ecole ? "border-cem-vert bg-cem-vert-pale text-cem-marine" : c.departement ? "border-l-4 border-l-primary bg-card" : "border-l-4 border-l-cem-jaune bg-card"
       } ${attenue ? "opacity-25" : ""}`}
     >
       <div className="flex items-start justify-between gap-2">
@@ -212,7 +212,7 @@ export function GrilleProgramme({
           <span className="inline-block h-3 w-4 rounded-sm border-l-4 border-l-primary bg-card" /> Cours du département d&apos;informatique
         </span>
         <span className="flex items-center gap-1">
-          <span className="inline-block h-3 w-4 rounded-sm bg-muted" /> Autres cours (formation générale, sciences...)
+          <span className="inline-block h-3 w-4 rounded-sm border-l-4 border-l-cem-jaune bg-card" /> Autres cours (formation générale, sciences...)
         </span>
         {tous.some((c) => c.ecole === "UdeS") && (
           <span className="flex items-center gap-1">

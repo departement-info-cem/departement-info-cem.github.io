@@ -86,7 +86,7 @@ resultats:
   dec-reseau:
     titre: "DEC technique, profil réseau"
     compatibilite: 100
-    texte: "Le réseau, c'est ici : serveurs Windows et Linux, Cisco, virtualisation, infonuagique et scripts."
+    texte: "Le réseau, c'est ici : installer et gérer des systèmes et des serveurs Windows et Linux, Cisco, virtualisation, infonuagique et scripts."
     liens:
       - { texte: "Voir la grille DEC Réseau", href: /programmes/dec-reseau }
       - { texte: "Essayer : répare un réseau", href: /jeux/reseau }
