@@ -8,7 +8,6 @@ nom: "Prénom Nom"
 courriel: prenom.nom              # sans @cegepmontpetit.ca, identique au nom du fichier
 bureau: "E-2xx"
 # photo: prenom.jpg               # ajoute ta photo dans data/photos/ (format portrait de préférence)
-# poste: "2575"                   # poste téléphonique
 # github: mon-pseudo
 # linkedin: mon-profil
 # site: https://mon-site.com
@@ -37,5 +36,5 @@ horaire:
 calendrier:
   - { date: 2027-02-15, titre: Remise du TP1, cours: 420-1P6-EM, type: remise }
   - { date: 2027-03-22, titre: Examen intra, cours: 420-1P6-EM, type: examen }
-  - { date: 2027-04-05, au: 2027-04-06, titre: Absent (colloque), type: absence, description: Colloque à Québec. }
+  - { date: 2027-04-05, au: 2027-04-06, type: absence }
   - { date: 2027-04-07, remplace: 2027-04-05, type: deplacement, cours: 420-1P6-EM, groupe: 1010 }   # ajoute debut, fin, local si différents

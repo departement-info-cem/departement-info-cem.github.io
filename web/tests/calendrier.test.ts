@@ -33,7 +33,7 @@ describe("construireCalendrier", () => {
   it("mardi 6 octobre suit l'horaire du lundi", () => expect(seances("2026-10-06")).toEqual(["420-1P6-EM"]));
   it("rien hors de la session", () => expect(seances("2027-01-11")).toEqual([]));
   it("étale un événement sur plusieurs jours", () => {
-    for (const d of ["2026-11-03", "2026-11-04"]) expect(cal.get(d)?.evenements.some((e) => e.titre === "Colloque")).toBe(true);
+    for (const d of ["2026-11-03", "2026-11-04"]) expect(cal.get(d)?.evenements.some((e) => e.titre === "Cours annulé")).toBe(true);
   });
 });
 
@@ -100,7 +100,7 @@ describe("absences et déplacements", () => {
     expect(c.get("2026-11-09")?.evenements.find((e) => e.source === "seance")?.annulee).toContain("déplacé au mercredi 11 novembre");
     expect(c.get("2026-11-11")?.evenements.find((e) => e.type === "deplacement")).toMatchObject({ heure: "08:00–11:00", cours: "420-1P6-EM" });
   });
-  it("annule les cours pendant une absence", () => expect(c.get("2026-11-17")?.evenements.find((e) => e.source === "seance")?.annulee).toContain("absence"));
+  it("annule les cours pendant une absence", () => expect(c.get("2026-11-17")?.evenements.find((e) => e.source === "seance")?.annulee).toBe("annulé"));
 });
 
 describe("en ce moment", () => {

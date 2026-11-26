@@ -87,5 +87,5 @@ calendrier:
   - { date: 2026-12-11, titre: "Remise finale TP2 (15 %)", cours: 420-SN1-RE, groupe: 1070, type: remise, evaluation: sommative }
   - { date: 2026-12-11, titre: "Remise finale TP2 (15 %)", cours: 420-SN1-RE, groupe: 1080, type: remise, evaluation: sommative }
 #  - { date: 2026-10-20, titre: Examen intra, cours: 420-5N6-EM, type: examen }
-#  - { date: 2026-11-03, au: 2026-11-06, titre: Absent (colloque), type: absence }
+#  - { date: 2026-11-03, au: 2026-11-06, type: absence }
 #  - { date: 2026-12-10, remplace: 2026-12-04, type: deplacement, cours: 420-SN1-RE, groupe: 1070 }   # cours repris en JR

@@ -33,4 +33,4 @@ horaire:
 # type : remise, examen, cours, absence, deplacement, activite ou autre
 calendrier: []
 #  - { date: 2026-12-07, titre: Remise du TP3, cours: 420-4A4-EM, type: remise }
-#  - { date: 2026-12-01, au: 2026-12-02, titre: Absent (colloque), type: absence }
+#  - { date: 2026-12-01, au: 2026-12-02, type: absence }

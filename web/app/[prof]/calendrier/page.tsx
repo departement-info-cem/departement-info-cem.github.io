@@ -17,7 +17,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps<"/[prof]/calendrier">): Promise<Metadata> {
   const p = prof((await params).prof);
-  return p ? { title: `Calendrier de ${p.nom}` } : {};
+  return p ? { title: `Calendrier de ${p.nom}`, robots: { index: false } } : {};
 }
 
 export default async function Page({ params }: PageProps<"/[prof]/calendrier">) {

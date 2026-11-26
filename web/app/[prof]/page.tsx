@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BookOpen, CalendarDays, Clock, ExternalLink, Link2, MapPin, MessageSquare, Pencil, Phone } from "lucide-react";
+import { BookOpen, CalendarDays, Clock, ExternalLink, Link2, MapPin, MessageSquare, Pencil } from "lucide-react";
 import { calendrierScolaire, coursAide, indexCours, prof, profs } from "@/lib/donnees";
 import { lienEdition, photo } from "@/lib/chemins";
 import { AvatarProf } from "@/components/carte-prof";
@@ -28,6 +28,8 @@ export async function generateMetadata({ params }: PageProps<"/[prof]">): Promis
   const p = prof((await params).prof);
   if (!p) return {};
   return {
+  // Horaire détaillé d'une personne : pas dans les moteurs de recherche (hameçonnage, usurpation)
+    robots: { index: false },
     title: p.nom,
     description: `Horaire, disponibilités et calendrier de ${p.nom}, prof au département d'informatique du Cégep Édouard-Montpetit.`,
     openGraph: p.photo ? { images: [photo(p.photo)] } : undefined,
@@ -72,11 +74,6 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
                 <span className={bouton({ variant: "outline", size: "sm" })}>
                   <MapPin className="size-4" /> Bureau {p.bureau}
                 </span>
-              )}
-              {p.poste && (
-                <a href={`tel:+14506792631,${p.poste}`} className={bouton({ variant: "outline", size: "sm" })}>
-                  <Phone className="size-4" /> Poste {p.poste}
-                </a>
               )}
               {p.github && (
                 <a href={`https://github.com/${p.github}`} target="_blank" rel="noreferrer" className={bouton({ variant: "outline", size: "sm" })}>

@@ -91,7 +91,7 @@ export function construireCalendrier(
           groupe: p.groupe,
           heure: `${p.debut}–${p.fin}`,
           local: p.local,
-          annulee: deplacement ? `déplacé au ${formaterDate(deplacement.date).toLowerCase()}` : absence ? "annulé (absence)" : undefined,
+          annulee: deplacement ? `déplacé au ${formaterDate(deplacement.date).toLowerCase()}` : absence ? "annulé" : undefined,
         });
       }
     });
@@ -119,7 +119,7 @@ export function construireCalendrier(
     chaqueJour(e.date, e.au ?? e.date, (iso) => {
       obtenir(iso).evenements.push({
         source: "prof",
-        titre: e.titre ?? "Absence",
+        titre: e.type === "absence" ? "Cours annulé" : (e.titre ?? ""),
         type: e.type,
         cours: e.cours,
         groupe: e.groupe,

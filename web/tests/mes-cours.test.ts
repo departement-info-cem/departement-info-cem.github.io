@@ -79,7 +79,7 @@ describe("mon calendrier", () => {
   const evts = evenementsPourMoi(mes, { "joris.deguet": prof });
 
   it("garde les dates de mon cours et de mon groupe, et les absences de mon prof", () => {
-    expect(evts.map((e) => e.titre)).toEqual(["5N6 · Examen final", "5N6 · Colloque (Joris Deguet)"]);
+    expect(evts.map((e) => e.titre)).toEqual(["5N6 · Examen final", "5N6 · Cours annulé (Joris Deguet)"]);
     expect(evts[1]).toMatchObject({ type: "absence", cours: "420-5N6-EM", groupe: "1020" });
   });
   it("à venir : l'évaluation, puis mon cours annulé par l'absence", () => {
@@ -87,7 +87,7 @@ describe("mon calendrier", () => {
     const jours = construireCalendrier(calendrierScolaire(), { plages, evenements: evts, sessionId: "A2026" });
     const liste = aVenir(jours, "2026-11-25", 14);
     expect(liste.find((j) => j.iso === "2026-11-30")?.evenements).toEqual([expect.objectContaining({ titre: "5N6 · Examen final", evaluation: "sommative" })]);
-    expect(liste.find((j) => j.iso === "2026-12-07")?.evenements.map((e) => e.annulee ?? e.type)).toEqual(["absence", "annulé (absence)"]);
+    expect(liste.find((j) => j.iso === "2026-12-07")?.evenements.map((e) => e.annulee ?? e.type)).toEqual(["absence", "annulé"]);
     // Le lundi 30, le cours a lieu normalement : il n'est pas dans « à venir »
     expect(liste.find((j) => j.iso === "2026-11-30")?.evenements.some((e) => e.source === "seance")).toBe(false);
   });

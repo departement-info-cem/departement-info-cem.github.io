@@ -29,7 +29,7 @@ export function etatProf(prof: Pick<ProfHoraire, "session" | "calendrier" | "pla
   const iso = isoDepuisDate(date);
   const m = minutes(date);
   const abs = absence(prof.calendrier, iso, m);
-  if (abs) return { etat: "absent", titre: abs.titre ?? "Absence" };
+  if (abs) return { etat: "absent", titre: "Cours annulé" };
 
   // Un cours repris aujourd'hui (souvent une journée JR) compte même s'il n'y a pas de cours réguliers
   const repris = prof.calendrier?.find((e) => e.type === "deplacement" && e.date === iso && e.debut && e.fin && dansPlage({ debut: e.debut, fin: e.fin }, m));

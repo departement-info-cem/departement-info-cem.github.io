@@ -8,7 +8,6 @@ nom: "Prénom Nom"
 courriel: prenom.nom              # sans @cegepmontpetit.ca, identique au nom du fichier
 bureau: "E-2xx"
 # photo: prenom.jpg               # ajoute ta photo dans data/photos/ (format portrait de préférence)
-# poste: "2575"                   # poste téléphonique
 # github: mon-pseudo
 # linkedin: mon-profil
 # site: https://mon-site.com
@@ -38,7 +37,7 @@ horaire:
 # ---------- Calendrier : tes dates à toi ----------
 # Les congés, journées pédagogiques et horaires modifiés du cégep sont ajoutés automatiquement.
 # type : remise, examen, cours, absence, deplacement, activite ou autre
-# absence : les cours et les dispos de ces jours sont annulés (ajoute cours: pour n'annuler qu'un cours)
+# absence : les cours et les dispos de ces jours sont annulés (ajoute cours: pour n'annuler qu'un cours), sans titre ni motif : elle paraît comme « Cours annulé »
 # deplacement : le cours du jour « remplace » est repris à « date » (souvent une journée JR)
 # evaluation : sommative ou formative (avec cours:, et groupe: au besoin) : la date paraît dans le calendrier
 #   et les rappels des étudiants de ce cours (page Mes cours) ; une absence ou un déplacement y paraît aussi
@@ -46,5 +45,5 @@ calendrier:
   - { date: 2027-02-15, titre: Remise du TP1, cours: 420-1P6-EM, type: remise }
   - { date: 2027-03-22, titre: Examen intra, cours: 420-1P6-EM, type: examen, evaluation: sommative }
   - { date: 2027-03-01, titre: Quiz 1, cours: 420-1P6-EM, type: examen, evaluation: formative }
-  - { date: 2027-04-05, au: 2027-04-06, titre: Absent (colloque), type: absence, description: Colloque à Québec. }
+  - { date: 2027-04-05, au: 2027-04-06, type: absence }
   - { date: 2027-04-07, remplace: 2027-04-05, type: deplacement, cours: 420-1P6-EM, groupe: 1010 }   # ajoute debut, fin, local si différents

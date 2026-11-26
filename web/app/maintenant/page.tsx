@@ -5,7 +5,8 @@ import { HoraireLabos } from "@/components/horaire-labos";
 import { indexCours, laboratoires, profsHoraire } from "@/lib/donnees";
 import { lienEdition } from "@/lib/chemins";
 
-export const metadata: Metadata = { title: "Locaux : profs et laboratoires" };
+// Où sont les profs en ce moment : pas dans les moteurs de recherche
+export const metadata: Metadata = { title: "Locaux : profs et laboratoires", robots: { index: false } };
 
 export default function PageMaintenant() {
   return (

@@ -75,6 +75,9 @@ export const evenementProfSchema = z
   })
   .strict()
   .superRefine((e, ctx) => {
+    // Une absence ne dit jamais pourquoi (un motif public sert de prétexte à l'hameçonnage) : elle paraît comme « Cours annulé »
+    if (e.type === "absence" && (e.titre || e.description))
+      ctx.addIssue({ code: "custom", path: [e.titre ? "titre" : "description"], message: "une absence n'a ni titre ni description : elle paraît seulement comme « Cours annulé »" });
     if (e.evaluation && (e.type === "absence" || e.type === "deplacement")) ctx.addIssue({ code: "custom", path: ["evaluation"], message: "« evaluation » ne va pas avec une absence ou un déplacement" });
     if (e.evaluation && !e.cours) ctx.addIssue({ code: "custom", path: ["cours"], message: "une évaluation doit indiquer son cours (ex. cours: 420-5N6-EM), pour paraître dans le calendrier des étudiants" });
     if (!e.titre && e.type !== "deplacement" && e.type !== "absence") ctx.addIssue({ code: "custom", path: ["titre"], message: "titre manquant" });
@@ -95,7 +98,6 @@ export const profSchema = z
       .regex(/^[a-z0-9][a-z0-9.-]*$/, { error: "courriel invalide : seulement la partie avant @cegepmontpetit.ca, en minuscules" }),
     bureau: z.string().optional(),
     photo: z.string().optional(),
-    poste: texteOuNombre.optional(),
     github: z.string().optional(),
     linkedin: z.string().optional(),
     site: z.url({ error: "site : adresse web invalide (commence par https://)" }).optional(),

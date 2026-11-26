@@ -90,7 +90,7 @@ export function evenementsPourMoi(mesCours: MonCours[], profs: DonneesMesCours["
     return p.calendrier.flatMap((e): EvenementProf[] => {
       if (!e.cours) {
         // Une absence sans cours précisé annule tous ses cours : ici, seulement mon groupe
-        return e.type === "absence" ? [{ ...e, cours: m.cours, groupe: m.groupe, titre: `${court(m.cours)} · ${e.titre ?? "Absence"} (${p.nom})` }] : [];
+        return e.type === "absence" ? [{ ...e, cours: m.cours, groupe: m.groupe, titre: `${court(m.cours)} · Cours annulé (${p.nom})` }] : [];
       }
       if (e.cours !== m.cours || (e.groupe && m.groupe && e.groupe !== m.groupe)) return [];
       return [{ ...e, titre: e.titre && `${court(m.cours)} · ${e.titre}` }];

@@ -6,7 +6,6 @@ nom: "Vincent Carrier"
 courriel: vincent.carrier  # sans @cegepmontpetit.ca
 bureau: "E-209"
 photo: vc.png  # fichier dans data/photos/
-poste: "2915"  # poste téléphonique
 github: vcarrier
 linkedin: vincentcarrier
 
@@ -41,9 +40,9 @@ calendrier:
   - { date: 2026-12-10, titre: Remise du TP3, cours: 420-3S4-EM, type: remise }
   - { date: 2026-12-11, titre: Formatif 3, cours: 420-3S4-EM, type: activite }
   - { date: 2026-12-22, titre: Examen 3, cours: 420-3S4-EM, type: examen }
-  - { date: 2026-10-29, titre: Absent, type: absence }
-  - { date: 2026-10-30, titre: Absent, type: absence }
-  - { date: 2026-11-09, titre: Absent, type: absence }
+  - { date: 2026-10-29, type: absence }
+  - { date: 2026-10-30, type: absence }
+  - { date: 2026-11-09, type: absence }
   - { date: 2026-11-29, titre: Remise du TP3, cours: 420-3T5-EM, type: remise }
   - { date: 2026-12-10, titre: Reprise de cours, cours: 420-3T5-EM, type: cours }
   - { date: 2026-12-13, titre: Remise du TP4, cours: 420-3T5-EM, type: remise }
