@@ -34,7 +34,6 @@ export function indexRecherche(): ElementRecherche[] {
       titre: p.nom,
       sousTitre: [p.bureau && `Bureau ${p.bureau}`, p.cours?.join(", ")].filter(Boolean).join(" · "),
       href: `/${p.id}`,
-      motsCles: p.courriel,
       photo: p.photo,
     })),
     ...programmes().map((p) => ({ type: "programme" as const, titre: p.nom, sousTitre: p.duree, href: `/programmes/${p.id}`, motsCles: `${p.court} ${p.code ?? ""}` })),

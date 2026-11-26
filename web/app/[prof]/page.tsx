@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BookOpen, CalendarDays, Clock, ExternalLink, Link2, Mail, MapPin, Pencil, Phone } from "lucide-react";
+import { BookOpen, CalendarDays, Clock, ExternalLink, Link2, MapPin, MessageSquare, Pencil, Phone } from "lucide-react";
 import { calendrierScolaire, coursAide, indexCours, prof, profs } from "@/lib/donnees";
 import { lienEdition, photo } from "@/lib/chemins";
 import { AvatarProf } from "@/components/carte-prof";
@@ -64,9 +64,10 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
             {p.presentation && <p className="max-w-2xl text-muted-foreground">{p.presentation}</p>}
             <div className="flex flex-wrap gap-2 pt-2">
               <BoutonChoixGroupe prof={p.id} />
-              <a href={`mailto:${p.courriel}@cegepmontpetit.ca`} className={bouton({ size: "sm" })}>
-                <Mail className="size-4" /> {p.courriel}@cegepmontpetit.ca
-              </a>
+              {/* Pas d'adresse courriel sur le site (hameçonnage) : les étudiants joignent les profs sur Teams */}
+              <span className={bouton({ variant: "outline", size: "sm" })}>
+                <MessageSquare className="size-4" /> Écris-moi sur Teams
+              </span>
               {p.bureau && (
                 <span className={bouton({ variant: "outline", size: "sm" })}>
                   <MapPin className="size-4" /> Bureau {p.bureau}
