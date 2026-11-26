@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { raccourcisCours } from "@/lib/raccourcis-cours";
-import { catalogue, raccourci, raccourcis } from "@/lib/donnees";
+import { pagesRaccourcis, raccourcisCours, trouverRaccourci } from "@/lib/raccourcis-cours";
+import { catalogue, raccourci, raccourcis, segmentsRaccourcis } from "@/lib/donnees";
 
 describe("raccourcis vers les sites des cours", () => {
   it("donne le sigle de chaque cours qui a un site, et de ses anciens numéros", () => {
@@ -42,9 +42,41 @@ describe("raccourcis vers les sites des cours", () => {
     // Un ancien numéro (alias 420-5N6-EM du 420-5M6-EM) mène au site du cours actuel
     expect(raccourci("5N6")?.url).toBe(raccourci("5M6")?.url);
     expect(raccourci("5N6")?.no).toBe("420-5M6-EM");
-    // Aucun raccourci ne peut prendre l'identifiant d'un prof (minuscules)
     expect(raccourcis().every((r) => r.sigle === r.sigle.toUpperCase())).toBe(true);
     // Chaque cours qui a un site a son raccourci
     for (const c of catalogue().filter((c) => c.url)) expect(raccourcis().some((r) => r.no === c.no && r.url === c.url)).toBe(true);
+  });
+
+  it("ne tient pas compte de la casse", () => {
+    const liste = raccourcisCours([{ no: "420-SN1-RE", nom: "SN1", url: "https://info.cegepmontpetit.ca/420-SN1/" }]).raccourcis;
+    for (const s of ["SN1", "sn1", "Sn1", "sN1"]) expect(trouverRaccourci(liste, s)?.sigle).toBe("SN1");
+    expect(raccourci("1p6")?.url).toBe(raccourci("1P6")?.url);
+  });
+
+  it("génère le sigle en majuscules et en minuscules", () => {
+    // Dans les tests, le site est à la racine (pas de basePath) : /1P6/ y est le site du cours lui-même, sans page
+    expect(segmentsRaccourcis()).toEqual(expect.arrayContaining(["1p6", "SN1", "sn1"]));
+    expect(segmentsRaccourcis()).not.toContain("1P6");
+    const liste = raccourcisCours([{ no: "420-905-EM", nom: "Intro", url: "https://info.cegepmontpetit.ca/905-IntroProg/" }]).raccourcis;
+    // Un sigle sans lettres n'a qu'une façon de s'écrire
+    expect(pagesRaccourcis(liste, "https://info.cegepmontpetit.ca/react").map((p) => p.segment)).toEqual(["905"]);
+  });
+
+  it("après la bascule à la racine, ne génère pas une page qui redirigerait vers elle-même", () => {
+    const liste = raccourcisCours([
+      { no: "420-Z03-EM", nom: "Z03", url: "https://info.cegepmontpetit.ca/z03/" },
+      { no: "420-1P6-EM", nom: "1P6", url: "https://info.cegepmontpetit.ca/1P6/" },
+    ]).raccourcis;
+    const segments = (racine: string) => pagesRaccourcis(liste, racine).map((p) => p.segment);
+    // Sous /react/, rien ne se recoupe
+    expect(segments("https://info.cegepmontpetit.ca/react")).toEqual(["1P6", "1p6", "Z03", "z03"]);
+    // À la racine, /1P6/ et /z03/ sont les sites eux-mêmes : seules les autres casses redirigent
+    expect(segments("https://info.cegepmontpetit.ca")).toEqual(["1p6", "Z03"]);
+  });
+
+  it("refuse un sigle qui prendrait l'adresse d'un prof ou d'une page, peu importe la casse", () => {
+    const { conflits } = raccourcisCours([{ no: "420-GIT-EM", nom: "Git", url: "https://a.ca/" }], ["git", "joris.deguet"]);
+    expect(conflits).toHaveLength(1);
+    expect(conflits[0]).toContain("/git/");
   });
 });

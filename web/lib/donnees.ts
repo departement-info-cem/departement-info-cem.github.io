@@ -13,7 +13,9 @@ import type { DonneesMesCours, GroupeCours } from "@/lib/mes-cours";
 import { JOURS, normaliserJour } from "@/lib/temps";
 import { estActif } from "@/lib/actif";
 import { formaterErreurs } from "@/lib/erreurs";
-import { raccourcisCours, type RaccourciCours } from "@/lib/raccourcis-cours";
+import { pagesRaccourcis, raccourcisCours, trouverRaccourci, type RaccourciCours } from "@/lib/raccourcis-cours";
+import { ROUTES_RESERVEES } from "@/lib/validation";
+import { BASE, SITE } from "@/lib/chemins";
 
 export const DOSSIER_DONNEES = path.resolve(process.cwd(), process.env.DOSSIER_DONNEES ?? "../data");
 
@@ -178,14 +180,20 @@ export function sitesCours(): SiteCours[] {
 /** Raccourcis /react/<sigle>/ vers les sites des cours (voir lib/raccourcis-cours.ts). */
 export function raccourcis(): RaccourciCours[] {
   return enCache("raccourcis", () => {
-    const { raccourcis, conflits } = raccourcisCours(catalogue());
+    const { raccourcis, conflits } = raccourcisCours(catalogue(), [...ROUTES_RESERVEES, ...fichiersProfs().map((f) => f.replace(/\.yaml$/, ""))]);
     if (conflits.length) throw new Error(`Erreur dans data/cours.yaml :\n${conflits.map((c) => `  - ${c}`).join("\n")}`);
     return raccourcis;
   });
 }
 
-export function raccourci(sigle: string): RaccourciCours | undefined {
-  return raccourcis().find((r) => r.sigle === sigle);
+/** Le raccourci d'un segment d'adresse, peu importe la casse. */
+export function raccourci(segment: string): RaccourciCours | undefined {
+  return trouverRaccourci(raccourcis(), segment);
+}
+
+/** Les segments d'adresse des pages de raccourcis à générer (1P6 et 1p6...). */
+export function segmentsRaccourcis(): string[] {
+  return pagesRaccourcis(raccourcis(), `${SITE}${BASE}`).map((p) => p.segment);
 }
 
 export function bot(): Bot {

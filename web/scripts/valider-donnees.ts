@@ -5,7 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import YAML from "yaml";
 import type { z } from "zod";
-import { validerYamlProf } from "../lib/validation";
+import { ROUTES_RESERVEES, validerYamlProf } from "../lib/validation";
 import { coursSchema, programmeSchema } from "../app/_types/programme";
 import { botSchema, calendrierScolaireSchema, coursServiceSchema, faqSchema, laboratoiresSchema, logicielsSchema } from "../app/_types/divers";
 import { formaterErreurs } from "../lib/erreurs";
@@ -44,8 +44,10 @@ const coursConnus = new Set(catalogue.flatMap((c) => [c.no, ...(c.alias ?? []).m
 const tagsConnus = new Set(catalogue.flatMap((c) => c.tags ?? []));
 const doublons = catalogue.map((c) => c.no).filter((no, i, t) => t.indexOf(no) !== i);
 for (const d of doublons) signaler("erreur", "cours.yaml", `le cours ${d} est défini deux fois`);
-// Raccourcis /react/<sigle>/ vers les sites des cours : un sigle ne peut pas mener à deux sites
-for (const c of raccourcisCours(catalogue).conflits) signaler("erreur", "cours.yaml", c);
+// Raccourcis /react/<sigle>/ vers les sites des cours : un sigle ne peut pas mener à deux sites,
+// ni prendre l'adresse d'une page du site ou d'un prof (peu importe la casse)
+const idsProfs = fs.readdirSync(path.join(DONNEES, "profs")).filter((f) => f.endsWith(".yaml") && !f.startsWith("_")).map((f) => f.replace(/\.yaml$/, ""));
+for (const c of raccourcisCours(catalogue, [...ROUTES_RESERVEES, ...idsProfs]).conflits) signaler("erreur", "cours.yaml", c);
 
 // 2. Programmes
 for (const f of fs.readdirSync(path.join(DONNEES, "programmes")).filter((f) => f.endsWith(".yaml"))) {

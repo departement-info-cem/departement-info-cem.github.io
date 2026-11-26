@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookOpen, CalendarDays, Clock, ExternalLink, Link2, Mail, MapPin, Pencil, Phone } from "lucide-react";
-import { calendrierScolaire, coursAide, indexCours, prof, profs, raccourci, raccourcis } from "@/lib/donnees";
+import { calendrierScolaire, coursAide, indexCours, prof, profs, raccourci, segmentsRaccourcis } from "@/lib/donnees";
 import { lienEdition, photo } from "@/lib/chemins";
 import { AvatarProf } from "@/components/carte-prof";
 import { SessionPerimee } from "@/components/session-perimee";
@@ -20,12 +20,12 @@ import { RedirectionCours } from "@/components/redirection-cours";
 
 // Une page par prof : /react/<identifiant>, générée au build pour chaque fichier data/profs/*.yaml.
 // La même route sert aux raccourcis vers les sites des cours, /react/1P6/ (voir lib/raccourcis-cours.ts) :
-// Next n'accepte pas deux segments dynamiques au même niveau. Les identifiants de profs sont en minuscules
-// et les sigles en majuscules, ils ne peuvent pas se confondre.
+// Next n'accepte pas deux segments dynamiques au même niveau. La validation refuse un sigle qui prendrait
+// l'identifiant d'un prof, peu importe la casse : les deux ne peuvent pas se confondre.
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return [...profs().map((p) => ({ prof: p.id })), ...raccourcis().map((r) => ({ prof: r.sigle }))];
+  return [...profs().map((p) => ({ prof: p.id })), ...segmentsRaccourcis().map((s) => ({ prof: s }))];
 }
 
 export async function generateMetadata({ params }: PageProps<"/[prof]">): Promise<Metadata> {

@@ -17,6 +17,9 @@ Ce fichier sert à expliquer comment modifier l'appli ou le contenu du site du d
 - Liens directs pour les sites de cours : `/react/<prof>/horaire/` et `/react/<prof>/calendrier/`, avec `?cours=420-5N6-EM` au besoin.
 - Raccourcis vers les sites des cours : `/react/1P6/`, `/react/4W6/`... Une page par cours qui a une `url` dans `data/cours.yaml`
   (et une par ancien numéro en `alias`), qui redirige vers ce site (`web/lib/raccourcis-cours.ts`).
+  Les majuscules ne comptent pas : une page pour `1P6` et une pour `1p6`, et la page 404 rattrape les autres casses
+  (`Sn1`) une fois le site à la racine. Prévu pour la bascule (`basePath: ""`) : aucune page ne redirige vers
+  elle-même (à la racine, `/1P6/` est le site du cours), et un sigle ne peut pas prendre l'adresse d'un prof ou d'une page.
 - Vérifications : `npm run valider`, `npm run lint`, `npm test`, `npm run build`
 - Tant que les deux sites cohabitent, le site Angular lit encore les fichiers JSON de `data/` :
   un changement doit être fait aux deux endroits pour apparaître sur les deux sites.

@@ -8,7 +8,7 @@
 #     « ancien programme » : anciens numéros, utilisés pour la dernière fois à l'automne 2026
 # Raccourcis : chaque cours qui a une url donne l'adresse courte https://info.cegepmontpetit.ca/react/<sigle>/,
 #   qui redirige vers son site (420-1P6-EM -> /react/1P6/), et une pour chaque alias (420-4D5-EM -> /react/4D5/).
-#   Le sigle est écrit en majuscules dans l'adresse.
+#   Les majuscules ne comptent pas : /react/1p6/ et /react/1P6/ mènent au même site.
 - no: 420-1B3-EM
   nom: Bureautique
   heures: 45

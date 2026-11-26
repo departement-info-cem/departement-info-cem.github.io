@@ -1,7 +1,12 @@
-// Raccourcis vers les sites des cours : /react/1P6/ mène à https://info.cegepmontpetit.ca/1P6/.
+// Raccourcis vers les sites des cours : /react/1P6/ (ou /react/1p6/) mène à https://info.cegepmontpetit.ca/1P6/.
 // Ils viennent tout seuls du catalogue (data/cours.yaml) : chaque cours qui a une « url » donne un raccourci
 // pour son sigle (420-1P6-EM -> 1P6), et un pour chacun de ses anciens numéros (alias 420-4D5-EM -> 4D5).
-// Logique pure, utilisée par lib/donnees.ts et scripts/valider-donnees.ts, et testée.
+// Logique pure, utilisée par lib/donnees.ts, scripts/valider-donnees.ts et la page 404, et testée.
+//
+// Les majuscules ne comptent pas :
+//  - une page est générée pour le sigle en majuscules et en minuscules (1P6 et 1p6), les deux façons de l'écrire ;
+//  - toute autre casse (Sn1) est rattrapée par la page 404 (components/raccourci-introuvable.tsx). Tant que le site
+//    est sous /react/, le 404 du domaine est celui de l'ancien site : ce rattrapage ne servira qu'après la bascule.
 import type { Cours } from "@/app/_types/programme";
 import { court } from "@/lib/mes-cours";
 
@@ -11,10 +16,14 @@ export type RaccourciCours = { sigle: string; url: string; no: string; nom: stri
 const SIGLE = /^[0-9A-Z]+$/;
 
 /**
- * Les raccourcis du catalogue, triés par sigle, et les conflits : un même sigle qui mènerait à deux sites différents.
+ * Les raccourcis du catalogue, triés par sigle, et les conflits : un même sigle qui mènerait à deux sites différents,
+ * ou qui prendrait une adresse déjà utilisée (« reserves » : identifiants des profs, pages du site), peu importe la casse.
  * Le numéro actuel d'un cours a priorité sur l'ancien numéro d'un autre cours.
  */
-export function raccourcisCours(catalogue: Pick<Cours, "no" | "nom" | "url" | "alias">[]): { raccourcis: RaccourciCours[]; conflits: string[] } {
+export function raccourcisCours(
+  catalogue: Pick<Cours, "no" | "nom" | "url" | "alias">[],
+  reserves: string[] = [],
+): { raccourcis: RaccourciCours[]; conflits: string[] } {
   const parSigle = new Map<string, RaccourciCours & { ancien: boolean }>();
   const conflits: string[] = [];
   const candidats = catalogue
@@ -31,6 +40,28 @@ export function raccourcisCours(catalogue: Pick<Cours, "no" | "nom" | "url" | "a
     if (!deja) parSigle.set(r.sigle, r);
     else if (deja.url !== r.url && deja.ancien === r.ancien) conflits.push(`le raccourci ${r.sigle} mènerait à deux sites : ${deja.no} (${deja.url}) et ${r.no} (${r.url})`);
   }
+  const prises = new Map(reserves.map((x) => [x.toLowerCase(), x]));
+  for (const r of parSigle.values()) {
+    const prise = prises.get(r.sigle.toLowerCase());
+    if (prise) conflits.push(`le raccourci ${r.sigle} (${r.no}) prendrait l'adresse /${prise}/, déjà utilisée par une page ou un prof`);
+  }
   const raccourcis = [...parSigle.values()].map(({ sigle, url, no, nom }) => ({ sigle, url, no, nom })).sort((a, b) => a.sigle.localeCompare(b.sigle));
   return { raccourcis, conflits };
+}
+
+/** Le raccourci d'un segment d'adresse, peu importe la casse (1p6, 1P6, Sn1...). */
+export function trouverRaccourci(raccourcis: RaccourciCours[], segment: string): RaccourciCours | undefined {
+  const s = segment.toUpperCase();
+  return raccourcis.find((r) => r.sigle === s);
+}
+
+/**
+ * Les pages à générer : le sigle en majuscules et en minuscules. On saute une page qui redirigerait vers elle-même :
+ * une fois le site à la racine (basePath ""), /z03/ est l'adresse même du site du Z03, une redirection tournerait en rond.
+ * « racine » : l'adresse du site, avec le basePath (ex. https://info.cegepmontpetit.ca/react).
+ */
+export function pagesRaccourcis(raccourcis: RaccourciCours[], racine: string): { segment: string; raccourci: RaccourciCours }[] {
+  return raccourcis.flatMap((r) =>
+    [...new Set([r.sigle, r.sigle.toLowerCase()])].filter((segment) => `${racine}/${segment}/` !== r.url).map((segment) => ({ segment, raccourci: r })),
+  );
 }
