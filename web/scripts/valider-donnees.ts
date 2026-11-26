@@ -9,6 +9,7 @@ import { validerYamlProf } from "../lib/validation";
 import { coursSchema, programmeSchema } from "../app/_types/programme";
 import { botSchema, calendrierScolaireSchema, coursServiceSchema, faqSchema, laboratoiresSchema, logicielsSchema } from "../app/_types/divers";
 import { formaterErreurs } from "../lib/erreurs";
+import { raccourcisCours } from "../lib/raccourcis-cours";
 
 const DONNEES = path.resolve(__dirname, "..", "..", "data");
 const CI = Boolean(process.env.GITHUB_ACTIONS);
@@ -43,6 +44,8 @@ const coursConnus = new Set(catalogue.flatMap((c) => [c.no, ...(c.alias ?? []).m
 const tagsConnus = new Set(catalogue.flatMap((c) => c.tags ?? []));
 const doublons = catalogue.map((c) => c.no).filter((no, i, t) => t.indexOf(no) !== i);
 for (const d of doublons) signaler("erreur", "cours.yaml", `le cours ${d} est défini deux fois`);
+// Raccourcis /react/<sigle>/ vers les sites des cours : un sigle ne peut pas mener à deux sites
+for (const c of raccourcisCours(catalogue).conflits) signaler("erreur", "cours.yaml", c);
 
 // 2. Programmes
 for (const f of fs.readdirSync(path.join(DONNEES, "programmes")).filter((f) => f.endsWith(".yaml"))) {

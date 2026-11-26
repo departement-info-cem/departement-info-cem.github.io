@@ -6,6 +6,9 @@
 #   fiche: fiche officielle du cours (ex. sur le site de l'UdeS), affichée dans la grille mais pas dans « Sites des cours »
 #   alias: autres numéros acceptés (ex. ancien numéro utilisé dans un horaire)
 #     « ancien programme » : anciens numéros, utilisés pour la dernière fois à l'automne 2026
+# Raccourcis : chaque cours qui a une url donne l'adresse courte https://info.cegepmontpetit.ca/react/<sigle>/,
+#   qui redirige vers son site (420-1P6-EM -> /react/1P6/), et une pour chaque alias (420-4D5-EM -> /react/4D5/).
+#   Le sigle est écrit en majuscules dans l'adresse.
 - no: 420-1B3-EM
   nom: Bureautique
   heures: 45

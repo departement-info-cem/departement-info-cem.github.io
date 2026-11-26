@@ -15,6 +15,8 @@ Ce fichier sert à expliquer comment modifier l'appli ou le contenu du site du d
 - `data/laboratoires.yaml` vient du PDF « Horaire du local » publié dans le dépôt 420-SN1 (des images : à recopier à chaque session).
   Il a servi à préremplir les fiches de profs (`prerempli: true`, à enlever une fois vérifié). Il alimente le bandeau du bas, la page `/react/maintenant/` et une page par local (`/react/locaux/D-0003/`). Les logos de l'en-tête sont dans `web/public/images/liens/`.
 - Liens directs pour les sites de cours : `/react/<prof>/horaire/` et `/react/<prof>/calendrier/`, avec `?cours=420-5N6-EM` au besoin.
+- Raccourcis vers les sites des cours : `/react/1P6/`, `/react/4W6/`... Une page par cours qui a une `url` dans `data/cours.yaml`
+  (et une par ancien numéro en `alias`), qui redirige vers ce site (`web/lib/raccourcis-cours.ts`).
 - Vérifications : `npm run valider`, `npm run lint`, `npm test`, `npm run build`
 - Tant que les deux sites cohabitent, le site Angular lit encore les fichiers JSON de `data/` :
   un changement doit être fait aux deux endroits pour apparaître sur les deux sites.

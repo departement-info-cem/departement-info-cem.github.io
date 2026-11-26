@@ -13,6 +13,7 @@ import type { DonneesMesCours, GroupeCours } from "@/lib/mes-cours";
 import { JOURS, normaliserJour } from "@/lib/temps";
 import { estActif } from "@/lib/actif";
 import { formaterErreurs } from "@/lib/erreurs";
+import { raccourcisCours, type RaccourciCours } from "@/lib/raccourcis-cours";
 
 export const DOSSIER_DONNEES = path.resolve(process.cwd(), process.env.DOSSIER_DONNEES ?? "../data");
 
@@ -172,6 +173,19 @@ export function sitesCours(): SiteCours[] {
         ...coursService().filter((p) => p.cours.some((x) => x.info.no === c.no)).map((p) => (p.discipline ? { id: "sn", court: p.court, session: p.programme } : { id: "service", court: p.court, session: "Cours de service" })),
       ],
     }));
+}
+
+/** Raccourcis /react/<sigle>/ vers les sites des cours (voir lib/raccourcis-cours.ts). */
+export function raccourcis(): RaccourciCours[] {
+  return enCache("raccourcis", () => {
+    const { raccourcis, conflits } = raccourcisCours(catalogue());
+    if (conflits.length) throw new Error(`Erreur dans data/cours.yaml :\n${conflits.map((c) => `  - ${c}`).join("\n")}`);
+    return raccourcis;
+  });
+}
+
+export function raccourci(sigle: string): RaccourciCours | undefined {
+  return raccourcis().find((r) => r.sigle === sigle);
 }
 
 export function bot(): Bot {
