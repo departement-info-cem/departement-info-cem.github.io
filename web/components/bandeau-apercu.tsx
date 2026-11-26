@@ -4,7 +4,7 @@ import { useMesCours } from "@/app/_contexts/mes-cours-context";
 import { bouton } from "@/lib/bouton";
 import { libelle } from "@/lib/mes-cours";
 
-// En haut de chaque page pendant un aperçu (lien avec ?cours=) : on voit le site avec les cours du lien.
+// En haut de chaque page pendant un aperçu (lien avec ?mescours=) : on voit le site avec les cours du lien.
 export function BandeauApercu() {
   const { apercu, garderApercu, quitterApercu } = useMesCours();
   if (!apercu) return null;
@@ -12,7 +12,7 @@ export function BandeauApercu() {
     <div role="status" className="no-print border-b border-cem-jaune bg-cem-jaune-pale text-cem-marine">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-3 gap-y-2 px-4 py-2 text-sm">
         <Eye className="size-4 shrink-0" />
-        <span className="min-w-0 flex-1">
+        <span className="min-w-[16rem] flex-1">
           <strong>Aperçu</strong> avec les cours du lien : {apercu.cours.length ? apercu.cours.map(libelle).join(", ") : "aucun"}.
           {apercu.inconnus.length > 0 && <> Introuvable : {apercu.inconnus.join(", ")}.</>} Tes propres cours ne sont pas touchés.
         </span>

@@ -9,7 +9,7 @@ import { basculer, court, ecrireParamCours, estPerime, lireParamCours, PARAM_COU
 // « Mes cours » de l'étudiant, partagés par toute la page : choisir un groupe met à jour la liste des profs,
 // la page Locaux et le bandeau sans recharger. Gardés dans le localStorage de ce navigateur seulement.
 //
-// Aperçu : une adresse avec ?cours=SN1-1050,5N6-1020 montre le site avec ces cours, sans toucher à ceux de la
+// Aperçu : une adresse avec ?mescours=SN1-1050,5N6-1020 montre le site avec ces cours, sans toucher à ceux de la
 // personne. L'aperçu dure le temps de l'onglet (sessionStorage), même en changeant de page, jusqu'à « Quitter ».
 type Apercu = { cours: MonCours[]; inconnus: string[] };
 const CLE_APERCU = "mes-cours-apercu";
@@ -24,11 +24,11 @@ type Valeur = DonneesMesCours & {
   retirer: (m: MonCours) => void;
   vider: () => void;
   lien: (profId: string) => Lien;
-  /** l'aperçu en cours (lien avec ?cours=), sinon null */
+  /** l'aperçu en cours (lien avec ?mescours=), sinon null */
   apercu: Apercu | null;
   garderApercu: () => void;
   quitterApercu: () => void;
-  /** mes cours (ou ceux de l'aperçu) pour ?cours= : « SN1-1050,5M6-1020 » */
+  /** mes cours (ou ceux de l'aperçu) pour ?mescours= : « SN1-1050,5M6-1020 » */
   paramCours: string;
 };
 

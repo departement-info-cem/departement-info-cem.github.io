@@ -6,10 +6,10 @@ import { chemin as avecBase } from "@/lib/chemins";
 
 // Partager un lien direct (horaire ou calendrier d'un prof) par message ou par courriel.
 // Sur téléphone : la feuille de partage du système (Messages, courriel, Teams...). Sur ordinateur : le lien est copié.
-// Sans « chemin », on partage l'adresse de la page actuelle (avec ?cours=... s'il y en a un).
-export function BoutonPartager({ chemin, titre, className }: { chemin?: string; titre: string; className?: string }) {
+// Sans « chemin » ni « url », on partage l'adresse de la page actuelle (avec ?cours=... s'il y en a un).
+export function BoutonPartager({ chemin, url, titre, className }: { chemin?: string; url?: () => string; titre: string; className?: string }) {
   const [copie, setCopie] = useState(false);
-  const adresse = () => (chemin ? new URL(avecBase(chemin), location.origin).href : location.href);
+  const adresse = () => (url ? url() : chemin ? new URL(avecBase(chemin), location.origin).href : location.href);
 
   async function partager() {
     const url = adresse();

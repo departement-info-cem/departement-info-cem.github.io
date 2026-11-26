@@ -1,8 +1,9 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, LayoutGrid, Menu, Monitor, Moon, Sun } from "lucide-react";
+import { ChevronDown, LayoutGrid, Menu, Monitor, Moon, Share2, Sun } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { RechercheGlobale, type ElementRecherche } from "@/components/recherche-globale";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -12,6 +13,7 @@ import { GRILLES_DIRECTES, LIENS_LOGOS } from "@/lib/raccourcis";
 import { chemin } from "@/lib/chemins";
 import { cn } from "@/lib/utils";
 import { useMesCours } from "@/app/_contexts/mes-cours-context";
+import { PartagerPage } from "@/components/partager-page";
 
 export const GRILLES = [
   ...GRILLES_DIRECTES,
@@ -51,6 +53,8 @@ const SOUS_MENU =
 export function Entete({ index }: { index: ElementRecherche[] }) {
   const chemin = usePathname();
   const { mesCours } = useMesCours();
+  const [partage, setPartage] = useState(false);
+  const [menu, setMenu] = useState(false);
   // Le centre d'aide devient « Mon centre d'aide » quand l'étudiant a entré ses cours
   const texteLien = (l: { href: string; texte: string }) => (l.href === "/centre-aide" && mesCours.length ? "Mon centre d'aide" : l.texte);
   const actif = (href: string) => chemin === href || chemin.startsWith(`${href}/`) || (href === "/maintenant" && chemin.startsWith("/locaux/")); // une page par labo
@@ -99,9 +103,13 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
 
         <div className="ml-auto flex shrink-0 items-center gap-1 lg:ml-0">
           <RechercheGlobale index={index} className={BOUTON_ICONE} />
+          {/* Sur mobile, le partage est dans le menu : l'en-tête n'a pas la place */}
+          <button onClick={() => setPartage(true)} className={cn(BOUTON_ICONE, "hidden lg:inline-flex")} aria-label="Partager cette page" title="Partager cette page">
+            <Share2 className="size-5" />
+          </button>
           <MenuLiens />
           <ChoixTheme />
-          <Sheet>
+          <Sheet open={menu} onOpenChange={setMenu}>
             <SheetTrigger className={cn(BOUTON_ICONE, "lg:hidden")} aria-label="Ouvrir le menu">
               <Menu className="size-5" />
             </SheetTrigger>
@@ -113,9 +121,19 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
                     {texteLien(l)}
                   </Link>
                 ))}
+                <button
+                  onClick={() => {
+                    setMenu(false);
+                    setPartage(true);
+                  }}
+                  className="mt-2 flex items-center gap-2 rounded-md border-t px-3 py-2 text-left font-medium hover:bg-accent"
+                >
+                  <Share2 className="size-4" /> Partager cette page
+                </button>
               </nav>
             </SheetContent>
           </Sheet>
+          <PartagerPage ouvert={partage} changer={setPartage} />
         </div>
       </div>
     </header>

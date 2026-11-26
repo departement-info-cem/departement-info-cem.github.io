@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { donneesMesCours } from "@/lib/donnees";
 import { aVenir, basculer, garderMonGroupe, court, ecrireParamCours, estPerime, lireParamCours, evenementsPourMoi, libelle, lienAvecMoi, nettoyer, trierPourMoi, type InfoProfMesCours, type MonCours } from "@/lib/mes-cours";
 import { construireCalendrier } from "@/lib/calendrier";
+import { adresseAvecCours } from "@/components/partager-page";
 import { calendrierScolaire } from "@/lib/donnees";
 import { dateDepuisIso } from "@/lib/temps";
 
@@ -138,5 +139,13 @@ describe("lien avec des cours (?cours=)", () => {
     const cours = lireParamCours("SN1-1050,3W6", donnees).cours;
     expect(ecrireParamCours(cours)).toBe("SN1-1050,3W6");
     expect(lireParamCours(ecrireParamCours(cours), donnees).cours).toEqual(cours);
+  });
+});
+
+describe("adresse à partager", () => {
+  it("ajoute mescours sans toucher au filtre ?cours= des pages de prof", () => {
+    expect(adresseAvecCours("https://x.ca/react/joris.deguet/horaire/?cours=420-5N6-EM", "SN1-1050,5M6-1020")).toBe("https://x.ca/react/joris.deguet/horaire/?cours=420-5N6-EM&mescours=SN1-1050,5M6-1020");
+    expect(adresseAvecCours("https://x.ca/react/profs/?mescours=3W6", null)).toBe("https://x.ca/react/profs/");
+    expect(adresseAvecCours("https://x.ca/react/profs/?mescours=3W6", "SN1")).toBe("https://x.ca/react/profs/?mescours=SN1");
   });
 });

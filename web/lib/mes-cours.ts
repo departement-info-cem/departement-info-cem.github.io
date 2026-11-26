@@ -122,10 +122,11 @@ export function garderMonGroupe<T extends { cours?: string; groupe?: string }>(l
   });
 }
 
-// ---------- Liens avec des cours : /react/centre-aide/?cours=SN1-1050,5N6-1020,3W6 ----------
+// ---------- Liens avec des cours : /react/centre-aide/?mescours=SN1-1050,5N6-1020,3W6 ----------
 
 /** Paramètre d'URL qui donne une liste de cours, pour montrer une page « comme si » on suivait ces cours. */
-export const PARAM_COURS = "cours";
+// « cours » est déjà pris par le filtre des pages /<prof>/horaire/?cours=420-5N6-EM (liens des sites de cours)
+export const PARAM_COURS = "mescours";
 
 /**
  * Lit « SN1-1050,5N6-1020,3W6 » : un sigle court ou un numéro complet (420-5N6-EM), et le groupe après un tiret
