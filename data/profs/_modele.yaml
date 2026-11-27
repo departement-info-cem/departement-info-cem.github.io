@@ -1,8 +1,8 @@
 # MODÈLE pour un nouveau prof.
 # 1. Copie ce fichier sous le nom <ton-courriel>.yaml (ex. marie.tremblay.yaml), sans @cegepmontpetit.ca
 # 2. Remplis les champs ; les lignes qui commencent par # sont des commentaires (ignorés).
-# 3. Ta page sera https://info.cegepmontpetit.ca/react/<ton-courriel>
-# Mode d'emploi complet : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+# 3. Ta page sera https://info.cegepmontpetit.ca/<ton-courriel>
+# Mode d'emploi complet : https://info.cegepmontpetit.ca/modifier-mon-profil
 
 nom: "Prénom Nom"
 courriel: prenom.nom              # sans @cegepmontpetit.ca, identique au nom du fichier

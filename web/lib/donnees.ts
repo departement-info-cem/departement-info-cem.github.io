@@ -254,7 +254,7 @@ export function donneesMesCours(date = new Date()): DonneesMesCours {
   return { groupes, profs: infos, cours: indexCours() };
 }
 
-/** Ce que lisent les sites de cours dans /react/donnees/cours/<numéro>.json : la logistique de chaque groupe, déclarée une seule fois ici. */
+/** Ce que lisent les sites de cours dans /donnees/cours/<numéro>.json : la logistique de chaque groupe, déclarée une seule fois ici. */
 export type FichierCours = {
   cours: string;
   nom?: string;
