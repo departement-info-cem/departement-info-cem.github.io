@@ -98,7 +98,7 @@ https://info.cegepmontpetit.ca/prenom.nom/calendrier/?cours=420-5N6-EM`}</pre>
           <p className="mb-2 text-sm text-muted-foreground">
             Envoie à ton groupe (Teams, Léa) une adresse du site suivie de <code>?mescours=</code>, du cours en abrégé et du groupe. Tes étudiants voient le site avec ce cours, puis cliquent « Garder ces cours » : ton horaire, tes dispos et tes dates paraissent dans leur page Mes cours.
           </p>
-          <pre className="overflow-x-auto rounded bg-muted p-3 font-mono text-xs">{`https://info.cegepmontpetit.ca/react/mes-cours/?mescours=SN1-1050`}</pre>
+          <pre className="overflow-x-auto rounded bg-muted p-3 font-mono text-xs">{`https://info.cegepmontpetit.ca/mes-cours/?mescours=SN1-1050`}</pre>
           <p className="mt-2 text-sm text-muted-foreground">
             Plusieurs cours : sépare-les par des virgules (<code>SN1-1050,4W6-1010</code>). Le bouton Partager de l&apos;en-tête fait la même adresse avec « Inclure mes cours », à partir de tes choix dans ta propre page Mes cours.
           </p>
