@@ -13,7 +13,7 @@ const PAGES: ElementRecherche[] = [
   { type: "page", titre: "Logiciels gratuits", href: "/logiciels", motsCles: "github education pack jetbrains office vmware visual studio" },
   { type: "page", titre: "Git et commits", href: "/git", motsCles: "depot repo commit" },
   { type: "page", titre: "Plagiat et IA", href: "/plagiat", motsCles: "triche chatgpt copilot" },
-  { type: "page", titre: "Nous joindre", href: "/contact", motsCles: "courriel coordination" },
+  { type: "page", titre: "Nous joindre et un problème ?", href: "/contact", motsCles: "courriel coordination problème plainte prof absent retard correction PAIRE aide" },
   { type: "page", titre: "Entreprises : offrir un stage", href: STAGES, motsCles: "stage stagiaire employeur recruter finissant emploi offre" },
   { type: "page", titre: "L'informatique, est-ce pour moi ? Mini-jeux et bot", href: "/orientation", motsCles: "bot orientation choisir jeux logique test python ping robot" },
   { type: "page", titre: "Mes cours : mes profs, leurs dispos et mon horaire", href: "/mes-cours", motsCles: "groupe mon prof horaire personnaliser" },

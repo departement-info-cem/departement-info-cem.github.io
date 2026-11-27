@@ -6,6 +6,7 @@ import type { EvenementProf, Plage } from "@/app/_types/prof";
 import { construireCalendrier, semainesDuMois, type EvenementJour, type JourCalendrier } from "@/lib/calendrier";
 import { dateDepuisIso, formaterDate, isoDepuisDate, LIBELLES_JOURS, MOIS } from "@/lib/temps";
 import { useMaintenant } from "@/app/_hooks/use-maintenant";
+import { COULEURS_TYPES, couleurBordure, ordreDesCours } from "@/lib/horaire";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 
@@ -26,7 +27,6 @@ const STYLES: Record<string, string> = {
   "evaluations-horaire": "bg-cem-ciel text-cem-marine",
   limite: "bg-muted text-muted-foreground",
   info: "bg-muted text-muted-foreground",
-  seance: "bg-accent text-accent-foreground",
   remise: "bg-cem-orange text-black font-semibold",
   examen: "bg-cem-rouge text-white font-semibold",
   absence: "bg-cem-rouge text-white font-semibold",
@@ -44,9 +44,15 @@ const LIBELLES_EVALUATION = { sommative: "Sommative", formative: "Formative" };
 /** Une évaluation sommative est encadrée : c'est la date à ne pas manquer. */
 const encadre = (e: EvenementJour) => (e.evaluation === "sommative" ? "ring-2 ring-cem-marine ring-inset dark:ring-white" : "");
 
-function Pastille({ e, compacte }: { e: EvenementJour; compacte?: boolean }) {
-  const texte = (e.evaluation ? `${e.evaluation === "sommative" ? "S" : "F"} · ` : "") + (e.source === "seance" ? `${e.heure?.split("–")[0]} ${e.cours ?? e.titre}${e.groupe ? ` gr.${e.groupe}` : ""}` : `${e.code ? `${e.code} · ` : e.type === "deplacement" && e.heure ? `${e.heure.split("–")[0]} ` : ""}${e.titre}`);
-  return <div title={e.annulee ? `${texte} : ${e.annulee}` : texte} className={`truncate rounded ${encadre(e)} ${e.annulee ? "line-through opacity-50" : ""} px-1 py-0.5 text-[11px] leading-tight ${STYLES[e.type] ?? STYLES.autre} ${compacte ? "" : "text-xs"}`}>{texte}</div>;
+/** Une séance a les couleurs de son cours dans l'horaire de la semaine (« Mon horaire », horaire du prof) : fond vert pâle, bordure du cours. */
+const styleSeance = (e: EvenementJour, coursOrdonnes: string[]) =>
+  e.source === "seance" ? { background: COULEURS_TYPES.cours.fond, color: COULEURS_TYPES.cours.texte, borderLeft: `3px solid ${couleurBordure({ type: "cours", cours: e.cours }, coursOrdonnes)}` } : undefined;
+const classeEvenement = (e: EvenementJour) => (e.source === "seance" ? "" : (STYLES[e.type] ?? STYLES.autre));
+
+// Le groupe d'un cours n'est pas affiché : l'heure et le local suffisent à reconnaître la séance.
+function Pastille({ e, compacte, coursOrdonnes }: { e: EvenementJour; compacte?: boolean; coursOrdonnes: string[] }) {
+  const texte = (e.evaluation ? `${e.evaluation === "sommative" ? "S" : "F"} · ` : "") + (e.source === "seance" ? `${e.heure?.split("–")[0]} ${e.cours ?? e.titre}` : `${e.code ? `${e.code} · ` : e.type === "deplacement" && e.heure ? `${e.heure.split("–")[0]} ` : ""}${e.titre}`);
+  return <div title={e.annulee ? `${texte} : ${e.annulee}` : texte} className={`truncate rounded ${encadre(e)} ${e.annulee ? "line-through opacity-50" : ""} px-1 py-0.5 text-[11px] leading-tight ${classeEvenement(e)} ${compacte ? "" : "text-xs"}`} style={styleSeance(e, coursOrdonnes)}>{texte}</div>;
 }
 
 export function CalendrierMois({
@@ -55,6 +61,7 @@ export function CalendrierMois({
   evenements,
   sessionId,
   coursFiltre,
+  coursOrdonnes: ordreImpose,
 }: {
   scolaire: CalendrierScolaire;
   plages?: Plage[];
@@ -62,6 +69,8 @@ export function CalendrierMois({
   sessionId?: string;
   /** n'affiche que les dates de ce cours (lien direct depuis un site de cours) */
   coursFiltre?: string;
+  /** ordre des cours pour leurs couleurs, s'il diffère de celui de « plages » (calendrier d'un prof filtré sur mon groupe) */
+  coursOrdonnes?: string[];
 }) {
   const maintenant = useMaintenant(3_600_000);
   const isoActuel = maintenant ? isoDepuisDate(maintenant) : undefined;
@@ -71,6 +80,7 @@ export function CalendrierMois({
   const [filtres, setFiltres] = useState<Set<Filtre>>(new Set(["scolaire", "seance", "prof"]));
   const [jourChoisi, setJourChoisi] = useState<JourCalendrier | null>(null);
 
+  const coursOrdonnes = useMemo(() => ordreImpose ?? ordreDesCours(plages ?? []), [ordreImpose, plages]);
   const jours = useMemo(() => construireCalendrier(scolaire, { plages, evenements, sessionId: session?.id }), [scolaire, plages, evenements, session]);
   // Les événements sans numéro de cours (absence, activité...) concernent tous les cours
   const duCours = (e: EvenementJour) => !coursFiltre || e.source === "scolaire" || !e.cours || e.cours.toUpperCase() === coursFiltre.toUpperCase();
@@ -117,8 +127,10 @@ export function CalendrierMois({
                 return apres;
               })
             }
-            className={`rounded-full border px-3 py-1 text-sm ${filtres.has(f) ? "" : "opacity-40 line-through"}`}
+            className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm ${filtres.has(f) ? "" : "opacity-40 line-through"}`}
           >
+            {/* Même pastille que la légende de l'horaire de la semaine */}
+            {f === "seance" && <span className="size-3 rounded-full border" style={{ background: COULEURS_TYPES.cours.fond }} />}
             {LIBELLES_FILTRES[f]}
           </button>
         ))}
@@ -148,7 +160,7 @@ export function CalendrierMois({
                       {e.titre}
                       {e.heure && ` · ${e.heure}`}
                       {e.local && ` · ${e.local}`}
-                      {e.cours && ` (${e.cours}${e.groupe ? ` gr. ${e.groupe}` : ""})`}
+                      {e.cours && ` (${e.cours})`}
                     </span>
                   ))}
               </div>
@@ -194,7 +206,7 @@ export function CalendrierMois({
                     <span className={`mb-1 inline-flex size-6 shrink-0 items-center justify-center rounded-full text-xs ${iso === aujourdhui ? "bg-primary font-bold text-primary-foreground" : ""}`}>{d.getDate()}</span>
                     <div className="space-y-0.5">
                       {evts.slice(0, 3).map((e, k) => (
-                        <Pastille key={k} e={e} compacte />
+                        <Pastille key={k} e={e} compacte coursOrdonnes={coursOrdonnes} />
                       ))}
                       {evts.length > 3 && <div className="text-[11px] text-muted-foreground">+{evts.length - 3} autre(s)</div>}
                     </div>
@@ -214,7 +226,7 @@ export function CalendrierMois({
           </DialogDescription>
           <ul className="space-y-2">
             {filtrer(jourChoisi ?? undefined).map((e, i) => (
-              <li key={i} className={`rounded-md p-2 ${encadre(e)} ${STYLES[e.type] ?? STYLES.autre}`}>
+              <li key={i} className={`rounded-md p-2 ${encadre(e)} ${classeEvenement(e)}`} style={styleSeance(e, coursOrdonnes)}>
                 <div className={`font-semibold ${e.annulee ? "line-through" : ""}`}>
                   {e.code && `${e.code} · `}
                   {e.evaluation && `Évaluation ${e.evaluation} · `}
@@ -222,7 +234,7 @@ export function CalendrierMois({
                 </div>
                 {e.annulee && <div className="text-sm font-bold uppercase">{e.annulee[0].toUpperCase() + e.annulee.slice(1)}</div>}
                 <div className="text-sm opacity-90">
-                  {[e.heure, e.cours, e.groupe && `groupe ${e.groupe}`, e.local && `local ${e.local}`].filter(Boolean).join(" · ")}
+                  {[e.heure, e.cours, e.local && `local ${e.local}`].filter(Boolean).join(" · ")}
                 </div>
                 {e.description && <p className="text-sm">{e.description}</p>}
               </li>

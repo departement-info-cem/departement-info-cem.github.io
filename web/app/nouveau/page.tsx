@@ -1,22 +1,9 @@
 import type { Metadata } from "next";
 import { Archive, Clock, FolderTree, HardDrive, Laptop, Search } from "lucide-react";
 import { Conteneur, TitrePage } from "@/components/titre-page";
-import { Apparition } from "@/components/apparition";
+import { Bloc } from "@/components/bloc";
 
 export const metadata: Metadata = { title: "Conseils aux nouveaux étudiants" };
-
-function Bloc({ icone: Icone, titre, children }: { icone: typeof Clock; titre: string; children: React.ReactNode }) {
-  return (
-    <Apparition>
-      <section className="h-full rounded-lg border bg-card p-5 shadow-sm">
-        <h2 className="mb-3 flex items-center gap-2 text-xl font-bold">
-          <Icone className="size-5 text-primary" /> {titre}
-        </h2>
-        <div className="space-y-2 [&_li]:ml-5 [&_li]:list-disc">{children}</div>
-      </section>
-    </Apparition>
-  );
-}
 
 export default function PageNouveau() {
   return (

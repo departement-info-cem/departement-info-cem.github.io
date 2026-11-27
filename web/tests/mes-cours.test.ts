@@ -91,6 +91,13 @@ describe("mon calendrier", () => {
     // Le lundi 30, le cours a lieu normalement : il n'est pas dans « à venir »
     expect(liste.find((j) => j.iso === "2026-11-30")?.evenements.some((e) => e.source === "seance")).toBe(false);
   });
+  it("à venir : pas de JR, EC, EUL ni EHR (le prof inscrit ce qu'il en fait), mais les congés et l'horaire modifié restent", () => {
+    const jours = construireCalendrier(calendrierScolaire(), {});
+    const types = (debut: string, nb: number) => aVenir(jours, debut, nb).flatMap((j) => j.evenements.map((e) => e.type));
+    const decembre = types("2026-12-09", 14);
+    for (const t of ["reprise", "evaluations", "evaluations-horaire"]) expect(decembre).not.toContain(t);
+    expect(types("2026-10-01", 20)).toEqual(expect.arrayContaining(["suspension", "horaire-modifie", "relache", "conge"]));
+  });
 });
 
 describe("calendrier d'un prof vu par son étudiant", () => {

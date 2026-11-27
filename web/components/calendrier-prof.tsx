@@ -5,6 +5,7 @@ import { useMesCours } from "@/app/_contexts/mes-cours-context";
 import { useScolaire } from "@/app/_contexts/scolaire-context";
 import { CalendrierMois } from "@/components/calendrier-mois";
 import { garderMonGroupe, libelle } from "@/lib/mes-cours";
+import { ordreDesCours } from "@/lib/horaire";
 
 // Calendrier d'un prof. Un étudiant qui a choisi son groupe avec ce prof (« Mes cours ») ne voit que les dates de son groupe,
 // sinon il verrait en évidence les examens et les remises des autres groupes et des autres cours. Une case permet de tout revoir.
@@ -28,6 +29,7 @@ export function CalendrierProf({ prof, plages, evenements, sessionId }: { prof: 
         plages={filtre && plages ? garderMonGroupe(plages, miens, canonique) : plages}
         evenements={filtre && evenements ? garderMonGroupe(evenements, miens, canonique) : evenements}
         sessionId={sessionId}
+        coursOrdonnes={ordreDesCours(plages ?? [])}
       />
     </>
   );

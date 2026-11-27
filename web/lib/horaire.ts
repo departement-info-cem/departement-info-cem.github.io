@@ -15,6 +15,11 @@ export const COULEURS_TYPES: Record<TypePlage, { fond: string; texte: string }> 
 /** Pour distinguer les cours entre eux : une bordure de couleur différente par numéro de cours. */
 const BORDURES_COURS = ["#278637", "#14b1e7", "#fdb913", "#f37021", "#0c3455", "#8dc640", "#d93b20"];
 
+/** L'ordre des cours qui décide de leur couleur de bordure : celui de leur première plage. Le même pour l'horaire et le calendrier d'une page. */
+export function ordreDesCours(plages: Pick<Plage, "cours">[]): string[] {
+  return [...new Set(plages.filter((p) => p.cours).map((p) => p.cours!.toUpperCase()))];
+}
+
 export function couleurBordure(plage: Pick<Plage, "type" | "cours">, coursOrdonnes: string[]): string {
   if (plage.type !== "cours") return "transparent";
   const i = coursOrdonnes.indexOf((plage.cours ?? "").toUpperCase());
