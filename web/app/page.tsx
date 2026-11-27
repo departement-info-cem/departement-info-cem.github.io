@@ -194,7 +194,7 @@ export default function Accueil() {
           <div className="mt-12 flex flex-wrap items-end justify-between gap-2">
             <div>
               <h3 className="text-2xl font-bold text-white">{listeProfs.length} profs</h3>
-              <p className="text-cem-gris-1">Leur horaire, leurs disponibilités et leur bureau sont en ligne.</p>
+              <p className="text-cem-gris-1">Leur bureau et leur horaire sont en ligne.</p>
             </div>
             <Link href="/profs" className="inline-flex items-center gap-1 font-semibold text-cem-vert hover:underline">
               Tous les profs <ArrowRight className="size-4" />

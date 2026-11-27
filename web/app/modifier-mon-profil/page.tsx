@@ -98,7 +98,7 @@ https://info.cegepmontpetit.ca/react/prenom.nom/calendrier/?cours=420-5N6-EM`}</
           <div className="grid gap-4 text-sm *:min-w-0 md:grid-cols-3">
             <div className="rounded-lg border bg-card p-4">
               <h3 className="mb-2 font-bold">Une plage de l&apos;horaire</h3>
-              <pre className="overflow-x-auto rounded bg-muted p-2 font-mono text-xs">{`- { jour: lundi, debut: "08:00", fin: "11:00",
+              <pre className="overflow-x-auto rounded bg-muted p-2 font-mono text-xs">{`- { jour: lundi, debut: "08:10", fin: "11:00",
     type: cours, cours: 420-1P6-EM,
     groupe: 1010, local: D-0601 }`}</pre>
               <p className="mt-2 text-muted-foreground">
