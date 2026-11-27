@@ -4,6 +4,7 @@
 
 nom: "Gabriel Gaudreault"
 courriel: gabriel.gaudreault  # sans @cegepmontpetit.ca
+contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 bureau: "E-209"
 photo: gg.png  # fichier dans data/photos/
 # github: mon-pseudo

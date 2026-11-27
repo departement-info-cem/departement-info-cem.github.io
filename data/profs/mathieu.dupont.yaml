@@ -4,6 +4,7 @@
 
 nom: "Mathieu Dupont"
 courriel: mathieu.dupont  # sans @cegepmontpetit.ca
+contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 bureau: "C-126"
 photo: md.jpg  # fichier dans data/photos/
 # github: mon-pseudo

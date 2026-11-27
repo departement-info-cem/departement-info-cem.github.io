@@ -91,12 +91,16 @@ export const evenementProfSchema = z
   });
 export type EvenementProf = z.infer<typeof evenementProfSchema>;
 
+/** Comment les étudiants joignent le prof : le bouton de sa page ouvre une conversation Teams, ou renvoie à MIO (Omnivox) */
+export const MOYENS_CONTACT = ["teams", "mio"] as const;
+
 export const profSchema = z
   .object({
     nom: z.string({ error: "nom manquant" }).min(1),
     courriel: z
       .string({ error: "courriel manquant (sans @cegepmontpetit.ca)" })
       .regex(/^[a-z0-9][a-z0-9.-]*$/, { error: "courriel invalide : seulement la partie avant @cegepmontpetit.ca, en minuscules" }),
+    contact: z.enum(MOYENS_CONTACT, { error: "contact : écris teams ou mio" }).default("teams"),
     bureau: z.string().optional(),
     photo: z.string().optional(),
     github: z.string().optional(),

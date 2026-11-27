@@ -4,6 +4,7 @@
 
 nom: "Mathieu Briau"
 courriel: mathieu.briau  # sans @cegepmontpetit.ca
+contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 bureau: "E-211"
 photo: mb.jpeg  # fichier dans data/photos/
 # github: mon-pseudo

@@ -4,6 +4,7 @@
 
 nom: "Jamil Gammoudi"
 courriel: jamil.gammoudi  # sans @cegepmontpetit.ca
+contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 bureau: "E-212"
 photo: jg.jpg  # fichier dans data/photos/
 # github: mon-pseudo

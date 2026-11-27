@@ -6,6 +6,7 @@
 
 nom: "Prénom Nom"
 courriel: prenom.nom              # sans @cegepmontpetit.ca, identique au nom du fichier
+contact: teams                    # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 bureau: "E-2xx"
 # photo: prenom.jpg               # ajoute ta photo dans data/photos/ (format portrait de préférence)
 # github: mon-pseudo

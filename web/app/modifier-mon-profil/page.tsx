@@ -19,7 +19,7 @@ const ETAPES = [
   },
   {
     titre: "Modifie le texte",
-    texte: "Change ce que tu veux : bureau, cours, plages de l'horaire, dates du calendrier. Les lignes qui commencent par # sont des commentaires et t'expliquent chaque champ. Respecte l'indentation (des espaces, pas de tabulations).",
+    texte: "Change ce que tu veux : bureau, cours, plages de l'horaire, dates du calendrier, et comment les étudiants te joignent (contact: teams ou mio). Les lignes qui commencent par # sont des commentaires et t'expliquent chaque champ. Respecte l'indentation (des espaces, pas de tabulations).",
   },
   {
     titre: "Vérifie avec l'aperçu (facultatif)",

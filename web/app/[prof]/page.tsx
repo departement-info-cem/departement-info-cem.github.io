@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BookOpen, CalendarDays, Clock, ExternalLink, Link2, MapPin, MessageSquare, Pencil } from "lucide-react";
+import { BookOpen, CalendarDays, Clock, ExternalLink, Link2, MapPin, Pencil } from "lucide-react";
 import { calendrierScolaire, coursAide, indexCours, prof, profs } from "@/lib/donnees";
 import { lienEdition, photo } from "@/lib/chemins";
 import { AvatarProf } from "@/components/carte-prof";
@@ -9,6 +9,7 @@ import { SessionPerimee } from "@/components/session-perimee";
 import { StatutProf } from "@/components/statut-prof";
 import { BoutonChoixGroupe } from "@/components/choix-groupe";
 import { BoutonPartager } from "@/components/bouton-partager";
+import { BoutonContact } from "@/components/bouton-contact";
 import { HorairePrerempli } from "@/components/horaire-prerempli";
 import { HoraireSemaine } from "@/components/horaire-semaine";
 import { CalendrierProf } from "@/components/calendrier-prof";
@@ -66,10 +67,7 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
             {p.presentation && <p className="max-w-2xl text-muted-foreground">{p.presentation}</p>}
             <div className="flex flex-wrap gap-2 pt-2">
               <BoutonChoixGroupe prof={p.id} />
-              {/* Pas d'adresse courriel sur le site (hameçonnage) : les étudiants joignent les profs sur Teams */}
-              <span className={bouton({ variant: "outline", size: "sm" })}>
-                <MessageSquare className="size-4" /> Écris-moi sur Teams
-              </span>
+              <BoutonContact courriel={p.courriel} contact={p.contact} />
               {p.bureau && (
                 <span className={bouton({ variant: "outline", size: "sm" })}>
                   <MapPin className="size-4" /> Bureau {p.bureau}
