@@ -30,4 +30,6 @@ horaire:
     - { jour: vendredi, debut: "12:00", fin: "15:00", type: cours, cours: 420-4W6-EM, groupe: 1010, local: D-0602 }
 
 # ---------- Calendrier : tes dates à toi (remises, examens, absences...) ----------
-calendrier: []
+calendrier:
+  - { date: 2026-12-10, remplace: 2026-10-28, type: deplacement, cours: 420-5N6-EM, groupe: 1010 }   # repris à la journée de reprise
+  - { date: 2026-12-14, remplace: 2026-12-17, type: deplacement, cours: 420-5N6-EM, groupe: 1010 }
