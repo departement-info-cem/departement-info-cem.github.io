@@ -5,12 +5,13 @@ import fs from "node:fs";
 import path from "node:path";
 import YAML from "yaml";
 import type { z } from "zod";
-import { profSchema, type Prof } from "@/app/_types/prof";
+import { profSchema, type EvenementProf, type Plage, type Prof } from "@/app/_types/prof";
 import { coursSchema, programmeSchema, type Cours, type CoursAffiche, type Programme } from "@/app/_types/programme";
 import { botSchema, calendrierScolaireSchema, coursServiceSchema, faqSchema, laboratoiresSchema, logicielsSchema, type Bot, type CalendrierScolaire, type CoursService, type Laboratoire, type Logiciel, type Question } from "@/app/_types/divers";
 import type { ProfHoraire } from "@/lib/maintenant";
-import type { DonneesMesCours, GroupeCours } from "@/lib/mes-cours";
-import { JOURS, normaliserJour } from "@/lib/temps";
+import type { DonneesMesCours, GroupeCours, Seance } from "@/lib/mes-cours";
+import { numeroterSeances, seancesDeLaSession, type SeanceNumerotee } from "@/lib/calendrier";
+import { JOURS, isoDepuisDate, normaliserJour } from "@/lib/temps";
 import { estActif } from "@/lib/actif";
 import { formaterErreurs } from "@/lib/erreurs";
 
@@ -250,6 +251,58 @@ export function donneesMesCours(date = new Date()): DonneesMesCours {
   }
   // Ordre : profs par nom (profs() est trié), puis groupes par numéro
   return { groupes, profs: infos, cours: indexCours() };
+}
+
+/** Ce que lisent les sites de cours dans /react/donnees/cours/<numéro>.json : la logistique de chaque groupe, déclarée une seule fois ici. */
+export type FichierCours = {
+  cours: string;
+  nom?: string;
+  /** date et heure du build */
+  genere: string;
+  groupes: {
+    prof: { id: string; nom: string };
+    groupe?: string;
+    session?: string;
+    /** l'horaire de la semaine */
+    plages: Seance[];
+    seances: SeanceNumerotee[];
+    /** les dates de la fiche pour ce cours et ce groupe : remises, examens, activités... (absences et déplacements sont dans les séances) */
+    evenements: Omit<EvenementProf, "cours" | "groupe">[];
+  }[];
+};
+
+/** Les numéros de cours qui ont un fichier pour les sites de cours : ceux du département au catalogue (anciens numéros compris) et ceux des horaires. */
+export function numerosFichiersCours(date = new Date()): string[] {
+  const duCatalogue = catalogue().flatMap((c) => [c.no, ...(c.alias ?? []).map((a) => a.no)]).filter((no) => no.startsWith("420-"));
+  return [...new Set([...duCatalogue.map((no) => no.toUpperCase()), ...Object.keys(donneesMesCours(date).groupes)])].sort();
+}
+
+/** Le fichier d'un cours pour son site : ses groupes cette session (profs actifs), leurs séances datées et leurs dates. */
+export function fichierCours(no: string, date = new Date()): FichierCours {
+  const cours = numeroCanonique(no);
+  const { groupes, profs: infos } = donneesMesCours(date);
+  const scolaire = calendrierScolaire();
+  // Sans session dans la fiche : la session en cours, ou la prochaine (comme le calendrier des profs)
+  const sessionParDefaut = scolaire.sessions.find((s) => isoDepuisDate(date) <= s.fin)?.id;
+  return {
+    cours,
+    nom: indexCours()[cours]?.nom,
+    genere: date.toISOString(),
+    groupes: (groupes[cours] ?? []).map((g) => {
+      const p = infos[g.prof];
+      const session = g.session ?? sessionParDefaut;
+      const plages: Plage[] = g.seances.map((s) => ({ ...s, type: "cours", cours, groupe: g.groupe }));
+      const duGroupe = p.calendrier.filter((e) => e.cours === cours && (!e.groupe || !g.groupe || e.groupe === g.groupe));
+      return {
+        prof: { id: g.prof, nom: p.nom },
+        groupe: g.groupe,
+        session,
+        plages: g.seances,
+        seances: numeroterSeances(seancesDeLaSession(scolaire, { plages, evenements: p.calendrier, sessionId: session })),
+        evenements: duGroupe.filter((e) => e.type !== "absence" && e.type !== "deplacement").map(({ date, au, titre, type, debut, fin, local, description, evaluation }) => ({ date, au, titre, type, debut, fin, local, description, evaluation })),
+      };
+    }),
+  };
 }
 
 export type LogicielAffiche = Logiciel & { coursLies: string[] };
