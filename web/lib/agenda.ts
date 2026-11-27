@@ -3,11 +3,8 @@
 // rappel 15 minutes avant, et relit le fichier de temps en temps (congés, cours annulés ou déplacés suivent tout seuls).
 // Rien n'est envoyé : le fichier d'un groupe est le même pour tous ses étudiants.
 import type { CalendrierScolaire } from "@/app/_types/divers";
-import type { Plage } from "@/app/_types/prof";
-import { construireCalendrier } from "@/lib/calendrier";
 import { chemin } from "@/lib/chemins";
-import { choixDe, court, evenementsPourMoi, libelle, type DonneesMesCours, type GroupeCours } from "@/lib/mes-cours";
-import { heureEnMinutes } from "@/lib/temps";
+import { choixDe, court, libelle, rencontresDuGroupe, type DonneesMesCours, type GroupeCours } from "@/lib/mes-cours";
 
 export const ORIGINE = "https://info.cegepmontpetit.ca";
 const DOMAINE = new URL(ORIGINE).host;
@@ -35,56 +32,40 @@ export function fichierAgenda(g: GroupeCours): string | null {
   return `${g.session}-${court(g.cours)}-${g.groupe ?? g.prof}.ics`.replace(/[^A-Za-z0-9.-]/g, "-");
 }
 
-const hhmm = (h: string) => {
-  const m = heureEnMinutes(h)!;
-  return `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
-};
-
 /**
- * Les séances d'un groupe pour toute sa session, d'après le calendrier scolaire (congés, horaire d'un autre jour)
- * et les dates de son prof (absences : séance annulée, sans rappel ; déplacements : séance reprise à une autre date).
+ * Les séances d'un groupe pour l'agenda, d'après ses rencontres datées (rencontresDuGroupe) : une séance annulée
+ * ou déplacée reste visible, sans rappel ; la reprise d'un cours déplacé paraît à sa nouvelle date.
  */
 export function seancesDuGroupe(g: GroupeCours, donnees: DonneesMesCours, scolaire: CalendrierScolaire): EvenementAgenda[] {
-  const m = choixDe(g);
-  const plages: Plage[] = g.seances.map((s) => ({ ...s, type: "cours", cours: g.cours, groupe: g.groupe }));
-  const jours = construireCalendrier(scolaire, { plages, evenements: evenementsPourMoi([m], donnees.profs), sessionId: g.session });
   const nomCours = donnees.cours[g.cours]?.nom;
-  const titre = `${libelle(m)}${nomCours ? ` · ${nomCours}` : ""}`;
+  const titre = `${libelle(choixDe(g))}${nomCours ? ` · ${nomCours}` : ""}`;
   const pageProf = `${ORIGINE}${chemin(`/${g.prof}/`)}`;
   const siteCours = donnees.cours[g.cours]?.url;
   const prof = donnees.profs[g.prof]?.nom;
   const base = fichierAgenda(g)!.replace(/\.ics$/, "");
+  const prefixe = { prevue: "", reprise: "", annulee: "Annulé : ", deplacee: "Déplacé : " } as const;
 
-  const resultat: EvenementAgenda[] = [];
-  for (const j of [...jours.values()].sort((a, b) => a.iso.localeCompare(b.iso))) {
-    for (const e of j.evenements) {
-      const seance = e.source === "seance";
-      const reprise = e.source === "prof" && e.type === "deplacement";
-      const [debut, fin] = (e.heure ?? "").split("–");
-      if ((!seance && !reprise) || !debut || !fin || heureEnMinutes(debut) === null || heureEnMinutes(fin) === null) continue;
-      resultat.push({
-        uid: `${j.iso}-${hhmm(debut).replace(":", "")}-${base}${reprise ? "-reprise" : ""}@${DOMAINE}`,
-        date: j.iso,
-        debut: hhmm(debut),
-        fin: hhmm(fin),
-        titre: e.annulee ? `${e.annulee.startsWith("déplacé") ? "Déplacé" : "Annulé"} : ${titre}` : titre,
-        lieu: e.local,
-        description: [
-          e.annulee && `Cours ${e.annulee}.`,
-          reprise && e.description,
-          prof && `Prof : ${prof}`,
-          e.local && `Local : ${e.local}`,
-          `Page du prof : ${pageProf}`,
-          siteCours && `Site du cours : ${siteCours}`,
-        ]
-          .filter(Boolean)
-          .join("\n"),
-        url: siteCours ?? pageProf,
-        rappel: e.annulee ? undefined : RAPPEL_MINUTES,
-      });
-    }
-  }
-  return resultat;
+  return rencontresDuGroupe(g, donnees.profs, scolaire).map((r) => ({
+    uid: `${r.date}-${r.debut.replace(":", "")}-${base}${r.statut === "reprise" ? "-reprise" : ""}@${DOMAINE}`,
+    date: r.date,
+    debut: r.debut,
+    fin: r.fin,
+    titre: `${prefixe[r.statut]}${titre}`,
+    lieu: r.local,
+    description: [
+      r.statut === "annulee" && "Cours annulé.",
+      r.statut === "deplacee" && `Cours ${r.note}.`,
+      r.statut === "reprise" && r.note,
+      prof && `Prof : ${prof}`,
+      r.local && `Local : ${r.local}`,
+      `Page du prof : ${pageProf}`,
+      siteCours && `Site du cours : ${siteCours}`,
+    ]
+      .filter(Boolean)
+      .join("\n"),
+    url: siteCours ?? pageProf,
+    rappel: r.numero ? RAPPEL_MINUTES : undefined,
+  }));
 }
 
 /** Tous les agendas à générer : nom du fichier -> nom de l'agenda et ses séances. */

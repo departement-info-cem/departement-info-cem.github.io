@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { donneesMesCours } from "@/lib/donnees";
-import { aVenir, basculer, garderMonGroupe, court, ecrireParamCours, estPerime, lireParamCours, evenementsPourMoi, libelle, lienAvecMoi, nettoyer, trierPourMoi, type InfoProfMesCours, type MonCours } from "@/lib/mes-cours";
+import { aVenir, basculer, garderMonGroupe, court, ecrireParamCours, estPerime, lireParamCours, evenementsPourMoi, libelle, lienAvecMoi, nettoyer, rencontresDuGroupe, trierPourMoi, type InfoProfMesCours, type MonCours } from "@/lib/mes-cours";
 import { construireCalendrier } from "@/lib/calendrier";
 import { adresseAvecCours } from "@/components/partager-page";
 import { calendrierScolaire } from "@/lib/donnees";
@@ -147,5 +147,40 @@ describe("adresse à partager", () => {
     expect(adresseAvecCours("https://x.ca/react/joris.deguet/horaire/?cours=420-5N6-EM", "SN1-1050,5M6-1020")).toBe("https://x.ca/react/joris.deguet/horaire/?cours=420-5N6-EM&mescours=SN1-1050,5M6-1020");
     expect(adresseAvecCours("https://x.ca/react/profs/?mescours=3W6", null)).toBe("https://x.ca/react/profs/");
     expect(adresseAvecCours("https://x.ca/react/profs/?mescours=3W6", "SN1")).toBe("https://x.ca/react/profs/?mescours=SN1");
+  });
+});
+
+describe("rencontresDuGroupe", () => {
+  const donnees = donneesMesCours(new Date(2026, 10, 27));
+  // 420-5N6-EM est un ancien numéro de 420-5M6-EM
+  const groupe = donnees.groupes["420-5M6-EM"].find((g) => g.prof === "po.brillant" && g.groupe === "1010")!;
+
+  it("5M6 gr. 1010 (mercredi 14h-17h, jeudi 8h-11h) : 30 rencontres à l'automne 2026, numérotées", () => {
+    const rencontres = rencontresDuGroupe(groupe, donnees.profs, calendrierScolaire());
+    expect(rencontres).toHaveLength(30);
+    expect(rencontres.map((r) => r.numero)).toEqual(Array.from({ length: 30 }, (_, i) => i + 1));
+    expect(rencontres[0]).toEqual({ numero: 1, date: "2026-08-26", debut: "14:00", fin: "17:00", local: "D-0704", statut: "prevue", note: undefined });
+    expect(rencontres.some((r) => r.date === "2026-11-11")).toBe(false); // journée particulière d'enseignement
+  });
+
+  it("une absence annule, un déplacement reporte : seules les rencontres qui ont lieu sont numérotées", () => {
+    const profs = {
+      ...donnees.profs,
+      "po.brillant": {
+        ...donnees.profs["po.brillant"],
+        calendrier: [
+          { date: "2026-09-02", type: "absence" as const },
+          { date: "2026-12-10", remplace: "2026-12-03", type: "deplacement" as const, cours: "420-5M6-EM", groupe: "1010" },
+        ],
+      },
+    };
+    const rencontres = rencontresDuGroupe(groupe, profs, calendrierScolaire());
+    const le = (date: string) => rencontres.find((r) => r.date === date);
+    expect(le("2026-09-02")).toMatchObject({ statut: "annulee" });
+    expect(le("2026-12-03")).toMatchObject({ statut: "deplacee", note: "déplacé au jeudi 10 décembre" });
+    expect([le("2026-09-02")?.numero, le("2026-12-03")?.numero]).toEqual([undefined, undefined]);
+    expect(le("2026-12-10")).toMatchObject({ statut: "reprise", debut: "08:00", fin: "11:00", note: "Reprise du cours du jeudi 3 décembre." });
+    expect(rencontres.filter((r) => r.numero)).toHaveLength(29);
+    expect(rencontres.at(-1)?.numero).toBe(29);
   });
 });
