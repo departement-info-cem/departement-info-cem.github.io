@@ -14,8 +14,8 @@ import { etatProf } from "@/lib/maintenant";
 import { simplifier } from "@/lib/texte";
 import type { InfoCours } from "@/components/horaire-semaine";
 
-// « actifs » : les identifiants des profs actifs cette session ; les autres vont dans une section à part, en bas.
-export function ListeProfs({ profs, actifs, cours }: { profs: Prof[]; actifs: string[]; cours: InfoCours }) {
+// « profs » : seulement ceux qui sont actifs cette session.
+export function ListeProfs({ profs, cours }: { profs: Prof[]; cours: InfoCours }) {
   const recherche = useTwoWayBinding("");
   const [coursChoisi, setCoursChoisi] = useState("");
   const [dispoSeulement, setDispoSeulement] = useState(false);
@@ -41,8 +41,7 @@ export function ListeProfs({ profs, actifs, cours }: { profs: Prof[]; actifs: st
     return true;
   });
   // Mes profs d'abord, puis ceux de mes cours (« Mes cours »)
-  const enPoste = trierPourMoi(filtres.filter((p) => actifs.includes(p.id)), (p) => lien(p.id));
-  const inactifs = filtres.filter((p) => !actifs.includes(p.id));
+  const enPoste = trierPourMoi(filtres, (p) => lien(p.id));
 
   return (
     <div>
@@ -76,16 +75,6 @@ export function ListeProfs({ profs, actifs, cours }: { profs: Prof[]; actifs: st
           <CarteProf key={p.id} prof={p} lien={lien(p.id)} />
         ))}
       </div>
-      {inactifs.length > 0 && (
-        <section className={enPoste.length > 0 ? "mt-10" : undefined}>
-          <h2 className="mb-4 text-xl font-bold text-muted-foreground">Pas actifs cette session</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {inactifs.map((p) => (
-              <CarteProf key={p.id} prof={p} />
-            ))}
-          </div>
-        </section>
-      )}
       {filtres.length === 0 && <p className="py-10 text-center text-muted-foreground">Aucun prof ne correspond à ta recherche.</p>}
     </div>
   );
