@@ -107,6 +107,6 @@ if (bot) {
 
 console.log(`\n${fichiersProfs.length} fiches de profs vérifiées : ${nbErreurs} erreur(s), ${nbAvertissements} avertissement(s).`);
 if (nbErreurs > 0) {
-  console.log("Corrige les erreurs ci-dessus puis refais un commit. Aide : https://info.cegepmontpetit.ca/react/modifier-mon-profil");
+  console.log("Corrige les erreurs ci-dessus puis refais un commit. Aide : https://info.cegepmontpetit.ca/modifier-mon-profil");
   process.exit(1);
 }

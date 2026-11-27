@@ -129,6 +129,6 @@ export const profSchema = z
   .strict();
 
 export type Prof = z.infer<typeof profSchema> & {
-  /** identifiant = nom du fichier (= courriel), sert dans l'URL /react/<id> */
+  /** identifiant = nom du fichier (= courriel), sert dans l'URL /<id> */
   id: string;
 };

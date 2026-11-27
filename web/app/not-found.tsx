@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { bouton } from "@/lib/bouton";
+import { scriptRedirection } from "@/lib/redirections";
 
 export default function PageIntrouvable() {
   return (
     <div className="mx-auto max-w-xl px-4 py-20 text-center">
+      {/* Anciennes adresses (/react/..., /prof/..., /dec/p...) : GitHub Pages sert cette page, on redirige tout de suite. */}
+      <script dangerouslySetInnerHTML={{ __html: scriptRedirection }} />
       <p className="text-6xl font-bold text-primary">404</p>
       <h1 className="mt-4 text-2xl font-bold">Page introuvable</h1>
       <p className="mt-2 text-muted-foreground">Segmentation fault (core dumped)... ou plus simplement, cette page n&apos;existe pas.</p>

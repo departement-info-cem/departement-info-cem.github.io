@@ -7,7 +7,7 @@ import { HoraireLabo } from "@/components/horaire-labos";
 import { indexCours, laboratoires, profsHoraire } from "@/lib/donnees";
 import { profsUtiles } from "@/lib/maintenant";
 
-// Une page par laboratoire : /react/locaux/D-0003, générée au build pour chaque local de data/laboratoires.yaml
+// Une page par laboratoire : /locaux/D-0003, générée au build pour chaque local de data/laboratoires.yaml
 export const dynamicParams = false;
 
 export function generateStaticParams() {

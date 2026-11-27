@@ -1,18 +1,15 @@
 import path from "node:path";
 import type { NextConfig } from "next";
 
-// Le site est exporté en fichiers statiques (GitHub Pages) et servi sous /react/
-// en parallèle de l'ancien site Angular. Pour la bascule finale : basePath "".
-// À la bascule, des adresses en /react/ sont déjà dans la nature et doivent continuer de répondre :
-// - /react/agenda/*.ics : les agendas des téléphones y sont abonnés (ils ne suivent pas de redirection en JavaScript) ;
-// - /react/donnees/cours/*.json : les sites de cours (depinfo-gabarit) essaient /donnees/ puis /react/, garder un temps ;
-// - les pages /react/... : liens partagés, favoris, et l'appli de l'écran d'accueil qui démarre sur /react/mes-cours/.
-export const BASE_PATH = "/react";
+// Le site est exporté en fichiers statiques (GitHub Pages) et servi à la racine de info.cegepmontpetit.ca.
+// Les anciennes adresses (/react/..., site Angular) sont redirigées par la page 404 : voir lib/redirections.ts.
+// Les agendas (.ics) et les données des sites de cours (.json) sont aussi recopiés sous /react/ : scripts/anciennes-adresses.ts.
+export const BASE_PATH = "";
 
 const nextConfig: NextConfig = {
   output: "export",
   basePath: BASE_PATH,
-  // /react/joris.deguet/ -> joris.deguet/index.html : GitHub Pages sait servir ça directement.
+  // /joris.deguet/ -> joris.deguet/index.html : GitHub Pages sait servir ça directement.
   trailingSlash: true,
   images: { unoptimized: true },
   env: { NEXT_PUBLIC_BASE_PATH: BASE_PATH },

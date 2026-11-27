@@ -8,7 +8,7 @@ import { StatutProf } from "@/components/statut-prof";
 import { BoutonPartager } from "@/components/bouton-partager";
 import { indexCours, prof, profs } from "@/lib/donnees";
 
-// Adresse directe /react/<prof>/horaire/ (avec ?cours=... au besoin), pour les liens des sites de cours.
+// Adresse directe /<prof>/horaire/ (avec ?cours=... au besoin), pour les liens des sites de cours.
 export const dynamicParams = false;
 
 export function generateStaticParams() {

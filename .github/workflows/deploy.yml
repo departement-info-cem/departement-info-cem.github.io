@@ -23,39 +23,7 @@ jobs:
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 22
-      - name: Cache de node modules
-        id: cache-nodemodules
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: angular/node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
-      - name: Installer les dépendences
-        working-directory: angular
-        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
-        run: |
-          npm ci
-
-      - name: Lint
-        working-directory: angular
-        run: npm run lint
-
-      - name: Build
-        working-directory: angular
-        run: npm run build:prod
-
-      - name: Fix 404.html
-        working-directory: angular/dist/depinfo/browser
-        run: |
-          cp index.html 404.html
-
-      # ---------- Nouveau site React (web/), publié sous /react/ ----------
+      # ---------- Site Next.js (web/), publié à la racine ----------
       - name: Installer les dépendances (React)
         working-directory: web
         run: npm ci
@@ -80,11 +48,8 @@ jobs:
         working-directory: web
         run: npm run build
 
-      - name: Placer le site React sous /react/
-        run: cp -r web/out angular/dist/depinfo/browser/react
-
       - name: Fix permissions
-        working-directory: angular/dist/depinfo/browser
+        working-directory: web/out
         run: |
           chmod -c -R +rX "./" | while read line; do
             echo "::warning title=Invalid file permissions automatically fixed::$line"
@@ -93,7 +58,7 @@ jobs:
       - name: Téléverser l'artéfact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
-          path: angular/dist/depinfo/browser
+          path: web/out
           retention-days: 5
   deploy:
     needs: build
