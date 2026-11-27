@@ -15,6 +15,27 @@ Ce fichier sert à expliquer comment modifier l'appli ou le contenu du site du d
 - `data/laboratoires.yaml` vient du PDF « Horaire du local » publié dans le dépôt 420-SN1 (des images : à recopier à chaque session).
   Il a servi à préremplir les fiches de profs (`prerempli: true`, à enlever une fois vérifié). Il alimente le bandeau du bas, la page `/react/maintenant/` et une page par local (`/react/locaux/D-0003/`). Les logos de l'en-tête sont dans `web/public/images/liens/`.
 - Liens directs pour les sites de cours : `/react/<prof>/horaire/` et `/react/<prof>/calendrier/`, avec `?cours=420-5N6-EM` au besoin.
+- Données pour les sites de cours : `/react/donnees/cours/<numéro>.json` (ex. https://info.cegepmontpetit.ca/react/donnees/cours/420-5N6-EM.json),
+  écrit à chaque build (`web/app/donnees/cours/[fichier]/route.ts`), aussi sous les anciens numéros. Le site de cours n'a plus à recopier
+  horaires et dates : il garde la matière de chaque séance, par numéro. Pour chaque groupe d'un prof actif : `prof`, `groupe`, `session`,
+  `plages` (l'horaire de la semaine), `seances` et `evenements` (remises, examens... de la fiche pour ce cours).
+  Les séances suivent le calendrier scolaire et le `calendrier:` de la fiche : `{ n, date, debut, fin, local, statut }`, où `statut`
+  vaut `normal`, `annulé` (absence : pas de `n`, la matière passe à la séance suivante) ou `déplacé` (à sa nouvelle date, `remplace` : la date prévue).
+  Lecture depuis Docusaurus (même domaine, info.cegepmontpetit.ca ; GitHub Pages permet aussi la lecture d'ailleurs, ex. en local) :
+
+  ```jsx
+  import { useEffect, useState } from "react";
+
+  export function useSeances(no, groupe) {
+    const [seances, setSeances] = useState([]);
+    useEffect(() => {
+      fetch(`https://info.cegepmontpetit.ca/react/donnees/cours/${no}.json`)
+        .then((r) => r.json())
+        .then((c) => setSeances(c.groupes.find((g) => g.groupe === groupe)?.seances ?? []));
+    }, [no, groupe]);
+    return seances; // seances.find((s) => s.n === 5)?.date : la date de la séance 5
+  }
+  ```
 - Vérifications : `npm run valider`, `npm run lint`, `npm test`, `npm run build`
 - Tant que les deux sites cohabitent, le site Angular lit encore les fichiers JSON de `data/` :
   un changement doit être fait aux deux endroits pour apparaître sur les deux sites.

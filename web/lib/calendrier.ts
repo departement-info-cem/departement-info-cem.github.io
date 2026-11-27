@@ -43,6 +43,83 @@ function chaqueJour(debut: string, fin: string, f: (iso: string) => void) {
   }
 }
 
+const meme = (a?: string, b?: string) => !a || a.toUpperCase() === b?.toUpperCase();
+/** L'événement vise ce cours (ou tous, s'il n'en nomme pas) et ce groupe (ou tous). */
+const concerne = (e: EvenementProf, p: Plage) => meme(e.cours, p.cours) && (!e.groupe || e.groupe === p.groupe);
+const minutes = (h: string) => h.padStart(5, "0");
+
+export type StatutSeance = "normal" | "annulé" | "déplacé";
+
+/** Une séance prévue : une plage « cours » de l'horaire de la semaine, un jour de classe de la session. */
+export type SeancePrevue = {
+  /** le jour prévu, d'après l'horaire et le calendrier scolaire */
+  date: string;
+  plage: Plage;
+  statut: StatutSeance;
+  /** déplacé : l'événement de la fiche qui la reprend un autre jour (sa date, et son heure ou son local s'ils changent) */
+  deplacement?: EvenementProf;
+};
+
+/**
+ * Les séances d'un horaire pendant une session : chaque jour de classe (sans les congés, la relâche, les journées de reprise...,
+ * en suivant les horaires modifiés), annulées par une absence de la fiche ou déplacées par un déplacement. Triées par date et par heure.
+ * C'est le seul calcul des séances du site : le calendrier des profs et les fichiers des sites de cours (/react/donnees/cours/) s'en servent.
+ */
+export function seancesDeLaSession(scolaire: CalendrierScolaire, options: { plages?: Plage[]; evenements?: EvenementProf[]; sessionId?: string }): SeancePrevue[] {
+  const session = scolaire.sessions.find((s) => s.id === options.sessionId);
+  const cours = (options.plages ?? []).filter((p) => p.type === "cours").sort((a, b) => minutes(a.debut).localeCompare(minutes(b.debut)));
+  const evenements = options.evenements ?? [];
+  const resultat: SeancePrevue[] = [];
+  if (!session) return resultat;
+  chaqueJour(session.debut, session.fin, (iso) => {
+    const jour = situationDuJour(scolaire, iso);
+    if (jour.sansCours) return;
+    for (const p of cours.filter((p) => normaliserJour(p.jour) === jour.horaireSuivi)) {
+      const deplacement = evenements.find((e) => e.type === "deplacement" && e.remplace === iso && concerne(e, p));
+      // Une absence sur une partie de la journée n'annule que les cours qui la chevauchent
+      const absence = evenements.some((e) => e.type === "absence" && e.date <= iso && iso <= (e.au ?? e.date) && concerne(e, p) && (!e.debut || !e.fin || (minutes(e.debut) < minutes(p.fin) && minutes(p.debut) < minutes(e.fin))));
+      resultat.push({ date: iso, plage: p, statut: deplacement ? "déplacé" : absence ? "annulé" : "normal", deplacement });
+    }
+  });
+  return resultat;
+}
+
+/** Une séance telle que la lisent les sites de cours : à la date et à l'heure où elle a lieu, numérotée si elle a lieu. */
+export type SeanceNumerotee = {
+  /** rang parmi les séances qui ont lieu (absent si annulé) : la séance 5 est celle où on voit la matière 5 */
+  n?: number;
+  date: string;
+  debut: string;
+  fin: string;
+  local?: string;
+  statut: StatutSeance;
+  /** déplacé : la date prévue à l'horaire */
+  remplace?: string;
+};
+
+/**
+ * Numérote les séances d'un groupe comme le prof les donne : 1, 2, 3... dans l'ordre où elles ont lieu.
+ * Une séance déplacée prend son rang à sa nouvelle date ; une séance annulée n'a pas de numéro : la matière passe à la suivante.
+ */
+export function numeroterSeances(seances: SeancePrevue[]): SeanceNumerotee[] {
+  const datees = seances
+    .map((s) => {
+      const d = s.deplacement;
+      const local = d?.local ?? s.plage.local;
+      return {
+        date: d?.date ?? s.date,
+        debut: d?.debut ?? s.plage.debut,
+        fin: d?.fin ?? s.plage.fin,
+        ...(local && { local }),
+        statut: s.statut,
+        ...(d && { remplace: s.date }),
+      };
+    })
+    .sort((a, b) => a.date.localeCompare(b.date) || minutes(a.debut).localeCompare(minutes(b.debut)));
+  let n = 0;
+  return datees.map((s) => (s.statut === "annulé" ? s : { n: ++n, ...s }));
+}
+
 export function construireCalendrier(
   scolaire: CalendrierScolaire,
   options: { plages?: Plage[]; evenements?: EvenementProf[]; sessionId?: string },
@@ -67,33 +144,19 @@ export function construireCalendrier(
     });
   }
 
-  // 2. Séances de cours : l'horaire de la semaine, pour chaque jour de la session
-  const session = scolaire.sessions.find((s) => s.id === options.sessionId);
+  // 2. Séances de cours : l'horaire de la semaine, pour chaque jour de classe de la session
   const seances = (options.plages ?? []).filter((p) => p.type === "cours");
   const evenements = options.evenements ?? [];
-  const meme = (a?: string, b?: string) => !a || a.toUpperCase() === b?.toUpperCase();
-  const concerne = (e: EvenementProf, p: Plage) => meme(e.cours, p.cours) && (!e.groupe || e.groupe === p.groupe);
-
-  if (session && seances.length) {
-    chaqueJour(session.debut, session.fin, (iso) => {
-      const j = jours.get(iso);
-      if (j?.sansCours) return;
-      const jourReel = jourDeLaSemaine(dateDepuisIso(iso));
-      const jourSuivi = j?.horaireSuivi ?? jourReel;
-      for (const p of seances.filter((p) => normaliserJour(p.jour) === jourSuivi)) {
-        const absence = evenements.find((e) => e.type === "absence" && e.date <= iso && iso <= (e.au ?? e.date) && concerne(e, p) && (!e.debut || !e.fin || (e.debut.padStart(5, "0") < p.fin.padStart(5, "0") && p.debut.padStart(5, "0") < e.fin.padStart(5, "0"))));
-        const deplacement = evenements.find((e) => e.type === "deplacement" && e.remplace === iso && concerne(e, p));
-        obtenir(iso).evenements.push({
-          source: "seance",
-          type: "seance",
-          titre: p.titre ?? p.cours ?? "Cours",
-          cours: p.cours,
-          groupe: p.groupe,
-          heure: `${p.debut}–${p.fin}`,
-          local: p.local,
-          annulee: deplacement ? `déplacé au ${formaterDate(deplacement.date).toLowerCase()}` : absence ? "annulé" : undefined,
-        });
-      }
+  for (const { date, plage: p, statut, deplacement } of seancesDeLaSession(scolaire, options)) {
+    obtenir(date).evenements.push({
+      source: "seance",
+      type: "seance",
+      titre: p.titre ?? p.cours ?? "Cours",
+      cours: p.cours,
+      groupe: p.groupe,
+      heure: `${p.debut}–${p.fin}`,
+      local: p.local,
+      annulee: deplacement ? `déplacé au ${formaterDate(deplacement.date).toLowerCase()}` : statut === "annulé" ? "annulé" : undefined,
     });
   }
 
