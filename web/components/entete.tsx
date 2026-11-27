@@ -21,8 +21,7 @@ export const GRILLES = [
   ...GRILLES_DIRECTES,
   { href: "/programmes", texte: "Tous les programmes", sousTitre: "AEC, comparateur" },
   { href: "/cours-service", texte: "Sciences de la nature et cours de service", sousTitre: "SN1, TIM, TAG, Z03" },
-  { href: "/orientation", texte: "Est-ce pour moi ?", sousTitre: "Quelques questions pour t'orienter" },
-  { href: "/jeux", texte: "Mini-jeux", sousTitre: "Programme un robot, répare un réseau" },
+  { href: "/orientation", texte: "Est-ce pour moi ?", sousTitre: "Deux mini-jeux et un bot pour t'orienter" },
 ];
 
 export const NAVIGATION = [
@@ -43,11 +42,13 @@ export const RESSOURCES = [
   { href: "/contact", texte: "Nous joindre" },
 ];
 
-// La barre complète (logo, liens, icônes) tient en 985 px : elle s'affiche dès lg (1024 px), pas xl,
-// pour les portables à petit écran ou en mise à l'échelle 125-150 %. Ajout d'un lien : revérifie à 1024 px.
+// La barre complète (logo, liens, icônes) s'affiche dès lg (1024 px), pas xl, pour les portables à petit écran
+// ou en mise à l'échelle 125-150 %. À 1024 px, une barre de défilement laisse 1009 px : sous xl, les liens sont
+// resserrés (px-2, sans espace entre eux) et le séparateur disparaît, et la barre tient en 989 px.
+// Ajout ou changement d'un lien : revérifie à 1024 px (largeur du contenu de <header> > div = sa largeur visible).
 
 // Tout ce qui est cliquable dans la barre a la même hauteur (36 px), le même arrondi et le même survol.
-const BOUTON = "inline-flex h-9 items-center gap-1 whitespace-nowrap rounded-md px-3 text-sm font-semibold transition-colors hover:bg-white/10";
+const BOUTON = "inline-flex h-9 items-center gap-1 whitespace-nowrap rounded-md px-2 xl:px-3 text-sm font-semibold transition-colors hover:bg-white/10";
 const BOUTON_ICONE ="inline-flex size-9 shrink-0 items-center justify-center rounded-md transition-colors hover:bg-white/10";
 const ACTIF = "bg-white/10 text-cem-vert";
 const SOUS_MENU =
@@ -72,10 +73,10 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
           <Logo anime classeTexte="max-[369px]:hidden" />
         </Link>
 
-        <nav className="ml-auto hidden items-center gap-1 lg:flex" aria-label="Navigation principale">
+        <nav className="ml-auto hidden items-center lg:flex xl:gap-1" aria-label="Navigation principale">
           <div className="group relative">
             <button className={cn(BOUTON, GRILLES.some((l) => actif(l.href)) && ACTIF)} aria-haspopup="true">
-              Grilles <ChevronDown className="size-4" />
+              Programmes <ChevronDown className="size-4" />
             </button>
             <div className={cn(SOUS_MENU, "left-0 w-64")}>
               {GRILLES.map((l) => (
@@ -105,7 +106,7 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
           </div>
         </nav>
 
-        <span className="hidden h-6 w-px bg-white/20 lg:block" aria-hidden="true" />
+        <span className="hidden h-6 w-px bg-white/20 xl:block" aria-hidden="true" />
 
         <div className="ml-auto flex shrink-0 items-center gap-1 lg:ml-0">
           <RechercheGlobale index={index} className={BOUTON_ICONE} />

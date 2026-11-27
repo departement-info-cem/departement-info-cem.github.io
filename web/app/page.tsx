@@ -170,8 +170,8 @@ export default function Accueil() {
             </h2>
             <p className="mt-1 text-muted-foreground">Deux petits jeux, cinq niveaux chacun, sans rien connaître d&apos;avance. Si tu y prends plaisir, c&apos;est bon signe.</p>
           </div>
-          <Link href="/jeux" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
-            Tous les jeux <ArrowRight className="size-3.5" />
+          <Link href="/orientation" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+            Jeux et bot d&apos;orientation <ArrowRight className="size-3.5" />
           </Link>
         </div>
         {/* Sur le parent : les cartes ont leur propre translate au survol */}

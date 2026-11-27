@@ -90,7 +90,14 @@ export function CalendrierMois({
     setMois({ annee: d.getFullYear(), mois: d.getMonth() });
   }
 
-  const semaines = semainesDuMois(affiche.annee, affiche.mois);
+  // Pas de cours la fin de semaine : samedi et dimanche ne paraissent que si une date du mois y tombe (ex. une remise le dimanche)
+  const finDeSemaine = (d: Date) => d.getDay() === 0 || d.getDay() === 6;
+  const toutesLesSemaines = semainesDuMois(affiche.annee, affiche.mois);
+  const avecFinsDeSemaine = toutesLesSemaines.some((s) => s.some((d) => finDeSemaine(d) && d.getMonth() === affiche.mois && filtrer(jours.get(isoDepuisDate(d))).length > 0));
+  const semaines = toutesLesSemaines
+    .map((s) => (avecFinsDeSemaine ? s : s.filter((d) => !finDeSemaine(d))))
+    .filter((s) => s.some((d) => d.getMonth() === affiche.mois));
+  const colonnes = avecFinsDeSemaine ? "grid-cols-7" : "grid-cols-5";
   const liste = [...jours.values()]
     .filter((j) => filtrer(j).length && (!session || (j.iso >= session.debut && j.iso <= session.fin)) && j.evenements.some((e) => e.source !== "seance" && filtres.has(e.source)))
     .sort((a, b) => a.iso.localeCompare(b.iso));
@@ -161,8 +168,8 @@ export function CalendrierMois({
               <ChevronRight />
             </Button>
           </div>
-          <div className="grid grid-cols-7 border-b text-center text-xs font-semibold text-muted-foreground">
-            {(["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"] as const).map((j) => (
+          <div className={`grid ${colonnes} border-b text-center text-xs font-semibold text-muted-foreground`}>
+            {(["lundi", "mardi", "mercredi", "jeudi", "vendredi", ...(avecFinsDeSemaine ? (["samedi", "dimanche"] as const) : [])] as const).map((j) => (
               <div key={j} className="py-1">
                 <span className="hidden sm:inline">{LIBELLES_JOURS[j]}</span>
                 <span className="sm:hidden">{LIBELLES_JOURS[j].slice(0, 3)}</span>
@@ -170,18 +177,17 @@ export function CalendrierMois({
             ))}
           </div>
           {semaines.map((semaine, i) => (
-            <div key={i} className="grid grid-cols-7">
+            <div key={i} className={`grid ${colonnes}`}>
               {semaine.map((d) => {
                 const iso = isoDepuisDate(d);
                 const jour = jours.get(iso);
                 const evts = filtrer(jour);
                 const horsMois = d.getMonth() !== affiche.mois;
-                const finDeSemaine = d.getDay() === 0 || d.getDay() === 6;
                 return (
                   <button
                     key={iso}
                     onClick={() => jour && evts.length && setJourChoisi(jour)}
-                    className={`flex min-h-24 min-w-0 flex-col items-stretch border-b border-r p-1 text-left transition hover:bg-accent/40 ${horsMois ? "opacity-40" : ""} ${finDeSemaine ? "bg-muted" : ""} ${
+                    className={`flex min-h-24 min-w-0 flex-col items-stretch border-b border-r p-1 text-left transition hover:bg-accent/40 ${horsMois ? "opacity-40" : ""} ${finDeSemaine(d) ? "bg-muted" : ""} ${
                       jour?.sansCours && filtres.has("scolaire") ? "bg-[repeating-linear-gradient(135deg,transparent,transparent_6px,var(--muted)_6px,var(--muted)_8px)]" : ""
                     }`}
                   >

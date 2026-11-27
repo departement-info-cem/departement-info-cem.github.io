@@ -28,7 +28,7 @@ export function ListeProfs({ profs, cours }: { profs: Prof[]; cours: InfoCours }
     const canonique = (c: string) => (cours[c.toUpperCase()]?.no ?? c).toUpperCase();
     return (p: Prof) => [...(p.cours ?? []), ...(p.horaire?.plages.map((x) => x.cours ?? "") ?? [])].filter(Boolean).map(canonique);
   }, [cours]);
-  const coursDonnes = useMemo(() => [...new Set(profs.flatMap(coursDe))].sort(), [profs, coursDe]);
+  const coursDonnes = useMemo(() => [...new Set(profs.flatMap(coursDe))].filter((c) => cours[c]).sort(), [profs, coursDe, cours]);
 
   const filtres = profs.filter((p) => {
     if (recherche.value && !simplifier(`${p.nom} ${p.bureau ?? ""}`).includes(simplifier(recherche.value))) return false;
