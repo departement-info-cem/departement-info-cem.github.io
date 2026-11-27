@@ -1,4 +1,4 @@
-// Le site est servi sous /react : les liens <Link> de Next ajoutent ce préfixe tout seuls,
+// Si le site est servi sous un préfixe (basePath), les liens <Link> de Next l'ajoutent tout seuls,
 // mais pas les <img> ni les URL construites à la main.
 export const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 

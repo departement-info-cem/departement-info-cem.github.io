@@ -89,8 +89,8 @@ export default function PageModifier() {
         <section>
           <h2 className="mb-2 text-2xl font-bold">Lier ton horaire depuis le site de ton cours</h2>
           <p className="mb-2 text-sm text-muted-foreground">Ces adresses ouvrent directement l&apos;horaire ou le calendrier ; avec <code>?cours=</code>, seulement les dates de ce cours.</p>
-          <pre className="overflow-x-auto rounded bg-muted p-3 font-mono text-xs">{`https://info.cegepmontpetit.ca/react/prenom.nom/horaire/
-https://info.cegepmontpetit.ca/react/prenom.nom/calendrier/?cours=420-5N6-EM`}</pre>
+          <pre className="overflow-x-auto rounded bg-muted p-3 font-mono text-xs">{`https://info.cegepmontpetit.ca/prenom.nom/horaire/
+https://info.cegepmontpetit.ca/prenom.nom/calendrier/?cours=420-5N6-EM`}</pre>
         </section>
 
         <section>

@@ -17,7 +17,7 @@ import { fusionnerDispos } from "@/lib/horaire";
 import { bouton } from "@/lib/bouton";
 import { court } from "@/lib/mes-cours";
 
-// Une page par prof : /react/<identifiant>, générée au build pour chaque fichier data/profs/*.yaml
+// Une page par prof : /<identifiant>, générée au build pour chaque fichier data/profs/*.yaml
 export const dynamicParams = false;
 
 export function generateStaticParams() {

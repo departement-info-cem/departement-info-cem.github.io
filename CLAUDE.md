@@ -2,8 +2,8 @@
 
 Ce dépôt contient deux sites :
 
-- `web/` : le nouveau site (Next.js, publié sous `/react/`). **Tout le travail se fait là.**
-- `angular/` : l'ancien site. N'y touche pas, ni aux fichiers JSON de `data/` qu'il lit, sauf demande explicite.
+- `web/` : le site (Next.js, publié à la racine de https://info.cegepmontpetit.ca/). **Tout le travail se fait là.**
+- `angular/` : l'ancien site, plus déployé (il sera supprimé). N'y touche pas, ni aux fichiers JSON de `data/` qu'il lit, sauf demande explicite.
 
 Commandes du site (dans `web/`) : voir le README. Particularités de cette version de Next.js : @web/AGENTS.md
 
@@ -11,8 +11,8 @@ Commandes du site (dans `web/`) : voir le README. Particularités de cette versi
 
 Quand une PR change l'apparence du site, sa description montre l'avant et l'après côte à côte.
 
-- **Avant** : le site en ligne, https://info.cegepmontpetit.ca/react/… (redéployé à chaque push sur `main`).
-  **Après** : `npm run dev` dans `web/`, puis http://localhost:3000/react/….
+- **Avant** : le site en ligne, https://info.cegepmontpetit.ca/… (redéployé à chaque push sur `main`).
+  **Après** : `npm run dev` dans `web/`, puis http://localhost:3000/….
 - Capture seulement ce qui change (le bouton, la carte, la section), au même endroit et avec la même taille de fenêtre des deux côtés.
   Ajoute la vue mobile si le changement y paraît.
   Émule `prefers-reduced-motion: reduce`, sinon les sections apparaissent en fondu et la capture peut tomber en plein milieu.

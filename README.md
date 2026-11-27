@@ -2,20 +2,20 @@
 
 Ce fichier sert à expliquer comment modifier l'appli ou le contenu du site du département d'informatique du collège Edouard Montpetit.
 
-## Nouveau site React (`web/`, publié sous /react/)
+## Site du département (`web/`, Next.js, publié à la racine)
 
 - Données en YAML : `data/profs/<courriel>.yaml` (une fiche par prof), `data/programmes/`, `data/cours.yaml`,
   `data/cours-service.yaml`, `data/laboratoires.yaml`, `data/faq.yaml`, `data/bot.yaml`, `data/logiciels.yaml`.
-- Mode d'emploi pour les profs : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+- Mode d'emploi pour les profs : https://info.cegepmontpetit.ca/modifier-mon-profil
 - Profs actifs : calculé (`web/lib/actif.ts`) d'après les cours et la session de la fiche, avec 30 jours de grâce en début de session.
   Le champ `actif: true` (coordination sans cours) ou `actif: false` (congé, départ) de la fiche l'emporte sur le calcul.
-- Développement : `cd web && npm ci && npm run dev`, puis http://localhost:3000/react
+- Développement : `cd web && npm ci && npm run dev`, puis http://localhost:3000
 - `data/calendrier-scolaire.yaml` est généré à partir du PDF officiel du cégep : `npm run calendrier`
   (aussi lancé à chaque déploiement et chaque matin de semaine ; `-- --verifier` dit seulement ce qui a changé).
 - `data/laboratoires.yaml` vient du PDF « Horaire du local » publié dans le dépôt 420-SN1 (des images : à recopier à chaque session).
-  Il a servi à préremplir les fiches de profs (`prerempli: true`, à enlever une fois vérifié). Il alimente le bandeau du bas, la page `/react/maintenant/` et une page par local (`/react/locaux/D-0003/`). Les logos de l'en-tête sont dans `web/public/images/liens/`.
-- Liens directs pour les sites de cours : `/react/<prof>/horaire/` et `/react/<prof>/calendrier/`, avec `?cours=420-5N6-EM` au besoin.
-- Données pour les sites de cours : `/react/donnees/cours/<numéro>.json` (ex. https://info.cegepmontpetit.ca/react/donnees/cours/420-5N6-EM.json),
+  Il a servi à préremplir les fiches de profs (`prerempli: true`, à enlever une fois vérifié). Il alimente le bandeau du bas, la page `/maintenant/` et une page par local (`/locaux/D-0003/`). Les logos de l'en-tête sont dans `web/public/images/liens/`.
+- Liens directs pour les sites de cours : `/<prof>/horaire/` et `/<prof>/calendrier/`, avec `?cours=420-5N6-EM` au besoin.
+- Données pour les sites de cours : `/donnees/cours/<numéro>.json` (ex. https://info.cegepmontpetit.ca/donnees/cours/420-5N6-EM.json),
   écrit à chaque build (`web/app/donnees/cours/[fichier]/route.ts`), aussi sous les anciens numéros. Le site de cours n'a plus à recopier
   horaires et dates : il garde la matière de chaque séance, par numéro. Pour chaque groupe d'un prof actif : `prof`, `groupe`, `session`,
   `plages` (l'horaire de la semaine), `rencontres`, `evenements` (remises, examens... de la fiche pour ce cours) et `agenda`
@@ -34,7 +34,7 @@ Ce fichier sert à expliquer comment modifier l'appli ou le contenu du site du d
   export function useRencontres(no, groupe) {
     const [rencontres, setRencontres] = useState([]);
     useEffect(() => {
-      fetch(`https://info.cegepmontpetit.ca/react/donnees/cours/${no}.json`)
+      fetch(`https://info.cegepmontpetit.ca/donnees/cours/${no}.json`)
         .then((r) => r.json())
         .then((c) => setRencontres(c.groupes.find((g) => g.groupe === groupe)?.rencontres ?? []));
     }, [no, groupe]);
@@ -42,10 +42,14 @@ Ce fichier sert à expliquer comment modifier l'appli ou le contenu du site du d
   }
   ```
 - Vérifications : `npm run valider`, `npm run lint`, `npm test`, `npm run build`
-- Tant que les deux sites cohabitent, le site Angular lit encore les fichiers JSON de `data/` :
-  un changement doit être fait aux deux endroits pour apparaître sur les deux sites.
+- Les anciennes adresses (`/react/...` et celles du site Angular : `/prof/<id>`, `/dec/p`, `/goodies`...)
+  sont redirigées par la page 404 : `web/lib/redirections.ts`. Les agendas `/react/agenda/*.ics` (abonnements des téléphones)
+  et les `/react/donnees/cours/*.json` (sites de cours) sont recopiés tels quels : `web/scripts/anciennes-adresses.ts`.
+- L'ancien site Angular (`angular/` et les fichiers JSON de `data/`) n'est plus déployé ; il sera supprimé.
 
-## Changer du contenu (ancien site Angular)
+## Ancien site Angular (plus déployé)
+
+### Changer du contenu
 
 Le contenu du site est fourni par plusieurs fichiers JSON que vous pouvez modifier sans
 toucher à l'application du site.
