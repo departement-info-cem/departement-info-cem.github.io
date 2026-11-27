@@ -25,6 +25,11 @@ describe("anciennes adresses du site sous /react/", () => {
     expect(r("/maintenant/")).toBe("/locaux/");
     expect(r("/maintenant/?mescours=SN1-1050")).toBe("/locaux/?mescours=SN1-1050");
   });
+  it("la page « Sites des cours » a été retirée : ses liens mènent aux grilles", () => {
+    expect(r("/sites")).toBe("/programmes/");
+    expect(r("/sites/")).toBe("/programmes/");
+    expect(r("/react/sites/")).toBe("/sites/");
+  });
 });
 
 describe("anciennes adresses du site Angular", () => {
@@ -80,6 +85,6 @@ describe("routes réservées", () => {
     for (const nom of [...dossiers("../app"), ...dossiers("../public")]) expect(ROUTES_RESERVEES, nom).toContain(nom);
   });
   it("les anciennes adresses redirigées aussi", () => {
-    for (const nom of ["react", "prof", "dec", "decbac", "goodies", "terminal", "accueil", "home", "assets"]) expect(ROUTES_RESERVEES).toContain(nom);
+    for (const nom of ["react", "prof", "dec", "decbac", "goodies", "terminal", "accueil", "home", "assets", "sites"]) expect(ROUTES_RESERVEES).toContain(nom);
   });
 });

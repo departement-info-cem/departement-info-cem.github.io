@@ -25,7 +25,6 @@ export const GRILLES = [
 ];
 
 export const NAVIGATION = [
-  { href: "/sites", texte: "Sites des cours" },
   { href: "/profs", texte: "Profs" },
   { href: "/locaux", texte: "Locaux" },
   { href: "/calendrier", texte: "Calendrier" },

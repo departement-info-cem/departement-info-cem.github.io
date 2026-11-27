@@ -159,23 +159,6 @@ export function profsHoraire(): ProfHoraire[] {
   return profs().map((p) => ({ id: p.id, nom: p.nom, session: p.session, calendrier: p.calendrier, bureau: p.bureau, photo: p.photo, plages: p.horaire?.plages ?? [] }));
 }
 
-export type SiteCours = { no: string; nom: string; url: string; places: { id: string; court: string; session: string }[] };
-
-/** Tous les cours qui ont un site web, avec leur place dans les grilles. */
-export function sitesCours(): SiteCours[] {
-  return catalogue()
-    .filter((c) => c.url)
-    .map((c) => ({
-      no: c.no,
-      nom: c.nom,
-      url: c.url!,
-      places: [
-        ...programmes().flatMap((p) => p.sessions.filter((s) => s.cours.some((x) => x.no === c.no)).map((s) => ({ id: p.id, court: p.court, session: s.titre }))),
-        ...coursService().filter((p) => p.cours.some((x) => x.info.no === c.no)).map((p) => (p.discipline ? { id: "sn", court: p.court, session: p.programme } : { id: "service", court: p.court, session: "Cours de service" })),
-      ],
-    }));
-}
-
 export function bot(): Bot {
   return enCache("bot.yaml", () => valider(botSchema, "bot.yaml"));
 }
