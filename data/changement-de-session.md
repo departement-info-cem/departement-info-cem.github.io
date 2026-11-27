@@ -60,7 +60,7 @@ Ces cas demandent une information que le PDF n'a pas : rassemble-les, et agis su
 ## 5. Vérifier et rendre compte
 
 - Dans `web/` : `npm run valider` (0 erreur, aucun avertissement de concordance), `npm test`, `npm run lint`.
-- `npm run dev` (relance-le s'il tournait déjà : il garde les données en mémoire) : ouvre la page d'un prof de l'étape 2 (l'avis de préremplissage, ses cours aux bonnes heures) et celle d'un local, `/react/locaux/D-0003/`.
+- `npm run dev` (relance-le s'il tournait déjà : il garde les données en mémoire) : ouvre la page d'un prof de l'étape 2 (l'avis de préremplissage, ses cours aux bonnes heures) et celle d'un local, `/locaux/D-0003/`.
 - Rends compte à l'utilisateur : les fiches mises à jour, les cas de l'étape 3, les fiches en attente des dispos du prof (celles qui ont `prerempli: true`).
 - La PR ne change que des données : pas de captures avant / après.
 

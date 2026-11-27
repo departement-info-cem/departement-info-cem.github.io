@@ -7,7 +7,7 @@
     "valider": "tsx scripts/valider-donnees.ts",
     "calendrier": "tsx scripts/calendrier-college.ts",
     "photos": "tsx scripts/copier-photos.ts",
-    "build": "npm run valider && npm run photos && next build",
+    "build": "npm run valider && npm run photos && next build && tsx scripts/anciennes-adresses.ts",
     "lint": "eslint",
     "test": "vitest run"
   },

@@ -1,4 +1,4 @@
-// /react/donnees/cours/420-5N6-EM.json : un fichier par cours, écrit au build, pour les sites de cours.
+// /donnees/cours/420-5N6-EM.json (recopié sous /react/donnees/ : scripts/anciennes-adresses.ts) : un fichier par cours, écrit au build, pour les sites de cours.
 // Ils y lisent qui donne chaque groupe, quand et où (séances datées et numérotées), au lieu de le recopier.
 import { fichierCours, numerosFichiersCours } from "@/lib/donnees";
 

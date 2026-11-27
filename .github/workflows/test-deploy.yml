@@ -9,25 +9,6 @@ permissions:
   contents: read
 
 jobs:
-  test:
-    name: Test déploiement
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Utiliser Node.js 22
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version: 22
-      - name: Installer les dépendences
-        working-directory: angular
-        run: npm ci
-      - name: Tester le build du site
-        working-directory: angular
-        run: npm run build
-      - name: Lint
-        working-directory: angular
-        run: npm run lint
-
   test-react:
     name: Test du site React
     runs-on: ubuntu-latest

@@ -170,7 +170,7 @@ export function garderMonGroupe<T extends { cours?: string; groupe?: string }>(l
   });
 }
 
-// ---------- Liens avec des cours : /react/centre-aide/?mescours=SN1-1050,5N6-1020,3W6 ----------
+// ---------- Liens avec des cours : /centre-aide/?mescours=SN1-1050,5N6-1020,3W6 ----------
 
 /** Paramètre d'URL qui donne une liste de cours, pour montrer une page « comme si » on suivait ces cours. */
 // « cours » est déjà pris par le filtre des pages /<prof>/horaire/?cours=420-5N6-EM (liens des sites de cours)

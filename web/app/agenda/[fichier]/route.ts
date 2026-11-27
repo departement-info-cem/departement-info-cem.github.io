@@ -1,7 +1,7 @@
 import { agendasDesGroupes, texteAgenda } from "@/lib/agenda";
 import { calendrierScolaire, donneesMesCours } from "@/lib/donnees";
 
-// L'agenda d'un groupe : /react/agenda/A2026-5N6-1020.ics, un fichier par groupe généré au build (voir lib/agenda.ts).
+// L'agenda d'un groupe : /agenda/A2026-5N6-1020.ics (recopié sous /react/agenda/ pour les anciens abonnements : scripts/anciennes-adresses.ts), un fichier par groupe généré au build (voir lib/agenda.ts).
 // Les étudiants s'y abonnent depuis la page « Mes cours » ; chaque déploiement le met à jour.
 export const dynamic = "force-static";
 export const dynamicParams = false;

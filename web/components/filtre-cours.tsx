@@ -6,7 +6,7 @@ import { CalendrierProf } from "@/components/calendrier-prof";
 import { HorairePrerempli } from "@/components/horaire-prerempli";
 import { HoraireSemaine, type InfoCours } from "@/components/horaire-semaine";
 
-// Adresses directes pour les sites de cours : /react/<prof>/horaire/?cours=420-5N6-EM et /react/<prof>/calendrier/?cours=...
+// Adresses directes pour les sites de cours : /<prof>/horaire/?cours=420-5N6-EM et /<prof>/calendrier/?cours=...
 // Avec ?cours=, on garde seulement ce cours (et les disponibilités du prof).
 export function VueDirecte({ prof, vue, cours }: { prof: Prof; vue: "horaire" | "calendrier"; cours: InfoCours }) {
   const params = useSearchParams();
