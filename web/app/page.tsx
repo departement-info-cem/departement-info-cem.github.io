@@ -11,7 +11,7 @@ import { DateAVenir } from "@/components/date-a-venir";
 import { CartesJeux } from "@/components/jeux/cartes-jeux";
 
 // L'accueil s'adresse aux futurs étudiants et à leurs parents. L'étudiant inscrit a le menu
-// (sites des cours, profs, locaux, calendrier) et la recherche de l'en-tête, qui trouve aussi le site de chaque cours.
+// (grilles, profs, locaux, calendrier) et la recherche de l'en-tête, qui trouve aussi le site de chaque cours.
 
 // La barre de chaque parcours est proportionnelle à sa durée (sur 5 ans) ; l'année du stage est en vert.
 const PARCOURS = [

@@ -12,10 +12,10 @@ export type Probleme = { niveau: "erreur" | "avertissement"; ligne?: number; mes
 /** Noms de pages du site : un prof ne peut pas avoir l'un de ces identifiants. */
 export const ROUTES_RESERVEES = [
   "profs", "programmes", "orientation", "faq", "nouveau", "git", "logiciels", "plagiat",
-  "contact", "modifier-mon-profil", "photos", "_next", "index", "maintenant", "calendrier", "cours-service", "sites", "jeux", "images", "mes-cours", "centre-aide",
+  "contact", "modifier-mon-profil", "photos", "_next", "index", "maintenant", "calendrier", "cours-service", "jeux", "images", "mes-cours", "centre-aide",
   "locaux", "404", "assets", "agenda", "donnees",
   // anciennes adresses redirigées (lib/redirections.ts)
-  "react", "prof", "dec", "decbac", "goodies", "terminal", "accueil", "home",
+  "react", "prof", "dec", "decbac", "goodies", "terminal", "accueil", "home", "sites",
 ];
 
 function cheminLisible(chemin: PropertyKey[]): string {

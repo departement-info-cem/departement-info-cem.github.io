@@ -3,7 +3,7 @@
 #   no: numéro officiel (ex. 420-1P6-EM)        nom: titre du cours
 #   heures: nombre d'heures (optionnel)        url: site du cours (optionnel)
 #   tags: technos/thèmes pour les filtres       ecole: UdeS si le cours est donné par l'Université de Sherbrooke
-#   fiche: fiche officielle du cours (ex. sur le site de l'UdeS), affichée dans la grille mais pas dans « Sites des cours »
+#   fiche: fiche officielle du cours (ex. sur le site de l'UdeS), affichée dans la grille quand le cours n'a pas de site
 #   alias: autres numéros acceptés (ex. ancien numéro utilisé dans un horaire)
 #     « ancien programme » : anciens numéros, utilisés pour la dernière fois à l'automne 2026
 - no: 420-1B3-EM

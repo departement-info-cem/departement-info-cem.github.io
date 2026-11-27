@@ -43,6 +43,8 @@ export function nouvelleAdresse(pathname: string, search: string, hash: string):
         return "/jeux/";
       case "maintenant": // ancienne adresse de la page Locaux (liens partagés, appli de l'écran d'accueil)
         return "/locaux/" + suite;
+      case "sites": // l'ancienne page « Sites des cours » : chaque grille donne le site de ses cours
+        return "/programmes/";
     }
   }
 

@@ -5,7 +5,6 @@ import { normaliserLocal } from "@/lib/maintenant";
 
 const PAGES: ElementRecherche[] = [
   { type: "page", titre: "SharePoint du département", href: SHAREPOINT, motsCles: "profs documents teams" },
-  { type: "page", titre: "Sites web des cours", href: "/sites", motsCles: "notes de cours materiel" },
   { type: "page", titre: "Locaux : profs disponibles et laboratoires libres", href: "/locaux", motsCles: "labo local dispo" },
   { type: "page", titre: "Calendrier scolaire", href: "/calendrier", motsCles: "relache conge JR EC examen session" },
   { type: "page", titre: "Sciences de la nature et cours de service", href: "/cours-service", motsCles: "sciences nature SN1 TIM TAG 905 964 983 Z03" },

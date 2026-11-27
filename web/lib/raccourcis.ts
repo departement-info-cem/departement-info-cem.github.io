@@ -5,14 +5,6 @@ export const GRILLES_DIRECTES = [
   { href: "/programmes/dec-bac", texte: "DEC-BAC", sousTitre: "Avec l'Université de Sherbrooke" },
 ];
 
-export const FILTRES_SITES = [
-  { id: "dec-prog", texte: "DEC Dév" },
-  { id: "dec-reseau", texte: "DEC Réseau" },
-  { id: "dec-bac", texte: "DEC-BAC" },
-  { id: "sn", texte: "Sciences de la nature" },
-  { id: "service", texte: "Cours de service" },
-];
-
 // Les prochaines activités du cégep pour les futurs étudiants. L'accueil affiche chaque date jusqu'au jour indiqué (iso),
 // puis la retire d'elle-même : à mettre à jour chaque session.
 export const PORTES_OUVERTES = { iso: "2027-02-04", texte: "Jeudi 4 février 2027, de 18 h 30 à 20 h 30" };

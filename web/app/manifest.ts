@@ -36,7 +36,6 @@ export default function manifest(): MetadataRoute.Manifest {
       { name: "Profs", url: chemin("/profs/") },
       { name: "Locaux libres", url: chemin("/locaux/") },
       { name: "Calendrier", url: chemin("/calendrier/") },
-      { name: "Sites des cours", url: chemin("/sites/") },
     ],
   };
 }
