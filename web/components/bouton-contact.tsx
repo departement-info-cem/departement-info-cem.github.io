@@ -1,7 +1,7 @@
 "use client";
-import { MessageSquare } from "lucide-react";
 import type { Prof } from "@/app/_types/prof";
 import { bouton } from "@/lib/bouton";
+import { LogoMio, LogoTeams } from "@/components/logos";
 
 // Le bouton « Écris-moi » de la page d'un prof, selon le champ « contact » de sa fiche.
 // Pas d'adresse courriel dans la page publiée (hameçonnage) : les robots qui récoltent les adresses lisent aussi les liens.
@@ -12,7 +12,7 @@ export function BoutonContact({ courriel, contact }: Pick<Prof, "courriel" | "co
   if (contact === "mio") {
     return (
       <span className={classes}>
-        <MessageSquare className="size-4" /> Écris-moi sur MIO
+        <LogoMio /> Écris-moi sur MIO
       </span>
     );
   }
@@ -26,7 +26,7 @@ export function BoutonContact({ courriel, contact }: Pick<Prof, "courriel" | "co
       rel="noreferrer"
       className={classes}
     >
-      <MessageSquare className="size-4" /> Écris-moi sur Teams
+      <LogoTeams /> Écris-moi sur Teams
     </a>
   );
 }

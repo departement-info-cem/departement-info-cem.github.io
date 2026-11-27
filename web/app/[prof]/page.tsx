@@ -9,6 +9,7 @@ import { SessionPerimee } from "@/components/session-perimee";
 import { StatutProf } from "@/components/statut-prof";
 import { BoutonChoixGroupe } from "@/components/choix-groupe";
 import { BoutonContact } from "@/components/bouton-contact";
+import { LogoGitHub, LogoLinkedIn } from "@/components/logos";
 import { HorairePrerempli } from "@/components/horaire-prerempli";
 import { HoraireSemaine } from "@/components/horaire-semaine";
 import { CalendrierProf } from "@/components/calendrier-prof";
@@ -76,12 +77,12 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
               )}
               {p.github && (
                 <a href={`https://github.com/${p.github}`} target="_blank" rel="noreferrer" className={bouton({ variant: "outline", size: "sm" })}>
-                  GitHub
+                  <LogoGitHub /> GitHub
                 </a>
               )}
               {p.linkedin && (
                 <a href={`https://www.linkedin.com/in/${p.linkedin}`} target="_blank" rel="noreferrer" className={bouton({ variant: "outline", size: "sm" })}>
-                  LinkedIn
+                  <LogoLinkedIn /> LinkedIn
                 </a>
               )}
               {p.site && (
