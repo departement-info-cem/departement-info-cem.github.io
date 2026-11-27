@@ -107,6 +107,8 @@ export const profSchema = z
     linkedin: z.string().optional(),
     site: urlWeb("site : adresse web invalide (commence par https://)").optional(),
     presentation: z.string().optional(),
+    /** Rôle au département, affiché sous le nom (ex. « Coordination du département ») : les étudiants savent à qui s'adresser */
+    role: z.string().optional(),
     /** Remplace le calcul de lib/actif.ts (cours cette session). À true pour la coordination. */
     actif: z.boolean({ error: "actif : écris true ou false, sans guillemets" }).optional(),
     cours: z.array(z.string()).optional(),

@@ -34,7 +34,7 @@ export default function manifest(): MetadataRoute.Manifest {
     // Appui long sur l'icône (Android)
     shortcuts: [
       { name: "Profs", url: chemin("/profs/") },
-      { name: "Locaux libres", url: chemin("/maintenant/") },
+      { name: "Locaux libres", url: chemin("/locaux/") },
       { name: "Calendrier", url: chemin("/calendrier/") },
       { name: "Sites des cours", url: chemin("/sites/") },
     ],

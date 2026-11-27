@@ -20,6 +20,11 @@ describe("anciennes adresses du site sous /react/", () => {
     expect(r("/react/modifier-mon-profil")).toBe("/modifier-mon-profil");
   });
   it("ne confond pas un chemin qui commence par « react »", () => expect(r("/reactif/")).toBeNull());
+  it("la page Locaux a quitté /maintenant/ pour /locaux/", () => {
+    expect(r("/react/maintenant/")).toBe("/locaux/");
+    expect(r("/maintenant/")).toBe("/locaux/");
+    expect(r("/maintenant/?mescours=SN1-1050")).toBe("/locaux/?mescours=SN1-1050");
+  });
 });
 
 describe("anciennes adresses du site Angular", () => {

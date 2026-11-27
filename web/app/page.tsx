@@ -16,7 +16,7 @@ import { CartesJeux } from "@/components/jeux/cartes-jeux";
 // La barre de chaque parcours est proportionnelle à sa durée (sur 5 ans) ; l'année du stage est en vert.
 const PARCOURS = [
   { id: "dec-prog", icone: Code2, etiquette: "DEC technique · 3 ans", titre: "Développement d'applications", ans: 3, stage: true, note: "Stage en entreprise à la dernière session", apres: ["Marché du travail", "ou université"], jeu: { href: "/jeux/programmation", texte: "Essayer : programme un robot" } },
-  { id: "dec-reseau", icone: Network, etiquette: "DEC technique · 3 ans", titre: "Réseaux et cybersécurité", ans: 3, stage: true, note: "Stage en entreprise à la dernière session", apres: ["Marché du travail", "ou université"], jeu: { href: "/jeux/reseau", texte: "Essayer : répare un réseau" } },
+  { id: "dec-reseau", icone: Network, etiquette: "DEC technique · 3 ans", titre: "Administration d'infrastructure TI", ans: 3, stage: true, note: "Stage en entreprise à la dernière session", apres: ["Marché du travail", "ou université"], jeu: { href: "/jeux/reseau", texte: "Essayer : répare un réseau" } },
   { id: "dec-bac", icone: GraduationCap, etiquette: "DEC-BAC avec l'Université de Sherbrooke · 5 ans", titre: "DEC + baccalauréat en informatique", ans: 5, stage: false, note: "3 sessions par année, avec des stages", apres: ["DEC et baccalauréat"], jeu: undefined },
 ];
 
