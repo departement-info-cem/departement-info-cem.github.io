@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { urlWeb } from "./liens";
 
 // data/cours.yaml : catalogue des cours
 export const coursSchema = z
@@ -9,9 +10,9 @@ export const coursSchema = z
     ponderation: z.string().optional(),
     ecole: z.string().optional(),
     tags: z.array(z.string()).optional(),
-    url: z.url().optional(),
+    url: urlWeb().optional(),
     /** fiche officielle du cours dans un autre établissement (UdeS) */
-    fiche: z.url().optional(),
+    fiche: urlWeb().optional(),
     description: z.string().optional(),
     /** anciens numéros du cours, avec l'ancien titre s'il a changé avec le programme */
     alias: z.array(z.union([z.string().transform((no) => ({ no, nom: undefined as string | undefined })), z.object({ no: z.string(), nom: z.string().optional() }).strict()])).optional(),
@@ -28,9 +29,9 @@ export const coursHorsCatalogueSchema = z
     ponderation: z.string().optional(),
     ecole: z.string().optional(),
     tags: z.array(z.string()).optional(),
-    url: z.url().optional(),
+    url: urlWeb().optional(),
     /** fiche officielle du cours dans un autre établissement (UdeS) */
-    fiche: z.url().optional(),
+    fiche: urlWeb().optional(),
     description: z.string().optional(),
   })
   .strict();
@@ -47,8 +48,8 @@ export const programmeSchema = z
     duree: z.string(),
     ordre: z.number().default(99),
     resume: z.string(),
-    lien: z.url().optional(),
-    source: z.url().optional(),
+    lien: urlWeb().optional(),
+    source: urlWeb().optional(),
     remarque: z.string().optional(),
     sessions: z.array(
       z

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { urlWeb } from "./liens";
 import { heureEnMinutes, normaliserJour } from "@/lib/temps";
 
 // Schéma d'un fichier data/profs/<identifiant>.yaml.
@@ -100,7 +101,7 @@ export const profSchema = z
     photo: z.string().optional(),
     github: z.string().optional(),
     linkedin: z.string().optional(),
-    site: z.url({ error: "site : adresse web invalide (commence par https://)" }).optional(),
+    site: urlWeb("site : adresse web invalide (commence par https://)").optional(),
     presentation: z.string().optional(),
     /** Remplace le calcul de lib/actif.ts (cours cette session). À true pour la coordination. */
     actif: z.boolean({ error: "actif : écris true ou false, sans guillemets" }).optional(),
