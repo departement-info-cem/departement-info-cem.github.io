@@ -11,7 +11,7 @@ export function PiedDePage() {
     <footer className="relative mt-16 overflow-hidden bg-cadre text-cadre-texte [main:has(>section.bg-cem-vert:last-child)+&]:mt-0">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
         <div className="space-y-3">
-          <Logo inverse taille={36} />
+          <Logo />
           <p className="text-sm text-cem-gris-1">
             Département d&apos;informatique
             <br />
