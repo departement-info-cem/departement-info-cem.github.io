@@ -7,7 +7,6 @@ import { AgendaMesCours } from "@/components/agenda-mes-cours";
 import { AVenir } from "@/components/a-venir";
 import { MonCalendrier, MonHoraire } from "@/components/mon-horaire";
 import { AjoutCours, texteSeances } from "@/components/choix-groupe";
-import { LienMesCours } from "@/components/lien-mes-cours";
 import { CarteInstallation } from "@/components/installer-appli";
 import { bouton } from "@/lib/bouton";
 import { chemin } from "@/lib/chemins";
@@ -70,7 +69,6 @@ export function GestionMesCours({ logiciels }: { logiciels: LogicielAffiche[] })
               <Trash2 className="size-4" /> Tout effacer
             </button>
           )}
-          <LienMesCours />
           <p className="mt-3 text-xs text-muted-foreground">Tes choix restent dans ce navigateur : rien n&apos;est envoyé, et ils n&apos;apparaissent pas sur un autre appareil.</p>
           <CarteInstallation />
         </div>

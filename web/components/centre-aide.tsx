@@ -31,7 +31,7 @@ export function CentreAide() {
   const personnel = miens.length > 0;
   const demandes = choix === MES_COURS ? (personnel ? miens : undefined) : choix === TOUS ? undefined : [choix];
   const presents = aidants(profs, { cours: demandes, session });
-  const coursOfferts = [...new Set(aidants(profs, { session }).flatMap((a) => a.cours))].sort((a, b) => court(a).localeCompare(court(b)));
+  const coursOfferts = [...new Set(aidants(profs, { session }).flatMap((a) => a.cours))].filter((no) => index[no]).sort((a, b) => court(a).localeCompare(court(b)));
   const nom = (no: string) => (index[no] ? `${court(no)} : ${index[no].nom}` : court(no));
 
   return (

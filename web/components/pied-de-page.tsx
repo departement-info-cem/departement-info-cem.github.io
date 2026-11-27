@@ -27,7 +27,6 @@ export function PiedDePage() {
             <li><Link href="/programmes" className="hover:underline">Programmes et grilles de cours</Link></li>
             <li><Link href="/profs" className="hover:underline">Les profs</Link></li>
             <li><Link href="/orientation" className="hover:underline">L&apos;informatique, est-ce pour moi ?</Link></li>
-            <li><Link href="/jeux" className="hover:underline">Mini-jeux : teste ta logique</Link></li>
             <li><Link href="/faq" className="hover:underline">Foire aux questions</Link></li>
             <li><a href={STAGES} target="_blank" rel="noreferrer" className="hover:underline">Entreprises : offrir un stage</a></li>
           </ul>

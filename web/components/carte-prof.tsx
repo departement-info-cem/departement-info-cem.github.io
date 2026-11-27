@@ -37,7 +37,6 @@ export function CarteProf({ prof, lien }: { prof: Prof; lien?: Lien }) {
         <div className="mt-1 flex flex-wrap gap-1">
           {lien && <PastilleLien lien={lien} />}
           <StatutProf prof={prof} compact />
-          {prof.horaire?.plages.length ? <span className="rounded-full bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">Horaire</span> : null}
         </div>
       </div>
     </Link>

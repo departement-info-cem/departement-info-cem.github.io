@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BookOpen, CalendarDays, Clock, ExternalLink, Link2, MapPin, Pencil } from "lucide-react";
+import { BookOpen, CalendarDays, Clock, ExternalLink, MapPin, Pencil } from "lucide-react";
 import { calendrierScolaire, coursAide, indexCours, prof, profs } from "@/lib/donnees";
 import { lienEdition, photo } from "@/lib/chemins";
 import { AvatarProf } from "@/components/carte-prof";
 import { SessionPerimee } from "@/components/session-perimee";
 import { StatutProf } from "@/components/statut-prof";
 import { BoutonChoixGroupe } from "@/components/choix-groupe";
-import { BoutonPartager } from "@/components/bouton-partager";
 import { BoutonContact } from "@/components/bouton-contact";
 import { HorairePrerempli } from "@/components/horaire-prerempli";
 import { HoraireSemaine } from "@/components/horaire-semaine";
@@ -105,17 +104,11 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="horaire">
-              <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                <p className="text-sm text-muted-foreground">{session ? `Horaire de la session ${session.nom}.` : ""}</p>
-                <BoutonPartager chemin={`/${p.id}/horaire/`} titre={`Horaire de ${p.nom}`} />
-              </div>
+              {session && <p className="mb-3 text-sm text-muted-foreground">Horaire de la session {session.nom}.</p>}
               {p.horaire?.prerempli && <HorairePrerempli />}
               <HoraireSemaine plages={p.horaire?.plages ?? []} debut={p.horaire?.debut} fin={p.horaire?.fin} cours={cours} impression={{ titre: p.nom, details: [p.bureau && `Bureau ${p.bureau}`, session?.nom] }} />
             </TabsContent>
             <TabsContent value="calendrier">
-              <div className="mb-3 flex justify-end">
-                <BoutonPartager chemin={`/${p.id}/calendrier/`} titre={`Calendrier de ${p.nom}`} />
-              </div>
               <p className="mb-3 text-sm text-muted-foreground">
                 Les congés et journées spéciales du cégep, les séances de cours{session ? ` de la session ${session.nom}` : ""} et les dates propres à {p.nom.split(" ")[0]}. Clique sur un jour pour les détails.
               </p>
@@ -178,20 +171,6 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
               <Link href="/centre-aide" className="mt-2 block text-xs text-primary underline">Centre d&apos;aide</Link>
             </div>
           )}
-          <div className="rounded-lg border bg-card p-4 text-sm">
-            <h2 className="mb-2 flex items-center gap-2 font-bold">
-              <Link2 className="size-4" /> Liens directs
-            </h2>
-            <ul className="space-y-1">
-              <li><Link href={`/${p.id}/horaire`} className="text-primary underline">Horaire</Link></li>
-              <li><Link href={`/${p.id}/calendrier`} className="text-primary underline">Calendrier</Link></li>
-            </ul>
-            {coursDonnes[0] && (
-              <p className="mt-2 text-xs text-muted-foreground">
-                Depuis le site d&apos;un cours, ajoute <code className="break-all">?cours={coursDonnes[0]}</code> pour n&apos;afficher que ce cours.
-              </p>
-            )}
-          </div>
           <div className="rounded-lg border border-dashed p-4 text-sm">
             <p className="mb-2 text-muted-foreground">C&apos;est ta page ? Modifie-la directement sur GitHub.</p>
             <a href={lienEdition(`profs/${p.id}.yaml`)} target="_blank" rel="noreferrer" className={bouton({ variant: "outline", size: "sm" })}>
