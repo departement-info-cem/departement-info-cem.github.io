@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { MapPin, Printer } from "lucide-react";
 import type { TypePlage } from "@/app/_types/prof";
 import { LIBELLES_TYPES_PLAGE } from "@/app/_types/prof";
-import { COULEURS_TYPES, couleurBordure, positionnerPlages, type PlageAffichee, type PlagePositionnee } from "@/lib/horaire";
+import { COULEURS_TYPES, couleurBordure, ordreDesCours, positionnerPlages, type PlageAffichee, type PlagePositionnee } from "@/lib/horaire";
 import { heureEnMinutes, JOURS_OUVRABLES, jourDeLaSemaine, LIBELLES_JOURS, minutesEnHeure } from "@/lib/temps";
 import { useMaintenant } from "@/app/_hooks/use-maintenant";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -30,7 +30,7 @@ export function HoraireSemaine({ plages, debut = "08:00", fin = "18:00", cours =
   const [detail, setDetail] = useState<PlagePositionnee | null>(null);
 
   const parJour = useMemo(() => positionnerPlages(plages.filter((p) => types.has(p.type))), [plages, types]);
-  const coursOrdonnes = useMemo(() => [...new Set(plages.filter((p) => p.cours).map((p) => p.cours!.toUpperCase()))], [plages]);
+  const coursOrdonnes = useMemo(() => ordreDesCours(plages), [plages]);
   const typesPresents = useMemo(() => [...new Set(plages.map((p) => p.type))], [plages]);
 
   // On élargit la plage horaire si une plage dépasse.
