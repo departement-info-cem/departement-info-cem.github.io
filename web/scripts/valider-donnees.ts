@@ -56,7 +56,8 @@ for (const f of fs.readdirSync(path.join(DONNEES, "programmes")).filter((f) => f
   );
 }
 
-// 3. Profs
+// 3. Profs (avec l'horaire des locaux : leurs cours en labo doivent y être)
+const laboratoires = verifier(laboratoiresSchema, "laboratoires.yaml");
 const photos = new Set(fs.readdirSync(path.join(DONNEES, "photos")));
 const fichiersProfs = fs.readdirSync(path.join(DONNEES, "profs")).filter((f) => f.endsWith(".yaml"));
 for (const f of fichiersProfs) {
@@ -66,6 +67,7 @@ for (const f of fichiersProfs) {
     id: modele ? undefined : id,
     coursConnus,
     photosConnues: modele ? undefined : photos,
+    laboratoires,
   });
   for (const p of problemes) signaler(p.niveau, `profs/${f}`, p.message, p.ligne);
 }
@@ -74,7 +76,7 @@ for (const f of autres) signaler("avertissement", `profs/${f}`, "fichier ignoré
 
 // 4. Divers
 verifier(calendrierScolaireSchema, "calendrier-scolaire.yaml");
-verifier(laboratoiresSchema, "laboratoires.yaml")?.forEach((l) =>
+laboratoires?.forEach((l) =>
   l.occupations.forEach((a, i) =>
     l.occupations.slice(i + 1).forEach((b) => {
       if (a.jour === b.jour && a.debut < b.fin && b.debut < a.fin)

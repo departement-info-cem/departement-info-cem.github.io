@@ -13,7 +13,8 @@ Ce fichier sert à expliquer comment modifier l'appli ou le contenu du site du d
 - `data/calendrier-scolaire.yaml` est généré à partir du PDF officiel du cégep : `npm run calendrier`
   (aussi lancé à chaque déploiement et chaque matin de semaine ; `-- --verifier` dit seulement ce qui a changé).
 - `data/laboratoires.yaml` vient du PDF « Horaire du local » publié dans le dépôt 420-SN1 (des images : à recopier à chaque session).
-  Il a servi à préremplir les fiches de profs (`prerempli: true`, à enlever une fois vérifié). Il alimente le bandeau du bas, la page `/react/maintenant/` et une page par local (`/react/locaux/D-0003/`). Les logos de l'en-tête sont dans `web/public/images/liens/`.
+  À chaque session, il sert aussi à remplir les cours des fiches de profs (`prerempli: true` jusqu'à ce que le prof confirme) :
+  voir [data/changement-de-session.md](data/changement-de-session.md). Il alimente le bandeau du bas, la page `/react/maintenant/` et une page par local (`/react/locaux/D-0003/`). Les logos de l'en-tête sont dans `web/public/images/liens/`.
 - Liens directs pour les sites de cours : `/react/<prof>/horaire/` et `/react/<prof>/calendrier/`, avec `?cours=420-5N6-EM` au besoin.
 - Données pour les sites de cours : `/react/donnees/cours/<numéro>.json` (ex. https://info.cegepmontpetit.ca/react/donnees/cours/420-5N6-EM.json),
   écrit à chaque build (`web/app/donnees/cours/[fichier]/route.ts`), aussi sous les anciens numéros. Le site de cours n'a plus à recopier
