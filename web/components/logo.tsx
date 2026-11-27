@@ -53,11 +53,12 @@ export function SymboleLogo({ variante = "binaire", taille = 40, className }: { 
   );
 }
 
-export function Logo({ variante = "binaire", taille = 40, inverse = false }: { variante?: VarianteLogo; taille?: number; inverse?: boolean }) {
+/** classeTexte : pour cacher le nom à côté du symbole, ex. dans l'en-tête sur un écran étroit. */
+export function Logo({ variante = "binaire", taille = 40, inverse = false, classeTexte = "" }: { variante?: VarianteLogo; taille?: number; inverse?: boolean; classeTexte?: string }) {
   return (
     <span className="inline-flex items-center gap-3">
       <SymboleLogo variante={variante} taille={taille} />
-      <span className="flex flex-col leading-tight">
+      <span className={`flex flex-col leading-tight ${classeTexte}`}>
         <span className={`font-heading text-lg font-bold tracking-tight ${inverse ? "text-white" : "text-cem-marine dark:text-white"}`}>Informatique</span>
         <span className={`text-xs ${inverse ? "hidden text-cem-ciel sm:inline" : "text-muted-foreground"}`}>Cégep Édouard-Montpetit</span>
       </span>

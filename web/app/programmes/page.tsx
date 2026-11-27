@@ -55,7 +55,7 @@ export default function PageProgrammes() {
         <section>
           <h2 className="text-2xl font-bold">Le département ailleurs au cégep</h2>
           <p className="mb-4 text-muted-foreground">Sciences de la nature, intégration multimédia, administration, cours à option.</p>
-          <Link href="/cours-service" className={bouton({ variant: "outline" })}>
+          <Link href="/cours-service" className={bouton({ variant: "outline" }, "h-auto whitespace-normal py-2")}>
             Sciences de la nature et cours de service <ArrowRight className="size-4" />
           </Link>
         </section>

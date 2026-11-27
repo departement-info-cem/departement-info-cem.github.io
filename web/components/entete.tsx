@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, LayoutGrid, Menu, Monitor, Moon, Share2, Sun } from "lucide-react";
+import { ChevronDown, LayoutGrid, Menu, Monitor, Moon, Share2, SquarePlus, Sun } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { RechercheGlobale, type ElementRecherche } from "@/components/recherche-globale";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -14,6 +14,8 @@ import { chemin } from "@/lib/chemins";
 import { cn } from "@/lib/utils";
 import { useMesCours } from "@/app/_contexts/mes-cours-context";
 import { PartagerPage } from "@/components/partager-page";
+import { AideInstallation } from "@/components/installer-appli";
+import { useInstallation } from "@/app/_hooks/use-installation";
 
 export const GRILLES = [
   ...GRILLES_DIRECTES,
@@ -56,6 +58,8 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
   const { mesCours } = useMesCours();
   const [partage, setPartage] = useState(false);
   const [menu, setMenu] = useState(false);
+  const { proposer, installer } = useInstallation();
+  const [aideInstallation, setAideInstallation] = useState(false);
   // Le centre d'aide devient « Mon centre d'aide » quand l'étudiant a entré ses cours
   const texteLien = (l: { href: string; texte: string }) => (l.href === "/centre-aide" && mesCours.length ? "Mon centre d'aide" : l.texte);
   const actif = (href: string) => chemin === href || chemin.startsWith(`${href}/`) || (href === "/maintenant" && chemin.startsWith("/locaux/")); // une page par labo
@@ -64,7 +68,8 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
     <header className="sticky top-0 z-40 bg-cadre text-cadre-texte shadow-md">
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 2xl:max-w-screen-2xl">
         <Link href="/" aria-label="Accueil" className="shrink-0">
-          <Logo inverse taille={40} />
+          {/* Logo, nom et quatre boutons tiennent en 370 px ; en dessous (iPhone SE avec le zoom d'affichage), le bouton du menu sortait de l'écran */}
+          <Logo inverse taille={40} classeTexte="max-[369px]:hidden" />
         </Link>
 
         <nav className="ml-auto hidden items-center gap-1 lg:flex" aria-label="Navigation principale">
@@ -131,10 +136,22 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
                 >
                   <Share2 className="size-4" /> Partager cette page
                 </button>
+                {proposer && (
+                  <button
+                    onClick={async () => {
+                      setMenu(false);
+                      if (!(await installer())) setAideInstallation(true);
+                    }}
+                    className="flex items-center gap-2 rounded-md px-3 py-2 text-left font-medium hover:bg-accent"
+                  >
+                    <SquarePlus className="size-4" /> Ajouter à l&apos;écran d&apos;accueil
+                  </button>
+                )}
               </nav>
             </SheetContent>
           </Sheet>
           <PartagerPage ouvert={partage} changer={setPartage} />
+          <AideInstallation ouvert={aideInstallation} changer={setAideInstallation} />
         </div>
       </div>
     </header>

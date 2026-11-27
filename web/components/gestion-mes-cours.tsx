@@ -7,6 +7,7 @@ import { AVenir } from "@/components/a-venir";
 import { MonCalendrier, MonHoraire } from "@/components/mon-horaire";
 import { AjoutCours, texteSeances } from "@/components/choix-groupe";
 import { LienMesCours } from "@/components/lien-mes-cours";
+import { CarteInstallation } from "@/components/installer-appli";
 import { bouton } from "@/lib/bouton";
 import { chemin } from "@/lib/chemins";
 import { court, libelle, type MonCours } from "@/lib/mes-cours";
@@ -70,6 +71,7 @@ export function GestionMesCours({ logiciels }: { logiciels: LogicielAffiche[] })
           )}
           <LienMesCours />
           <p className="mt-3 text-xs text-muted-foreground">Tes choix restent dans ce navigateur : rien n&apos;est envoyé, et ils n&apos;apparaissent pas sur un autre appareil.</p>
+          <CarteInstallation />
         </div>
         <div className="rounded-lg border bg-muted p-4">
           <h2 className="mb-3 text-xl font-bold">Ajouter un cours</h2>

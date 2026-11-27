@@ -15,7 +15,7 @@ function Carte({ jeu }: { jeu: (typeof JEUX)[number] }) {
       <span className="flex size-14 shrink-0 items-center justify-center rounded-lg bg-cem-marine text-cem-vert">
         <jeu.icone className="size-8" />
       </span>
-      <span className="flex-1">
+      <span className="min-w-0 flex-1">
         <span className="flex items-center justify-between font-bold group-hover:text-primary">
           {jeu.titre} <ArrowRight className="size-4" />
         </span>
@@ -33,7 +33,7 @@ function Carte({ jeu }: { jeu: (typeof JEUX)[number] }) {
 
 export function CartesJeux() {
   return (
-    <div className="grid gap-4 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
       {JEUX.map((j) => (
         <Carte key={j.href} jeu={j} />
       ))}

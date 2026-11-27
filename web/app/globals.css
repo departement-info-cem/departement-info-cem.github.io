@@ -211,6 +211,12 @@
   .apparition { opacity: 1; transform: none; transition: none; }
 }
 
+/* Sur iPhone, toucher un champ écrit en moins de 16 px agrandit la page, qui reste agrandie ensuite.
+   Hors des couches de Tailwind : l'emporte sur text-sm. */
+@media (pointer: coarse) {
+  input, select, textarea { font-size: max(16px, 1em); }
+}
+
 /* Bandeau défilant (voir components/bandeau.tsx) */
 /* Fixé en bas : la page garde la place en dessous pour ne rien cacher, seulement quand il est affiché */
 .bandeau-bas { --hauteur: 2.25rem; height: calc(var(--hauteur) + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom); }
