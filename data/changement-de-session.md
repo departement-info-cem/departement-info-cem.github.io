@@ -10,6 +10,12 @@ Le site calcule le reste tout seul : profs actifs, séances datées, agenda des 
 - **Le PDF « Horaire du local »** (rapport RPHOR020) de la nouvelle session : l'utilisateur te le donne, ou il est dans le dépôt du cours 420-SN1 :
   `gh api repos/departement-info-cem/420-SN1/contents/web/static/pdf/horairelabos.pdf -H "Accept: application/vnd.github.raw" > horairelabos.pdf`.
   La session est écrite en haut à droite de chaque page : vérifie que c'est la bonne.
+- **Ce que le PDF ne dit pas :** demande-le à l'utilisateur dès le début, et rassemble ses réponses avant l'étape 2 :
+  - les dispos et le centre d'aide que les profs ont envoyés pour la nouvelle session ;
+  - les cours donnés hors des labos (salles de classe, autres départements) ;
+  - les plages `reunion` et `autre` qui valent encore (ex. réunion de département) ;
+  - qui fait la coordination ;
+  - les congés, retours, départs et nouveaux profs (avec leur courriel).
 - Travaille sur une branche.
 
 ## 1. Recopier le PDF dans `data/laboratoires.yaml`
@@ -38,7 +44,7 @@ Retrouve chaque prof du PDF par son `nom:` dans `data/profs/*.yaml` (« Marsolai
   - `reunion` et `autre` : garde celles que l'utilisateur confirme pour la nouvelle session.
 - `horaire.prerempli: true` : sa page affiche l'avis « Cours tirés de l'horaire officiel des laboratoires… ». Si la fiche a le commentaire « PRÉREMPLI … (PDF RPHOR020 du …) », mets-y la date du nouveau PDF.
 - `calendrier:` retire les dates déjà passées et garde les autres (une remise d'AEC peut tomber entre deux sessions) ; s'il n'en reste aucune, écris `calendrier: []`.
-- Garde `aide:` (les cours où il peut aider ne dépendent pas de la session) et les commentaires de la fiche.
+- Garde `aide:` (les cours où il peut aider ne dépendent pas de la session), `role:` et les commentaires de la fiche.
 
 **Fini quand :** chaque bloc du PDF dont le prof a une fiche se trouve dans cette fiche, et `npm run valider` ne donne aucun avertissement « absent de l'horaire » ni « hors de la réservation ».
 
@@ -51,6 +57,7 @@ Ces cas demandent une information que le PDF n'a pas : rassemble-les, et agis su
 - **Nom du PDF sans fiche** : crée sa fiche à partir de `data/profs/_modele.yaml` quand l'utilisateur te donne son courriel.
 - **Cours absent de `data/cours.yaml`** (avertissement de `valider`) : ajoute-le s'il est dans une grille de `data/programmes/`, sinon signale-le.
 - **`actif: true`** (coordination sans cours) et **`actif: false`** (congé, départ) : seulement sur la parole de l'utilisateur.
+- **La coordination** change parfois d'une session à l'autre : mets `role: "Coordination du département"` dans la fiche de chaque coordonnateur que l'utilisateur nomme, et retire-le des autres. Un coordonnateur sans cours a aussi besoin de `actif: true`.
 
 ## 4. Les autres dates de la session
 
