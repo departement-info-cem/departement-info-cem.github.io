@@ -84,3 +84,7 @@
   reponse: Pour la même raison qu'on va au gym au lieu de demander à quelqu'un de soulever les poids à notre place. Les exercices servent à construire ta compréhension. Aux examens et en stage, c'est toi qui dois comprendre ce que fait le code.
   categories: [IA, travaux]
   liens: []
+- question: J'ai un problème avec mon prof, à qui m'adresser ?
+  reponse: Essaie d'abord d'en parler avec ton prof. S'il y a un problème de fond, ou si tu n'es pas à l'aise de lui en parler, va voir la coordination du département, au bureau E-210 ou sur Teams. Ce que tu lui dis n'est pas répété au prof sans ton accord.
+  categories: [problèmes]
+  liens: [/contact]
