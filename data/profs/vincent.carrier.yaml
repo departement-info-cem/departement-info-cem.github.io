@@ -6,6 +6,7 @@ nom: "Vincent Carrier"
 courriel: vincent.carrier  # sans @cegepmontpetit.ca
 contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 bureau: "E-209"
+role: "Coordination du département"
 photo: vc.png  # fichier dans data/photos/
 github: vcarrier
 linkedin: vincentcarrier
