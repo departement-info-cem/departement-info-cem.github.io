@@ -211,6 +211,45 @@
   .apparition { opacity: 1; transform: none; transition: none; }
 }
 
+/* Accueil : effets qui suivent le défilement (voir app/page.tsx).
+   Le défilement reste celui du navigateur (molette, clavier, Ctrl+F, ancres, retour arrière) : aucun
+   script ne l'intercepte, chaque effet dépend seulement de la position de son élément dans l'écran.
+   Un élément monté à plus de 10rem du bas de l'écran (plus son décalage --i) est donc dans son état
+   final, peu importe comment on s'y est rendu. Sans prise en charge (Firefox), à l'impression ou avec les animations
+   réduites, la page reste immobile.
+   Les éléments animés ne doivent pas avoir leur propre translate ou scale (ex. hover:-translate-y-1) :
+   l'animation l'écraserait. Mettre alors la classe sur un parent. */
+@supports (animation-timeline: view()) {
+  @media screen and (prefers-reduced-motion: no-preference) {
+    .defile-entree, .defile-barre, .defile-tuile, .defile-visage {
+      animation-timing-function: ease-out;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      /* --i décale les éléments d'une même rangée pour qu'ils arrivent l'un après l'autre */
+      animation-range: cover calc(var(--i, 0) * 1.5rem) cover calc(10rem + var(--i, 0) * 1.5rem);
+    }
+    .defile-entree { animation-name: defile-entree; }
+    .defile-barre { animation-name: defile-barre; }
+    .defile-tuile { animation-name: defile-tuile; }
+    .defile-visage { animation-name: defile-visage; }
+    /* Fond du bandeau principal et photos de la mosaïque : l'image glisse moins vite que son cadre.
+       Le cadre doit être en overflow-clip et non overflow-hidden, qui en ferait la zone de défilement suivie. */
+    .defile-fond, .defile-tuile img {
+      animation: defile-fond linear both;
+      animation-timeline: view();
+      animation-range: exit;
+    }
+    .defile-tuile img { scale: 1.2; animation-name: defile-photo; animation-range: cover; }
+  }
+}
+@keyframes defile-entree { from { opacity: 0; translate: 0 2rem; } }
+@keyframes defile-barre { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+@keyframes defile-tuile { from { opacity: 0; scale: 0.9; } }
+@keyframes defile-visage { from { opacity: 0; scale: 0.5; } }
+@keyframes defile-fond { to { translate: 0 30%; } }
+/* Le scale de 1.2 laisse 10 % de marge de chaque côté : le décalage reste en deçà */
+@keyframes defile-photo { from { translate: 0 -8%; } to { translate: 0 8%; } }
+
 /* Bandeau défilant (voir components/bandeau.tsx) */
 /* Fixé en bas : la page garde la place en dessous pour ne rien cacher, seulement quand il est affiché */
 .bandeau-bas { --hauteur: 2.25rem; height: calc(var(--hauteur) + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom); }
