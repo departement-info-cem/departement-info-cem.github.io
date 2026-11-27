@@ -18,7 +18,10 @@ Ce fichier sert à expliquer comment modifier l'appli ou le contenu du site du d
 - Données pour les sites de cours : `/react/donnees/cours/<numéro>.json` (ex. https://info.cegepmontpetit.ca/react/donnees/cours/420-5N6-EM.json),
   écrit à chaque build (`web/app/donnees/cours/[fichier]/route.ts`), aussi sous les anciens numéros. Le site de cours n'a plus à recopier
   horaires et dates : il garde la matière de chaque séance, par numéro. Pour chaque groupe d'un prof actif : `prof`, `groupe`, `session`,
-  `plages` (l'horaire de la semaine), `rencontres` et `evenements` (remises, examens... de la fiche pour ce cours).
+  `plages` (l'horaire de la semaine), `rencontres`, `evenements` (remises, examens... de la fiche pour ce cours) et `agenda`
+  (l'adresse de l'abonnement .ics du groupe, ou `null`). `profs` donne la semaine complète de chaque prof du cours (ses autres cours,
+  dispos, centre d'aide), `{ nom, bureau, horaire: { debut, fin, plages }, page }`, pour l'onglet Horaire des sites de cours.
+  Les adresses (`agenda`, `page`) suivent le site : les sites de cours ne codent en dur que celle du fichier.
   Les rencontres sont celles de l'agenda du téléphone (`rencontresDuGroupe` dans `web/lib/mes-cours.ts`) : le calendrier scolaire et le
   `calendrier:` de la fiche, `{ numero, date, debut, fin, local, statut, note }`. `statut` vaut `prevue`, `annulee` (absence), `deplacee`
   (à sa date prévue, `note` : « déplacé au jeudi 10 décembre ») ou `reprise` (le cours déplacé, à sa nouvelle date).

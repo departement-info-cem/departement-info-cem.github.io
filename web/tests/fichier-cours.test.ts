@@ -28,6 +28,17 @@ describe("fichierCours (420-5N6-EM)", () => {
     });
   });
 
+  it("donne l'abonnement d'agenda de chaque groupe et la semaine complète de chaque prof", () => {
+    expect(po.agenda).toMatch(/^https:\/\/info\.cegepmontpetit\.ca\/(react\/)?agenda\/A2026-5M6-1010\.ics$/);
+    const semaine = fichier.profs["po.brillant"];
+    expect(semaine.page).toMatch(/\/po\.brillant\/horaire\/$/);
+    // Ses autres cours (numéro actuel, groupe en texte) et ses dispos, pas seulement le 5M6
+    expect(semaine.horaire.plages).toContainEqual(expect.objectContaining({ type: "cours", cours: "420-5M6-EM", groupe: "1010", jour: "mercredi" }));
+    expect(semaine.horaire.plages.some((x) => x.type === "cours" && x.cours !== "420-5M6-EM")).toBe(true);
+    expect(semaine.horaire.plages.some((x) => x.type === "dispo" || x.type === "centre-aide")).toBe(true);
+    expect(Object.keys(fichier.profs).sort()).toEqual(["joris.deguet", "po.brillant"]);
+  });
+
   it("donne 30 rencontres numérotées pour le groupe 1010", () => {
     expect(po.rencontres).toHaveLength(30);
     expect(po.rencontres[0]).toEqual({ numero: 1, date: "2026-08-26", debut: "14:00", fin: "17:00", local: "D-0704", statut: "prevue" });

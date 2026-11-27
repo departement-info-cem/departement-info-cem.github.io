@@ -5,11 +5,13 @@ import fs from "node:fs";
 import path from "node:path";
 import YAML from "yaml";
 import type { z } from "zod";
-import { profSchema, type EvenementProf, type Prof } from "@/app/_types/prof";
+import { profSchema, type EvenementProf, type Plage, type Prof } from "@/app/_types/prof";
 import { coursSchema, programmeSchema, type Cours, type CoursAffiche, type Programme } from "@/app/_types/programme";
 import { botSchema, calendrierScolaireSchema, coursServiceSchema, faqSchema, laboratoiresSchema, logicielsSchema, type Bot, type CalendrierScolaire, type CoursService, type Laboratoire, type Logiciel, type Question } from "@/app/_types/divers";
 import type { ProfHoraire } from "@/lib/maintenant";
 import { rencontresDuGroupe, type DonneesMesCours, type GroupeCours, type Rencontre, type Seance } from "@/lib/mes-cours";
+import { fichierAgenda, ORIGINE } from "@/lib/agenda";
+import { chemin } from "@/lib/chemins";
 import { JOURS, isoDepuisDate, normaliserJour } from "@/lib/temps";
 import { estActif } from "@/lib/actif";
 import { formaterErreurs } from "@/lib/erreurs";
@@ -268,7 +270,11 @@ export type FichierCours = {
     rencontres: Rencontre[];
     /** les dates de la fiche pour ce cours et ce groupe : remises, examens, activités... (absences et déplacements sont dans les rencontres) */
     evenements: Omit<EvenementProf, "cours" | "groupe">[];
+    /** l'abonnement d'agenda du groupe (.ics, voir lib/agenda.ts), ou null s'il n'a pas d'horaire */
+    agenda: string | null;
   }[];
+  /** la semaine complète de chaque prof du cours (ses autres cours, dispos, centre d'aide...), pour l'onglet Horaire des sites de cours */
+  profs: Record<string, { nom: string; bureau?: string; horaire: { debut?: string; fin?: string; plages: Plage[] }; /** sa page d'horaire sur le site du département */ page: string }>;
 };
 
 /** Les numéros de cours qui ont un fichier pour les sites de cours : ceux du département au catalogue (anciens numéros compris) et ceux des horaires. */
@@ -299,8 +305,17 @@ export function fichierCours(no: string, date = new Date()): FichierCours {
         plages: g.seances,
         rencontres: rencontresDuGroupe({ ...g, session }, infos, scolaire),
         evenements: duGroupe.filter((e) => e.type !== "absence" && e.type !== "deplacement").map(({ date, au, titre, type, debut, fin, local, description, evaluation }) => ({ date, au, titre, type, debut, fin, local, description, evaluation })),
+        agenda: fichierAgenda(g) && `${ORIGINE}${chemin(`/agenda/${fichierAgenda(g)}`)}`,
       };
     }),
+    profs: Object.fromEntries(
+      [...new Set((groupes[cours] ?? []).map((g) => g.prof))].flatMap((id) => {
+        const p = prof(id);
+        if (!p) return [];
+        const plages = (p.horaire?.plages ?? []).map((x) => ({ ...x, ...(x.cours && { cours: numeroCanonique(x.cours) }), ...(x.groupe !== undefined && { groupe: String(x.groupe) }) }));
+        return [[id, { nom: p.nom, bureau: p.bureau, horaire: { debut: p.horaire?.debut, fin: p.horaire?.fin, plages }, page: `${ORIGINE}${chemin(`/${id}/horaire/`)}` }]];
+      }),
+    ),
   };
 }
 
