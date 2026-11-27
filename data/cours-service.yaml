@@ -15,6 +15,9 @@
     - no: 420-4A4-EM
       quand:
         - "Session 4 (cours au choix) : profils Sciences pures et appliquées, et Découverte"
+    - no: 360-4A3-EM
+      quand:
+        - "Session 4"
 
 - programme: Techniques d'intégration multimédia
   court: TIM
