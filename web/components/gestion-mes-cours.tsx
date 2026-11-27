@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Trash2, TriangleAlert, X } from "lucide-react";
 import { useMesCours, useMonCalendrier } from "@/app/_contexts/mes-cours-context";
+import { AgendaMesCours } from "@/components/agenda-mes-cours";
 import { AVenir } from "@/components/a-venir";
 import { MonCalendrier, MonHoraire } from "@/components/mon-horaire";
 import { AjoutCours, texteSeances } from "@/components/choix-groupe";
@@ -96,6 +97,13 @@ export function GestionMesCours({ logiciels }: { logiciels: LogicielAffiche[] })
         <section>
           <h2 id="calendrier" className="mb-1 text-2xl font-bold">Mon calendrier</h2>
           <MonCalendrier />
+        </section>
+      )}
+
+      {mesCours.length > 0 && (
+        <section>
+          <h2 id="agenda" className="mb-1 text-2xl font-bold">Ajouter à mon agenda</h2>
+          <AgendaMesCours />
         </section>
       )}
 
