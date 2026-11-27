@@ -146,6 +146,12 @@ export function rencontresDuGroupe(g: GroupeCours, profs: DonneesMesCours["profs
   return rencontres;
 }
 
+/**
+ * Journées du cégep qui ne disent rien à l'étudiant par elles-mêmes : JR, EC, EUL, EHR. Si son prof s'en sert
+ * (reprise, examen), il l'inscrit dans sa fiche, et c'est cette date-là qui paraît.
+ */
+const JOURNEES_DU_PROF = new Set(["reprise", "evaluations", "evaluations-horaire"]);
+
 /** Ce qui compte dans les jours à venir : évaluations, remises, cours annulés ou déplacés, congés et dates limites. */
 export function aVenir(jours: Map<string, JourCalendrier>, aujourdhui: string, nbJours = 21): { iso: string; evenements: EvenementJour[] }[] {
   const fin = dateDepuisIso(aujourdhui);
@@ -154,7 +160,7 @@ export function aVenir(jours: Map<string, JourCalendrier>, aujourdhui: string, n
   return [...jours.values()]
     .filter((j) => j.iso >= aujourdhui && j.iso <= limite)
     .sort((a, b) => a.iso.localeCompare(b.iso))
-    .map((j) => ({ iso: j.iso, evenements: j.evenements.filter((e) => (e.source === "seance" ? Boolean(e.annulee) : e.type !== "info")) }))
+    .map((j) => ({ iso: j.iso, evenements: j.evenements.filter((e) => (e.source === "seance" ? Boolean(e.annulee) : e.type !== "info" && !(e.source === "scolaire" && JOURNEES_DU_PROF.has(e.type)))) }))
     .filter((j) => j.evenements.length > 0);
 }
 
