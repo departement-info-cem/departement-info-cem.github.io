@@ -23,10 +23,13 @@ jobs:
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 22
+          # Garde les paquets npm téléchargés tant que package-lock.json ne change pas
+          cache: npm
+          cache-dependency-path: web/package-lock.json
       # ---------- Site Next.js (web/), publié à la racine ----------
       - name: Installer les dépendances (React)
         working-directory: web
-        run: npm ci
+        run: npm ci --no-audit --no-fund
 
       # Si le site du cégep est en panne ou si le PDF change de forme, on garde le calendrier du dépôt.
       - name: Mettre à jour le calendrier scolaire (PDF du cégep)
@@ -38,11 +41,14 @@ jobs:
         working-directory: web
         run: npm run valider
 
-      - name: Lint et tests (React)
-        working-directory: web
-        run: |
-          npm run lint
-          npm test
+      # next build vérifie les types : avec le fichier du build précédent (300 Ko),
+      # TypeScript ne revérifie que ce qui a changé (environ 4 s au lieu de 8).
+      - name: Reprendre la vérification des types du build précédent
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: web/.next/cache/.tsbuildinfo
+          key: tsbuildinfo-${{ github.sha }}
+          restore-keys: tsbuildinfo-
 
       - name: Build (React)
         working-directory: web
@@ -60,8 +66,30 @@ jobs:
         with:
           path: web/out
           retention-days: 5
+
+  # Sur une autre machine, en même temps que le build : le site n'est publié que si les deux réussissent.
+  verifier:
+    name: Lint et tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Utiliser Node.js 22
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Installer les dépendances (React)
+        working-directory: web
+        run: npm ci --no-audit --no-fund
+      - name: Lint et tests (React)
+        working-directory: web
+        run: |
+          npm run lint
+          npm test
+
   deploy:
-    needs: build
+    needs: [build, verifier]
 
     permissions:
       pages: write

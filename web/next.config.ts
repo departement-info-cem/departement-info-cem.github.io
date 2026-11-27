@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   images: { unoptimized: true },
   env: { NEXT_PUBLIC_BASE_PATH: BASE_PATH },
+  experimental: {
+    // Sur GitHub (CI=true), .next/cache/turbopack (70 Mo) n'est jamais repris d'un build à l'autre :
+    // ne pas l'écrire fait gagner environ 2 s. En local, il accélère les builds suivants.
+    turbopackFileSystemCacheForBuild: !process.env.CI,
+  },
   turbopack: {
     // racine du dépôt : le site lit les données dans ../data
     root: path.resolve(__dirname, ".."),
