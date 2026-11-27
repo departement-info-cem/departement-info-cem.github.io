@@ -27,7 +27,7 @@ export const GRILLES = [
 export const NAVIGATION = [
   { href: "/sites", texte: "Sites des cours" },
   { href: "/profs", texte: "Profs" },
-  { href: "/maintenant", texte: "Locaux" },
+  { href: "/locaux", texte: "Locaux" },
   { href: "/calendrier", texte: "Calendrier" },
 ];
 
@@ -63,7 +63,7 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
   const [aideInstallation, setAideInstallation] = useState(false);
   // Le centre d'aide devient « Mon centre d'aide » quand l'étudiant a entré ses cours
   const texteLien = (l: { href: string; texte: string }) => (l.href === "/centre-aide" && mesCours.length ? "Mon centre d'aide" : l.texte);
-  const actif = (href: string) => chemin === href || chemin.startsWith(`${href}/`) || (href === "/maintenant" && chemin.startsWith("/locaux/")); // une page par labo
+  const actif = (href: string) => chemin === href || chemin.startsWith(`${href}/`); // /locaux/ et la page de chaque labo
 
   return (
     <header className="sticky top-0 z-40 bg-cadre text-cadre-texte shadow-md">

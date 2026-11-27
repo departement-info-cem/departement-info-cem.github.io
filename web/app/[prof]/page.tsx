@@ -49,6 +49,7 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
     { titre: "Disponibilités", liste: fusionnerDispos(plages.filter((x) => x.type === "dispo")) },
     { titre: "Au centre d'aide", liste: fusionnerDispos(plages.filter((x) => x.type === "centre-aide")) },
   ];
+  const avecDispos = listesDispos.some((l) => l.liste.length > 0);
   // Ses cours de la session ont déjà leur encadré : ici, les autres cours où il peut aider
   const donnes = new Set(coursDonnes.map((c) => (cours[c]?.no ?? c).toUpperCase()));
   const aide = coursAide(p).filter((c) => !donnes.has(c));
@@ -61,6 +62,7 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
           <div className="flex-1 space-y-2">
             <div className="h-1 w-16 rounded bg-cem-vert" />
             <h1 className="text-3xl font-bold md:text-4xl">{p.nom}</h1>
+            {p.role && <p className="text-lg font-semibold text-primary">{p.role}</p>}
             <StatutProf prof={p} />
             <SessionPerimee session={p.session} />
             {p.presentation && <p className="max-w-2xl text-muted-foreground">{p.presentation}</p>}
@@ -92,8 +94,29 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
         </div>
       </section>
 
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-8 lg:grid-cols-[1fr_280px]">
-        <div className="min-w-0">
+      {/* Sur téléphone, les dispos passent avant l'horaire : c'est ce que l'étudiant vient chercher. Sur ordinateur, elles restent en haut à droite. */}
+      <div className="mx-auto grid max-w-6xl gap-x-8 gap-y-6 px-4 py-8 lg:grid-cols-[1fr_280px] lg:grid-rows-[auto_1fr]">
+        {avecDispos && (
+          <aside className="space-y-6 lg:col-start-2 lg:row-start-1">
+            {listesDispos.map(
+              ({ titre, liste }) =>
+                liste.length > 0 && (
+                  <div key={titre} className="rounded-lg border bg-card p-4">
+                    <h2 className="mb-2 font-bold">{titre}</h2>
+                    <ul className="space-y-1 text-sm">
+                      {liste.map((d, i) => (
+                        <li key={i}>
+                          <span className="capitalize">{d.jour}</span> {d.debut}–{d.fin}
+                          {d.local && <strong> · {d.local}</strong>}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ),
+            )}
+          </aside>
+        )}
+        <div className="min-w-0 lg:col-start-1 lg:row-span-2 lg:row-start-1">
           <Tabs defaultValue="horaire">
             <TabsList className="mb-4">
               <TabsTrigger value="horaire">
@@ -117,7 +140,7 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
           </Tabs>
         </div>
 
-        <aside className="space-y-6">
+        <aside className={`space-y-6 lg:col-start-2 ${avecDispos ? "lg:row-start-2" : "lg:row-start-1"}`}>
           {coursDonnes.length > 0 && (
             <div className="rounded-lg border bg-card p-4">
               <h2 className="mb-2 flex items-center gap-2 font-bold">
@@ -141,22 +164,6 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
                 })}
               </ul>
             </div>
-          )}
-          {listesDispos.map(
-            ({ titre, liste }) =>
-              liste.length > 0 && (
-                <div key={titre} className="rounded-lg border bg-card p-4">
-                  <h2 className="mb-2 font-bold">{titre}</h2>
-                  <ul className="space-y-1 text-sm">
-                    {liste.map((d, i) => (
-                      <li key={i}>
-                        <span className="capitalize">{d.jour}</span> {d.debut}–{d.fin}
-                        {d.local && <strong> · {d.local}</strong>}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ),
           )}
           {aide.length > 0 && (
             <div className="rounded-lg border bg-card p-4">

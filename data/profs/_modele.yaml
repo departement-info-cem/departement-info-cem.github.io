@@ -13,6 +13,7 @@ bureau: "E-2xx"
 # linkedin: mon-profil
 # site: https://mon-site.com
 # presentation: "Une ou deux phrases pour te présenter aux étudiants."
+# role: "Coordination du département"   # un rôle au département, affiché sous ton nom
 
 # Tu es « actif » si tu as des cours cette session. Pour forcer l'un ou l'autre :
 # actif: true                     # ex. coordination, sans cours
