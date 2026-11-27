@@ -9,11 +9,11 @@ const STATIQUE = "/images/logo.svg";
 const ANIME = "/images/logo-anime.svg";
 
 /**
- * taille : hauteur du M en pixels (une cellule = taille / 24 px). 36 px, la hauteur des boutons de l'en-tête,
- * donne des cellules de 3 pixels physiques sur les écrans haute densité ; 24 ou 48 px restent nets partout.
+ * taille : hauteur du M en pixels (une cellule = taille / 24 px). 30 px, la hauteur visible de l'ancien logo,
+ * adoucit un peu les bords des pixels ; seuls 24 et 48 px (et 36 px sur les écrans haute densité) sont parfaitement nets.
  * classeTexte : pour cacher le nom à côté du symbole, ex. dans l'en-tête sur un écran étroit.
  */
-export function Logo({ taille = 36, anime = false, classeTexte = "" }: { taille?: number; anime?: boolean; classeTexte?: string }) {
+export function Logo({ taille = 30, anime = false, classeTexte = "" }: { taille?: number; anime?: boolean; classeTexte?: string }) {
   const cellule = taille / 24;
   const image = (
     <Image
@@ -29,8 +29,7 @@ export function Logo({ taille = 36, anime = false, classeTexte = "" }: { taille?
     />
   );
   return (
-    // gap-2 : le curseur sépare déjà le M du nom ; le logo garde ainsi la largeur de l'ancien (barre de navigation à 1024 px)
-    <span className="inline-flex items-center gap-2">
+    <span className="inline-flex items-center gap-3">
       {anime ? (
         // Logo statique pour qui a réduit les animations dans son système
         <picture className="shrink-0">

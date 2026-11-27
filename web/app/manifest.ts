@@ -3,9 +3,10 @@ import { chemin } from "@/lib/chemins";
 
 // Ce qui permet d'ajouter le site à l'écran d'accueil d'un téléphone, comme une appli (voir components/installer-appli.tsx).
 // Next n'ajoute pas /react aux adresses écrites ici : d'où chemin().
-// Les PNG reprennent public/images/logo.svg sur fond marine : arrondi pour icone-192 et icone-512, plein pour la version
-// masquable et apple-icon.png (Android et iOS découpent eux-mêmes l'icône). Une cellule du logo y fait un nombre entier
-// de pixels (4, 10 ou 11) pour rester nette. À refaire si le logo change.
+// Les PNG reprennent le M de public/images/logo.svg, sans le curseur, sur fond marine : arrondi pour icone-192 et
+// icone-512, plein pour la version masquable et apple-icon.png (Android et iOS découpent eux-mêmes l'icône).
+// Le M occupe environ la moitié de la hauteur (le tiers pour la version masquable, que le téléphone rogne) et une
+// cellule y fait un nombre entier de pixels (4, 7 ou 10) pour rester nette. À refaire si le logo change.
 
 // Exigé par l'export statique (output: "export")
 export const dynamic = "force-static";
