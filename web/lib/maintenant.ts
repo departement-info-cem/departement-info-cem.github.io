@@ -233,7 +233,7 @@ export function resumeMaintenant(profs: ProfHoraire[], labos: Laboratoire[], sco
   else if (["samedi", "dimanche"].includes(jourDeLaSemaine(date))) raison = "C'est la fin de semaine";
   else if (labos.length > 0 && etats.every(({ e }) => e.raison === "horaire incomplet")) raison = "L'horaire des locaux de cette session n'est pas encore inscrit";
 
-  return { iso, situation, nbAvecDispos, dispos, bientot, etats, libres, prochainLibre: premier && { local: premier.l.local, heure: premier.e.jusqua! }, heures: heuresLabos(labos, scolaire, date), raison };
+  return { iso, situation, nbAvecHoraire: avecHoraire.length, nbAvecDispos, dispos, bientot, etats, libres, prochainLibre: premier && { local: premier.l.local, heure: premier.e.jusqua! }, heures: heuresLabos(labos, scolaire, date), raison };
 }
 
 /** Le bandeau est sur toutes les pages : on garde seulement les profs qui y changent quelque chose. */

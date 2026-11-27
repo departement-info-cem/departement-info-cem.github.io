@@ -23,17 +23,16 @@ export function ListeProfs({ profs, cours }: { profs: Prof[]; cours: InfoCours }
   const scolaire = useScolaire();
   const { lien } = useMesCours();
 
-  const coursDonnes = useMemo(() => {
-    const nos = new Set(profs.flatMap((p) => [...(p.cours ?? []), ...(p.horaire?.plages.map((x) => x.cours ?? "") ?? [])]).filter(Boolean).map((c) => c.toUpperCase()));
-    return [...nos].sort();
-  }, [profs]);
+  // Numéros canoniques, comme ailleurs sur le site : un ancien numéro (5N6) compte pour le nouveau (5M6)
+  const coursDe = useMemo(() => {
+    const canonique = (c: string) => (cours[c.toUpperCase()]?.no ?? c).toUpperCase();
+    return (p: Prof) => [...(p.cours ?? []), ...(p.horaire?.plages.map((x) => x.cours ?? "") ?? [])].filter(Boolean).map(canonique);
+  }, [cours]);
+  const coursDonnes = useMemo(() => [...new Set(profs.flatMap(coursDe))].sort(), [profs, coursDe]);
 
   const filtres = profs.filter((p) => {
     if (recherche.value && !simplifier(`${p.nom} ${p.bureau ?? ""}`).includes(simplifier(recherche.value))) return false;
-    if (coursChoisi) {
-      const siens = [...(p.cours ?? []), ...(p.horaire?.plages.map((x) => x.cours ?? "") ?? [])].map((c) => c.toUpperCase());
-      if (!siens.includes(coursChoisi)) return false;
-    }
+    if (coursChoisi && !coursDe(p).includes(coursChoisi)) return false;
     if (dispoSeulement) {
       if (!maintenant) return false;
       if (etatProf({ session: p.session, calendrier: p.calendrier, plages: p.horaire?.plages ?? [] }, scolaire, maintenant).etat !== "dispo") return false;

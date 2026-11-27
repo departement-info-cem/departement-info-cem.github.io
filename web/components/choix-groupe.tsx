@@ -120,10 +120,14 @@ export function AjoutCours() {
   const [texte, setTexte] = useState("");
   const [cours, setCours] = useState<string | null>(null);
   const mots = simplifier(texte).split(/\s+/).filter(Boolean);
+  // Les anciens numéros (alias) mènent aussi au cours : l'étudiant de l'ancien programme tape celui d'Omnivox (ex. 5N6 pour 5M6)
+  const alias = (no: string) => Object.keys(index).filter((a) => a !== no && index[a].no.toUpperCase() === no);
   const trouves = Object.keys(groupes)
     .sort()
-    .filter((no) => mots.every((m) => simplifier(`${no} ${index[no]?.nom ?? ""}`).includes(m)))
+    .filter((no) => mots.every((m) => simplifier(`${no} ${index[no]?.nom ?? ""} ${alias(no).join(" ")}`).includes(m)))
     .slice(0, mots.length ? 12 : 0);
+  // L'ancien numéro tapé, pour que l'étudiant reconnaisse son cours sous le nouveau
+  const aliasTape = (no: string) => alias(no).find((a) => mots.some((m) => simplifier(a).includes(m) && !simplifier(no).includes(m)));
 
   if (cours) {
     return (
@@ -151,7 +155,10 @@ export function AjoutCours() {
           <li key={no}>
             <button onClick={() => setCours(no)} className="flex w-full gap-2 rounded-md border bg-card px-3 py-2 text-left text-sm hover:border-primary">
               <span className="w-12 shrink-0 font-semibold tabular-nums text-primary">{court(no)}</span>
-              <span>{index[no]?.nom ?? no}</span>
+              <span>
+                {index[no]?.nom ?? no}
+                {aliasTape(no) && <span className="text-muted-foreground"> (ou {court(aliasTape(no)!)})</span>}
+              </span>
             </button>
           </li>
         ))}

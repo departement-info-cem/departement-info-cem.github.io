@@ -65,7 +65,7 @@ export default function PageNouveau() {
         </Bloc>
         <Bloc icone={Archive} titre="Disponibilités">
           <p>
-            Tous les profs t&apos;offrent des heures de disponibilité en dehors des cours : elles sont affichées sur leur page. Utilise-les, ce sont des experts du domaine. Tes camarades viennent souvent de découvrir ce qu&apos;ils t&apos;expliquent, ce n&apos;est pas toujours fiable.
+            Tous les profs t&apos;offrent des heures de disponibilité en dehors des cours. Celles qu&apos;ils ont inscrites sont sur leur page ; sinon, demande-les en classe. Utilise-les, ce sont des experts du domaine. Tes camarades viennent souvent de découvrir ce qu&apos;ils t&apos;expliquent, ce n&apos;est pas toujours fiable.
           </p>
         </Bloc>
       </Conteneur>

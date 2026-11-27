@@ -24,14 +24,14 @@ horaire:
   debut: "08:00"
   fin: "18:00"
   plages:
-    - { jour: lundi, debut: "08:00", fin: "11:00", type: cours, cours: 420-1C5-EM, groupe: 1050, local: D-0226 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
-    - { jour: lundi, debut: "13:00", fin: "16:00", type: cours, cours: 420-1C5-EM, groupe: 1060, local: D-0226 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
-    - { jour: mercredi, debut: "09:00", fin: "12:00", type: cours, cours: 420-1X6-EM, groupe: 1070, local: D-0226 }
-    - { jour: mercredi, debut: "14:00", fin: "17:00", type: cours, cours: 420-1X6-EM, groupe: 1080, local: D-0602 }
-    - { jour: jeudi, debut: "08:00", fin: "11:00", type: cours, cours: 420-1C5-EM, groupe: 1050, local: D-0226 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
-    - { jour: jeudi, debut: "15:00", fin: "18:00", type: cours, cours: 420-1C5-EM, groupe: 1060, local: D-0622 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
-    - { jour: vendredi, debut: "08:00", fin: "11:00", type: cours, cours: 420-1X6-EM, groupe: 1070, local: D-0704 }
-    - { jour: vendredi, debut: "15:00", fin: "18:00", type: cours, cours: 420-1X6-EM, groupe: 1080, local: D-0624 }
+    - { jour: lundi, debut: "08:10", fin: "11:00", type: cours, cours: 420-1C5-EM, groupe: 1050, local: D-0226 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
+    - { jour: lundi, debut: "13:10", fin: "16:00", type: cours, cours: 420-1C5-EM, groupe: 1060, local: D-0226 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
+    - { jour: mercredi, debut: "09:10", fin: "12:00", type: cours, cours: 420-1X6-EM, groupe: 1070, local: D-0226 }
+    - { jour: mercredi, debut: "14:10", fin: "17:00", type: cours, cours: 420-1X6-EM, groupe: 1080, local: D-0602 }
+    - { jour: jeudi, debut: "08:10", fin: "11:00", type: cours, cours: 420-1C5-EM, groupe: 1050, local: D-0226 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
+    - { jour: jeudi, debut: "15:10", fin: "18:00", type: cours, cours: 420-1C5-EM, groupe: 1060, local: D-0622 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
+    - { jour: vendredi, debut: "08:10", fin: "11:00", type: cours, cours: 420-1X6-EM, groupe: 1070, local: D-0704 }
+    - { jour: vendredi, debut: "15:10", fin: "18:00", type: cours, cours: 420-1X6-EM, groupe: 1080, local: D-0624 }
 #    - { jour: mardi, debut: "13:00", fin: "15:00", type: dispo, local: E-2xx }   # exemple de disponibilité
 
 # ---------- Calendrier : tes dates à toi (remises, examens, absences...) ----------
