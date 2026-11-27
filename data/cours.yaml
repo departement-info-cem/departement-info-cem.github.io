@@ -416,6 +416,15 @@
     - ia
     - python
   description: Cours au choix de Sciences de la nature donné par le département d'informatique.
+- no: 360-4A3-EM
+  nom: Projet scientifique de fin d'études en informatique
+  ponderation: 0-3-3
+  heures: 45
+  tags:
+    - recherche
+    - sciences
+  url: https://info.cegepmontpetit.ca/360-4A3/
+  description: Projet scientifique de fin d'études en Sciences de la nature, option informatique comme discipline principale
 - no: 420-905-EM
   nom: Introduction à la programmation
   ponderation: 1-4-2
