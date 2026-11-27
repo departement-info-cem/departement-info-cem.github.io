@@ -33,7 +33,7 @@ describe("fichierCours (420-5N6-EM)", () => {
     const semaine = fichier.profs["po.brillant"];
     expect(semaine.page).toMatch(/\/po\.brillant\/horaire\/$/);
     // Ses autres cours (numéro actuel, groupe en texte) et ses dispos, pas seulement le 5M6
-    expect(semaine.horaire.plages).toContainEqual(expect.objectContaining({ type: "cours", cours: "420-5M6-EM", groupe: "1010", jour: "mercredi" }));
+    expect(semaine.horaire.plages).toContainEqual(expect.objectContaining({ type: "cours", cours: "420-5M6-EM", nomCours: "Applications mobiles avancées", groupe: "1010", jour: "mercredi" }));
     expect(semaine.horaire.plages.some((x) => x.type === "cours" && x.cours !== "420-5M6-EM")).toBe(true);
     expect(semaine.horaire.plages.some((x) => x.type === "dispo" || x.type === "centre-aide")).toBe(true);
     expect(Object.keys(fichier.profs).sort()).toEqual(["joris.deguet", "po.brillant"]);

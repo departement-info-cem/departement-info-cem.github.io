@@ -274,7 +274,7 @@ export type FichierCours = {
     agenda: string | null;
   }[];
   /** la semaine complète de chaque prof du cours (ses autres cours, dispos, centre d'aide...), pour l'onglet Horaire des sites de cours */
-  profs: Record<string, { nom: string; bureau?: string; horaire: { debut?: string; fin?: string; plages: Plage[] }; /** sa page d'horaire sur le site du département */ page: string }>;
+  profs: Record<string, { nom: string; bureau?: string; horaire: { debut?: string; fin?: string; plages: (Plage & { nomCours?: string })[] }; /** sa page d'horaire sur le site du département */ page: string }>;
 };
 
 /** Les numéros de cours qui ont un fichier pour les sites de cours : ceux du département au catalogue (anciens numéros compris) et ceux des horaires. */
@@ -290,9 +290,10 @@ export function fichierCours(no: string, date = new Date()): FichierCours {
   const scolaire = calendrierScolaire();
   // Sans session dans la fiche : la session en cours, ou la prochaine (comme le calendrier des profs)
   const sessionParDefaut = scolaire.sessions.find((s) => isoDepuisDate(date) <= s.fin)?.id;
+  const index = indexCours();
   return {
     cours,
-    nom: indexCours()[cours]?.nom,
+    nom: index[cours]?.nom,
     genere: date.toISOString(),
     groupes: (groupes[cours] ?? []).map((g) => {
       const p = infos[g.prof];
@@ -312,7 +313,7 @@ export function fichierCours(no: string, date = new Date()): FichierCours {
       [...new Set((groupes[cours] ?? []).map((g) => g.prof))].flatMap((id) => {
         const p = prof(id);
         if (!p) return [];
-        const plages = (p.horaire?.plages ?? []).map((x) => ({ ...x, ...(x.cours && { cours: numeroCanonique(x.cours) }), ...(x.groupe !== undefined && { groupe: String(x.groupe) }) }));
+        const plages = (p.horaire?.plages ?? []).map((x) => ({ ...x, ...(x.cours && { cours: numeroCanonique(x.cours), nomCours: index[numeroCanonique(x.cours)]?.nom }), ...(x.groupe !== undefined && { groupe: String(x.groupe) }) }));
         return [[id, { nom: p.nom, bureau: p.bureau, horaire: { debut: p.horaire?.debut, fin: p.horaire?.fin, plages }, page: `${ORIGINE}${chemin(`/${id}/horaire/`)}` }]];
       }),
     ),
