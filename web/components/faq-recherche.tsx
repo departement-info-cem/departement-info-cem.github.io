@@ -36,7 +36,7 @@ export function FaqRecherche({ questions }: { questions: Question[] }) {
           <button
             key={c}
             onClick={() => setCategorie(categorie === c ? null : c)}
-            className={`rounded-full border px-3 py-1 text-sm capitalize ${categorie === c ? "border-primary bg-primary text-primary-foreground" : "hover:bg-accent"}`}
+            className={`rounded-full border px-3 py-1 text-sm first-letter:uppercase ${categorie === c ? "border-primary bg-primary text-primary-foreground" : "hover:bg-accent"}`}
           >
             {c}
           </button>

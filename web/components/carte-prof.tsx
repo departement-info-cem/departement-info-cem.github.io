@@ -33,6 +33,7 @@ export function CarteProf({ prof, lien }: { prof: Prof; lien?: Lien }) {
       <AvatarProf prof={prof} taille={64} />
       <div className="min-w-0">
         <div className="font-semibold group-hover:text-primary">{prof.nom}</div>
+        {prof.role && <div className="text-sm font-medium text-primary">{prof.role}</div>}
         {prof.bureau && <div className="text-sm text-muted-foreground">Bureau {prof.bureau}</div>}
         <div className="mt-1 flex flex-wrap gap-1">
           {lien && <PastilleLien lien={lien} />}

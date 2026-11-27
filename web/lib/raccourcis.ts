@@ -1,7 +1,7 @@
 // Les grilles les plus consultées : accès direct depuis le menu.
 export const GRILLES_DIRECTES = [
   { href: "/programmes/dec-prog", texte: "DEC Dév", sousTitre: "Développement d'applications" },
-  { href: "/programmes/dec-reseau", texte: "DEC Réseau", sousTitre: "Réseaux et cybersécurité" },
+  { href: "/programmes/dec-reseau", texte: "DEC Réseau", sousTitre: "Administration d'infrastructure TI" },
   { href: "/programmes/dec-bac", texte: "DEC-BAC", sousTitre: "Avec l'Université de Sherbrooke" },
 ];
 

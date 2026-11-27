@@ -6,6 +6,7 @@ nom: "Éric B. Gendron"
 courriel: ericb.gendron  # sans @cegepmontpetit.ca
 contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 bureau: "E-210"
+role: "Coordination du département"
 actif: true  # coordination à temps plein : actif même sans cours (enlève cette ligne pour revenir au calcul automatique)
 photo: eg.jpg  # fichier dans data/photos/
 aide: [420-1X6-EM, 420-1C5-EM, 420-2S5-EM, 420-3C5-EM, 420-3X6-EM, 420-4U5-EM]   # cours pour lesquels tu peux aider (ceux de « cours » comptent d'office)

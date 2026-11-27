@@ -11,6 +11,7 @@ export function nouvelleAdresse(pathname: string, search: string, hash: string):
   // Site Next.js sous /react/ : même page, sans le préfixe
   if (pathname === "/react" || pathname.startsWith("/react/")) {
     const reste = pathname.slice("/react".length);
+    if (/^\/maintenant\/?$/.test(reste)) return "/locaux/" + suite; // la page Locaux a changé d'adresse
     return (reste === "" ? "/" : reste) + suite;
   }
 
@@ -40,6 +41,8 @@ export function nouvelleAdresse(pathname: string, search: string, hash: string):
         return "/logiciels/";
       case "terminal":
         return "/jeux/";
+      case "maintenant": // ancienne adresse de la page Locaux (liens partagés, appli de l'écran d'accueil)
+        return "/locaux/" + suite;
     }
   }
 

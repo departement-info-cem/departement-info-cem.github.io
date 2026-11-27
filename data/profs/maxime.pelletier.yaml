@@ -5,7 +5,8 @@
 nom: "Maxime Pelletier"
 courriel: maxime.pelletier  # sans @cegepmontpetit.ca
 contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
-bureau: "C-126"
+bureau: "E-210"
+role: "Coordination du département"
 photo: mp.png  # fichier dans data/photos/
 # github: mon-pseudo
 # linkedin: mon-profil
