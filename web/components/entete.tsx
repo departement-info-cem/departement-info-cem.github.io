@@ -69,7 +69,7 @@ export function Entete({ index }: { index: ElementRecherche[] }) {
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 2xl:max-w-screen-2xl">
         <Link href="/" aria-label="Accueil" className="shrink-0">
           {/* Logo, nom et quatre boutons tiennent en 370 px ; en dessous (iPhone SE avec le zoom d'affichage), le bouton du menu sortait de l'écran */}
-          <Logo inverse taille={40} classeTexte="max-[369px]:hidden" />
+          <Logo anime classeTexte="max-[369px]:hidden" />
         </Link>
 
         <nav className="ml-auto hidden items-center gap-1 lg:flex" aria-label="Navigation principale">
