@@ -211,6 +211,12 @@
   .apparition { opacity: 1; transform: none; transition: none; }
 }
 
+/* Sur iPhone, toucher un champ écrit en moins de 16 px agrandit la page, qui reste agrandie ensuite.
+   Hors des couches de Tailwind : l'emporte sur text-sm. */
+@media (pointer: coarse) {
+  input, select, textarea { font-size: max(16px, 1em); }
+}
+
 /* Accueil : effets qui suivent le défilement (voir app/page.tsx).
    Le défilement reste celui du navigateur (molette, clavier, Ctrl+F, ancres, retour arrière) : aucun
    script ne l'intercepte, chaque effet dépend seulement de la position de son élément dans l'écran.

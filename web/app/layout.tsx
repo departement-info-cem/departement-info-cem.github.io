@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Montserrat } from "next/font/google";
 import "./globals.css";
 import { Bandeau } from "@/components/bandeau";
@@ -22,17 +22,25 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://info.cegepmontpetit.ca"),
   title: { default: "Département d'informatique | Cégep Édouard-Montpetit", template: "%s | Informatique Montpetit" },
   description: "DEC en informatique, DEC-BAC, AEC, profs, horaires et ressources du département d'informatique du Cégep Édouard-Montpetit.",
-  icons: { icon: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/icon.svg` },
+  icons: { icon: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/icon.svg`, apple: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/apple-icon.png` },
+  // Nom sous l'icône de l'écran d'accueil sur iPhone (le reste vient de app/manifest.ts)
+  appleWebApp: { title: "Info CEM" },
 };
 
+// Barre du navigateur (et de l'appli installée) du même bleu que l'en-tête, dans les deux thèmes.
+export const viewport: Viewport = { themeColor: "#0c3455" };
+
 // Applique le thème sombre avant l'affichage pour éviter un flash blanc.
-const scriptTheme = `try{var t=localStorage.getItem("theme-depinfo");if(t==='"sombre"'||t==="sombre"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}`;
+// Garde aussi l'offre d'installation d'Android (Chrome, Edge, Samsung), qui peut arriver avant que React soit prêt :
+// le bouton « Ajouter à l'écran d'accueil » s'en sert (voir app/_hooks/use-installation.ts).
+const scriptDepart = `try{var t=localStorage.getItem("theme-depinfo");if(t==='"sombre"'||t==="sombre"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}
+addEventListener("beforeinstallprompt",function(e){e.preventDefault();window.offreInstallation=e;dispatchEvent(new Event("offre-installation"))});`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="fr-CA" data-scroll-behavior="smooth" className={`${montserrat.variable} ${mono.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: scriptTheme }} />
+        <script dangerouslySetInnerHTML={{ __html: scriptDepart }} />
       </head>
       <body className="flex min-h-full flex-col">
         <ThemeProvider>

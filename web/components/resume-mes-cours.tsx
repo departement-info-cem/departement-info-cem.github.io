@@ -29,7 +29,7 @@ export function ResumeMesCours() {
       ) : (
         <span>Indique tes cours et ton groupe pour voir tes profs en premier, avec leurs disponibilités.</span>
       )}
-      <span className="ml-auto flex gap-2">
+      <span className="ml-auto flex flex-wrap gap-2">
         <Dialog>
           <DialogTrigger className={bouton({ variant: "outline", size: "sm" })}>
             <BookmarkPlus className="size-4" /> Ajouter un cours

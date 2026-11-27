@@ -76,7 +76,7 @@ export default function Accueil() {
       <section className="relative overflow-clip bg-cem-marine text-white">
         <Image src={chemin("/images/college.jpg")} alt="" fill priority className="defile-fond object-cover opacity-20" sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-r from-cem-marine via-cem-marine/90 to-cem-marine/40" />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 md:py-20 lg:grid-cols-2">
+        <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 py-14 md:py-20 lg:grid-cols-2">
           <div>
             <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-cem-ciel">Cégep Édouard-Montpetit · Longueuil</p>
             <h1 className="text-4xl font-bold leading-tight text-white md:text-5xl">
