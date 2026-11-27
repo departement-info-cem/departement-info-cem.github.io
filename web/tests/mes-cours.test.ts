@@ -183,4 +183,20 @@ describe("rencontresDuGroupe", () => {
     expect(rencontres.filter((r) => r.numero)).toHaveLength(29);
     expect(rencontres.at(-1)?.numero).toBe(29);
   });
+
+  it("une absence sur une partie de la journée n'annule que les cours qu'elle chevauche", () => {
+    const profs = {
+      ...donnees.profs,
+      "po.brillant": {
+        ...donnees.profs["po.brillant"],
+        calendrier: [
+          { date: "2026-09-02", type: "absence" as const, debut: "08:00", fin: "12:00" }, // mercredi matin : le cours de 14 h a lieu
+          { date: "2026-09-03", type: "absence" as const, debut: "10:00", fin: "12:00" }, // jeudi : chevauche le cours de 8 h à 11 h
+        ],
+      },
+    };
+    const rencontres = rencontresDuGroupe(groupe, profs, calendrierScolaire());
+    expect(rencontres.find((r) => r.date === "2026-09-02")?.statut).toBe("prevue");
+    expect(rencontres.find((r) => r.date === "2026-09-03")?.statut).toBe("annulee");
+  });
 });
