@@ -16,7 +16,7 @@ export default function PageContact() {
           <Mail className="size-5" /> <span>coordination.info@<wbr />cegepmontpetit.ca</span>
         </a>
         <p className="max-w-2xl text-muted-foreground">
-          Tu cherches un prof en particulier ? Chaque prof a sa page avec son bureau et ses disponibilités ; pour lui écrire, passe par Teams : <Link href="/profs" className="text-primary underline">voir les profs</Link>.
+          Tu cherches un prof en particulier ? Chaque prof a sa page avec son bureau et ses disponibilités ; pour lui écrire, elle t&apos;indique s&apos;il préfère Teams ou MIO : <Link href="/profs" className="text-primary underline">voir les profs</Link>.
         </p>
       </Conteneur>
     </>

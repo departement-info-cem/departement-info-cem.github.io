@@ -18,6 +18,8 @@ describe("validerYamlProf", () => {
   it("refuse le motif d'une absence", () =>
     expect(messages("nom: Test\ncourriel: test.prof\ncalendrier:\n  - { date: 2027-04-05, titre: Colloque, type: absence }\n")[0].message).toContain("Cours annulé"));
   it("refuse le poste téléphonique", () => expect(messages('nom: Test\ncourriel: test.prof\nposte: "2575"\n')[0].message).toContain("champ inconnu : poste"));
+  it("accepte MIO comme moyen de contact", () => expect(messages("nom: Test\ncourriel: test.prof\ncontact: mio\n")).toEqual([]));
+  it("refuse un moyen de contact inconnu", () => expect(messages("nom: Test\ncourriel: test.prof\ncontact: courriel\n")[0].message).toContain("teams ou mio"));
   it("signale du YAML mal formé", () => expect(messages("nom: [Test\ncourriel: x")[0].message).toContain("YAML mal formé"));
   it("refuse un identifiant réservé", () => expect(messages("nom: Test\ncourriel: faq\n", { id: "faq" })[0].message).toContain("nom d'une page"));
   it("refuse un courriel différent du nom de fichier", () => expect(messages("nom: Test\ncourriel: a.b\n", { id: "c.d" })[0].message).toContain("identique au nom du fichier"));

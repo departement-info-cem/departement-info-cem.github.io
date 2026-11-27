@@ -4,6 +4,7 @@
 
 nom: "Jean-François Paradis"
 courriel: jf.paradis  # sans @cegepmontpetit.ca
+contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 # bureau: "E-213"  # pas de cours cette session
 actif: false  # pas actif cette session : enlève cette ligne au retour
 photo: jfp.png  # fichier dans data/photos/

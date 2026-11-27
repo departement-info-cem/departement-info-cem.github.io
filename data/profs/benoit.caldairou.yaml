@@ -4,6 +4,7 @@
 
 nom: "Benoit Caldairou"
 courriel: benoit.caldairou  # sans @cegepmontpetit.ca
+contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 bureau: "E-252"
 # photo: prenom.jpg     # ajoute ta photo dans data/photos/
 # github: mon-pseudo
