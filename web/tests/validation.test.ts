@@ -39,3 +39,19 @@ describe("liens dans les données", () => {
     expect(lienSiteOuWeb.safeParse("javascript:alert(1)").success).toBe(false);
   });
 });
+
+describe("concordance avec l'horaire des locaux", () => {
+  const laboratoires = [
+    { local: "D-0003", session: "A2026", complet: true, ouverture: "07:00", fermeture: "23:00", occupations: [{ jour: "lundi", debut: "08:10", fin: "11:00", cours: "420-1P6-EM", groupe: "1010" }] },
+  ];
+  const fiche = (plage: string, session = "A2026") => `nom: Test\ncourriel: test.prof\nsession: ${session}\nhoraire:\n  plages:\n    - ${plage}\n`;
+  const avertissements = (plage: string, session?: string) => messages(fiche(plage, session), { laboratoires }).map((p) => p.message);
+  const cours = (debut: string, fin: string, autres = "groupe: 1010, local: D-0003") => `{ jour: lundi, debut: "${debut}", fin: "${fin}", type: cours, cours: 420-1P6-EM, ${autres} }`;
+
+  it("accepte les heures de la réservation", () => expect(avertissements(cours("08:10", "11:00"))).toEqual([]));
+  it("accepte une séance plus courte que la réservation", () => expect(avertissements(cours("08:10", "10:30"))).toEqual([]));
+  it("signale un cours qui déborde de la réservation", () => expect(avertissements(cours("08:00", "11:00"))[0]).toContain("hors de la réservation du D-0003 (08:10-11:00"));
+  it("signale un cours absent de l'horaire du local", () => expect(avertissements(cours("08:10", "11:00", "groupe: 1020, local: D-0003"))[0]).toContain("absent de l'horaire du D-0003"));
+  it("ignore un horaire des locaux d'une autre session", () => expect(avertissements(cours("08:00", "11:00"), "H2027")).toEqual([]));
+  it("ignore un local qui n'est pas un labo", () => expect(avertissements(cours("08:00", "11:00", "groupe: 1010, local: B-2210"))).toEqual([]));
+});

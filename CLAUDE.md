@@ -7,6 +7,8 @@ Ce dépôt contient deux sites :
 
 Commandes du site (dans `web/`) : voir le README. Particularités de cette version de Next.js : @web/AGENTS.md
 
+**Nouvelle session**, ou mise à jour des horaires des profs et des labos : suis [data/changement-de-session.md](data/changement-de-session.md).
+
 ## Captures avant / après dans les PR
 
 Quand une PR change l'apparence du site, sa description montre l'avant et l'après côte à côte.
