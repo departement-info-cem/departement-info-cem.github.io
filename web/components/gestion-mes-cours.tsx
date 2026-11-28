@@ -3,10 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Trash2, TriangleAlert, X } from "lucide-react";
 import { useMesCours, useMonCalendrier } from "@/app/_contexts/mes-cours-context";
+import { AgendaMesCours } from "@/components/agenda-mes-cours";
 import { AVenir } from "@/components/a-venir";
 import { MonCalendrier, MonHoraire } from "@/components/mon-horaire";
 import { AjoutCours, texteSeances } from "@/components/choix-groupe";
-import { LienMesCours } from "@/components/lien-mes-cours";
+import { CarteInstallation } from "@/components/installer-appli";
 import { bouton } from "@/lib/bouton";
 import { chemin } from "@/lib/chemins";
 import { court, libelle, type MonCours } from "@/lib/mes-cours";
@@ -68,8 +69,8 @@ export function GestionMesCours({ logiciels }: { logiciels: LogicielAffiche[] })
               <Trash2 className="size-4" /> Tout effacer
             </button>
           )}
-          <LienMesCours />
           <p className="mt-3 text-xs text-muted-foreground">Tes choix restent dans ce navigateur : rien n&apos;est envoyé, et ils n&apos;apparaissent pas sur un autre appareil.</p>
+          <CarteInstallation />
         </div>
         <div className="rounded-lg border bg-muted p-4">
           <h2 className="mb-3 text-xl font-bold">Ajouter un cours</h2>
@@ -96,6 +97,13 @@ export function GestionMesCours({ logiciels }: { logiciels: LogicielAffiche[] })
         <section>
           <h2 id="calendrier" className="mb-1 text-2xl font-bold">Mon calendrier</h2>
           <MonCalendrier />
+        </section>
+      )}
+
+      {mesCours.length > 0 && (
+        <section>
+          <h2 id="agenda" className="mb-1 text-2xl font-bold">Ajouter à mon agenda</h2>
+          <AgendaMesCours />
         </section>
       )}
 

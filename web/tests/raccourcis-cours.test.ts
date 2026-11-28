@@ -62,13 +62,13 @@ describe("raccourcis vers les sites des cours", () => {
     expect(pagesRaccourcis(liste, "https://info.cegepmontpetit.ca/react").map((p) => p.segment)).toEqual(["905"]);
   });
 
-  it("après la bascule à la racine, ne génère pas une page qui redirigerait vers elle-même", () => {
+  it("ne génère pas une page qui redirigerait vers elle-même", () => {
     const liste = raccourcisCours([
       { no: "420-Z03-EM", nom: "Z03", url: "https://info.cegepmontpetit.ca/z03/" },
       { no: "420-1P6-EM", nom: "1P6", url: "https://info.cegepmontpetit.ca/1P6/" },
     ]).raccourcis;
     const segments = (racine: string) => pagesRaccourcis(liste, racine).map((p) => p.segment);
-    // Sous /react/, rien ne se recoupe
+    // Sous un préfixe (comme /react/ avant la bascule), rien ne se recoupe
     expect(segments("https://info.cegepmontpetit.ca/react")).toEqual(["1P6", "1p6", "Z03", "z03"]);
     // À la racine, /1P6/ et /z03/ sont les sites eux-mêmes : seules les autres casses redirigent
     expect(segments("https://info.cegepmontpetit.ca")).toEqual(["1p6", "Z03"]);

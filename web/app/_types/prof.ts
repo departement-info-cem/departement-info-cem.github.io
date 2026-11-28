@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { urlWeb } from "./liens";
 import { heureEnMinutes, normaliserJour } from "@/lib/temps";
 
 // Schéma d'un fichier data/profs/<identifiant>.yaml.
@@ -75,6 +76,9 @@ export const evenementProfSchema = z
   })
   .strict()
   .superRefine((e, ctx) => {
+    // Une absence ne dit jamais pourquoi (un motif public sert de prétexte à l'hameçonnage) : elle paraît comme « Cours annulé »
+    if (e.type === "absence" && (e.titre || e.description))
+      ctx.addIssue({ code: "custom", path: [e.titre ? "titre" : "description"], message: "une absence n'a ni titre ni description : elle paraît seulement comme « Cours annulé »" });
     if (e.evaluation && (e.type === "absence" || e.type === "deplacement")) ctx.addIssue({ code: "custom", path: ["evaluation"], message: "« evaluation » ne va pas avec une absence ou un déplacement" });
     if (e.evaluation && !e.cours) ctx.addIssue({ code: "custom", path: ["cours"], message: "une évaluation doit indiquer son cours (ex. cours: 420-5N6-EM), pour paraître dans le calendrier des étudiants" });
     if (!e.titre && e.type !== "deplacement" && e.type !== "absence") ctx.addIssue({ code: "custom", path: ["titre"], message: "titre manquant" });
@@ -87,19 +91,24 @@ export const evenementProfSchema = z
   });
 export type EvenementProf = z.infer<typeof evenementProfSchema>;
 
+/** Comment les étudiants joignent le prof : le bouton de sa page ouvre une conversation Teams, ou renvoie à MIO (Omnivox) */
+export const MOYENS_CONTACT = ["teams", "mio"] as const;
+
 export const profSchema = z
   .object({
     nom: z.string({ error: "nom manquant" }).min(1),
     courriel: z
       .string({ error: "courriel manquant (sans @cegepmontpetit.ca)" })
       .regex(/^[a-z0-9][a-z0-9.-]*$/, { error: "courriel invalide : seulement la partie avant @cegepmontpetit.ca, en minuscules" }),
+    contact: z.enum(MOYENS_CONTACT, { error: "contact : écris teams ou mio" }).default("teams"),
     bureau: z.string().optional(),
     photo: z.string().optional(),
-    poste: texteOuNombre.optional(),
     github: z.string().optional(),
     linkedin: z.string().optional(),
-    site: z.url({ error: "site : adresse web invalide (commence par https://)" }).optional(),
+    site: urlWeb("site : adresse web invalide (commence par https://)").optional(),
     presentation: z.string().optional(),
+    /** Rôle au département, affiché sous le nom (ex. « Coordination du département ») : les étudiants savent à qui s'adresser */
+    role: z.string().optional(),
     /** Remplace le calcul de lib/actif.ts (cours cette session). À true pour la coordination. */
     actif: z.boolean({ error: "actif : écris true ou false, sans guillemets" }).optional(),
     cours: z.array(z.string()).optional(),
@@ -122,6 +131,6 @@ export const profSchema = z
   .strict();
 
 export type Prof = z.infer<typeof profSchema> & {
-  /** identifiant = nom du fichier (= courriel), sert dans l'URL /react/<id> */
+  /** identifiant = nom du fichier (= courriel), sert dans l'URL /<id> */
   id: string;
 };

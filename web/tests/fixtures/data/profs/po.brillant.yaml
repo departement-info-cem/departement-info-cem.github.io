@@ -1,12 +1,11 @@
-# Fiche de Pierre-Olivier Brillant, affichée sur https://info.cegepmontpetit.ca/react/po.brillant
-# Mode d'emploi : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+# Fiche de Pierre-Olivier Brillant, affichée sur https://info.cegepmontpetit.ca/po.brillant
+# Mode d'emploi : https://info.cegepmontpetit.ca/modifier-mon-profil
 # Après « Commit changes », le site se met à jour en 2-3 minutes (onglet Actions sur GitHub).
 
 nom: "Pierre-Olivier Brillant"
 courriel: po.brillant  # sans @cegepmontpetit.ca
 bureau: "E-211"
 photo: pob.jpeg  # fichier dans data/photos/
-poste: "2575"  # poste téléphonique
 github: PierreOlivierBrillant
 linkedin: pierreolivier-brillant
 

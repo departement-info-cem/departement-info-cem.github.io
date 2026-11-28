@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowRight, Backpack, Briefcase, ChevronDown, Code2, FilePen, Gamepad2, GraduationCap, Network, School } from "lucide-react";
@@ -10,14 +11,17 @@ import { DateAVenir } from "@/components/date-a-venir";
 import { CartesJeux } from "@/components/jeux/cartes-jeux";
 
 // L'accueil s'adresse aux futurs étudiants et à leurs parents. L'étudiant inscrit a le menu
-// (sites des cours, profs, locaux, calendrier) et la recherche de l'en-tête, qui trouve aussi le site de chaque cours.
+// (grilles, profs, locaux, calendrier) et la recherche de l'en-tête, qui trouve aussi le site de chaque cours.
 
 // La barre de chaque parcours est proportionnelle à sa durée (sur 5 ans) ; l'année du stage est en vert.
 const PARCOURS = [
   { id: "dec-prog", icone: Code2, etiquette: "DEC technique · 3 ans", titre: "Développement d'applications", ans: 3, stage: true, note: "Stage en entreprise à la dernière session", apres: ["Marché du travail", "ou université"], jeu: { href: "/jeux/programmation", texte: "Essayer : programme un robot" } },
-  { id: "dec-reseau", icone: Network, etiquette: "DEC technique · 3 ans", titre: "Réseaux et cybersécurité", ans: 3, stage: true, note: "Stage en entreprise à la dernière session", apres: ["Marché du travail", "ou université"], jeu: { href: "/jeux/reseau", texte: "Essayer : répare un réseau" } },
+  { id: "dec-reseau", icone: Network, etiquette: "DEC technique · 3 ans", titre: "Administration d'infrastructure TI", ans: 3, stage: true, note: "Stage en entreprise à la dernière session", apres: ["Marché du travail", "ou université"], jeu: { href: "/jeux/reseau", texte: "Essayer : répare un réseau" } },
   { id: "dec-bac", icone: GraduationCap, etiquette: "DEC-BAC avec l'Université de Sherbrooke · 5 ans", titre: "DEC + baccalauréat en informatique", ans: 5, stage: false, note: "3 sessions par année, avec des stages", apres: ["DEC et baccalauréat"], jeu: undefined },
 ];
+
+// Rang d'un élément dans sa rangée, pour que les effets de défilement arrivent en cascade (voir globals.css).
+const rang = (i: number) => ({ "--i": i }) as CSSProperties;
 
 // Mosaïque de photos : la grande et la verticale occupent deux rangées, les autres comblent les trous.
 // Sur téléphone, les quatre premières suffisent (elles forment déjà un rectangle complet).
@@ -69,10 +73,10 @@ export default function Accueil() {
   return (
     <>
       {/* ---------- Bandeau principal : un message, deux actions ---------- */}
-      <section className="relative overflow-hidden bg-cem-marine text-white">
-        <Image src={chemin("/images/college.jpg")} alt="" fill priority className="object-cover opacity-20" sizes="100vw" />
+      <section className="relative overflow-clip bg-cem-marine text-white">
+        <Image src={chemin("/images/college.jpg")} alt="" fill priority className="defile-fond object-cover opacity-20" sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-r from-cem-marine via-cem-marine/90 to-cem-marine/40" />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 md:py-20 lg:grid-cols-2">
+        <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 py-14 md:py-20 lg:grid-cols-2">
           <div>
             <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-cem-ciel">Cégep Édouard-Montpetit · Longueuil</p>
             <h1 className="text-4xl font-bold leading-tight text-white md:text-5xl">
@@ -106,7 +110,7 @@ export default function Accueil() {
         <p className="mt-1 text-muted-foreground">Le choix dépend surtout de ce que tu veux faire après le cégep.</p>
         <div className="mt-8 divide-y rounded-xl border bg-card shadow-sm">
           {PARCOURS.map((c) => (
-            <div key={c.id} className="grid gap-5 p-5 md:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-center lg:gap-10">
+            <div key={c.id} className="defile-entree grid gap-5 p-5 md:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-center lg:gap-10">
               <div className="flex gap-4">
                 <span className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-accent text-primary">
                   <c.icone className="size-6" />
@@ -128,7 +132,7 @@ export default function Accueil() {
                 </div>
               </div>
               <div>
-                <div className="flex gap-1" style={{ width: `${(c.ans / 5) * 100}%` }} aria-hidden>
+                <div className="defile-barre flex gap-1" style={{ width: `${(c.ans / 5) * 100}%` }} aria-hidden>
                   {Array.from({ length: c.ans }, (_, i) => (
                     <div key={i} className={`flex-1 rounded py-2 text-center text-xs font-bold ${c.stage && i === c.ans - 1 ? "bg-cem-vert text-cem-marine" : "bg-accent text-accent-foreground"}`}>
                       An {i + 1}
@@ -166,11 +170,12 @@ export default function Accueil() {
             </h2>
             <p className="mt-1 text-muted-foreground">Deux petits jeux, cinq niveaux chacun, sans rien connaître d&apos;avance. Si tu y prends plaisir, c&apos;est bon signe.</p>
           </div>
-          <Link href="/jeux" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
-            Tous les jeux <ArrowRight className="size-3.5" />
+          <Link href="/orientation" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+            Jeux et bot d&apos;orientation <ArrowRight className="size-3.5" />
           </Link>
         </div>
-        <div className="mt-6">
+        {/* Sur le parent : les cartes ont leur propre translate au survol */}
+        <div className="defile-entree mt-6">
           <CartesJeux />
         </div>
       </section>
@@ -180,8 +185,8 @@ export default function Accueil() {
           <h2 className="text-3xl font-bold text-white">À quoi ça ressemble</h2>
           <p className="mt-1 text-cem-gris-1">Des laboratoires de 24 postes, des travaux d&apos;équipe et un projet de fin d&apos;études.</p>
           <div className="mt-6 grid auto-rows-[7rem] grid-cols-2 gap-2 sm:auto-rows-[9rem] md:grid-cols-4 md:gap-3 lg:auto-rows-[10rem]">
-            {PHOTOS.map((p) => (
-              <div key={p.fichier} className={`relative overflow-hidden rounded-md ${p.tuile}`}>
+            {PHOTOS.map((p, i) => (
+              <div key={p.fichier} className={`defile-tuile relative overflow-clip rounded-md ${p.tuile}`} style={rang(i % 4)}>
                 <Image src={chemin(`/images/${p.fichier}`)} alt={p.alt} fill sizes="(min-width: 768px) 50vw, 100vw" className={`object-cover ${p.cadrage ?? ""}`} />
               </div>
             ))}
@@ -189,7 +194,7 @@ export default function Accueil() {
           <div className="mt-12 flex flex-wrap items-end justify-between gap-2">
             <div>
               <h3 className="text-2xl font-bold text-white">{listeProfs.length} profs</h3>
-              <p className="text-cem-gris-1">Leur horaire, leurs disponibilités et leur bureau sont en ligne.</p>
+              <p className="text-cem-gris-1">Leur bureau et leur horaire sont en ligne.</p>
             </div>
             <Link href="/profs" className="inline-flex items-center gap-1 font-semibold text-cem-vert hover:underline">
               Tous les profs <ArrowRight className="size-4" />
@@ -200,7 +205,7 @@ export default function Accueil() {
             {listeProfs
               .filter((p) => p.photo)
               .map((p, i) => (
-                <Link key={p.id} href={`/${p.id}`} className={`group flex w-20 flex-col items-center gap-1 text-center ${i >= 12 ? "max-md:hidden" : ""}`}>
+                <Link key={p.id} href={`/${p.id}`} style={rang(i % 4)} className={`defile-visage group flex w-20 flex-col items-center gap-1 text-center ${i >= 12 ? "max-md:hidden" : ""}`}>
                   <span className="rounded-full ring-2 ring-transparent transition group-hover:ring-cem-vert">
                     <AvatarProf prof={p} taille={64} />
                   </span>
@@ -238,8 +243,8 @@ export default function Accueil() {
         <div className="mx-auto max-w-6xl px-4 py-14">
           <h2 className="text-3xl font-bold text-cem-marine">Viens voir par toi-même</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {VISITE.map((c) => (
-              <div key={c.titre} className="flex flex-col rounded-lg bg-cem-marine p-5 text-white shadow">
+            {VISITE.map((c, i) => (
+              <div key={c.titre} style={rang(i)} className="defile-entree flex flex-col rounded-lg bg-cem-marine p-5 text-white shadow">
                 <c.icone className="mb-2 size-6 text-cem-vert" />
                 <h3 className="text-lg font-bold text-white">{c.titre}</h3>
                 {c.date && (

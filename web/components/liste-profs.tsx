@@ -14,8 +14,8 @@ import { etatProf } from "@/lib/maintenant";
 import { simplifier } from "@/lib/texte";
 import type { InfoCours } from "@/components/horaire-semaine";
 
-// « actifs » : les identifiants des profs actifs cette session ; les autres vont dans une section à part, en bas.
-export function ListeProfs({ profs, actifs, cours }: { profs: Prof[]; actifs: string[]; cours: InfoCours }) {
+// « profs » : seulement ceux qui sont actifs cette session.
+export function ListeProfs({ profs, cours }: { profs: Prof[]; cours: InfoCours }) {
   const recherche = useTwoWayBinding("");
   const [coursChoisi, setCoursChoisi] = useState("");
   const [dispoSeulement, setDispoSeulement] = useState(false);
@@ -23,17 +23,16 @@ export function ListeProfs({ profs, actifs, cours }: { profs: Prof[]; actifs: st
   const scolaire = useScolaire();
   const { lien } = useMesCours();
 
-  const coursDonnes = useMemo(() => {
-    const nos = new Set(profs.flatMap((p) => [...(p.cours ?? []), ...(p.horaire?.plages.map((x) => x.cours ?? "") ?? [])]).filter(Boolean).map((c) => c.toUpperCase()));
-    return [...nos].sort();
-  }, [profs]);
+  // Numéros canoniques, comme ailleurs sur le site : un ancien numéro (5N6) compte pour le nouveau (5M6)
+  const coursDe = useMemo(() => {
+    const canonique = (c: string) => (cours[c.toUpperCase()]?.no ?? c).toUpperCase();
+    return (p: Prof) => [...(p.cours ?? []), ...(p.horaire?.plages.map((x) => x.cours ?? "") ?? [])].filter(Boolean).map(canonique);
+  }, [cours]);
+  const coursDonnes = useMemo(() => [...new Set(profs.flatMap(coursDe))].filter((c) => cours[c]).sort(), [profs, coursDe, cours]);
 
   const filtres = profs.filter((p) => {
     if (recherche.value && !simplifier(`${p.nom} ${p.bureau ?? ""}`).includes(simplifier(recherche.value))) return false;
-    if (coursChoisi) {
-      const siens = [...(p.cours ?? []), ...(p.horaire?.plages.map((x) => x.cours ?? "") ?? [])].map((c) => c.toUpperCase());
-      if (!siens.includes(coursChoisi)) return false;
-    }
+    if (coursChoisi && !coursDe(p).includes(coursChoisi)) return false;
     if (dispoSeulement) {
       if (!maintenant) return false;
       if (etatProf({ session: p.session, calendrier: p.calendrier, plages: p.horaire?.plages ?? [] }, scolaire, maintenant).etat !== "dispo") return false;
@@ -41,8 +40,7 @@ export function ListeProfs({ profs, actifs, cours }: { profs: Prof[]; actifs: st
     return true;
   });
   // Mes profs d'abord, puis ceux de mes cours (« Mes cours »)
-  const enPoste = trierPourMoi(filtres.filter((p) => actifs.includes(p.id)), (p) => lien(p.id));
-  const inactifs = filtres.filter((p) => !actifs.includes(p.id));
+  const enPoste = trierPourMoi(filtres, (p) => lien(p.id));
 
   return (
     <div>
@@ -76,16 +74,6 @@ export function ListeProfs({ profs, actifs, cours }: { profs: Prof[]; actifs: st
           <CarteProf key={p.id} prof={p} lien={lien(p.id)} />
         ))}
       </div>
-      {inactifs.length > 0 && (
-        <section className={enPoste.length > 0 ? "mt-10" : undefined}>
-          <h2 className="mb-4 text-xl font-bold text-muted-foreground">Pas actifs cette session</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {inactifs.map((p) => (
-              <CarteProf key={p.id} prof={p} />
-            ))}
-          </div>
-        </section>
-      )}
       {filtres.length === 0 && <p className="py-10 text-center text-muted-foreground">Aucun prof ne correspond à ta recherche.</p>}
     </div>
   );

@@ -12,13 +12,13 @@
   reponse: Le DEC technique dure 3 ans et mène au marché du travail ; on peut ensuite aller à l'université. Le DEC-BAC donne un DEC et un baccalauréat de l'Université de Sherbrooke en 5 ans. Des cours « en double » disparaissent, et on fait 3 sessions par année.
   categories: [futurs étudiants, programmes]
   liens: [/programmes/comparer]
-- question: Qu'est-ce que je dois installer sur mon ordi pour les cours?
+- question: Qu'est-ce que je dois installer sur mon ordi pour les cours ?
   reponse: Dans chaque cours, les profs vont te montrer comment installer les logiciels nécessaires. Tu peux aussi visiter la page sur les logiciels gratuits.
   categories:
     - logiciels
   liens:
     - /logiciels
-- question: À quoi ressemblent les labos?
+- question: À quoi ressemblent les labos ?
   reponse: Nous avons des laboratoires de 24 postes où se donnent tous les cours. Même s'il y a de la théorie, tu as un poste pour mettre en pratique tout de suite ce que tu as appris.
   categories:
     - locaux
@@ -29,32 +29,32 @@
     - futurs étudiants
     - ordi
   liens: []
-- question: Quelles spécifications pour acheter un ordi pour la technique?
+- question: Quelles spécifications pour acheter un ordi pour la technique ?
   reponse: Tout d'abord, tu peux faire ta technique avec les ordis fournis au collège. Tu n'es pas obligés d'avoir un ordi. Au début de la technique, les cours sont moins demandant pour ton ordi. Par contre, si tu achètes un ordi qui doit aller jusqu'à la fin de tes études, nous recommandons d'acheter un processeur Intel i5 ou Ryzen 3600 ou supérieur. Au niveau stockage, on te recommande 512 Go en SSD, tu peux t'en sortir avec 256Go en programmation mais pour réseau 512 ou même 1To. Côté mémoire vive, si tu vas en réseau ça prend 16Go, en programmation tu peux sans doute y arriver avec 8Go mais c'est moins confortable. Côté logiciel, tu verras qu'on fournit tout. Si côté argent, c'est difficile, contacte-nous et on t'indiquera des ressources.
   categories:
     - ordi
   liens: []
-- question: Quelle formation si je veux faire de l'intelligence artificielle?
+- question: Quelle formation si je veux faire de l'intelligence artificielle ?
   reponse: La formation habituelle pour l'IA, c'est l'université en informatique, à l'université de Montréal par exemple. Au CEGEP, nous avons le pré-universitaire et les techniques. PréU, ça prend 2 ans et tu peux continuer au bac en info, la technique prend 3 ans et tu peux aussi continuer au bac (avec des cours crédités). La grosse différence, dans la technique tu vas faire dans les 1000 heures de cours de programmation, au préU, une centaine et le reste dans d'autres matières.
   categories:
     - IA
     - professions
   liens:
     - https://www.umontreal.ca/intelligenceartificielle/
-- question: Quelle formation si je veux faire du jeu video?
-  reponse: La formation habituelle des pros du jeu video, c'est le Bac en informatique, si possible accompagné de projets de jeux que tu as fait par toi-même. Au CEGEP, nous avons le pré-universitaire et les techniques. PréU, ça prend 2 ans et tu peux continuer au bac en info, la technique prend 3 ans et tu peux aussi continuer au bac (avec des cours crédités). La grosse différence, dans la technique vas faire dans les 1000 heures de cours de programmation, au préU, une centaine et le reste dans d'autres matières.
+- question: Quelle formation si je veux faire du jeu vidéo ?
+  reponse: La formation habituelle des pros du jeu vidéo, c'est le Bac en informatique, si possible accompagné de projets de jeux que tu as faits par toi-même. Au cégep, nous avons le pré-universitaire et les techniques. PréU, ça prend 2 ans et tu peux continuer au bac en info, la technique prend 3 ans et tu peux aussi continuer au bac (avec des cours crédités). La grosse différence, c'est que dans la technique, tu vas faire dans les 1000 heures de cours de programmation, au préU, une centaine et le reste dans d'autres matières.
   categories:
-    - jeux video
+    - jeux vidéo
     - professions
   liens: []
-- question: Ça veut dire quoi copier ou plagier en info?
+- question: Ça veut dire quoi copier ou plagier en info ?
   reponse: Quand on écrit du code ou qu'on monte des serveurs ou des réseaux, on peut se demander ce qu'on a le droit d'échanger avec les autres étudiants ou pas. Pour ça on a fait une page, suis le lien
   categories:
     - plagiat
     - travaux
   liens:
     - /plagiat
-- question: Les travaux c'est seul ou en équipe?
+- question: Les travaux c'est seul ou en équipe ?
   reponse: Ça dépend des cours. On retrouve les travaux d'équipe plutôt à la fin de la formation. Le projet des finissant se fait intégralement en équipe. Dans tous les cas, chaque prof explique tout ça au premier cours.
   categories:
     - équipe
@@ -84,3 +84,7 @@
   reponse: Pour la même raison qu'on va au gym au lieu de demander à quelqu'un de soulever les poids à notre place. Les exercices servent à construire ta compréhension. Aux examens et en stage, c'est toi qui dois comprendre ce que fait le code.
   categories: [IA, travaux]
   liens: []
+- question: J'ai un problème avec mon prof, à qui m'adresser ?
+  reponse: Essaie d'abord d'en parler avec ton prof. S'il y a un problème de fond, ou si tu n'es pas à l'aise de lui en parler, va voir la coordination du département, au bureau E-210 ou sur Teams. Ce que tu lui dis n'est pas répété au prof sans ton accord.
+  categories: [problèmes]
+  liens: [/contact]

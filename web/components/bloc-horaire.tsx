@@ -11,7 +11,7 @@ export function textesPlage(p: PlageAffichee, cours: InfoCours) {
   const noms = p.noms ?? [];
   // Sans titre, une présence porte le nom du prof (page Centre d'aide)
   const nomsEnTitre = !p.titre && p.type !== "cours" && noms.length > 0;
-  const titre = p.titre ?? info?.nom ?? (p.type === "cours" ? (p.cours ?? LIBELLES_TYPES_PLAGE.cours) : nomsEnTitre ? noms.join(", ") : LIBELLES_TYPES_PLAGE[p.type]);
+  const titre = (p.type === "cours" ? info?.nom : undefined) ?? p.titre ?? info?.nom ?? (p.type === "cours" ? (p.cours ?? LIBELLES_TYPES_PLAGE.cours) : nomsEnTitre ? noms.join(", ") : LIBELLES_TYPES_PLAGE[p.type]);
   const groupe = p.groupe ? `gr. ${p.groupe}` : "";
   // Le sigle ne paraît qu'une fois : pas sous un titre qui le donne déjà
   const sigleEnTitre = p.cours && titre.toUpperCase().split(/[^0-9A-Z]+/).includes(court(p.cours.toUpperCase()));

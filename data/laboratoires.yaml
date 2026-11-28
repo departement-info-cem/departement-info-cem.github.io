@@ -1,9 +1,10 @@
 # Laboratoires et leur horaire d'occupation (affichés dans le bandeau du site et sur
-# https://info.cegepmontpetit.ca/react/maintenant).
+# https://info.cegepmontpetit.ca/locaux).
 #
 # Source, automne 2026 : « Horaire du local » (RPHOR020, 2026-08-19), publié dans le dépôt du cours SN1 :
 # https://github.com/departement-info-cem/420-SN1/blob/main/web/static/pdf/horairelabos.pdf
-# Ce PDF ne contient que des images : il faut le recopier ici à la main à chaque session, puis changer « session ».
+# Ce PDF ne contient que des images : il faut le recopier ici à la main à chaque session, puis changer « session »
+# (procédure complète : data/changement-de-session.md).
 # Tant que ce n'est pas fait, le site dit « horaire incomplet » et n'affiche aucun local libre.
 #
 # Cours de 5 heures : ce sont 2 séances de 2 h 30, mais le PDF réserve 3 h. Quand deux d'entre eux se chevauchent

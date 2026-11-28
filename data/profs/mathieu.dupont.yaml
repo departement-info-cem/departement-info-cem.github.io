@@ -1,9 +1,10 @@
-# Fiche de Mathieu Dupont, affichée sur https://info.cegepmontpetit.ca/react/mathieu.dupont
-# Mode d'emploi : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+# Fiche de Mathieu Dupont, affichée sur https://info.cegepmontpetit.ca/mathieu.dupont
+# Mode d'emploi : https://info.cegepmontpetit.ca/modifier-mon-profil
 # Après « Commit changes », le site se met à jour en 2-3 minutes (onglet Actions sur GitHub).
 
 nom: "Mathieu Dupont"
 courriel: mathieu.dupont  # sans @cegepmontpetit.ca
+contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 bureau: "C-126"
 photo: md.jpg  # fichier dans data/photos/
 # github: mon-pseudo
@@ -23,11 +24,11 @@ horaire:
   debut: "08:00"
   fin: "18:00"
   plages:
-    - { jour: lundi, debut: "12:00", fin: "15:00", type: cours, cours: 420-SN1-RE, groupe: 1030, local: D-0602 }
-    - { jour: lundi, debut: "15:00", fin: "18:00", type: cours, cours: 420-SN1-RE, groupe: 1040, local: D-0602 }
-    - { jour: mardi, debut: "08:00", fin: "11:00", type: cours, cours: 360-4A3-EM, groupe: 1010, local: D-0007, titre: "Projet scientifique de fin d'études en informatique" }
-    - { jour: mercredi, debut: "09:00", fin: "12:00", type: cours, cours: 420-SN1-RE, groupe: 1010, local: D-0007 }
-    - { jour: mercredi, debut: "14:00", fin: "17:00", type: cours, cours: 420-SN1-RE, groupe: 1020, local: D-0007 }
+    - { jour: lundi, debut: "12:10", fin: "15:00", type: cours, cours: 420-SN1-RE, groupe: 1030, local: D-0602 }
+    - { jour: lundi, debut: "15:10", fin: "18:00", type: cours, cours: 420-SN1-RE, groupe: 1040, local: D-0602 }
+    - { jour: mardi, debut: "08:10", fin: "11:00", type: cours, cours: 360-4A3-EM, groupe: 1010, local: D-0007, titre: "Projet scientifique de fin d'études en informatique" }
+    - { jour: mercredi, debut: "09:10", fin: "12:00", type: cours, cours: 420-SN1-RE, groupe: 1010, local: D-0007 }
+    - { jour: mercredi, debut: "14:10", fin: "17:00", type: cours, cours: 420-SN1-RE, groupe: 1020, local: D-0007 }
     - { jour: lundi, debut: "11:30", fin: "12:00", type: dispo, local: C-126 }
     - { jour: mardi, debut: "11:00", fin: "12:00", type: centre-aide, local: D-0008 }
     - { jour: mardi, debut: "12:00", fin: "13:30", type: dispo, local: C-126 }
@@ -39,4 +40,4 @@ horaire:
 # type : remise, examen, cours, absence, deplacement, activite ou autre
 calendrier: []
 #  - { date: 2026-12-07, titre: Remise du TP3, cours: 360-4A3-EM, type: remise }
-#  - { date: 2026-12-01, au: 2026-12-02, titre: Absent (colloque), type: absence }
+#  - { date: 2026-12-01, au: 2026-12-02, type: absence }

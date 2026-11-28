@@ -8,7 +8,7 @@ import { StatutProf } from "@/components/statut-prof";
 import { BoutonPartager } from "@/components/bouton-partager";
 import { indexCours, prof, profs } from "@/lib/donnees";
 
-// Adresse directe /react/<prof>/calendrier/ (avec ?cours=... au besoin), pour les liens des sites de cours.
+// Adresse directe /<prof>/calendrier/ (avec ?cours=... au besoin), pour les liens des sites de cours.
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -17,7 +17,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps<"/[prof]/calendrier">): Promise<Metadata> {
   const p = prof((await params).prof);
-  return p ? { title: `Calendrier de ${p.nom}` } : {};
+  return p ? { title: `Calendrier de ${p.nom}`, robots: { index: false } } : {};
 }
 
 export default async function Page({ params }: PageProps<"/[prof]/calendrier">) {

@@ -19,7 +19,7 @@ export function EnCeMoment({ profs, labos }: { profs: ProfHoraire[]; labos: Labo
   const { lien } = useMesCours();
   if (!maintenant) return <div className="h-40 animate-pulse rounded-lg bg-muted" aria-label="Chargement" />;
 
-  const { iso, situation, nbAvecDispos, etats, ...resume } = resumeMaintenant(profs, labos, scolaire, maintenant);
+  const { iso, situation, etats, ...resume } = resumeMaintenant(profs, labos, scolaire, maintenant);
   // Mes profs et ceux de mes cours d'abord (« Mes cours »), même si leur dispo est plus tard
   const dispos = trierPourMoi(resume.dispos, ({ p }) => lien(p.id));
   const bientot = trierPourMoi(resume.bientot, ({ p }) => lien(p.id)).slice(0, 8);
@@ -84,9 +84,6 @@ export function EnCeMoment({ profs, labos }: { profs: ProfHoraire[]; labos: Labo
               </ul>
             </>
           )}
-          <p className="mt-3 text-xs text-muted-foreground">
-            {nbAvecDispos} prof(s) sur {profs.length} ont inscrit leurs disponibilités pour cette session.
-          </p>
         </section>
 
         <section className="rounded-lg border bg-card p-4">

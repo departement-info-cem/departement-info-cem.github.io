@@ -3,12 +3,12 @@
 #   no: numéro officiel (ex. 420-1P6-EM)        nom: titre du cours
 #   heures: nombre d'heures (optionnel)        url: site du cours (optionnel)
 #   tags: technos/thèmes pour les filtres       ecole: UdeS si le cours est donné par l'Université de Sherbrooke
-#   fiche: fiche officielle du cours (ex. sur le site de l'UdeS), affichée dans la grille mais pas dans « Sites des cours »
+#   fiche: fiche officielle du cours (ex. sur le site de l'UdeS), affichée dans la grille quand le cours n'a pas de site
 #   alias: autres numéros acceptés (ex. ancien numéro utilisé dans un horaire)
 #     « ancien programme » : anciens numéros, utilisés pour la dernière fois à l'automne 2026
-# Raccourcis : chaque cours qui a une url donne l'adresse courte https://info.cegepmontpetit.ca/react/<sigle>/,
-#   qui redirige vers son site (420-1P6-EM -> /react/1P6/), et une pour chaque alias (420-4D5-EM -> /react/4D5/).
-#   Les majuscules ne comptent pas : /react/1p6/ et /react/1P6/ mènent au même site.
+# Raccourcis : chaque cours qui a une url donne l'adresse courte https://info.cegepmontpetit.ca/<sigle>/,
+#   qui redirige vers son site (420-4W6-EM -> /4W6/), et une pour chaque alias (420-4D5-EM -> /4D5/).
+#   Les majuscules ne comptent pas : /4w6/ et /4W6/ mènent au même site.
 - no: 420-1B3-EM
   nom: Bureautique
   heures: 45
@@ -55,12 +55,14 @@
   nom: Programmation objet en TI
   heures: 90
   tags:
+    - prog
     - git
     - python
 - no: 420-2W6-EM
   nom: Programmation Web serveur
   heures: 90
   tags:
+    - prog
     - web
   alias:
     - { no: 420-2W5-EM, nom: "Prog. Web serveur" }   # ancien programme
@@ -86,6 +88,7 @@
   nom: Introduction à la programmation mobile
   heures: 75
   tags:
+    - prog
     - mobile
     - git
   url: https://info.cegepmontpetit.ca/3M5-Intro-Mobile/
@@ -93,6 +96,7 @@
   nom: Programmation web transactionnelle
   heures: 90
   tags:
+    - prog
     - web
     - bd
     - git
@@ -101,6 +105,7 @@
   nom: Automatisation de tâches
   heures: 75
   tags:
+    - prog
     - automatisation
   url: https://info.cegepmontpetit.ca/3t5-automatisation/
 - no: 420-3C5-EM
@@ -125,6 +130,7 @@
   nom: Solutions applicatives
   heures: 60
   tags:
+    - prog
     - solutions
   alias:
     - { no: 420-4E4-EM, nom: "Solutions technologiques en programmation" }   # ancien programme
@@ -132,6 +138,7 @@
   nom: Bases de données et programmation Web
   heures: 90
   tags:
+    - prog
     - bd
   url: https://info.cegepmontpetit.ca/4D5-Base-De-Donnees-Et-Prog-Web/
   alias:
@@ -140,6 +147,7 @@
   nom: Applications mobiles
   heures: 90
   tags:
+    - prog
     - mobile
     - git
   url: https://github.com/departement-info-cem/4N6-Mobile/
@@ -149,6 +157,7 @@
   nom: Programmation web orientée services
   heures: 90
   tags:
+    - prog
     - web
     - git
   url: https://info.cegepmontpetit.ca/4W6-WebServices/
@@ -201,6 +210,7 @@
   nom: Applications mobiles avancées
   heures: 90
   tags:
+    - prog
     - mobile
     - web
     - git
@@ -254,6 +264,7 @@
 - no: 420-6P5-EM
   nom: Projet en développement d'applications
   tags:
+    - prog
     - pro
   url: https://info.cegepmontpetit.ca/projet-prog/
 - no: MAT 099i
@@ -279,6 +290,7 @@
   ecole: UdeS
   fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT339
   tags:
+    - prog
     - algo
 - no: MAT 115
   nom: Logique et mathématiques discrètes
@@ -336,12 +348,14 @@
 - no: 420-6P3-EM
   nom: Projet de fin d'études en programmation
   tags:
+    - prog
     - pro
 - no: IFT 232
   nom: Méthodes de conception orientée objet
   ecole: UdeS
   fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT232
   tags:
+    - prog
     - algo
 - no: IFT 313
   nom: Introduction aux langages formels
@@ -375,6 +389,8 @@
     - os
 - no: IFT 359
   nom: Programmation fonctionnelle
+  tags:
+    - prog
   ecole: UdeS
   fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT359
 - no: IFT 630
@@ -382,6 +398,7 @@
   ecole: UdeS
   fiche: https://www.usherbrooke.ca/admission/fiches-cours/IFT630
   tags:
+    - prog
     - algo
 - no: 420-SN1-RE
   nom: Programmation en sciences
@@ -402,6 +419,15 @@
     - ia
     - python
   description: Cours au choix de Sciences de la nature donné par le département d'informatique.
+- no: 360-4A3-EM
+  nom: Projet scientifique de fin d'études en informatique
+  ponderation: 0-3-3
+  heures: 45
+  tags:
+    - recherche
+    - sciences
+  url: https://info.cegepmontpetit.ca/360-4A3/
+  description: Projet scientifique de fin d'études en Sciences de la nature, option informatique comme discipline principale
 - no: 420-905-EM
   nom: Introduction à la programmation
   ponderation: 1-4-2
@@ -424,5 +450,6 @@
 - no: 420-Z03-EM
   nom: Introduction à la programmation web
   tags:
+    - prog
     - web
   url: https://info.cegepmontpetit.ca/z03/

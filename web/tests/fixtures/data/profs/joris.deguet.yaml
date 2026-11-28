@@ -1,5 +1,5 @@
-# Fiche de Joris Deguet, affichée sur https://info.cegepmontpetit.ca/react/joris.deguet
-# Mode d'emploi : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+# Fiche de Joris Deguet, affichée sur https://info.cegepmontpetit.ca/joris.deguet
+# Mode d'emploi : https://info.cegepmontpetit.ca/modifier-mon-profil
 # Après « Commit changes », le site se met à jour en 2-3 minutes (onglet Actions sur GitHub).
 
 nom: "Joris Deguet"
@@ -34,7 +34,9 @@ horaire:
 # ---------- Calendrier : tes dates à toi (remises, examens, absences...) ----------
 # Les congés et journées pédagogiques du cégep sont ajoutés automatiquement.
 # type : remise, examen, cours, absence, deplacement, activite ou autre
-calendrier: []
+calendrier:
+  - { date: 2026-10-19, titre: "Examen intra (20 %)", cours: 420-5N6-EM, groupe: 1020, type: examen, evaluation: sommative }
+  - { date: 2026-09-08, titre: "Contrôle 1 (10 min, début de cours)", cours: 420-SN1-RE, groupe: 1050, type: examen, evaluation: sommative }
 #  - { date: 2026-10-20, titre: Examen intra, cours: 420-5N6-EM, type: examen }
-#  - { date: 2026-11-03, au: 2026-11-06, titre: Absent (colloque), type: absence }
+#  - { date: 2026-11-03, au: 2026-11-06, type: absence }
 #  - { date: 2026-12-10, remplace: 2026-12-04, type: deplacement, cours: 420-SN1-RE, groupe: 1070 }   # cours repris en JR

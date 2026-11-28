@@ -1,12 +1,13 @@
-# Fiche de Vincent Carrier, affichée sur https://info.cegepmontpetit.ca/react/vincent.carrier
-# Mode d'emploi : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+# Fiche de Vincent Carrier, affichée sur https://info.cegepmontpetit.ca/vincent.carrier
+# Mode d'emploi : https://info.cegepmontpetit.ca/modifier-mon-profil
 # Après « Commit changes », le site se met à jour en 2-3 minutes (onglet Actions sur GitHub).
 
 nom: "Vincent Carrier"
 courriel: vincent.carrier  # sans @cegepmontpetit.ca
+contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 bureau: "E-209"
+role: "Coordination du département"
 photo: vc.png  # fichier dans data/photos/
-poste: "2915"  # poste téléphonique
 github: vcarrier
 linkedin: vincentcarrier
 
@@ -30,7 +31,7 @@ horaire:
     # - { jour: mardi, debut: "18:30", fin: "23:00", type: cours, cours: 420-B74-RO, groupe: 6151, local: D-0622 }
     - { jour: jeudi, debut: "12:10", fin: "14:30", type: cours, cours: 420-3T5-EM, groupe: 1010, local: D-0620 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
     - { jour: jeudi, debut: "15:10", fin: "17:30", type: cours, cours: 420-3T5-EM, groupe: 1020, local: D-0620 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
-    - { jour: mardi, debut: "08:00", fin: "10:00", type: cours, cours: 420-3S4-EM, groupe: 1030, local: D-0622 }
+    - { jour: vendredi, debut: "08:10", fin: "10:00", type: cours, cours: 420-3S4-EM, groupe: 1030, local: D-0622 }
     - { jour: lundi, debut: "14:35", fin: "16:00", type: dispo, local: E-209 }   # exemple de disponibilité
     - { jour: mardi, debut: "12:10", fin: "14:00", type: centre-aide, local: E-209 }   # exemple de disponibilité
 
@@ -41,9 +42,9 @@ calendrier:
   - { date: 2026-12-10, titre: Remise du TP3, cours: 420-3S4-EM, type: remise }
   - { date: 2026-12-11, titre: Formatif 3, cours: 420-3S4-EM, type: activite }
   - { date: 2026-12-22, titre: Examen 3, cours: 420-3S4-EM, type: examen }
-  - { date: 2026-10-29, titre: Absent, type: absence }
-  - { date: 2026-10-30, titre: Absent, type: absence }
-  - { date: 2026-11-09, titre: Absent, type: absence }
+  - { date: 2026-10-29, type: absence }
+  - { date: 2026-10-30, type: absence }
+  - { date: 2026-11-09, type: absence }
   - { date: 2026-11-29, titre: Remise du TP3, cours: 420-3T5-EM, type: remise }
   - { date: 2026-12-10, titre: Reprise de cours, cours: 420-3T5-EM, type: cours }
   - { date: 2026-12-13, titre: Remise du TP4, cours: 420-3T5-EM, type: remise }

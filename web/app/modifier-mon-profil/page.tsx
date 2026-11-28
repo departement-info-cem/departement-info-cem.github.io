@@ -19,7 +19,7 @@ const ETAPES = [
   },
   {
     titre: "Modifie le texte",
-    texte: "Change ce que tu veux : bureau, cours, plages de l'horaire, dates du calendrier. Les lignes qui commencent par # sont des commentaires et t'expliquent chaque champ. Respecte l'indentation (des espaces, pas de tabulations).",
+    texte: "Change ce que tu veux : bureau, cours, plages de l'horaire, dates du calendrier, et comment les étudiants te joignent (contact: teams ou mio). Les lignes qui commencent par # sont des commentaires et t'expliquent chaque champ. Respecte l'indentation (des espaces, pas de tabulations).",
   },
   {
     titre: "Vérifie avec l'aperçu (facultatif)",
@@ -89,8 +89,19 @@ export default function PageModifier() {
         <section>
           <h2 className="mb-2 text-2xl font-bold">Lier ton horaire depuis le site de ton cours</h2>
           <p className="mb-2 text-sm text-muted-foreground">Ces adresses ouvrent directement l&apos;horaire ou le calendrier ; avec <code>?cours=</code>, seulement les dates de ce cours.</p>
-          <pre className="overflow-x-auto rounded bg-muted p-3 font-mono text-xs">{`https://info.cegepmontpetit.ca/react/prenom.nom/horaire/
-https://info.cegepmontpetit.ca/react/prenom.nom/calendrier/?cours=420-5N6-EM`}</pre>
+          <pre className="overflow-x-auto rounded bg-muted p-3 font-mono text-xs">{`https://info.cegepmontpetit.ca/prenom.nom/horaire/
+https://info.cegepmontpetit.ca/prenom.nom/calendrier/?cours=420-5N6-EM`}</pre>
+        </section>
+
+        <section>
+          <h2 className="mb-2 text-2xl font-bold">Remplir « Mes cours » de ton groupe</h2>
+          <p className="mb-2 text-sm text-muted-foreground">
+            Envoie à ton groupe (Teams, Léa) une adresse du site suivie de <code>?mescours=</code>, du cours en abrégé et du groupe. Tes étudiants voient le site avec ce cours, puis cliquent « Garder ces cours » : ton horaire, tes dispos et tes dates paraissent dans leur page Mes cours.
+          </p>
+          <pre className="overflow-x-auto rounded bg-muted p-3 font-mono text-xs">{`https://info.cegepmontpetit.ca/mes-cours/?mescours=SN1-1050`}</pre>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Plusieurs cours : sépare-les par des virgules (<code>SN1-1050,4W6-1010</code>). Le bouton Partager de l&apos;en-tête fait la même adresse avec « Inclure mes cours », à partir de tes choix dans ta propre page Mes cours.
+          </p>
         </section>
 
         <section>
@@ -98,7 +109,7 @@ https://info.cegepmontpetit.ca/react/prenom.nom/calendrier/?cours=420-5N6-EM`}</
           <div className="grid gap-4 text-sm *:min-w-0 md:grid-cols-3">
             <div className="rounded-lg border bg-card p-4">
               <h3 className="mb-2 font-bold">Une plage de l&apos;horaire</h3>
-              <pre className="overflow-x-auto rounded bg-muted p-2 font-mono text-xs">{`- { jour: lundi, debut: "08:00", fin: "11:00",
+              <pre className="overflow-x-auto rounded bg-muted p-2 font-mono text-xs">{`- { jour: lundi, debut: "08:10", fin: "11:00",
     type: cours, cours: 420-1P6-EM,
     groupe: 1010, local: D-0601 }`}</pre>
               <p className="mt-2 text-muted-foreground">
@@ -114,7 +125,7 @@ https://info.cegepmontpetit.ca/react/prenom.nom/calendrier/?cours=420-5N6-EM`}</
     cours: 420-1P6-EM, type: remise,
     evaluation: sommative }
 - { date: 2027-04-05, au: 2027-04-06,
-    titre: Colloque, type: absence }
+    type: absence }
 - { date: 2027-04-07, remplace: 2027-04-05,
     type: deplacement, cours: 420-1P6-EM }`}</pre>
               <p className="mt-2 text-muted-foreground">
@@ -122,7 +133,7 @@ https://info.cegepmontpetit.ca/react/prenom.nom/calendrier/?cours=420-5N6-EM`}</
               </p>
               <p className="mt-2 text-muted-foreground">
                 <strong>evaluation</strong> : <code>sommative</code> ou <code>formative</code>. Avec <code>cours</code> (et <code>groupe</code> au besoin), la date paraît dans le calendrier et les rappels de tes étudiants (page Mes cours), tout comme tes absences et tes cours déplacés.{" "}
-                <strong>absence</strong> annule les cours et les dispos de ces jours. <strong>deplacement</strong> reprend le cours du jour <code>remplace</code> à <code>date</code>, souvent une journée JR (même heure et même local, sauf si tu ajoutes <code>debut</code>, <code>fin</code>, <code>local</code>).
+                <strong>absence</strong> annule les cours et les dispos de ces jours ; elle paraît seulement comme « Cours annulé », sans titre ni motif. <strong>deplacement</strong> reprend le cours du jour <code>remplace</code> à <code>date</code>, souvent une journée JR (même heure et même local, sauf si tu ajoutes <code>debut</code>, <code>fin</code>, <code>local</code>).
               </p>
             </div>
             <div className="rounded-lg border bg-card p-4">

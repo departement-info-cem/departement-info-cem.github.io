@@ -9,52 +9,27 @@ on:
     - cron: "0 9 * * 1-5"
   workflow_dispatch:
 
+# Le jeton GitHub ne peut que lire le dépôt (le job deploy reçoit ses propres droits plus bas)
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Build le site
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Utiliser Node.js 22
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 22
-      - name: Cache de node modules
-        id: cache-nodemodules
-        uses: actions/cache@v4
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: angular/node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
-      - name: Installer les dépendences
-        working-directory: angular
-        if: steps.cache-nodemodules.outputs.cache-hit != 'true'
-        run: |
-          npm ci
-
-      - name: Lint
-        working-directory: angular
-        run: npm run lint
-
-      - name: Build
-        working-directory: angular
-        run: npm run build:prod
-
-      - name: Fix 404.html
-        working-directory: angular/dist/depinfo/browser
-        run: |
-          cp index.html 404.html
-
-      # ---------- Nouveau site React (web/), publié sous /react/ ----------
+          # Garde les paquets npm téléchargés tant que package-lock.json ne change pas
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      # ---------- Site Next.js (web/), publié à la racine ----------
       - name: Installer les dépendances (React)
         working-directory: web
-        run: npm ci
+        run: npm ci --no-audit --no-fund
 
       # Si le site du cégep est en panne ou si le PDF change de forme, on garde le calendrier du dépôt.
       - name: Mettre à jour le calendrier scolaire (PDF du cégep)
@@ -66,33 +41,55 @@ jobs:
         working-directory: web
         run: npm run valider
 
-      - name: Lint et tests (React)
-        working-directory: web
-        run: |
-          npm run lint
-          npm test
+      # next build vérifie les types : avec le fichier du build précédent (300 Ko),
+      # TypeScript ne revérifie que ce qui a changé (environ 4 s au lieu de 8).
+      - name: Reprendre la vérification des types du build précédent
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: web/.next/cache/.tsbuildinfo
+          key: tsbuildinfo-${{ github.sha }}
+          restore-keys: tsbuildinfo-
 
       - name: Build (React)
         working-directory: web
         run: npm run build
 
-      - name: Placer le site React sous /react/
-        run: cp -r web/out angular/dist/depinfo/browser/react
-
       - name: Fix permissions
-        working-directory: angular/dist/depinfo/browser
+        working-directory: web/out
         run: |
           chmod -c -R +rX "./" | while read line; do
             echo "::warning title=Invalid file permissions automatically fixed::$line"
           done
 
       - name: Téléverser l'artéfact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
-          path: angular/dist/depinfo/browser
+          path: web/out
           retention-days: 5
+
+  # Sur une autre machine, en même temps que le build : le site n'est publié que si les deux réussissent.
+  verifier:
+    name: Lint et tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Utiliser Node.js 22
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Installer les dépendances (React)
+        working-directory: web
+        run: npm ci --no-audit --no-fund
+      - name: Lint et tests (React)
+        working-directory: web
+        run: |
+          npm run lint
+          npm test
+
   deploy:
-    needs: build
+    needs: [build, verifier]
 
     permissions:
       pages: write
@@ -105,4 +102,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

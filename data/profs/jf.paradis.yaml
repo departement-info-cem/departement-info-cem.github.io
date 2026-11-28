@@ -1,9 +1,10 @@
-# Fiche de Jean-François Paradis, affichée sur https://info.cegepmontpetit.ca/react/jf.paradis
-# Mode d'emploi : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+# Fiche de Jean-François Paradis, affichée sur https://info.cegepmontpetit.ca/jf.paradis
+# Mode d'emploi : https://info.cegepmontpetit.ca/modifier-mon-profil
 # Après « Commit changes », le site se met à jour en 2-3 minutes (onglet Actions sur GitHub).
 
 nom: "Jean-François Paradis"
 courriel: jf.paradis  # sans @cegepmontpetit.ca
+contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 # bureau: "E-213"  # pas de cours cette session
 actif: false  # pas actif cette session : enlève cette ligne au retour
 photo: jfp.png  # fichier dans data/photos/

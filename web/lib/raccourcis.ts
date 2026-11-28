@@ -1,16 +1,8 @@
 // Les grilles les plus consultées : accès direct depuis le menu.
 export const GRILLES_DIRECTES = [
   { href: "/programmes/dec-prog", texte: "DEC Dév", sousTitre: "Développement d'applications" },
-  { href: "/programmes/dec-reseau", texte: "DEC Réseau", sousTitre: "Réseaux et cybersécurité" },
+  { href: "/programmes/dec-reseau", texte: "DEC Réseau", sousTitre: "Administration d'infrastructure TI" },
   { href: "/programmes/dec-bac", texte: "DEC-BAC", sousTitre: "Avec l'Université de Sherbrooke" },
-];
-
-export const FILTRES_SITES = [
-  { id: "dec-prog", texte: "DEC Dév" },
-  { id: "dec-reseau", texte: "DEC Réseau" },
-  { id: "dec-bac", texte: "DEC-BAC" },
-  { id: "sn", texte: "Sciences de la nature" },
-  { id: "service", texte: "Cours de service" },
 ];
 
 // Les prochaines activités du cégep pour les futurs étudiants. L'accueil affiche chaque date jusqu'au jour indiqué (iso),

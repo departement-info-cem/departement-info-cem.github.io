@@ -44,7 +44,7 @@ const coursConnus = new Set(catalogue.flatMap((c) => [c.no, ...(c.alias ?? []).m
 const tagsConnus = new Set(catalogue.flatMap((c) => c.tags ?? []));
 const doublons = catalogue.map((c) => c.no).filter((no, i, t) => t.indexOf(no) !== i);
 for (const d of doublons) signaler("erreur", "cours.yaml", `le cours ${d} est défini deux fois`);
-// Raccourcis /react/<sigle>/ vers les sites des cours : un sigle ne peut pas mener à deux sites,
+// Raccourcis /<sigle>/ vers les sites des cours : un sigle ne peut pas mener à deux sites,
 // ni prendre l'adresse d'une page du site ou d'un prof (peu importe la casse)
 const idsProfs = fs.readdirSync(path.join(DONNEES, "profs")).filter((f) => f.endsWith(".yaml") && !f.startsWith("_")).map((f) => f.replace(/\.yaml$/, ""));
 for (const c of raccourcisCours(catalogue, [...ROUTES_RESERVEES, ...idsProfs]).conflits) signaler("erreur", "cours.yaml", c);
@@ -61,7 +61,8 @@ for (const f of fs.readdirSync(path.join(DONNEES, "programmes")).filter((f) => f
   );
 }
 
-// 3. Profs
+// 3. Profs (avec l'horaire des locaux : leurs cours en labo doivent y être)
+const laboratoires = verifier(laboratoiresSchema, "laboratoires.yaml");
 const photos = new Set(fs.readdirSync(path.join(DONNEES, "photos")));
 const fichiersProfs = fs.readdirSync(path.join(DONNEES, "profs")).filter((f) => f.endsWith(".yaml"));
 for (const f of fichiersProfs) {
@@ -71,6 +72,7 @@ for (const f of fichiersProfs) {
     id: modele ? undefined : id,
     coursConnus,
     photosConnues: modele ? undefined : photos,
+    laboratoires,
   });
   for (const p of problemes) signaler(p.niveau, `profs/${f}`, p.message, p.ligne);
 }
@@ -79,7 +81,7 @@ for (const f of autres) signaler("avertissement", `profs/${f}`, "fichier ignoré
 
 // 4. Divers
 verifier(calendrierScolaireSchema, "calendrier-scolaire.yaml");
-verifier(laboratoiresSchema, "laboratoires.yaml")?.forEach((l) =>
+laboratoires?.forEach((l) =>
   l.occupations.forEach((a, i) =>
     l.occupations.slice(i + 1).forEach((b) => {
       if (a.jour === b.jour && a.debut < b.fin && b.debut < a.fin)
@@ -112,6 +114,6 @@ if (bot) {
 
 console.log(`\n${fichiersProfs.length} fiches de profs vérifiées : ${nbErreurs} erreur(s), ${nbAvertissements} avertissement(s).`);
 if (nbErreurs > 0) {
-  console.log("Corrige les erreurs ci-dessus puis refais un commit. Aide : https://info.cegepmontpetit.ca/react/modifier-mon-profil");
+  console.log("Corrige les erreurs ci-dessus puis refais un commit. Aide : https://info.cegepmontpetit.ca/modifier-mon-profil");
   process.exit(1);
 }

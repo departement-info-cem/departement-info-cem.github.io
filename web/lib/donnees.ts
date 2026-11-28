@@ -5,12 +5,14 @@ import fs from "node:fs";
 import path from "node:path";
 import YAML from "yaml";
 import type { z } from "zod";
-import { profSchema, type Prof } from "@/app/_types/prof";
+import { profSchema, type EvenementProf, type Plage, type Prof } from "@/app/_types/prof";
 import { coursSchema, programmeSchema, type Cours, type CoursAffiche, type Programme } from "@/app/_types/programme";
 import { botSchema, calendrierScolaireSchema, coursServiceSchema, faqSchema, laboratoiresSchema, logicielsSchema, type Bot, type CalendrierScolaire, type CoursService, type Laboratoire, type Logiciel, type Question } from "@/app/_types/divers";
 import type { ProfHoraire } from "@/lib/maintenant";
-import type { DonneesMesCours, GroupeCours } from "@/lib/mes-cours";
-import { JOURS, normaliserJour } from "@/lib/temps";
+import { rencontresDuGroupe, type DonneesMesCours, type GroupeCours, type Rencontre, type Seance } from "@/lib/mes-cours";
+import { fichierAgenda, ORIGINE } from "@/lib/agenda";
+import { chemin } from "@/lib/chemins";
+import { JOURS, isoDepuisDate, normaliserJour } from "@/lib/temps";
 import { estActif } from "@/lib/actif";
 import { formaterErreurs } from "@/lib/erreurs";
 import { pagesRaccourcis, raccourcisCours, trouverRaccourci, type RaccourciCours } from "@/lib/raccourcis-cours";
@@ -160,24 +162,7 @@ export function profsHoraire(): ProfHoraire[] {
   return profs().map((p) => ({ id: p.id, nom: p.nom, session: p.session, calendrier: p.calendrier, bureau: p.bureau, photo: p.photo, plages: p.horaire?.plages ?? [] }));
 }
 
-export type SiteCours = { no: string; nom: string; url: string; places: { id: string; court: string; session: string }[] };
-
-/** Tous les cours qui ont un site web, avec leur place dans les grilles. */
-export function sitesCours(): SiteCours[] {
-  return catalogue()
-    .filter((c) => c.url)
-    .map((c) => ({
-      no: c.no,
-      nom: c.nom,
-      url: c.url!,
-      places: [
-        ...programmes().flatMap((p) => p.sessions.filter((s) => s.cours.some((x) => x.no === c.no)).map((s) => ({ id: p.id, court: p.court, session: s.titre }))),
-        ...coursService().filter((p) => p.cours.some((x) => x.info.no === c.no)).map((p) => (p.discipline ? { id: "sn", court: p.court, session: p.programme } : { id: "service", court: p.court, session: "Cours de service" })),
-      ],
-    }));
-}
-
-/** Raccourcis /react/<sigle>/ vers les sites des cours (voir lib/raccourcis-cours.ts). */
+/** Raccourcis /<sigle>/ vers les sites des cours (voir lib/raccourcis-cours.ts). */
 export function raccourcis(): RaccourciCours[] {
   return enCache("raccourcis", () => {
     const { raccourcis, conflits } = raccourcisCours(catalogue(), [...ROUTES_RESERVEES, ...fichiersProfs().map((f) => f.replace(/\.yaml$/, ""))]);
@@ -272,6 +257,72 @@ export function donneesMesCours(date = new Date()): DonneesMesCours {
   }
   // Ordre : profs par nom (profs() est trié), puis groupes par numéro
   return { groupes, profs: infos, cours: indexCours() };
+}
+
+/** Ce que lisent les sites de cours dans /donnees/cours/<numéro>.json : la logistique de chaque groupe, déclarée une seule fois ici. */
+export type FichierCours = {
+  cours: string;
+  nom?: string;
+  /** date et heure du build */
+  genere: string;
+  groupes: {
+    prof: { id: string; nom: string };
+    groupe?: string;
+    session?: string;
+    /** l'horaire de la semaine */
+    plages: Seance[];
+    /** les rencontres datées de la session, comme dans l'agenda (lib/agenda.ts) */
+    rencontres: Rencontre[];
+    /** les dates de la fiche pour ce cours et ce groupe : remises, examens, activités... (absences et déplacements sont dans les rencontres) */
+    evenements: Omit<EvenementProf, "cours" | "groupe">[];
+    /** l'abonnement d'agenda du groupe (.ics, voir lib/agenda.ts), ou null s'il n'a pas d'horaire */
+    agenda: string | null;
+  }[];
+  /** la semaine complète de chaque prof du cours (ses autres cours, dispos, centre d'aide...), pour l'onglet Horaire des sites de cours */
+  profs: Record<string, { nom: string; bureau?: string; horaire: { debut?: string; fin?: string; plages: (Plage & { nomCours?: string })[] }; /** sa page d'horaire sur le site du département */ page: string }>;
+};
+
+/** Les numéros de cours qui ont un fichier pour les sites de cours : ceux du département au catalogue (anciens numéros compris) et ceux des horaires. */
+export function numerosFichiersCours(date = new Date()): string[] {
+  const duCatalogue = catalogue().flatMap((c) => [c.no, ...(c.alias ?? []).map((a) => a.no)]).filter((no) => no.startsWith("420-"));
+  return [...new Set([...duCatalogue.map((no) => no.toUpperCase()), ...Object.keys(donneesMesCours(date).groupes)])].sort();
+}
+
+/** Le fichier d'un cours pour son site : ses groupes cette session (profs actifs), leurs rencontres datées et leurs dates. */
+export function fichierCours(no: string, date = new Date()): FichierCours {
+  const cours = numeroCanonique(no);
+  const { groupes, profs: infos } = donneesMesCours(date);
+  const scolaire = calendrierScolaire();
+  // Sans session dans la fiche : la session en cours, ou la prochaine (comme le calendrier des profs)
+  const sessionParDefaut = scolaire.sessions.find((s) => isoDepuisDate(date) <= s.fin)?.id;
+  const index = indexCours();
+  return {
+    cours,
+    nom: index[cours]?.nom,
+    genere: date.toISOString(),
+    groupes: (groupes[cours] ?? []).map((g) => {
+      const p = infos[g.prof];
+      const session = g.session ?? sessionParDefaut;
+      const duGroupe = p.calendrier.filter((e) => e.cours === cours && (!e.groupe || !g.groupe || e.groupe === g.groupe));
+      return {
+        prof: { id: g.prof, nom: p.nom },
+        groupe: g.groupe,
+        session,
+        plages: g.seances,
+        rencontres: rencontresDuGroupe({ ...g, session }, infos, scolaire),
+        evenements: duGroupe.filter((e) => e.type !== "absence" && e.type !== "deplacement").map(({ date, au, titre, type, debut, fin, local, description, evaluation }) => ({ date, au, titre, type, debut, fin, local, description, evaluation })),
+        agenda: fichierAgenda(g) && `${ORIGINE}${chemin(`/agenda/${fichierAgenda(g)}`)}`,
+      };
+    }),
+    profs: Object.fromEntries(
+      [...new Set((groupes[cours] ?? []).map((g) => g.prof))].flatMap((id) => {
+        const p = prof(id);
+        if (!p) return [];
+        const plages = (p.horaire?.plages ?? []).map((x) => ({ ...x, ...(x.cours && { cours: numeroCanonique(x.cours), nomCours: index[numeroCanonique(x.cours)]?.nom }), ...(x.groupe !== undefined && { groupe: String(x.groupe) }) }));
+        return [[id, { nom: p.nom, bureau: p.bureau, horaire: { debut: p.horaire?.debut, fin: p.horaire?.fin, plages }, page: `${ORIGINE}${chemin(`/${id}/horaire/`)}` }]];
+      }),
+    ),
+  };
 }
 
 export type LogicielAffiche = Logiciel & { coursLies: string[] };

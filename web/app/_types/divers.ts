@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { lienSiteOuWeb, urlWeb } from "./liens";
 import { heureEnMinutes, normaliserJour } from "@/lib/temps";
 
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
@@ -25,9 +26,9 @@ export const SANS_COURS: TypeJourScolaire[] = ["conge", "pedagogique", "mise-a-j
 
 export const calendrierScolaireSchema = z
   .object({
-    source: z.url().optional(),
+    source: urlWeb().optional(),
     /** les PDF officiels dont le fichier est extrait */
-    pdf: z.array(z.object({ annee: z.string(), url: z.url(), revise: z.string().optional() }).strict()).default([]),
+    pdf: z.array(z.object({ annee: z.string(), url: urlWeb(), revise: z.string().optional() }).strict()).default([]),
     sessions: z.array(
       z.object({ id: z.string(), nom: z.string(), debut: z.string().regex(DATE), fin: z.string().regex(DATE) }).strict(),
     ),
@@ -55,7 +56,7 @@ export const faqSchema = z.array(
       question: z.string(),
       reponse: z.string(),
       categories: z.array(z.string()).default([]),
-      liens: z.array(z.string()).default([]),
+      liens: z.array(lienSiteOuWeb).default([]),
     })
     .strict(),
 );
@@ -82,7 +83,7 @@ export const botSchema = z
           titre: z.string(),
           compatibilite: z.number().min(0).max(100),
           texte: z.string(),
-          liens: z.array(z.object({ texte: z.string(), href: z.string() }).strict()).default([]),
+          liens: z.array(z.object({ texte: z.string(), href: lienSiteOuWeb }).strict()).default([]),
         })
         .strict(),
     ),
@@ -99,7 +100,7 @@ export const logicielsSchema = z.array(
       logo: z.string().optional(),
       identifiant: z.string(),
       description: z.string(),
-      lien: z.url(),
+      lien: urlWeb(),
       bouton: z.string(),
       vedette: z.boolean().default(false),
       /** cours où il sert : numéros, ou tags des cours de data/cours.yaml (os, reseau, web...) */
@@ -156,7 +157,7 @@ export const coursServiceSchema = z.array(
       court: z.string(),
       /** l'informatique est une discipline de ce programme : ce n'est pas un cours de service */
       discipline: z.boolean().default(false),
-      lien: z.url().optional(),
+      lien: urlWeb().optional(),
       description: z.string().optional(),
       cours: z.array(z.object({ no: z.string(), quand: z.array(z.string()).default([]), note: z.string().optional() }).strict()),
     })

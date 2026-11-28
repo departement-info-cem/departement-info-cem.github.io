@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { donneesMesCours } from "@/lib/donnees";
-import { aVenir, basculer, garderMonGroupe, court, ecrireParamCours, estPerime, lireParamCours, evenementsPourMoi, libelle, lienAvecMoi, nettoyer, trierPourMoi, type InfoProfMesCours, type MonCours } from "@/lib/mes-cours";
+import { aVenir, basculer, garderMonGroupe, court, ecrireParamCours, estPerime, lireParamCours, evenementsPourMoi, libelle, lienAvecMoi, nettoyer, rencontresDuGroupe, trierPourMoi, type InfoProfMesCours, type MonCours } from "@/lib/mes-cours";
 import { construireCalendrier } from "@/lib/calendrier";
 import { adresseAvecCours } from "@/components/partager-page";
 import { calendrierScolaire } from "@/lib/donnees";
@@ -79,7 +79,7 @@ describe("mon calendrier", () => {
   const evts = evenementsPourMoi(mes, { "joris.deguet": prof });
 
   it("garde les dates de mon cours et de mon groupe, et les absences de mon prof", () => {
-    expect(evts.map((e) => e.titre)).toEqual(["5N6 · Examen final", "5N6 · Colloque (Joris Deguet)"]);
+    expect(evts.map((e) => e.titre)).toEqual(["5N6 · Examen final", "5N6 · Cours annulé (Joris Deguet)"]);
     expect(evts[1]).toMatchObject({ type: "absence", cours: "420-5N6-EM", groupe: "1020" });
   });
   it("à venir : l'évaluation, puis mon cours annulé par l'absence", () => {
@@ -87,9 +87,16 @@ describe("mon calendrier", () => {
     const jours = construireCalendrier(calendrierScolaire(), { plages, evenements: evts, sessionId: "A2026" });
     const liste = aVenir(jours, "2026-11-25", 14);
     expect(liste.find((j) => j.iso === "2026-11-30")?.evenements).toEqual([expect.objectContaining({ titre: "5N6 · Examen final", evaluation: "sommative" })]);
-    expect(liste.find((j) => j.iso === "2026-12-07")?.evenements.map((e) => e.annulee ?? e.type)).toEqual(["absence", "annulé (absence)"]);
+    expect(liste.find((j) => j.iso === "2026-12-07")?.evenements.map((e) => e.annulee ?? e.type)).toEqual(["absence", "annulé"]);
     // Le lundi 30, le cours a lieu normalement : il n'est pas dans « à venir »
     expect(liste.find((j) => j.iso === "2026-11-30")?.evenements.some((e) => e.source === "seance")).toBe(false);
+  });
+  it("à venir : pas de JR, EC, EUL ni EHR (le prof inscrit ce qu'il en fait), mais les congés et l'horaire modifié restent", () => {
+    const jours = construireCalendrier(calendrierScolaire(), {});
+    const types = (debut: string, nb: number) => aVenir(jours, debut, nb).flatMap((j) => j.evenements.map((e) => e.type));
+    const decembre = types("2026-12-09", 14);
+    for (const t of ["reprise", "evaluations", "evaluations-horaire"]) expect(decembre).not.toContain(t);
+    expect(types("2026-10-01", 20)).toEqual(expect.arrayContaining(["suspension", "horaire-modifie", "relache", "conge"]));
   });
 });
 
@@ -147,5 +154,56 @@ describe("adresse à partager", () => {
     expect(adresseAvecCours("https://x.ca/react/joris.deguet/horaire/?cours=420-5N6-EM", "SN1-1050,5M6-1020")).toBe("https://x.ca/react/joris.deguet/horaire/?cours=420-5N6-EM&mescours=SN1-1050,5M6-1020");
     expect(adresseAvecCours("https://x.ca/react/profs/?mescours=3W6", null)).toBe("https://x.ca/react/profs/");
     expect(adresseAvecCours("https://x.ca/react/profs/?mescours=3W6", "SN1")).toBe("https://x.ca/react/profs/?mescours=SN1");
+  });
+});
+
+describe("rencontresDuGroupe", () => {
+  const donnees = donneesMesCours(new Date(2026, 10, 27));
+  // 420-5N6-EM est un ancien numéro de 420-5M6-EM
+  const groupe = donnees.groupes["420-5M6-EM"].find((g) => g.prof === "po.brillant" && g.groupe === "1010")!;
+
+  it("5M6 gr. 1010 (mercredi 14h-17h, jeudi 8h-11h) : 30 rencontres à l'automne 2026, numérotées", () => {
+    const rencontres = rencontresDuGroupe(groupe, donnees.profs, calendrierScolaire());
+    expect(rencontres).toHaveLength(30);
+    expect(rencontres.map((r) => r.numero)).toEqual(Array.from({ length: 30 }, (_, i) => i + 1));
+    expect(rencontres[0]).toEqual({ numero: 1, date: "2026-08-26", debut: "14:00", fin: "17:00", local: "D-0704", statut: "prevue", note: undefined });
+    expect(rencontres.some((r) => r.date === "2026-11-11")).toBe(false); // journée particulière d'enseignement
+  });
+
+  it("une absence annule, un déplacement reporte : seules les rencontres qui ont lieu sont numérotées", () => {
+    const profs = {
+      ...donnees.profs,
+      "po.brillant": {
+        ...donnees.profs["po.brillant"],
+        calendrier: [
+          { date: "2026-09-02", type: "absence" as const },
+          { date: "2026-12-10", remplace: "2026-12-03", type: "deplacement" as const, cours: "420-5M6-EM", groupe: "1010" },
+        ],
+      },
+    };
+    const rencontres = rencontresDuGroupe(groupe, profs, calendrierScolaire());
+    const le = (date: string) => rencontres.find((r) => r.date === date);
+    expect(le("2026-09-02")).toMatchObject({ statut: "annulee" });
+    expect(le("2026-12-03")).toMatchObject({ statut: "deplacee", note: "déplacé au jeudi 10 décembre" });
+    expect([le("2026-09-02")?.numero, le("2026-12-03")?.numero]).toEqual([undefined, undefined]);
+    expect(le("2026-12-10")).toMatchObject({ statut: "reprise", debut: "08:00", fin: "11:00", note: "Reprise du cours du jeudi 3 décembre." });
+    expect(rencontres.filter((r) => r.numero)).toHaveLength(29);
+    expect(rencontres.at(-1)?.numero).toBe(29);
+  });
+
+  it("une absence sur une partie de la journée n'annule que les cours qu'elle chevauche", () => {
+    const profs = {
+      ...donnees.profs,
+      "po.brillant": {
+        ...donnees.profs["po.brillant"],
+        calendrier: [
+          { date: "2026-09-02", type: "absence" as const, debut: "08:00", fin: "12:00" }, // mercredi matin : le cours de 14 h a lieu
+          { date: "2026-09-03", type: "absence" as const, debut: "10:00", fin: "12:00" }, // jeudi : chevauche le cours de 8 h à 11 h
+        ],
+      },
+    };
+    const rencontres = rencontresDuGroupe(groupe, profs, calendrierScolaire());
+    expect(rencontres.find((r) => r.date === "2026-09-02")?.statut).toBe("prevue");
+    expect(rencontres.find((r) => r.date === "2026-09-03")?.statut).toBe("annulee");
   });
 });

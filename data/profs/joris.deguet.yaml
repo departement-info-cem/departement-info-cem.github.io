@@ -1,9 +1,10 @@
-# Fiche de Joris Deguet, affichée sur https://info.cegepmontpetit.ca/react/joris.deguet
-# Mode d'emploi : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+# Fiche de Joris Deguet, affichée sur https://info.cegepmontpetit.ca/joris.deguet
+# Mode d'emploi : https://info.cegepmontpetit.ca/modifier-mon-profil
 # Après « Commit changes », le site se met à jour en 2-3 minutes (onglet Actions sur GitHub).
 
 nom: "Joris Deguet"
 courriel: joris.deguet  # sans @cegepmontpetit.ca
+contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 bureau: "E-211"
 photo: joris.jpeg  # fichier dans data/photos/
 github: jorisdeguet
@@ -22,15 +23,15 @@ horaire:
   fin: "18:00"
   plages:
     - { jour: lundi, debut: "11:00", fin: "12:00", type: centre-aide, titre: "Centre d'aide avec M. Deguet", local: D-0008 }
-    - { jour: lundi, debut: "15:00", fin: "18:00", type: cours, cours: 420-5N6-EM, groupe: 1020, local: D-0624 }
-    - { jour: mardi, debut: "12:00", fin: "15:00", type: cours, cours: 420-SN1-RE, groupe: 1050, local: D-0003, titre: Programmation sciences }
-    - { jour: mardi, debut: "15:00", fin: "18:00", type: cours, cours: 420-SN1-RE, groupe: 1060, local: D-0003, titre: Programmation sciences bis }
-    - { jour: mercredi, debut: "09:00", fin: "12:00", type: cours, cours: 420-5N6-EM, groupe: 1020, local: D-0605 }
+    - { jour: lundi, debut: "15:10", fin: "18:00", type: cours, cours: 420-5N6-EM, groupe: 1020, local: D-0624 }
+    - { jour: mardi, debut: "12:10", fin: "15:00", type: cours, cours: 420-SN1-RE, groupe: 1050, local: D-0003, titre: Programmation sciences }
+    - { jour: mardi, debut: "15:10", fin: "18:00", type: cours, cours: 420-SN1-RE, groupe: 1060, local: D-0003, titre: Programmation sciences bis }
+    - { jour: mercredi, debut: "09:10", fin: "12:00", type: cours, cours: 420-5N6-EM, groupe: 1020, local: D-0605 }
     - { jour: mercredi, debut: "12:00", fin: "14:00", type: reunion, titre: "Le trou de l'horaire" }
-    - { jour: vendredi, debut: "08:00", fin: "11:00", type: cours, cours: 420-SN1-RE, groupe: 1070, local: D-0003, titre: Programmation sciences tôt le matin }
+    - { jour: vendredi, debut: "08:10", fin: "11:00", type: cours, cours: 420-SN1-RE, groupe: 1070, local: D-0003, titre: Programmation sciences tôt le matin }
     - { jour: vendredi, debut: "11:00", fin: "12:00", type: centre-aide, titre: "Centre d'aide avec M. Deguet", local: D-0008 }
     - { jour: vendredi, debut: "13:00", fin: "15:00", type: dispo, titre: Dispo à Jojo, local: E-211 }
-    - { jour: vendredi, debut: "15:00", fin: "18:00", type: cours, cours: 420-SN1-RE, groupe: 1080, local: D-0604, titre: Programmation sciences tard le soir }
+    - { jour: vendredi, debut: "15:10", fin: "18:00", type: cours, cours: 420-SN1-RE, groupe: 1080, local: D-0604, titre: Programmation sciences tard le soir }
 
 # ---------- Calendrier : tes dates à toi (remises, examens, absences...) ----------
 # Les congés et journées pédagogiques du cégep sont ajoutés automatiquement.
@@ -87,5 +88,5 @@ calendrier:
   - { date: 2026-12-11, titre: "Remise finale TP2 (15 %)", cours: 420-SN1-RE, groupe: 1070, type: remise, evaluation: sommative }
   - { date: 2026-12-11, titre: "Remise finale TP2 (15 %)", cours: 420-SN1-RE, groupe: 1080, type: remise, evaluation: sommative }
 #  - { date: 2026-10-20, titre: Examen intra, cours: 420-5N6-EM, type: examen }
-#  - { date: 2026-11-03, au: 2026-11-06, titre: Absent (colloque), type: absence }
+#  - { date: 2026-11-03, au: 2026-11-06, type: absence }
 #  - { date: 2026-12-10, remplace: 2026-12-04, type: deplacement, cours: 420-SN1-RE, groupe: 1070 }   # cours repris en JR

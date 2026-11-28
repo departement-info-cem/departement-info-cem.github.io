@@ -1,9 +1,10 @@
-# Fiche de Benoit Caldairou, affichée sur https://info.cegepmontpetit.ca/react/benoit.caldairou
-# Mode d'emploi : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+# Fiche de Benoit Caldairou, affichée sur https://info.cegepmontpetit.ca/benoit.caldairou
+# Mode d'emploi : https://info.cegepmontpetit.ca/modifier-mon-profil
 # Après « Commit changes », le site se met à jour en 2-3 minutes (onglet Actions sur GitHub).
 
 nom: "Benoit Caldairou"
 courriel: benoit.caldairou  # sans @cegepmontpetit.ca
+contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 bureau: "E-252"
 # photo: prenom.jpg     # ajoute ta photo dans data/photos/
 # github: mon-pseudo
@@ -23,12 +24,18 @@ horaire:
   debut: "08:00"
   fin: "18:00"
   plages:
-    - { jour: lundi, debut: "08:00", fin: "10:30", type: cours, cours: 420-3M5-EM, groupe: 1010, local: D-0603 }
+    - { jour: lundi, debut: "08:10", fin: "10:30", type: cours, cours: 420-3M5-EM, groupe: 1010, local: D-0603 }
     - { jour: lundi, debut: "10:30", fin: "13:00", type: cours, cours: 420-3M5-EM, groupe: 1020, local: D-0603 }
-    - { jour: mardi, debut: "12:00", fin: "15:00", type: cours, cours: 420-1X6-EM, groupe: 1060, local: D-0602 }
-    - { jour: mercredi, debut: "09:00", fin: "12:00", type: cours, cours: 420-3M5-EM, groupe: 1020, local: D-0604 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
-    - { jour: mercredi, debut: "14:00", fin: "17:00", type: cours, cours: 420-3M5-EM, groupe: 1010, local: D-0604 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
-    - { jour: vendredi, debut: "12:00", fin: "15:00", type: cours, cours: 420-1X6-EM, groupe: 1060, local: D-0624 }
+    - { jour: lundi, debut: "13:10", fin: "16:00", type: cours, cours: 420-1B3-EM, groupe: 1070, local: D-0603 }
+    - { jour: mardi, debut: "11:00", fin: "12:00", type: dispo, local: E-252}
+    - { jour: mardi, debut: "12:10", fin: "15:00", type: cours, cours: 420-1X6-EM, groupe: 1060, local: D-0602 }
+    - { jour: mardi, debut: "15:00", fin: "16:00", type: dispo, local: E-252}
+    - { jour: mercredi, debut: "09:00", fin: "09:30", type: dispo, local: D-0604}
+    - { jour: mercredi, debut: "09:30", fin: "12:00", type: cours, cours: 420-3M5-EM, groupe: 1020, local: D-0604 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
+    - { jour: mercredi, debut: "14:10", fin: "16:30", type: cours, cours: 420-3M5-EM, groupe: 1010, local: D-0604 }   # réservé 3 h, séance de 2 h 30 : précise tes heures
+    - { jour: mercredi, debut: "16:30", fin: "17:00", type: dispo, local: D-0604}
+    - { jour: vendredi, debut: "11:00", fin: "12:00", type: dispo, local: D-0008}
+    - { jour: vendredi, debut: "12:10", fin: "15:00", type: cours, cours: 420-1X6-EM, groupe: 1060, local: D-0624 }
 #    - { jour: mardi, debut: "13:00", fin: "15:00", type: dispo, local: E-2xx }   # exemple de disponibilité
 
 # ---------- Calendrier : tes dates à toi (remises, examens, absences...) ----------
@@ -36,4 +43,4 @@ horaire:
 # type : remise, examen, cours, absence, deplacement, activite ou autre
 calendrier: []
 #  - { date: 2026-12-07, titre: Remise du TP3, cours: 420-1X6-EM, type: remise }
-#  - { date: 2026-12-01, au: 2026-12-02, titre: Absent (colloque), type: absence }
+#  - { date: 2026-12-01, au: 2026-12-02, type: absence }

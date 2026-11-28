@@ -11,7 +11,7 @@ export function PiedDePage() {
     <footer className="relative mt-16 overflow-hidden bg-cadre text-cadre-texte [main:has(>section.bg-cem-vert:last-child)+&]:mt-0">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
         <div className="space-y-3">
-          <Logo inverse taille={36} />
+          <Logo />
           <p className="text-sm text-cem-gris-1">
             Département d&apos;informatique
             <br />
@@ -27,7 +27,6 @@ export function PiedDePage() {
             <li><Link href="/programmes" className="hover:underline">Programmes et grilles de cours</Link></li>
             <li><Link href="/profs" className="hover:underline">Les profs</Link></li>
             <li><Link href="/orientation" className="hover:underline">L&apos;informatique, est-ce pour moi ?</Link></li>
-            <li><Link href="/jeux" className="hover:underline">Mini-jeux : teste ta logique</Link></li>
             <li><Link href="/faq" className="hover:underline">Foire aux questions</Link></li>
             <li><a href={STAGES} target="_blank" rel="noreferrer" className="hover:underline">Entreprises : offrir un stage</a></li>
           </ul>

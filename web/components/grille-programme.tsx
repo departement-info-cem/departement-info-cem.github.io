@@ -163,7 +163,7 @@ export function GrilleProgramme({
         </Statistique>
         {avecDep && (
           <Statistique valeur={prog.heuresDep ? vus.heuresDep : vus.nbDep} total={prog.heuresDep || prog.nbDep} unite={prog.heuresDep ? "h" : undefined} filtre={filtre} delai={180}>
-            {prog.heuresDep ? "en informatique (420)" : "cours d'informatique"}
+            {prog.heuresDep ? "dans des cours d'informatique" : "cours d'informatique"}
             {choix.length ? ", sans les cours au choix" : ""}
           </Statistique>
         )}

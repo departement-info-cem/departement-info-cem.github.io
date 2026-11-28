@@ -1,9 +1,10 @@
 // « Mes cours » : l'étudiant indique ses cours et son groupe ; le site met ses profs en avant.
 // Le choix reste dans le navigateur (localStorage), rien n'est envoyé nulle part.
 // Logique pure, sans React : utilisée par le contexte (app/_contexts/mes-cours-context.tsx) et testée.
+import type { CalendrierScolaire } from "@/app/_types/divers";
 import type { EvenementProf, Plage } from "@/app/_types/prof";
-import type { EvenementJour, JourCalendrier } from "@/lib/calendrier";
-import { dateDepuisIso, isoDepuisDate } from "@/lib/temps";
+import { construireCalendrier, type EvenementJour, type JourCalendrier } from "@/lib/calendrier";
+import { dateDepuisIso, heureEnMinutes, isoDepuisDate, minutesEnHeure } from "@/lib/temps";
 
 /** Un cours de l'étudiant. Sans prof : le cours seul (groupe inconnu, ou cours absent des fiches). */
 export type MonCours = { cours: string; prof?: string; groupe?: string; session?: string };
@@ -90,13 +91,66 @@ export function evenementsPourMoi(mesCours: MonCours[], profs: DonneesMesCours["
     return p.calendrier.flatMap((e): EvenementProf[] => {
       if (!e.cours) {
         // Une absence sans cours précisé annule tous ses cours : ici, seulement mon groupe
-        return e.type === "absence" ? [{ ...e, cours: m.cours, groupe: m.groupe, titre: `${court(m.cours)} · ${e.titre ?? "Absence"} (${p.nom})` }] : [];
+        return e.type === "absence" ? [{ ...e, cours: m.cours, groupe: m.groupe, titre: `${court(m.cours)} · Cours annulé (${p.nom})` }] : [];
       }
       if (e.cours !== m.cours || (e.groupe && m.groupe && e.groupe !== m.groupe)) return [];
       return [{ ...e, titre: e.titre && `${court(m.cours)} · ${e.titre}` }];
     });
   });
 }
+
+export type StatutRencontre = "prevue" | "annulee" | "deplacee" | "reprise";
+
+/** Une rencontre datée d'un groupe. Heures "08:00", heure de Montréal. */
+export type Rencontre = {
+  /** rang dans la session (1, 2...) des rencontres qui ont lieu ; absent pour une séance annulée ou déplacée */
+  numero?: number;
+  date: string;
+  debut: string;
+  fin: string;
+  local?: string;
+  statut: StatutRencontre;
+  /** déplacée : « déplacé au jeudi 10 décembre » ; reprise : « Reprise du cours du mercredi 2 décembre. » */
+  note?: string;
+};
+
+/**
+ * Les rencontres d'un groupe pour toute sa session : son horaire de la semaine sur les dates du calendrier scolaire
+ * (congés, horaire d'un autre jour), avec les absences et les déplacements de son prof. Sert à l'agenda (lib/agenda.ts),
+ * au navigateur comme au build.
+ */
+export function rencontresDuGroupe(g: GroupeCours, profs: DonneesMesCours["profs"], scolaire: CalendrierScolaire): Rencontre[] {
+  const plages: Plage[] = g.seances.map((s) => ({ ...s, type: "cours", cours: g.cours, groupe: g.groupe }));
+  const jours = construireCalendrier(scolaire, { plages, evenements: evenementsPourMoi([choixDe(g)], profs), sessionId: g.session });
+  const hhmm = (h: string) => minutesEnHeure(heureEnMinutes(h)!);
+  const rencontres: Rencontre[] = [];
+  for (const j of jours.values()) {
+    for (const e of j.evenements) {
+      const reprise = e.source === "prof" && e.type === "deplacement";
+      const [debut, fin] = (e.heure ?? "").split("–");
+      if ((e.source !== "seance" && !reprise) || !debut || !fin || heureEnMinutes(debut) === null || heureEnMinutes(fin) === null) continue;
+      const deplacee = e.annulee?.startsWith("déplacé");
+      rencontres.push({
+        date: j.iso,
+        debut: hhmm(debut),
+        fin: hhmm(fin),
+        local: e.local,
+        statut: reprise ? "reprise" : deplacee ? "deplacee" : e.annulee ? "annulee" : "prevue",
+        note: reprise ? e.description : deplacee ? e.annulee : undefined,
+      });
+    }
+  }
+  rencontres.sort((a, b) => a.date.localeCompare(b.date) || a.debut.localeCompare(b.debut));
+  let numero = 0;
+  for (const r of rencontres) if (r.statut === "prevue" || r.statut === "reprise") r.numero = ++numero;
+  return rencontres;
+}
+
+/**
+ * Journées du cégep qui ne disent rien à l'étudiant par elles-mêmes : JR, EC, EUL, EHR. Si son prof s'en sert
+ * (reprise, examen), il l'inscrit dans sa fiche, et c'est cette date-là qui paraît.
+ */
+const JOURNEES_DU_PROF = new Set(["reprise", "evaluations", "evaluations-horaire"]);
 
 /** Ce qui compte dans les jours à venir : évaluations, remises, cours annulés ou déplacés, congés et dates limites. */
 export function aVenir(jours: Map<string, JourCalendrier>, aujourdhui: string, nbJours = 21): { iso: string; evenements: EvenementJour[] }[] {
@@ -106,7 +160,7 @@ export function aVenir(jours: Map<string, JourCalendrier>, aujourdhui: string, n
   return [...jours.values()]
     .filter((j) => j.iso >= aujourdhui && j.iso <= limite)
     .sort((a, b) => a.iso.localeCompare(b.iso))
-    .map((j) => ({ iso: j.iso, evenements: j.evenements.filter((e) => (e.source === "seance" ? Boolean(e.annulee) : e.type !== "info")) }))
+    .map((j) => ({ iso: j.iso, evenements: j.evenements.filter((e) => (e.source === "seance" ? Boolean(e.annulee) : e.type !== "info" && !(e.source === "scolaire" && JOURNEES_DU_PROF.has(e.type)))) }))
     .filter((j) => j.evenements.length > 0);
 }
 
@@ -122,7 +176,7 @@ export function garderMonGroupe<T extends { cours?: string; groupe?: string }>(l
   });
 }
 
-// ---------- Liens avec des cours : /react/centre-aide/?mescours=SN1-1050,5N6-1020,3W6 ----------
+// ---------- Liens avec des cours : /centre-aide/?mescours=SN1-1050,5N6-1020,3W6 ----------
 
 /** Paramètre d'URL qui donne une liste de cours, pour montrer une page « comme si » on suivait ces cours. */
 // « cours » est déjà pris par le filtre des pages /<prof>/horaire/?cours=420-5N6-EM (liens des sites de cours)

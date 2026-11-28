@@ -1,11 +1,11 @@
-# Fiche de Dominic Proulx, affichée sur https://info.cegepmontpetit.ca/react/dominic.proulx
-# Mode d'emploi : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+# Fiche de Dominic Proulx, affichée sur https://info.cegepmontpetit.ca/dominic.proulx
+# Mode d'emploi : https://info.cegepmontpetit.ca/modifier-mon-profil
 # Après « Commit changes », le site se met à jour en 2-3 minutes (onglet Actions sur GitHub).
 
 nom: "Dominic Proulx"
 courriel: dominic.proulx  # sans @cegepmontpetit.ca
+contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 bureau: "E-210"
-actif: true  # décharge à la coordination : actif même sans cours ici (enlève cette ligne pour revenir au calcul automatique)
 photo: dp.png  # fichier dans data/photos/
 # github: mon-pseudo
 # linkedin: mon-profil

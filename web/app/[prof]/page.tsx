@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BookOpen, CalendarDays, Clock, ExternalLink, Link2, Mail, MapPin, Pencil, Phone } from "lucide-react";
+import { BookOpen, CalendarDays, Clock, ExternalLink, MapPin, Pencil } from "lucide-react";
 import { calendrierScolaire, coursAide, indexCours, prof, profs, raccourci, segmentsRaccourcis } from "@/lib/donnees";
 import { lienEdition, photo } from "@/lib/chemins";
 import { AvatarProf } from "@/components/carte-prof";
 import { SessionPerimee } from "@/components/session-perimee";
 import { StatutProf } from "@/components/statut-prof";
 import { BoutonChoixGroupe } from "@/components/choix-groupe";
-import { BoutonPartager } from "@/components/bouton-partager";
+import { BoutonContact } from "@/components/bouton-contact";
+import { LogoGitHub, LogoLinkedIn } from "@/components/logos";
 import { HorairePrerempli } from "@/components/horaire-prerempli";
 import { HoraireSemaine } from "@/components/horaire-semaine";
 import { CalendrierProf } from "@/components/calendrier-prof";
@@ -18,8 +19,8 @@ import { bouton } from "@/lib/bouton";
 import { court } from "@/lib/mes-cours";
 import { RedirectionCours } from "@/components/redirection-cours";
 
-// Une page par prof : /react/<identifiant>, générée au build pour chaque fichier data/profs/*.yaml.
-// La même route sert aux raccourcis vers les sites des cours, /react/1P6/ (voir lib/raccourcis-cours.ts) :
+// Une page par prof : /<identifiant>, générée au build pour chaque fichier data/profs/*.yaml.
+// La même route sert aux raccourcis vers les sites des cours, /1p6/ (voir lib/raccourcis-cours.ts) :
 // Next n'accepte pas deux segments dynamiques au même niveau. La validation refuse un sigle qui prendrait
 // l'identifiant d'un prof, peu importe la casse : les deux ne peuvent pas se confondre.
 export const dynamicParams = false;
@@ -35,6 +36,8 @@ export async function generateMetadata({ params }: PageProps<"/[prof]">): Promis
   const p = prof(id);
   if (!p) return {};
   return {
+  // Horaire détaillé d'une personne : pas dans les moteurs de recherche (hameçonnage, usurpation)
+    robots: { index: false },
     title: p.nom,
     description: `Horaire, disponibilités et calendrier de ${p.nom}, prof au département d'informatique du Cégep Édouard-Montpetit.`,
     openGraph: p.photo ? { images: [photo(p.photo)] } : undefined,
@@ -57,6 +60,7 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
     { titre: "Disponibilités", liste: fusionnerDispos(plages.filter((x) => x.type === "dispo")) },
     { titre: "Au centre d'aide", liste: fusionnerDispos(plages.filter((x) => x.type === "centre-aide")) },
   ];
+  const avecDispos = listesDispos.some((l) => l.liste.length > 0);
   // Ses cours de la session ont déjà leur encadré : ici, les autres cours où il peut aider
   const donnes = new Set(coursDonnes.map((c) => (cours[c]?.no ?? c).toUpperCase()));
   const aide = coursAide(p).filter((c) => !donnes.has(c));
@@ -69,32 +73,26 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
           <div className="flex-1 space-y-2">
             <div className="h-1 w-16 rounded bg-cem-vert" />
             <h1 className="text-3xl font-bold md:text-4xl">{p.nom}</h1>
+            {p.role && <p className="text-lg font-semibold text-primary">{p.role}</p>}
             <StatutProf prof={p} />
             <SessionPerimee session={p.session} />
             {p.presentation && <p className="max-w-2xl text-muted-foreground">{p.presentation}</p>}
             <div className="flex flex-wrap gap-2 pt-2">
               <BoutonChoixGroupe prof={p.id} />
-              <a href={`mailto:${p.courriel}@cegepmontpetit.ca`} className={bouton({ size: "sm" })}>
-                <Mail className="size-4" /> {p.courriel}@cegepmontpetit.ca
-              </a>
+              <BoutonContact courriel={p.courriel} contact={p.contact} />
               {p.bureau && (
                 <span className={bouton({ variant: "outline", size: "sm" })}>
                   <MapPin className="size-4" /> Bureau {p.bureau}
                 </span>
               )}
-              {p.poste && (
-                <a href={`tel:+14506792631,${p.poste}`} className={bouton({ variant: "outline", size: "sm" })}>
-                  <Phone className="size-4" /> Poste {p.poste}
-                </a>
-              )}
               {p.github && (
                 <a href={`https://github.com/${p.github}`} target="_blank" rel="noreferrer" className={bouton({ variant: "outline", size: "sm" })}>
-                  GitHub
+                  <LogoGitHub /> GitHub
                 </a>
               )}
               {p.linkedin && (
                 <a href={`https://www.linkedin.com/in/${p.linkedin}`} target="_blank" rel="noreferrer" className={bouton({ variant: "outline", size: "sm" })}>
-                  LinkedIn
+                  <LogoLinkedIn /> LinkedIn
                 </a>
               )}
               {p.site && (
@@ -107,8 +105,29 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
         </div>
       </section>
 
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-8 lg:grid-cols-[1fr_280px]">
-        <div className="min-w-0">
+      {/* Sur téléphone, les dispos passent avant l'horaire : c'est ce que l'étudiant vient chercher. Sur ordinateur, elles restent en haut à droite. */}
+      <div className="mx-auto grid max-w-6xl gap-x-8 gap-y-6 px-4 py-8 lg:grid-cols-[1fr_280px] lg:grid-rows-[auto_1fr]">
+        {avecDispos && (
+          <aside className="space-y-6 lg:col-start-2 lg:row-start-1">
+            {listesDispos.map(
+              ({ titre, liste }) =>
+                liste.length > 0 && (
+                  <div key={titre} className="rounded-lg border bg-card p-4">
+                    <h2 className="mb-2 font-bold">{titre}</h2>
+                    <ul className="space-y-1 text-sm">
+                      {liste.map((d, i) => (
+                        <li key={i}>
+                          <span className="capitalize">{d.jour}</span> {d.debut}–{d.fin}
+                          {d.local && <strong> · {d.local}</strong>}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ),
+            )}
+          </aside>
+        )}
+        <div className="min-w-0 lg:col-start-1 lg:row-span-2 lg:row-start-1">
           <Tabs defaultValue="horaire">
             <TabsList className="mb-4">
               <TabsTrigger value="horaire">
@@ -119,17 +138,11 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="horaire">
-              <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                <p className="text-sm text-muted-foreground">{session ? `Horaire de la session ${session.nom}.` : ""}</p>
-                <BoutonPartager chemin={`/${p.id}/horaire/`} titre={`Horaire de ${p.nom}`} />
-              </div>
+              {session && <p className="mb-3 text-sm text-muted-foreground">Horaire de la session {session.nom}.</p>}
               {p.horaire?.prerempli && <HorairePrerempli />}
               <HoraireSemaine plages={p.horaire?.plages ?? []} debut={p.horaire?.debut} fin={p.horaire?.fin} cours={cours} impression={{ titre: p.nom, details: [p.bureau && `Bureau ${p.bureau}`, session?.nom] }} />
             </TabsContent>
             <TabsContent value="calendrier">
-              <div className="mb-3 flex justify-end">
-                <BoutonPartager chemin={`/${p.id}/calendrier/`} titre={`Calendrier de ${p.nom}`} />
-              </div>
               <p className="mb-3 text-sm text-muted-foreground">
                 Les congés et journées spéciales du cégep, les séances de cours{session ? ` de la session ${session.nom}` : ""} et les dates propres à {p.nom.split(" ")[0]}. Clique sur un jour pour les détails.
               </p>
@@ -138,7 +151,7 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
           </Tabs>
         </div>
 
-        <aside className="space-y-6">
+        <aside className={`space-y-6 lg:col-start-2 ${avecDispos ? "lg:row-start-2" : "lg:row-start-1"}`}>
           {coursDonnes.length > 0 && (
             <div className="rounded-lg border bg-card p-4">
               <h2 className="mb-2 flex items-center gap-2 font-bold">
@@ -163,22 +176,6 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
               </ul>
             </div>
           )}
-          {listesDispos.map(
-            ({ titre, liste }) =>
-              liste.length > 0 && (
-                <div key={titre} className="rounded-lg border bg-card p-4">
-                  <h2 className="mb-2 font-bold">{titre}</h2>
-                  <ul className="space-y-1 text-sm">
-                    {liste.map((d, i) => (
-                      <li key={i}>
-                        <span className="capitalize">{d.jour}</span> {d.debut}–{d.fin}
-                        {d.local && <strong> · {d.local}</strong>}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ),
-          )}
           {aide.length > 0 && (
             <div className="rounded-lg border bg-card p-4">
               <h2 className="mb-2 font-bold">Peut aussi aider en</h2>
@@ -192,20 +189,6 @@ export default async function PageProf({ params }: PageProps<"/[prof]">) {
               <Link href="/centre-aide" className="mt-2 block text-xs text-primary underline">Centre d&apos;aide</Link>
             </div>
           )}
-          <div className="rounded-lg border bg-card p-4 text-sm">
-            <h2 className="mb-2 flex items-center gap-2 font-bold">
-              <Link2 className="size-4" /> Liens directs
-            </h2>
-            <ul className="space-y-1">
-              <li><Link href={`/${p.id}/horaire`} className="text-primary underline">Horaire</Link></li>
-              <li><Link href={`/${p.id}/calendrier`} className="text-primary underline">Calendrier</Link></li>
-            </ul>
-            {coursDonnes[0] && (
-              <p className="mt-2 text-xs text-muted-foreground">
-                Depuis le site d&apos;un cours, ajoute <code className="break-all">?cours={coursDonnes[0]}</code> pour n&apos;afficher que ce cours.
-              </p>
-            )}
-          </div>
           <div className="rounded-lg border border-dashed p-4 text-sm">
             <p className="mb-2 text-muted-foreground">C&apos;est ta page ? Modifie-la directement sur GitHub.</p>
             <a href={lienEdition(`profs/${p.id}.yaml`)} target="_blank" rel="noreferrer" className={bouton({ variant: "outline", size: "sm" })}>

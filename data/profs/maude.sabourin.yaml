@@ -1,9 +1,10 @@
-# Fiche de Maude Sabourin, affichée sur https://info.cegepmontpetit.ca/react/maude.sabourin
-# Mode d'emploi : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+# Fiche de Maude Sabourin, affichée sur https://info.cegepmontpetit.ca/maude.sabourin
+# Mode d'emploi : https://info.cegepmontpetit.ca/modifier-mon-profil
 # Après « Commit changes », le site se met à jour en 2-3 minutes (onglet Actions sur GitHub).
 
 nom: "Maude Sabourin"
 courriel: maude.sabourin  # sans @cegepmontpetit.ca
+contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 bureau: "E-213"
 actif: false  # pas actif cette session : enlève cette ligne au retour
 aide: [420-1B3-EM, 420-2W5-EM, 420-5L4-EM]   # cours pour lesquels tu peux aider (ceux de « cours » comptent d'office)

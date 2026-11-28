@@ -3,14 +3,19 @@
 //  - par l'aperçu en direct de la page « Modifier mon profil » (dans le navigateur).
 import YAML, { isNode, LineCounter } from "yaml";
 import { profSchema, type Prof } from "@/app/_types/prof";
+import type { Laboratoire } from "@/app/_types/divers";
 import { heureEnMinutes, normaliserJour } from "@/lib/temps";
+import { normaliserLocal } from "@/lib/maintenant";
 
 export type Probleme = { niveau: "erreur" | "avertissement"; ligne?: number; message: string };
 
 /** Noms de pages du site : un prof ne peut pas avoir l'un de ces identifiants. */
 export const ROUTES_RESERVEES = [
   "profs", "programmes", "orientation", "faq", "nouveau", "git", "logiciels", "plagiat",
-  "contact", "modifier-mon-profil", "logo", "photos", "_next", "index", "maintenant", "calendrier", "cours-service", "sites", "jeux", "images", "mes-cours", "centre-aide", "locaux",
+  "contact", "modifier-mon-profil", "photos", "_next", "index", "maintenant", "calendrier", "cours-service", "jeux", "images", "mes-cours", "centre-aide",
+  "locaux", "404", "assets", "agenda", "donnees", "retro",
+  // anciennes adresses redirigées (lib/redirections.ts)
+  "react", "prof", "dec", "decbac", "goodies", "terminal", "accueil", "home", "sites",
 ];
 
 function cheminLisible(chemin: PropertyKey[]): string {
@@ -19,7 +24,7 @@ function cheminLisible(chemin: PropertyKey[]): string {
 
 export function validerYamlProf(
   texte: string,
-  options: { id?: string; coursConnus?: Set<string>; photosConnues?: Set<string> } = {},
+  options: { id?: string; coursConnus?: Set<string>; photosConnues?: Set<string>; laboratoires?: Laboratoire[] } = {},
 ): { prof?: Prof; problemes: Probleme[] } {
   const compteur = new LineCounter();
   const doc = YAML.parseDocument(texte, { lineCounter: compteur, prettyErrors: false });
@@ -91,6 +96,24 @@ export function validerYamlProf(
       }
     }),
   );
+
+  // Avertissement : un cours dans un labo doit être dans l'horaire des locaux (data/laboratoires.yaml) de la même session,
+  // et tenir dans la réservation. Une séance plus courte (2 h 30 dans un bloc de 3 h) est permise.
+  const labos = options.laboratoires?.filter((l) => l.session && l.session === donnees.session) ?? [];
+  plages.forEach((p, i) => {
+    const labo = labos.find((l) => p.local && normaliserLocal(l.local) === normaliserLocal(p.local));
+    if (p.type !== "cours" || !p.cours || !labo) return;
+    const quoi = `cours ${p.cours}${p.groupe ? ` gr. ${p.groupe}` : ""} du ${normaliserJour(p.jour)}`;
+    const candidats = labo.occupations.filter((o) => normaliserJour(o.jour) === normaliserJour(p.jour) && o.cours?.toUpperCase() === p.cours!.toUpperCase() && (!p.groupe || o.groupe === p.groupe));
+    const [d, f] = [heureEnMinutes(p.debut)!, heureEnMinutes(p.fin)!];
+    const ligne = ligneDe(["horaire", "plages", i]);
+    if (!candidats.length) {
+      problemes.push({ niveau: "avertissement", ligne, message: `${quoi} : absent de l'horaire du ${labo.local} (data/laboratoires.yaml, ${labo.session}). Vérifie le jour, le local et le groupe.` });
+    } else if (!candidats.some((o) => heureEnMinutes(o.debut)! <= d && f <= heureEnMinutes(o.fin)!)) {
+      const o = candidats[0];
+      problemes.push({ niveau: "avertissement", ligne, message: `${quoi} (${p.debut}-${p.fin}) : hors de la réservation du ${labo.local} (${o.debut}-${o.fin} dans data/laboratoires.yaml). Reprends les heures de l'horaire des locaux.` });
+    }
+  });
 
   return { prof, problemes };
 }

@@ -1,9 +1,10 @@
-# Fiche de Vincent Duval, affichée sur https://info.cegepmontpetit.ca/react/vincent.duval
-# Mode d'emploi : https://info.cegepmontpetit.ca/react/modifier-mon-profil
+# Fiche de Vincent Duval, affichée sur https://info.cegepmontpetit.ca/vincent.duval
+# Mode d'emploi : https://info.cegepmontpetit.ca/modifier-mon-profil
 # Après « Commit changes », le site se met à jour en 2-3 minutes (onglet Actions sur GitHub).
 
 nom: "Vincent Duval"
 courriel: vincent.duval  # sans @cegepmontpetit.ca
+contact: teams  # ou mio : le bouton « Écris-moi » de ta page ouvre une conversation Teams avec toi, ou renvoie à MIO
 bureau: "E-210"
 actif: false  # pas actif cette session : enlève cette ligne au retour
 photo: vd.jpg  # fichier dans data/photos/

@@ -4,7 +4,7 @@ import { ExternalLink } from "lucide-react";
 import type { RaccourciCours } from "@/lib/raccourcis-cours";
 import { bouton } from "@/lib/bouton";
 
-// Page d'un raccourci /react/<sigle>/ : le site est statique (GitHub Pages), sans redirection côté serveur.
+// Page d'un raccourci /<sigle>/ : le site est statique (GitHub Pages), sans redirection côté serveur.
 // La balise meta redirige dès le chargement, même sans JavaScript ; l'effet couvre une arrivée par navigation
 // interne (la balise n'y est pas relue) ; le lien reste au cas où les deux seraient bloqués.
 export function RedirectionCours({ raccourci }: { raccourci: RaccourciCours }) {

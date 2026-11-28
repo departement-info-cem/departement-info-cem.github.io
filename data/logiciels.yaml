@@ -23,6 +23,14 @@
   description: Visual Studio, Windows et d'autres logiciels Microsoft pour le développement .NET et les cours du début de la technique.
   lien: https://portal.azure.com/#blade/Microsoft_Azure_Education/EducationMenuBlade/software
   bouton: Portail Azure Education
+  cours: [420-3W6-EM, 420-4W6-EM, 420-5W6-EM]
+- nom: Visual Studio Code
+  logo: vscode.svg
+  identifiant: aucun
+  description: L'éditeur de code gratuit de Microsoft, léger, avec des extensions pour presque tous les langages.
+  lien: https://code.visualstudio.com/
+  bouton: Télécharger VS Code
+  cours: [420-4W6-EM, 420-5W6-EM]
 - nom: Office 365
   logo: microsoft-365.svg
   identifiant: matricule@cegepmontpetit.ca
