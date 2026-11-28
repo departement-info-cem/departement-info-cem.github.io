@@ -1,9 +1,7 @@
 # Consignes pour Claude
 
-Ce dépôt contient deux sites :
-
-- `web/` : le site (Next.js, publié à la racine de https://info.cegepmontpetit.ca/). **Tout le travail se fait là.**
-- `angular/` : l'ancien site, plus déployé (il sera supprimé). N'y touche pas, ni aux fichiers JSON de `data/` qu'il lit, sauf demande explicite.
+Ce dépôt contient le site du département : le code dans `web/` (Next.js, publié à la racine de https://info.cegepmontpetit.ca/),
+le contenu dans `data/` (YAML).
 
 Commandes du site (dans `web/`) : voir [web/README.md](web/README.md). Particularités de cette version de Next.js : @web/AGENTS.md
 

@@ -1,5 +1,4 @@
 # Mises à jour de sécurité et de versions, regroupées pour limiter le nombre de PR.
-# Le site Angular (angular/) n'est pas suivi : il sera retiré à la bascule.
 version: 2
 updates:
   - package-ecosystem: npm

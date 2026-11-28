@@ -147,7 +147,7 @@ Le site est reconstruit à chaque push sur `main`, et chaque matin de semaine po
 │   ├── lib/           la logique : horaires, disponibilités, agendas, calendrier
 │   ├── scripts/       vérification des données, calendrier scolaire, photos
 │   └── tests/         les tests Vitest
-└── angular/           l'ancien site, plus déployé (il sera supprimé)
+└── .github/           déploiement (GitHub Actions) et captures du README
 ```
 
 ## Contribuer

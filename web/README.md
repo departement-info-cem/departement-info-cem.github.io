@@ -32,8 +32,6 @@ Tout le contenu est dans `data/`, en YAML :
 - `data/cours-service.yaml`, `data/laboratoires.yaml`, `data/faq.yaml`, `data/bot.yaml` (le bot d'orientation), `data/logiciels.yaml`.
 - `data/photos/` : les photos des profs.
 
-Les fichiers JSON de `data/` ne servent qu'à l'ancien site Angular.
-
 ### Profs actifs
 
 Calculé (`web/lib/actif.ts`) d'après les cours et la session de la fiche, avec 30 jours de grâce en début de session.
@@ -106,5 +104,3 @@ et les `/react/donnees/cours/*.json` (sites de cours) sont recopiés tels quels 
 GitHub Actions (`.github/workflows/deploy.yml`) construit et publie le site sur GitHub Pages à chaque push sur `main`
 et chaque matin de semaine. Le lint et les tests tournent en parallèle sur une autre machine : le site n'est publié que si tout réussit.
 Chaque pull request passe les mêmes vérifications, sans publication (`test-deploy.yml`).
-
-L'ancien site Angular (`angular/` et les fichiers JSON de `data/`) n'est plus déployé ; il sera supprimé.
