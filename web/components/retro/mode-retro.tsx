@@ -172,26 +172,27 @@ export function ModeRetro() {
   }, []);
 
   const surTouche = useEffectEvent((e: KeyboardEvent) => {
-    if (e.ctrlKey || e.metaKey || e.altKey || e.defaultPrevented) return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
     const cible = e.target instanceof Element ? e.target : null;
-    if (phase === "allume") {
-      if (e.key === "F2") {
-        e.preventDefault();
-        changerPhosphore();
-        return;
-      }
-      // Échap ferme d'abord une fenêtre ou un menu ouvert ; il quitte le mode seulement s'il n'y en a pas.
-      if (e.key === "F10" || (e.key === "Escape" && !cible?.closest(`${SAISIE}, [role="dialog"], [role="menu"], [role="listbox"]`))) {
-        e.preventDefault();
-        quitter();
+    // Le code compte même si la touche a déjà servi : dans la salle 3D, les flèches font aussi marcher.
+    if (!cible?.closest(SAISIE)) {
+      clavier.current = ajouterTouche(clavier.current, e.key);
+      if (codeComplet(clavier.current, CODE_CLAVIER)) {
+        clavier.current = [];
+        basculer();
         return;
       }
     }
-    if (cible?.closest(SAISIE)) return;
-    clavier.current = ajouterTouche(clavier.current, e.key);
-    if (codeComplet(clavier.current, CODE_CLAVIER)) {
-      clavier.current = [];
-      basculer();
+    if (e.defaultPrevented || phase !== "allume") return;
+    if (e.key === "F2") {
+      e.preventDefault();
+      changerPhosphore();
+      return;
+    }
+    // Échap ferme d'abord une fenêtre ou un menu ouvert, et sert aux jeux ; il quitte le mode seulement sinon.
+    if (e.key === "F10" || (e.key === "Escape" && !cible?.closest(`${SAISIE}, [role="dialog"], [role="menu"], [role="listbox"], [role="application"]`))) {
+      e.preventDefault();
+      quitter();
     }
   });
 

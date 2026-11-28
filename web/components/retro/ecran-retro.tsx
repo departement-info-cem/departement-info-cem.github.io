@@ -1,14 +1,18 @@
 "use client";
 import { useEffect, useEffectEvent, useState, type ButtonHTMLAttributes, type CSSProperties } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useMaintenant } from "@/app/_hooks/use-maintenant";
 import { chemin } from "@/lib/chemins";
 import { cheminDos, type Phosphore } from "@/lib/retro";
 import type { Phase } from "@/components/retro/mode-retro";
 
 // Ce qui s'ajoute au site en mode rétro (voir mode-retro.tsx) : l'écran de démarrage, la barre d'état
-// à la Norton Commander, le balayage de l'écran à chaque page et l'extinction. Chargé à la première activation.
+// à la Norton Commander, le balayage de l'écran à chaque page, l'extinction, et la salle 3D où l'on se promène
+// quand on se lève de sa chaise. Chargé à la première activation ; la salle, la première fois qu'on se lève.
+
+const Salle3D = dynamic(() => import("@/components/retro/salle-3d").then((m) => m.Salle3D), { ssr: false });
 
 type Props = { phase: Phase; phosphore: Phosphore; passer: () => void; changerPhosphore: () => void; quitter: () => void };
 
@@ -18,6 +22,7 @@ export function EcranRetro({ phase, phosphore, passer, changerPhosphore, quitter
       {phase === "demarrage" && <Demarrage passer={passer} />}
       {(phase === "allume" || phase === "extinction") && <BarreEtat phosphore={phosphore} changerPhosphore={changerPhosphore} quitter={quitter} />}
       {phase === "allume" && <Balayage />}
+      {phase === "allume" && <Salle />}
       {phase === "extinction" && <div className="retro-extinction" aria-hidden />}
       {phase === "fondu" && <div className="retro-fondu" aria-hidden />}
     </>
@@ -128,4 +133,47 @@ function Balayage() {
     setN(n + 1);
   }
   return n > 0 ? <div key={n} className="retro-balayage" aria-hidden /> : null;
+}
+
+// Les touches qui font se lever de sa chaise : celles pour marcher dans la salle. Pas dans un champ, ni dans un menu,
+// une liste ou un jeu qui se sert déjà des flèches ; et Espace garde son rôle sur un bouton ou un lien.
+const TOUCHES_SALLE = new Set(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "KeyW", "KeyA", "KeyS", "KeyD", "Space"]);
+const PAS_ICI =
+  'input, textarea, select, [contenteditable]:not([contenteditable="false"]), [role="menu"], [role="menubar"], [role="listbox"], [role="tablist"], [role="radiogroup"], [role="slider"], [role="spinbutton"], [role="combobox"], [role="grid"], [role="tree"], [role="dialog"], [role="application"]';
+const PAS_ESPACE = 'button, a[href], summary, [role="button"], [role="checkbox"], [role="switch"]';
+
+function Salle() {
+  const [debout, setDebout] = useState(false);
+  const router = useRouter();
+  const page = usePathname();
+  // Changement de page (bouton Précédent...) : la copie de la page dans l'écran virtuel serait périmée
+  const [pageDepart, setPageDepart] = useState(page);
+  if (page !== pageDepart) {
+    setPageDepart(page);
+    setDebout(false);
+  }
+
+  const surTouche = useEffectEvent((e: KeyboardEvent) => {
+    if (debout || e.defaultPrevented || e.repeat || e.ctrlKey || e.metaKey || e.altKey || !TOUCHES_SALLE.has(e.code)) return;
+    const cible = e.target instanceof Element ? e.target : null;
+    if (cible?.closest(PAS_ICI) || (e.code === "Space" && cible?.closest(PAS_ESPACE)) || document.querySelector('[role="dialog"]')) return;
+    e.preventDefault();
+    setDebout(true);
+  });
+  useEffect(() => {
+    const f = (e: KeyboardEvent) => surTouche(e);
+    addEventListener("keydown", f);
+    return () => removeEventListener("keydown", f);
+  }, []);
+
+  if (!debout) return null;
+  return (
+    <Salle3D
+      rassis={() => setDebout(false)}
+      aller={(href) => {
+        setDebout(false);
+        router.push(href);
+      }}
+    />
+  );
 }
