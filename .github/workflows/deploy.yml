@@ -26,8 +26,7 @@ jobs:
           # Garde les paquets npm téléchargés tant que package-lock.json ne change pas
           cache: npm
           cache-dependency-path: web/package-lock.json
-      # ---------- Site Next.js (web/), publié à la racine ----------
-      - name: Installer les dépendances (React)
+      - name: Installer les dépendances
         working-directory: web
         run: npm ci --no-audit --no-fund
 
@@ -50,7 +49,7 @@ jobs:
           key: tsbuildinfo-${{ github.sha }}
           restore-keys: tsbuildinfo-
 
-      - name: Build (React)
+      - name: Build
         working-directory: web
         run: npm run build
 
@@ -79,10 +78,10 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: web/package-lock.json
-      - name: Installer les dépendances (React)
+      - name: Installer les dépendances
         working-directory: web
         run: npm ci --no-audit --no-fund
-      - name: Lint et tests (React)
+      - name: Lint et tests
         working-directory: web
         run: |
           npm run lint
