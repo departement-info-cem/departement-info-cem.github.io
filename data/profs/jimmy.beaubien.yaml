@@ -22,18 +22,12 @@ aide: [420-1P6-EM, 420-2P6-EM, 420-1B3-EM, 420-983-EM]   # cours pour lesquels t
 horaire:
   prerempli: true
   debut: "08:00"
-  fin: "19:00"
+  fin: "18:00"
   plages:
     - { jour: mardi, debut: "12:10", fin: "15:00", type: cours, cours: 420-983-EM, groupe: 1180, local: D-0008 }
     - { jour: mardi, debut: "15:10", fin: "18:00", type: cours, cours: 420-983-EM, groupe: 1120, local: D-0008 }
     - { jour: vendredi, debut: "12:10", fin: "15:00", type: cours, cours: 420-983-EM, groupe: 1170, local: D-0603 }
     - { jour: vendredi, debut: "15:10", fin: "18:00", type: cours, cours: 420-983-EM, groupe: 1160, local: D-0603 }
-    - { jour: lundi, debut: "10:00", fin: "15:00", type: dispo, titre: "Sur rendez-vous (LÉA ou Teams)", local: Teams }
-    - { jour: mardi, debut: "10:15", fin: "12:00", type: dispo, local: E-213 }
-    - { jour: mardi, debut: "18:00", fin: "19:00", type: dispo, local: D-0008 }
-    - { jour: mercredi, debut: "10:00", fin: "15:00", type: dispo, titre: "Sur rendez-vous (LÉA ou Teams)", local: Teams }
-    - { jour: vendredi, debut: "10:15", fin: "12:00", type: dispo, local: D-0008 }   # « E-008 » sur la photo, à confirmer
-    - { jour: vendredi, debut: "18:00", fin: "19:00", type: dispo, local: D-0603 }
 #    - { jour: mardi, debut: "13:00", fin: "15:00", type: dispo, local: E-2xx }   # exemple de disponibilité
 
 # ---------- Calendrier : tes dates à toi (remises, examens, absences...) ----------

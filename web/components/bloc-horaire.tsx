@@ -3,6 +3,7 @@ import type { PlageAffichee } from "@/lib/horaire";
 import { LIBELLES_TYPES_PLAGE } from "@/app/_types/prof";
 import { court } from "@/lib/mes-cours";
 import { nomCourt, simplifier } from "@/lib/texte";
+import { heureEnMinutes } from "@/lib/temps";
 import type { InfoCours } from "@/components/horaire-semaine";
 
 /** Ce qu'on peut dire d'une plage : en abrégé dans son bloc, au complet dans la fenêtre de détails. */
@@ -17,7 +18,8 @@ export function textesPlage(p: PlageAffichee, cours: InfoCours) {
   const sigleEnTitre = p.cours && titre.toUpperCase().split(/[^0-9A-Z]+/).includes(court(p.cours.toUpperCase()));
   return {
     titre,
-    titreCourt: nomsEnTitre ? noms.map(nomCourt).join(", ") : titre,
+    // Dans le bloc, « Dispo » laisse la place au local dans les petites plages
+    titreCourt: nomsEnTitre ? noms.map(nomCourt).join(", ") : !p.titre && p.type === "dispo" ? "Dispo" : titre,
     noms: nomsEnTitre ? [] : noms,
     sigle: p.cours ? [p.cours, groupe].filter(Boolean).join(" ") : "",
     sigleCourt: p.cours ? [sigleEnTitre ? "" : court(p.cours), groupe].filter(Boolean).join(" ") : "",
@@ -29,16 +31,22 @@ export function textesPlage(p: PlageAffichee, cours: InfoCours) {
 // colonne suivante, hors du bloc : rien n'est coupé au milieu, et le détail complet s'ouvre d'un clic.
 export function ContenuBloc({ p, cours }: { p: PlageAffichee; cours: InfoCours }) {
   const t = textesPlage(p, cours);
+  // 30 min ou moins : une ou deux lignes seulement, le local monte sur la ligne du titre pour rester visible
+  const duree = (heureEnMinutes(p.fin) ?? 0) - (heureEnMinutes(p.debut) ?? 0);
+  const localEnTitre = !!p.local && duree <= 30;
   return (
     <span className="flex h-full w-full flex-col flex-wrap justify-center content-start gap-x-8 overflow-clip leading-[14px] @max-[6rem]:text-[11px]">
-      <Ligne className="font-semibold">{t.titreCourt}</Ligne>
+      <Ligne className="font-semibold">
+        {t.titreCourt}
+        {localEnTitre && <span className="font-normal"> · {p.local}</span>}
+      </Ligne>
       {t.noms.length > 0 && <Ligne>{t.noms.map(nomCourt).join(", ")}</Ligne>}
       <Ligne>
         <span className="whitespace-nowrap">
           {p.debut}
           <span className="@max-[7rem]:hidden">–{p.fin}</span>
         </span>
-        {p.local && (
+        {p.local && !localEnTitre && (
           <>
             {" "}
             <span className="@min-[2.75rem]:whitespace-nowrap">
