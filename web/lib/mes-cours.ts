@@ -15,7 +15,7 @@ export type Seance = { jour: string; debut: string; fin: string; local?: string 
 export type GroupeCours = { cours: string; prof: string; groupe?: string; session?: string; seances: Seance[] };
 
 /** aide : les cours pour lesquels il peut aider (ceux qu'il donne compris) ; calendrier : ses dates. Numéros de cours canoniques. */
-export type InfoProfMesCours = { nom: string; session?: string; cours: string[]; aide: string[]; dispos: Plage[]; calendrier: EvenementProf[] };
+export type InfoProfMesCours = { nom: string; photo?: string; session?: string; cours: string[]; aide: string[]; dispos: Plage[]; calendrier: EvenementProf[] };
 
 /** Ce que le serveur prépare au build (profs actifs seulement), passé une fois dans le layout. */
 export type DonneesMesCours = {
