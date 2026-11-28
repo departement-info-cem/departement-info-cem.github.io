@@ -31,7 +31,7 @@ horaire:
     - { jour: jeudi, debut: "08:10", fin: "11:00", type: cours, cours: 420-1P6-EM, groupe: 1010, local: D-0605 }
     - { jour: jeudi, debut: "12:10", fin: "15:00", type: cours, cours: 420-1P6-EM, groupe: 1020, local: D-0605 }
     - { jour: mercredi, debut: "09:00", fin: "11:00", type: dispo, local: E-212 }
-    - { jour: vendredi, debut: "09:00", fin: "11:00", type: dispo, local: D-0008 }
+    - { jour: vendredi, debut: "09:00", fin: "11:00", type: centre-aide, local: D-0008 }
     - { jour: mercredi, debut: "12:00", fin: "14:00", type: reunion, titre: "Réunion de département" }
 #    - { jour: mardi, debut: "13:00", fin: "15:00", type: dispo, local: E-2xx }   # exemple de disponibilité
 
