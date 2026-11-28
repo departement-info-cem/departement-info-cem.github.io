@@ -2,6 +2,7 @@
 import { useEffect, useEffectEvent, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { useAnimationsReduites } from "@/app/_hooks/use-animations-reduites";
+import { chemin } from "@/lib/chemins";
 import { ajouterEntree, ajouterTouche, CODE_CLAVIER, CODE_TACTILE, codeComplet, geste, lirePhosphore, PHOSPHORES, phosphoreSuivant, type Entree, type Phosphore } from "@/lib/retro";
 
 // Easter egg : le code Konami donne au site l'allure d'un terminal des années 80 (voir lib/retro.ts).
@@ -20,6 +21,13 @@ const CLE = "retro-depinfo";
 
 // Couleur de chaque phosphore en RVB de 0 à 1 : les mêmes que --p dans globals.css.
 const COULEURS: Record<Phosphore, [number, number, number]> = { vert: [0.2, 1, 0.4], ambre: [1, 0.69, 0], blanc: [0.875, 0.914, 1] };
+
+// La musique du mode rétro : « Take Your Shot », de Melody Ayres-Griffiths (banque Pixabay, n° 151736).
+// Le MP3 d'origine (9,5 Mo) est réencodé en Opus mono à 24 kbit/s (1 Mo), et son silence final retiré pour boucler :
+//   ffmpeg -i origine.mp3 -t 294.6 -ac 1 -c:a libopus -b:a 24k -vbr constrained -map_metadata -1 musique.webm
+// Elle ne se télécharge qu'au moment où on entre dans le mode.
+const MUSIQUE = "/retro/musique.webm";
+const VOLUME = 0.4;
 
 // Champs où les flèches et les lettres servent à écrire (recherche, éditeur Python du jeu d'Octet...)
 const SAISIE = 'input, textarea, select, [contenteditable]:not([contenteditable="false"])';
@@ -93,9 +101,12 @@ export function ModeRetro() {
   const [phase, setPhase] = useState<Phase>("eteint");
   const [phosphore, setPhosphore] = useState<Phosphore>("vert");
   const [annonce, setAnnonce] = useState("");
+  const [son, setSon] = useState(false);
   const animationsReduites = useAnimationsReduites();
   const minuterie = useRef<ReturnType<typeof setTimeout>>(undefined);
   const audio = useRef<AudioContext | null>(null);
+  const musique = useRef<HTMLAudioElement | null>(null);
+  const fondu = useRef<ReturnType<typeof setInterval>>(undefined);
   const clavier = useRef<readonly Entree[]>([]);
   const tactile = useRef<readonly Entree[]>([]);
 
@@ -104,13 +115,70 @@ export function ModeRetro() {
     minuterie.current = setTimeout(action, ms);
   }
 
+  // Lance la musique depuis le début, en boucle. Seulement juste après un geste (le code Konami, F3) :
+  // sinon les navigateurs la bloquent. Vrai si elle joue (ou va jouer).
+  function jouerMusique(): boolean {
+    try {
+      if (!musique.current) {
+        const a = new Audio();
+        if (!a.canPlayType('audio/webm; codecs="opus"')) return false;
+        a.src = chemin(MUSIQUE);
+        a.loop = true;
+        musique.current = a;
+      }
+      const a = musique.current;
+      clearInterval(fondu.current);
+      Object.assign(a, { currentTime: 0, playbackRate: 1, volume: VOLUME, muted: false });
+      a.play().catch(() => setSon(false));
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  // À l'extinction, la musique ralentit et descend dans les graves en s'éteignant, comme une cassette qui perd le courant.
+  function arreterMusique(duree: number) {
+    const a = musique.current;
+    clearInterval(fondu.current);
+    setSon(false);
+    if (!a || a.paused) return;
+    const fin = () => {
+      clearInterval(fondu.current);
+      a.pause();
+      Object.assign(a, { currentTime: 0, playbackRate: 1, volume: VOLUME });
+    };
+    if (!duree) return fin();
+    a.preservesPitch = false;
+    const debut = performance.now();
+    fondu.current = setInterval(() => {
+      const t = Math.min(1, (performance.now() - debut) / duree);
+      a.playbackRate = 1 - 0.7 * t;
+      a.volume = VOLUME * (1 - t);
+      if (t >= 1) fin();
+    }, 30);
+  }
+
+  // F3, ou le bouton de la barre d'état : coupe ou remet le son. Après un rechargement (pas de geste, donc pas de
+  // musique), il la lance.
+  function basculerSon() {
+    const a = musique.current;
+    if (son && a) {
+      a.muted = true;
+      setSon(false);
+    } else if (a && !a.paused) {
+      a.muted = false;
+      setSon(true);
+    } else setSon(jouerMusique());
+  }
+
   function activer() {
     // Créé pendant la touche ou le toucher : les navigateurs bloquent le son qui ne suit pas un geste.
     try {
       audio.current ??= new AudioContext();
     } catch {}
+    setSon(jouerMusique());
     appliquer(true, phosphore);
-    setAnnonce("Mode rétro activé. Échap, F10 ou le même code pour en sortir.");
+    setAnnonce("Mode rétro activé, avec de la musique : F3 pour la couper. Échap, F10 ou le même code pour en sortir.");
     if (animationsReduites) {
       setPhase("allume");
       bip(audio.current);
@@ -129,6 +197,7 @@ export function ModeRetro() {
 
   function quitter() {
     setAnnonce("Mode rétro désactivé.");
+    arreterMusique(animationsReduites ? 0 : DUREES.extinction);
     if (animationsReduites) {
       appliquer(false, phosphore);
       setPhase("eteint");
@@ -189,6 +258,11 @@ export function ModeRetro() {
       changerPhosphore();
       return;
     }
+    if (e.key === "F3") {
+      e.preventDefault();
+      basculerSon();
+      return;
+    }
     // Échap ferme d'abord une fenêtre ou un menu ouvert, et sert aux jeux ; il quitte le mode seulement sinon.
     if (e.key === "F10" || (e.key === "Escape" && !cible?.closest(`${SAISIE}, [role="dialog"], [role="menu"], [role="listbox"], [role="application"]`))) {
       e.preventDefault();
@@ -237,7 +311,9 @@ export function ModeRetro() {
       </p>
       {/* Écran noir tout de suite, le temps que l'écran de démarrage se charge la première fois */}
       {phase === "demarrage" && <div className="retro-noir" aria-hidden />}
-      {phase !== "eteint" && <EcranRetro phase={phase} phosphore={phosphore} passer={demarre} changerPhosphore={changerPhosphore} quitter={quitter} />}
+      {phase !== "eteint" && (
+        <EcranRetro phase={phase} phosphore={phosphore} son={son} passer={demarre} changerPhosphore={changerPhosphore} basculerSon={basculerSon} quitter={quitter} />
+      )}
     </>
   );
 }

@@ -14,13 +14,13 @@ import type { Phase } from "@/components/retro/mode-retro";
 
 const Salle3D = dynamic(() => import("@/components/retro/salle-3d").then((m) => m.Salle3D), { ssr: false });
 
-type Props = { phase: Phase; phosphore: Phosphore; passer: () => void; changerPhosphore: () => void; quitter: () => void };
+type Props = { phase: Phase; phosphore: Phosphore; son: boolean; passer: () => void; changerPhosphore: () => void; basculerSon: () => void; quitter: () => void };
 
-export function EcranRetro({ phase, phosphore, passer, changerPhosphore, quitter }: Props) {
+export function EcranRetro({ phase, phosphore, son, passer, changerPhosphore, basculerSon, quitter }: Props) {
   return (
     <>
       {phase === "demarrage" && <Demarrage passer={passer} />}
-      {(phase === "allume" || phase === "extinction") && <BarreEtat phosphore={phosphore} changerPhosphore={changerPhosphore} quitter={quitter} />}
+      {(phase === "allume" || phase === "extinction") && <BarreEtat phosphore={phosphore} son={son} changerPhosphore={changerPhosphore} basculerSon={basculerSon} quitter={quitter} />}
       {phase === "allume" && <Balayage />}
       {phase === "allume" && <Salle />}
       {phase === "extinction" && <div className="retro-extinction" aria-hidden />}
@@ -94,7 +94,7 @@ function Demarrage({ passer }: { passer: () => void }) {
 const NOMS: Record<Phosphore, string> = { vert: "Vert", ambre: "Ambre", blanc: "Blanc" };
 
 // En bas de l'écran, comme les touches de fonction de Norton Commander : le numéro, puis l'action en vidéo inverse.
-function BarreEtat({ phosphore, changerPhosphore, quitter }: Omit<Props, "phase" | "passer">) {
+function BarreEtat({ phosphore, son, changerPhosphore, basculerSon, quitter }: Omit<Props, "phase" | "passer">) {
   const page = usePathname();
   const maintenant = useMaintenant(10_000);
   const deux = (n: number) => String(n).padStart(2, "0");
@@ -102,6 +102,7 @@ function BarreEtat({ phosphore, changerPhosphore, quitter }: Omit<Props, "phase"
   return (
     <div className="retro-barre no-print" role="group" aria-label="Mode rétro">
       <Touche numero="F2" libelle={NOMS[phosphore]} onClick={changerPhosphore} title="Changer la couleur de l'écran (F2)" aria-label={`Couleur de l'écran : ${NOMS[phosphore].toLowerCase()}. Changer`} />
+      <Touche numero="F3" libelle={son ? "Son" : "Muet"} onClick={basculerSon} title={son ? "Couper la musique (F3)" : "Mettre la musique (F3)"} aria-label={son ? "Couper la musique" : "Mettre la musique"} />
       <Touche numero="F10" libelle="Quitter" onClick={quitter} title="Quitter le mode rétro (F10 ou Échap)" aria-label="Quitter le mode rétro" />
       <span className="ml-auto min-w-0 truncate text-(--p-2)">{cheminDos(page)}&gt;</span>
       <span className="shrink-0" aria-hidden>
