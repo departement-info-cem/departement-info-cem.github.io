@@ -211,6 +211,7 @@ export function donneesMesCours(date = new Date()): DonneesMesCours {
     const plages = p.horaire?.plages ?? [];
     infos[p.id] = {
       nom: p.nom,
+      photo: p.photo,
       session: p.session,
       cours,
       aide: coursAide(p),

@@ -14,16 +14,27 @@ import { formaterHeure } from "@/lib/temps";
 
 const ABREGES: Record<string, string> = { lundi: "lun", mardi: "mar", mercredi: "mer", jeudi: "jeu", vendredi: "ven", samedi: "sam", dimanche: "dim" };
 
+/** « lun 8h00–11h00 D-0003 » */
+export const texteSeance = (s: Seance) => `${ABREGES[s.jour] ?? s.jour} ${formaterHeure(s.debut)}–${formaterHeure(s.fin)}${s.local ? ` ${s.local}` : ""}`;
+
+export const SANS_HORAIRE = "Horaire pas encore inscrit par le prof";
+
 export function texteSeances(seances: Seance[]): string {
-  if (!seances.length) return "Horaire pas encore inscrit par le prof";
-  return seances.map((s) => `${ABREGES[s.jour] ?? s.jour} ${formaterHeure(s.debut)}–${formaterHeure(s.fin)}${s.local ? ` ${s.local}` : ""}`).join(" · ");
+  return seances.length ? seances.map(texteSeance).join(" · ") : SANS_HORAIRE;
 }
 
 /** Les groupes d'un cours (tous les profs) ou d'un prof (tous ses cours). Un clic l'ajoute à mes cours, ou le retire. */
 export function ListeGroupes({ cours, prof }: { cours?: string; prof?: string }) {
-  const { groupes, profs, cours: index, tous, basculer } = useMesCours();
+  const { groupes, profs, cours: index, tous, basculer, retirer, perime } = useMesCours();
   const liste: GroupeCours[] = cours ? (groupes[cours] ?? []) : Object.values(groupes).flat().filter((g) => g.prof === prof);
-  const choisi = (g: GroupeCours) => tous.some((m) => memeChoix(m, choixDe(g)));
+  // Le même groupe choisi à une session passée ne compte pas : le choisir de nouveau remplace l'ancien choix, au lieu de le retirer
+  const ancien = (g: GroupeCours) => tous.find((m) => memeChoix(m, choixDe(g)) && perime(m));
+  const choisi = (g: GroupeCours) => tous.some((m) => memeChoix(m, choixDe(g)) && !perime(m));
+  const choisir = (g: GroupeCours) => {
+    const a = ancien(g);
+    if (a) retirer(a);
+    basculer(choixDe(g));
+  };
   const coursSeul = cours ? tous.find((m) => m.cours === cours && !m.prof) : undefined;
 
   return (
@@ -33,7 +44,7 @@ export function ListeGroupes({ cours, prof }: { cours?: string; prof?: string })
         {liste.map((g) => (
           <li key={`${g.cours}|${g.prof}|${g.groupe ?? ""}`}>
             <button
-              onClick={() => basculer(choixDe(g))}
+              onClick={() => choisir(g)}
               aria-pressed={choisi(g)}
               className={`flex w-full items-start gap-2 rounded-md border p-2 text-left transition hover:border-primary ${choisi(g) ? "border-primary bg-accent" : "bg-card"}`}
             >
@@ -114,11 +125,11 @@ export function ChoixGroupeDeplie({ cours }: { cours: string }) {
   );
 }
 
-/** Ajouter un cours : recherche par numéro ou nom parmi les cours donnés cette session, puis choix du groupe. */
-export function AjoutCours() {
+/** Ajouter un cours : recherche par numéro ou nom parmi les cours donnés cette session, puis choix du groupe (d'emblée, avec initial). */
+export function AjoutCours({ initial }: { initial?: string }) {
   const { groupes, cours: index } = useMesCours();
   const [texte, setTexte] = useState("");
-  const [cours, setCours] = useState<string | null>(null);
+  const [cours, setCours] = useState<string | null>(initial ?? null);
   const mots = simplifier(texte).split(/\s+/).filter(Boolean);
   // Les anciens numéros (alias) mènent aussi au cours : l'étudiant de l'ancien programme tape celui d'Omnivox (ex. 5N6 pour 5M6)
   const alias = (no: string) => Object.keys(index).filter((a) => a !== no && index[a].no.toUpperCase() === no);
