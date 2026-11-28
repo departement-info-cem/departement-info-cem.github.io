@@ -62,6 +62,7 @@ export function CalendrierMois({
   sessionId,
   coursFiltre,
   coursOrdonnes: ordreImpose,
+  sansCalendrierScolaire,
 }: {
   scolaire: CalendrierScolaire;
   plages?: Plage[];
@@ -71,13 +72,15 @@ export function CalendrierMois({
   coursFiltre?: string;
   /** ordre des cours pour leurs couleurs, s'il diffère de celui de « plages » (calendrier d'un prof filtré sur mon groupe) */
   coursOrdonnes?: string[];
+  /** le filtre « Calendrier du cégep » est d'abord désactivé (Mon calendrier) */
+  sansCalendrierScolaire?: boolean;
 }) {
   const maintenant = useMaintenant(3_600_000);
   const isoActuel = maintenant ? isoDepuisDate(maintenant) : undefined;
   const session = scolaire.sessions.find((s) => s.id === sessionId) ?? scolaire.sessions.find((s) => isoActuel && isoActuel <= s.fin) ?? scolaire.sessions[0];
   const [mois, setMois] = useState<{ annee: number; mois: number } | null>(null);
   const [vue, setVue] = useState<"mois" | "liste">("mois");
-  const [filtres, setFiltres] = useState<Set<Filtre>>(new Set(["scolaire", "seance", "prof"]));
+  const [filtres, setFiltres] = useState<Set<Filtre>>(() => new Set(sansCalendrierScolaire ? ["seance", "prof"] : ["scolaire", "seance", "prof"]));
   const [jourChoisi, setJourChoisi] = useState<JourCalendrier | null>(null);
 
   const coursOrdonnes = useMemo(() => ordreImpose ?? ordreDesCours(plages ?? []), [ordreImpose, plages]);

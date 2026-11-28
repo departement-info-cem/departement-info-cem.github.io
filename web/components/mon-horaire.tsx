@@ -37,14 +37,14 @@ export function MonHoraire() {
   );
 }
 
-/** Mes séances, les dates de mes profs pour mes cours et mon groupe, et le calendrier du cégep. */
+/** Mes séances et les dates de mes profs pour mes cours et mon groupe ; le calendrier du cégep sur demande. */
 export function MonCalendrier() {
   const scolaire = useScolaire();
   const { seances, evenements, session } = useMonCalendrier();
   return (
     <>
-      <p className="mb-3 text-sm text-muted-foreground">Tes séances, les dates que tes profs ont inscrites pour tes cours et ton groupe, et le calendrier du cégep. Les évaluations sommatives sont encadrées.</p>
-      <CalendrierMois scolaire={scolaire} plages={seances} evenements={evenements} sessionId={session} />
+      <p className="mb-3 text-sm text-muted-foreground">Tes séances et les dates que tes profs ont inscrites pour tes cours et ton groupe ; « Calendrier du cégep » ajoute les congés et les dates du cégep. Les évaluations sommatives sont encadrées.</p>
+      <CalendrierMois scolaire={scolaire} plages={seances} evenements={evenements} sessionId={session} sansCalendrierScolaire />
     </>
   );
 }
