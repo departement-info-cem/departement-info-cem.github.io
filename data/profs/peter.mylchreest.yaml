@@ -25,10 +25,13 @@ horaire:
   plages:
     - { jour: lundi, debut: "08:10", fin: "11:00", type: cours, cours: 420-983-EM, groupe: 1010, local: D-0008 }
     - { jour: lundi, debut: "12:10", fin: "15:00", type: cours, cours: 420-983-EM, groupe: 1020, local: D-0008 }
-    - { jour: mardi, debut: "08:10", fin: "10:30", type: cours, cours: 420-1C5-EM, groupe: 1010, local: D-0226 }
-    - { jour: mardi, debut: "10:30", fin: "13:00", type: cours, cours: 420-1C5-EM, groupe: 1020, local: D-0226 }
+    - { jour: mardi, debut: "08:10", fin: "10:00", type: cours, cours: 420-1C5-EM, groupe: 1010, local: D-0226 }
+    - { jour: mardi, debut: "10:30", fin: "12:40", type: cours, cours: 420-1C5-EM, groupe: 1020, local: D-0226 }
     - { jour: vendredi, debut: "08:10", fin: "10:30", type: cours, cours: 420-1C5-EM, groupe: 1020, local: D-0226 }
     - { jour: vendredi, debut: "10:30", fin: "13:00", type: cours, cours: 420-1C5-EM, groupe: 1010, local: D-0226 }
+    - { jour: jeudi, debut: "12:00", fin: "15:00", type: dispo, local: E-214 }
+    - { jour: mardi, debut: "10:00", fin: "10:30", type: dispo, local: D-0226 }   # lu sur la photo, à confirmer
+    - { jour: mardi, debut: "12:40", fin: "13:00", type: dispo, local: D-0226 }   # lu sur la photo, à confirmer
 #    - { jour: mardi, debut: "13:00", fin: "15:00", type: dispo, local: E-2xx }   # exemple de disponibilité
 
 # ---------- Calendrier : tes dates à toi (remises, examens, absences...) ----------

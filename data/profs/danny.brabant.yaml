@@ -30,6 +30,9 @@ horaire:
     - { jour: jeudi, debut: "08:10", fin: "11:00", type: cours, cours: 420-1X6-EM, groupe: 1040, local: D-0624 }
     - { jour: jeudi, debut: "12:10", fin: "15:00", type: cours, cours: 420-1X6-EM, groupe: 1030, local: D-0602 }
     - { jour: vendredi, debut: "15:10", fin: "18:00", type: cours, cours: 420-5V6-EM, groupe: 1020, local: D-0622 }
+    - { jour: mercredi, debut: "11:00", fin: "12:00", type: dispo, local: D-0620 }
+    - { jour: jeudi, debut: "11:00", fin: "12:00", type: centre-aide, local: D-0008 }
+    - { jour: vendredi, debut: "13:00", fin: "15:00", type: dispo, local: D-0622 }
 #    - { jour: mardi, debut: "13:00", fin: "15:00", type: dispo, local: E-2xx }   # exemple de disponibilité
 
 # ---------- Calendrier : tes dates à toi (remises, examens, absences...) ----------
