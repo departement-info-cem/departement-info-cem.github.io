@@ -15,6 +15,9 @@ import { chemin } from "@/lib/chemins";
 import { JOURS, isoDepuisDate, normaliserJour } from "@/lib/temps";
 import { estActif } from "@/lib/actif";
 import { formaterErreurs } from "@/lib/erreurs";
+import { pagesRaccourcis, raccourcisCours, trouverRaccourci, type RaccourciCours } from "@/lib/raccourcis-cours";
+import { ROUTES_RESERVEES } from "@/lib/validation";
+import { BASE, SITE } from "@/lib/chemins";
 
 export const DOSSIER_DONNEES = path.resolve(process.cwd(), process.env.DOSSIER_DONNEES ?? "../data");
 
@@ -157,6 +160,25 @@ export function coursService(): ServiceAffiche[] {
 /** Version légère des profs (pour la page « Locaux »). */
 export function profsHoraire(): ProfHoraire[] {
   return profs().map((p) => ({ id: p.id, nom: p.nom, session: p.session, calendrier: p.calendrier, bureau: p.bureau, photo: p.photo, plages: p.horaire?.plages ?? [] }));
+}
+
+/** Raccourcis /<sigle>/ vers les sites des cours (voir lib/raccourcis-cours.ts). */
+export function raccourcis(): RaccourciCours[] {
+  return enCache("raccourcis", () => {
+    const { raccourcis, conflits } = raccourcisCours(catalogue(), [...ROUTES_RESERVEES, ...fichiersProfs().map((f) => f.replace(/\.yaml$/, ""))]);
+    if (conflits.length) throw new Error(`Erreur dans data/cours.yaml :\n${conflits.map((c) => `  - ${c}`).join("\n")}`);
+    return raccourcis;
+  });
+}
+
+/** Le raccourci d'un segment d'adresse, peu importe la casse. */
+export function raccourci(segment: string): RaccourciCours | undefined {
+  return trouverRaccourci(raccourcis(), segment);
+}
+
+/** Les segments d'adresse des pages de raccourcis à générer (1P6 et 1p6...). */
+export function segmentsRaccourcis(): string[] {
+  return pagesRaccourcis(raccourcis(), `${SITE}${BASE}`).map((p) => p.segment);
 }
 
 export function bot(): Bot {

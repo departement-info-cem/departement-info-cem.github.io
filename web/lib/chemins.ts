@@ -2,6 +2,9 @@
 // mais pas les <img> ni les URL construites à la main.
 export const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
+/** Le domaine du site (sans le basePath). */
+export const SITE = "https://info.cegepmontpetit.ca";
+
 export function chemin(p: string): string {
   return `${BASE}${p.startsWith("/") ? p : `/${p}`}`;
 }

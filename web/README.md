@@ -56,6 +56,15 @@ Les logos de l'en-tête sont dans `web/public/images/liens/`.
 
 `/<prof>/horaire/` et `/<prof>/calendrier/`, avec `?cours=420-5N6-EM` au besoin.
 
+## Raccourcis vers les sites des cours
+
+`/4W6/`, `/4D5/`... Une page par cours qui a une `url` dans `data/cours.yaml` (et une par ancien numéro en `alias`),
+qui redirige vers ce site (`web/lib/raccourcis-cours.ts`).
+
+- Les majuscules ne comptent pas : une page pour `4W6` et une pour `4w6`, et la page 404 rattrape les autres casses (`Sn1`).
+- Aucune page ne redirige vers elle-même : `/1P6/` est l'adresse même du site du 1P6, seule `/1p6/` est générée.
+- `npm run valider` refuse un sigle qui mènerait à deux sites, ou qui prendrait l'adresse d'un prof ou d'une page.
+
 ## Données pour les sites de cours
 
 `/donnees/cours/<numéro>.json` (ex. https://info.cegepmontpetit.ca/donnees/cours/420-5N6-EM.json) est écrit à chaque build

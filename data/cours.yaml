@@ -6,6 +6,9 @@
 #   fiche: fiche officielle du cours (ex. sur le site de l'UdeS), affichée dans la grille quand le cours n'a pas de site
 #   alias: autres numéros acceptés (ex. ancien numéro utilisé dans un horaire)
 #     « ancien programme » : anciens numéros, utilisés pour la dernière fois à l'automne 2026
+# Raccourcis : chaque cours qui a une url donne l'adresse courte https://info.cegepmontpetit.ca/<sigle>/,
+#   qui redirige vers son site (420-4W6-EM -> /4W6/), et une pour chaque alias (420-4D5-EM -> /4D5/).
+#   Les majuscules ne comptent pas : /4w6/ et /4W6/ mènent au même site.
 - no: 420-1B3-EM
   nom: Bureautique
   heures: 45
