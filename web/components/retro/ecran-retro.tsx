@@ -1,23 +1,28 @@
 "use client";
 import { useEffect, useEffectEvent, useState, type ButtonHTMLAttributes, type CSSProperties } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useMaintenant } from "@/app/_hooks/use-maintenant";
 import { chemin } from "@/lib/chemins";
 import { cheminDos, type Phosphore } from "@/lib/retro";
 import type { Phase } from "@/components/retro/mode-retro";
 
 // Ce qui s'ajoute au site en mode rétro (voir mode-retro.tsx) : l'écran de démarrage, la barre d'état
-// à la Norton Commander, le balayage de l'écran à chaque page et l'extinction. Chargé à la première activation.
+// à la Norton Commander, le balayage de l'écran à chaque page, l'extinction, et la salle 3D où l'on se promène
+// quand on se lève de sa chaise. Chargé à la première activation ; la salle, la première fois qu'on se lève.
 
-type Props = { phase: Phase; phosphore: Phosphore; passer: () => void; changerPhosphore: () => void; quitter: () => void };
+const Salle3D = dynamic(() => import("@/components/retro/salle-3d").then((m) => m.Salle3D), { ssr: false });
 
-export function EcranRetro({ phase, phosphore, passer, changerPhosphore, quitter }: Props) {
+type Props = { phase: Phase; phosphore: Phosphore; son: boolean; passer: () => void; changerPhosphore: () => void; basculerSon: () => void; quitter: () => void };
+
+export function EcranRetro({ phase, phosphore, son, passer, changerPhosphore, basculerSon, quitter }: Props) {
   return (
     <>
       {phase === "demarrage" && <Demarrage passer={passer} />}
-      {(phase === "allume" || phase === "extinction") && <BarreEtat phosphore={phosphore} changerPhosphore={changerPhosphore} quitter={quitter} />}
+      {(phase === "allume" || phase === "extinction") && <BarreEtat phosphore={phosphore} son={son} changerPhosphore={changerPhosphore} basculerSon={basculerSon} quitter={quitter} />}
       {phase === "allume" && <Balayage />}
+      {phase === "allume" && <Salle />}
       {phase === "extinction" && <div className="retro-extinction" aria-hidden />}
       {phase === "fondu" && <div className="retro-fondu" aria-hidden />}
     </>
@@ -89,7 +94,7 @@ function Demarrage({ passer }: { passer: () => void }) {
 const NOMS: Record<Phosphore, string> = { vert: "Vert", ambre: "Ambre", blanc: "Blanc" };
 
 // En bas de l'écran, comme les touches de fonction de Norton Commander : le numéro, puis l'action en vidéo inverse.
-function BarreEtat({ phosphore, changerPhosphore, quitter }: Omit<Props, "phase" | "passer">) {
+function BarreEtat({ phosphore, son, changerPhosphore, basculerSon, quitter }: Omit<Props, "phase" | "passer">) {
   const page = usePathname();
   const maintenant = useMaintenant(10_000);
   const deux = (n: number) => String(n).padStart(2, "0");
@@ -97,6 +102,7 @@ function BarreEtat({ phosphore, changerPhosphore, quitter }: Omit<Props, "phase"
   return (
     <div className="retro-barre no-print" role="group" aria-label="Mode rétro">
       <Touche numero="F2" libelle={NOMS[phosphore]} onClick={changerPhosphore} title="Changer la couleur de l'écran (F2)" aria-label={`Couleur de l'écran : ${NOMS[phosphore].toLowerCase()}. Changer`} />
+      <Touche numero="F3" libelle={son ? "Son" : "Muet"} onClick={basculerSon} title={son ? "Couper la musique (F3)" : "Mettre la musique (F3)"} aria-label={son ? "Couper la musique" : "Mettre la musique"} />
       <Touche numero="F10" libelle="Quitter" onClick={quitter} title="Quitter le mode rétro (F10 ou Échap)" aria-label="Quitter le mode rétro" />
       <span className="ml-auto min-w-0 truncate text-(--p-2)">{cheminDos(page)}&gt;</span>
       <span className="shrink-0" aria-hidden>
@@ -128,4 +134,47 @@ function Balayage() {
     setN(n + 1);
   }
   return n > 0 ? <div key={n} className="retro-balayage" aria-hidden /> : null;
+}
+
+// Les touches qui font se lever de sa chaise : celles pour marcher dans la salle. Pas dans un champ, ni dans un menu,
+// une liste ou un jeu qui se sert déjà des flèches ; et Espace garde son rôle sur un bouton ou un lien.
+const TOUCHES_SALLE = new Set(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "KeyW", "KeyA", "KeyS", "KeyD", "Space"]);
+const PAS_ICI =
+  'input, textarea, select, [contenteditable]:not([contenteditable="false"]), [role="menu"], [role="menubar"], [role="listbox"], [role="tablist"], [role="radiogroup"], [role="slider"], [role="spinbutton"], [role="combobox"], [role="grid"], [role="tree"], [role="dialog"], [role="application"]';
+const PAS_ESPACE = 'button, a[href], summary, [role="button"], [role="checkbox"], [role="switch"]';
+
+function Salle() {
+  const [debout, setDebout] = useState(false);
+  const router = useRouter();
+  const page = usePathname();
+  // Changement de page (bouton Précédent...) : la copie de la page dans l'écran virtuel serait périmée
+  const [pageDepart, setPageDepart] = useState(page);
+  if (page !== pageDepart) {
+    setPageDepart(page);
+    setDebout(false);
+  }
+
+  const surTouche = useEffectEvent((e: KeyboardEvent) => {
+    if (debout || e.defaultPrevented || e.repeat || e.ctrlKey || e.metaKey || e.altKey || !TOUCHES_SALLE.has(e.code)) return;
+    const cible = e.target instanceof Element ? e.target : null;
+    if (cible?.closest(PAS_ICI) || (e.code === "Space" && cible?.closest(PAS_ESPACE)) || document.querySelector('[role="dialog"]')) return;
+    e.preventDefault();
+    setDebout(true);
+  });
+  useEffect(() => {
+    const f = (e: KeyboardEvent) => surTouche(e);
+    addEventListener("keydown", f);
+    return () => removeEventListener("keydown", f);
+  }, []);
+
+  if (!debout) return null;
+  return (
+    <Salle3D
+      rassis={() => setDebout(false)}
+      aller={(href) => {
+        setDebout(false);
+        router.push(href);
+      }}
+    />
+  );
 }

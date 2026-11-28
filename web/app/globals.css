@@ -259,7 +259,8 @@
 /* Bandeau défilant (voir components/bandeau.tsx) */
 /* Fixé en bas : la page garde la place en dessous pour ne rien cacher, seulement quand il est affiché */
 .bandeau-bas { --hauteur: 2.25rem; height: calc(var(--hauteur) + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom); }
-body:has(.bandeau-bas) { padding-bottom: calc(2.25rem + env(safe-area-inset-bottom)); }
+/* .retro-copie : la copie de la page affichée dans l'écran de la salle 3D du mode rétro (components/retro/salle-3d.tsx) */
+:is(body, .retro-copie):has(.bandeau-bas) { padding-bottom: calc(2.25rem + env(safe-area-inset-bottom)); }
 /* Les ancres s'arrêtent sous l'en-tête collant (et au-dessus du bandeau) */
 html { scroll-padding-top: 5rem; }
 html:has(.bandeau-bas) { scroll-padding-bottom: 3rem; }
@@ -465,7 +466,7 @@ html:has(.bandeau-bas) { scroll-padding-bottom: 3rem; }
   html.retro[data-phosphore="blanc"] { --p: #dfe9ff; --filtre-image: url(#retro-blanc); }
 
   /* Lueur du phosphore autour des lettres */
-  html.retro body { text-shadow: 0 0 1px color-mix(in srgb, currentColor 70%, transparent), 0 0 8px color-mix(in srgb, currentColor 40%, transparent); }
+  html.retro :is(body, .retro-copie) { text-shadow: 0 0 1px color-mix(in srgb, currentColor 70%, transparent), 0 0 8px color-mix(in srgb, currentColor 40%, transparent); }
   html.retro :is(b, strong, h1, h2, h3, .font-bold, .font-semibold) {
     text-shadow: 0 0 1px currentColor, 0 0 4px color-mix(in srgb, currentColor 70%, transparent), 0 0 14px color-mix(in srgb, currentColor 50%, transparent);
   }
@@ -500,7 +501,7 @@ html:has(.bandeau-bas) { scroll-padding-bottom: 3rem; }
 
   /* L'écran : lignes de balayage, coins sombres et arrondis du tube, reflet de la vitre.
      Par-dessus tout, sans intercepter les clics. */
-  html.retro body::before {
+  html.retro :is(body, .retro-copie)::before {
     content: "";
     position: fixed;
     inset: 0;
@@ -514,7 +515,7 @@ html:has(.bandeau-bas) { scroll-padding-bottom: 3rem; }
     box-shadow: inset 0 0 5rem rgb(0 0 0 / 0.6), 0 0 0 3rem #000;
   }
   /* Une bande un peu plus claire descend lentement, comme le rafraîchissement d'un vieux moniteur */
-  html.retro body::after {
+  html.retro :is(body, .retro-copie)::after {
     content: "";
     position: fixed;
     inset-inline: 0;
@@ -526,8 +527,8 @@ html:has(.bandeau-bas) { scroll-padding-bottom: 3rem; }
     translate: 0 -100%;
   }
   @media (prefers-reduced-motion: no-preference) {
-    html.retro body::before { animation: retro-scintillement 6s steps(1) infinite; }
-    html.retro body::after { animation: retro-rafraichissement 8s linear infinite; }
+    html.retro :is(body, .retro-copie)::before { animation: retro-scintillement 6s steps(1) infinite; }
+    html.retro :is(body, .retro-copie)::after { animation: retro-rafraichissement 8s linear infinite; }
     html.retro h1::after, .retro-clignote { animation: terminal-curseur 1.1s steps(1) infinite; }
   }
 
@@ -550,9 +551,9 @@ html:has(.bandeau-bas) { scroll-padding-bottom: 3rem; }
     line-height: 1;
     white-space: nowrap;
   }
-  body:has(.bandeau-bas) .retro-barre { bottom: calc(2.25rem + env(safe-area-inset-bottom)); height: 1.75rem; padding-bottom: 0; }
-  html.retro body:has(.retro-barre) { padding-bottom: calc(1.75rem + env(safe-area-inset-bottom)); }
-  html.retro body:has(.retro-barre):has(.bandeau-bas) { padding-bottom: calc(4rem + env(safe-area-inset-bottom)); }
+  :is(body, .retro-copie):has(.bandeau-bas) .retro-barre { bottom: calc(2.25rem + env(safe-area-inset-bottom)); height: 1.75rem; padding-bottom: 0; }
+  html.retro :is(body, .retro-copie):has(.retro-barre) { padding-bottom: calc(1.75rem + env(safe-area-inset-bottom)); }
+  html.retro :is(body, .retro-copie):has(.retro-barre):has(.bandeau-bas) { padding-bottom: calc(4rem + env(safe-area-inset-bottom)); }
 
   /* Démarrage : le tube s'allume (un point, une ligne, puis tout l'écran), et le BIOS fait ses vérifications */
   .retro-noir, .retro-demarrage { position: fixed; inset: 0; z-index: 2147483000; background: #000; }
@@ -607,3 +608,138 @@ html:has(.bandeau-bas) { scroll-padding-bottom: 3rem; }
   77.4% { opacity: 1; }
 }
 @keyframes retro-rafraichissement { to { translate: 0 400%; } }
+
+/* ---------- Salle 3D du mode rétro (components/retro/salle-3d.tsx, mesures dans lib/salle.ts) ----------
+   Chaque face est un <div> placé dans l'espace par la caméra ; --cm vaut le nombre de pixels d'un centimètre
+   dans cette face (chacune a sa résolution). Le monde est dessiné en phosphore, comme les jeux
+   vectoriels des années 80 : faces presque noires (elles cachent ce qui est derrière), arêtes lumineuses.
+   Les grandes faces (murs, plancher) restent unies, à part leurs arêtes, et peu détaillées : le
+   navigateur garde chaque face en mémoire graphique, et quand elle déborde, des morceaux disparaissent puis
+   reviennent. Une zone d'une seule couleur, elle, ne coûte rien. Le quadrillage du plancher vient des arêtes
+   de ses dalles (de longues bandes fines clignotaient). */
+.salle {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483640;
+  overflow: hidden;
+  background: #000;
+  perspective-origin: 50% 50%;
+  color: var(--p);
+  font-family: var(--font-retro), monospace;
+  cursor: crosshair;
+  user-select: none;
+  touch-action: none;
+  --lueur: color-mix(in srgb, var(--p) 22%, transparent);
+}
+.salle-camera { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; }
+.salle-prepare { opacity: 0.01; }
+.salle-face {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  transform-origin: 0 0;
+  backface-visibility: hidden;
+  /* Ici et pas sur .salle : --cm change d'une face à l'autre (sa résolution, voir salle-3d.tsx) */
+  --arete: calc(var(--cm) * 0.6);
+  background: color-mix(in srgb, var(--p) 5%, #000);
+  box-shadow: inset 0 0 0 var(--arete) var(--p-3);
+}
+.salle-mur { background: color-mix(in srgb, var(--p) 4%, #000); }
+.salle-plancher { background: color-mix(in srgb, var(--p) 3%, #000); box-shadow: inset 0 0 0 calc(var(--cm) * 0.4) var(--p-4); }
+.salle-neon { background: var(--p); box-shadow: 0 0 calc(var(--cm) * 25) var(--p); }
+.salle-table { background: color-mix(in srgb, var(--p) 10%, #000); box-shadow: inset 0 0 0 var(--arete) var(--p-2); }
+.salle-moniteur, .salle-boitier { background: color-mix(in srgb, var(--p) 7%, #000); box-shadow: inset 0 0 0 var(--arete) var(--p-2); }
+.salle-chaise { background: color-mix(in srgb, var(--p) 4%, #000); }
+.salle-cadre { background: color-mix(in srgb, var(--p) 12%, #000); }
+.salle-noir { background: #000; box-shadow: none; }
+.salle-clavier {
+  background-color: color-mix(in srgb, var(--p) 8%, #000);
+  background-image: linear-gradient(90deg, var(--p-4) calc(var(--cm) * 0.3), transparent 0), linear-gradient(var(--p-4) calc(var(--cm) * 0.3), transparent 0);
+  background-size: calc(var(--cm) * 2) calc(var(--cm) * 2);
+}
+.salle-tableau { background: color-mix(in srgb, var(--p) 6%, #000); box-shadow: inset 0 0 0 calc(var(--cm) * 2) var(--p-3); }
+/* La nuit dehors : un ciel étoilé derrière les croisillons de la fenêtre */
+.salle-fenetre {
+  background:
+    linear-gradient(90deg, transparent calc(50% - var(--cm)), var(--p-3) 0 calc(50% + var(--cm)), transparent 0),
+    linear-gradient(transparent calc(50% - var(--cm)), var(--p-3) 0 calc(50% + var(--cm)), transparent 0),
+    radial-gradient(circle at 20% 30%, var(--p) calc(var(--cm) * 0.5), transparent 0),
+    radial-gradient(circle at 70% 20%, var(--p-2) calc(var(--cm) * 0.4), transparent 0),
+    radial-gradient(circle at 85% 70%, var(--p) calc(var(--cm) * 0.5), transparent 0),
+    radial-gradient(circle at 35% 75%, var(--p-3) calc(var(--cm) * 0.4), transparent 0),
+    radial-gradient(circle at 55% 45%, var(--p-2) calc(var(--cm) * 0.3), transparent 0),
+    radial-gradient(circle at 12% 80%, var(--p-2) calc(var(--cm) * 0.4), transparent 0),
+    radial-gradient(circle at 78% 30%, color-mix(in srgb, var(--p) 60%, #000) calc(var(--cm) * 7), transparent 0), /* la lune */
+    #000;
+  box-shadow: inset 0 0 0 calc(var(--cm) * 2) var(--p-3);
+}
+.salle-affiche { box-shadow: inset 0 0 0 calc(var(--cm) * 1) var(--p-2), inset 0 0 calc(var(--cm) * 10) var(--lueur); }
+.salle-baie { background: color-mix(in srgb, var(--p) 3%, #000); box-shadow: inset 0 0 0 var(--arete) var(--p-2); }
+
+/* Textes de la salle (tableau, affiches, écrans des autres ordinateurs) */
+.salle-texte {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: pre;
+  text-align: left;
+  line-height: 1.15;
+  color: var(--p);
+  text-shadow: 0 0 calc(var(--cm) * 0.8) var(--p);
+}
+.salle-craie { font-size: calc(var(--cm) * 9); }
+.salle-affiche-texte { font-size: calc(var(--cm) * 7); text-align: center; }
+.salle-grand { font-size: calc(var(--cm) * 12); }
+.salle-horloge { font-size: calc(var(--cm) * 20); }
+.salle-schema { font-size: calc(var(--cm) * 7); }
+.salle-mini {
+  position: absolute;
+  padding: calc(var(--cm) * 1.2);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--p) 9%, #000);
+  box-shadow: inset 0 0 calc(var(--cm) * 3) rgb(0 0 0 / 0.8);
+  color: var(--p);
+  font-size: calc(var(--cm) * 2.1);
+  line-height: 1.15;
+  white-space: pre;
+  text-shadow: 0 0 calc(var(--cm) * 0.5) var(--p);
+  /* Lignes de balayage, comme sur l'écran du site */
+  background-image: repeating-linear-gradient(to bottom, rgb(0 0 0 / 0.35) 0 calc(var(--cm) * 0.15), transparent 0 calc(var(--cm) * 0.4));
+}
+
+/* Façades des baies : unités empilées, diodes qui clignotent, câbles qui pendent */
+.salle-facade { position: absolute; inset: calc(var(--cm) * 3); display: flex; flex-direction: column; gap: calc(var(--cm) * 3); }
+.salle-unite {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: calc(var(--cm) * 2);
+  padding-inline: calc(var(--cm) * 3);
+  box-shadow: inset 0 0 0 calc(var(--cm) * 0.4) var(--p-3);
+}
+.salle-del { width: calc(var(--cm) * 1.6); height: calc(var(--cm) * 1.6); background: var(--p); box-shadow: 0 0 calc(var(--cm) * 1.5) var(--p); }
+.salle-del-faible { background: var(--p-3); box-shadow: none; }
+.salle-etiquette { position: static; flex: none; font-size: calc(var(--cm) * 5); justify-content: center; }
+.salle-cables { position: absolute; inset: auto 0 0 0; width: 100%; height: 30%; fill: none; stroke: var(--p-2); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+@media (prefers-reduced-motion: no-preference) {
+  .salle-del { animation: salle-del 1.7s steps(1) var(--d, 0s) infinite; }
+}
+@keyframes salle-del { 50% { opacity: 0.2; } }
+
+/* L'écran de son ordinateur : la copie de la page, dans un cadre qui ne défile pas (pour que les éléments fixes,
+   comme la barre d'état, restent en bas de l'écran) et une zone qui défile comme la vraie page */
+.salle-ecran { background: var(--k); box-shadow: none; }
+.salle-defilement { position: absolute; inset: 0; overflow: hidden; }
+
+/* Ce qu'on voit par-dessus la salle : où on est, le viseur, l'aide */
+.salle-hud { position: absolute; inset: 0; pointer-events: none; font-size: 1.25rem; text-shadow: 0 0 6px var(--p); transition: opacity 0.4s; }
+.salle-hud-cache { opacity: 0; }
+.salle-lieu { position: absolute; left: 1.25rem; top: 1rem; }
+.salle-viseur { position: absolute; left: 50%; top: 50%; translate: -50% -50%; color: var(--p-2); font-size: 1.5rem; }
+.salle-aide, .salle-invite { position: absolute; inset-inline: 1rem; bottom: 1.25rem; text-align: center; }
+.salle-aide { color: var(--p-2); }
+.salle-invite { font-size: 1.75rem; }
+.salle-hud kbd { padding: 0 0.4ch; background: var(--p); color: #000; font-family: inherit; text-shadow: none; }
