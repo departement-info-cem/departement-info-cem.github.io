@@ -133,7 +133,8 @@ function ResumeCours({ m, choisirGroupe }: { m: MonCours; choisirGroupe: () => v
   const passe = perime(m);
   return (
     <details className={`group rounded-lg border bg-card ${passe ? "border-cem-jaune" : ""}`}>
-      <summary className="flex cursor-pointer list-none items-center gap-3 rounded-lg p-3 hover:bg-accent [&::-webkit-details-marker]:hidden">
+      {/* Hauteur de deux lignes de titre : un titre court donne une carte aussi haute que les autres */}
+      <summary className="flex min-h-18 cursor-pointer list-none items-center gap-3 rounded-lg p-3 hover:bg-accent [&::-webkit-details-marker]:hidden">
         <span className="w-10 shrink-0 font-semibold tabular-nums text-primary">{court(m.cours)}</span>
         <span className="min-w-0 flex-1 font-medium">{index[m.cours]?.nom ?? m.cours}</span>
         {passe && <TriangleAlert className="size-4 shrink-0 text-cem-jaune" aria-label="Session passée" />}
