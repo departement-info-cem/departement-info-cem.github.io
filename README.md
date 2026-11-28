@@ -1,80 +1,206 @@
-# Site du département d'informatique
+<div align="center">
 
-Ce fichier sert à expliquer comment modifier l'appli ou le contenu du site du département d'informatique du collège Edouard Montpetit.
+<a href="https://info.cegepmontpetit.ca/"><img src="web/public/images/logo.svg" alt="Logo du département d'informatique" width="96"></a>
 
-## Site du département (`web/`, Next.js, publié à la racine)
+# Informatique · Cégep Édouard-Montpetit
 
-- Données en YAML : `data/profs/<courriel>.yaml` (une fiche par prof), `data/programmes/`, `data/cours.yaml`,
-  `data/cours-service.yaml`, `data/laboratoires.yaml`, `data/faq.yaml`, `data/bot.yaml`, `data/logiciels.yaml`.
-- Mode d'emploi pour les profs : https://info.cegepmontpetit.ca/modifier-mon-profil
-- Profs actifs : calculé (`web/lib/actif.ts`) d'après les cours et la session de la fiche, avec 30 jours de grâce en début de session.
-  Le champ `actif: true` (coordination sans cours) ou `actif: false` (congé, départ) de la fiche l'emporte sur le calcul.
-- Développement : `cd web && npm ci && npm run dev`, puis http://localhost:3000
-- `data/calendrier-scolaire.yaml` est généré à partir du PDF officiel du cégep : `npm run calendrier`
-  (aussi lancé à chaque déploiement et chaque matin de semaine ; `-- --verifier` dit seulement ce qui a changé).
-- `data/laboratoires.yaml` vient du PDF « Horaire du local » publié dans le dépôt 420-SN1 (des images : à recopier à chaque session).
-  À chaque session, il sert aussi à remplir les cours des fiches de profs (`prerempli: true` jusqu'à ce que le prof confirme) :
-  voir [data/changement-de-session.md](data/changement-de-session.md). Il alimente le bandeau du bas, la page `/locaux/` et une page par local (`/locaux/D-0003/`). Les logos de l'en-tête sont dans `web/public/images/liens/`.
-- Liens directs pour les sites de cours : `/<prof>/horaire/` et `/<prof>/calendrier/`, avec `?cours=420-5N6-EM` au besoin.
-- Données pour les sites de cours : `/donnees/cours/<numéro>.json` (ex. https://info.cegepmontpetit.ca/donnees/cours/420-5N6-EM.json),
-  écrit à chaque build (`web/app/donnees/cours/[fichier]/route.ts`), aussi sous les anciens numéros. Le site de cours n'a plus à recopier
-  horaires et dates : il garde la matière de chaque séance, par numéro. Pour chaque groupe d'un prof actif : `prof`, `groupe`, `session`,
-  `plages` (l'horaire de la semaine), `rencontres`, `evenements` (remises, examens... de la fiche pour ce cours) et `agenda`
-  (l'adresse de l'abonnement .ics du groupe, ou `null`). `profs` donne la semaine complète de chaque prof du cours (ses autres cours,
-  dispos, centre d'aide), `{ nom, bureau, horaire: { debut, fin, plages }, page }`, pour l'onglet Horaire des sites de cours.
-  Les adresses (`agenda`, `page`) suivent le site : les sites de cours ne codent en dur que celle du fichier.
-  Les rencontres sont celles de l'agenda du téléphone (`rencontresDuGroupe` dans `web/lib/mes-cours.ts`) : le calendrier scolaire et le
-  `calendrier:` de la fiche, `{ numero, date, debut, fin, local, statut, note }`. `statut` vaut `prevue`, `annulee` (absence), `deplacee`
-  (à sa date prévue, `note` : « déplacé au jeudi 10 décembre ») ou `reprise` (le cours déplacé, à sa nouvelle date).
-  `numero` : le rang parmi les rencontres qui ont lieu (`prevue` et `reprise`) ; une rencontre annulée ou déplacée n'en a pas, la matière passe à la suivante.
-  Lecture depuis Docusaurus (même domaine, info.cegepmontpetit.ca ; GitHub Pages permet aussi la lecture d'ailleurs, ex. en local) :
+**Le site du département d'informatique : programmes, profs, horaires, locaux et calendrier, toujours à jour.**
 
-  ```jsx
-  import { useEffect, useState } from "react";
+[![Déploiement](https://github.com/departement-info-cem/departement-info-cem.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/departement-info-cem/departement-info-cem.github.io/actions/workflows/deploy.yml)
+[![Site en ligne](https://img.shields.io/website?url=https%3A%2F%2Finfo.cegepmontpetit.ca%2F&label=site&up_message=en%20ligne&down_message=hors%20ligne)](https://info.cegepmontpetit.ca/)
+![Next.js 16](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs)
+![React 19](https://img.shields.io/badge/React-19-149eca?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white)
+![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?logo=tailwindcss&logoColor=white)
+[![Licence MIT](https://img.shields.io/badge/licence-MIT-8dc63e)](LICENSE)
 
-  export function useRencontres(no, groupe) {
-    const [rencontres, setRencontres] = useState([]);
-    useEffect(() => {
-      fetch(`https://info.cegepmontpetit.ca/donnees/cours/${no}.json`)
-        .then((r) => r.json())
-        .then((c) => setRencontres(c.groupes.find((g) => g.groupe === groupe)?.rencontres ?? []));
-    }, [no, groupe]);
-    return rencontres; // rencontres.find((r) => r.numero === 5)?.date : la date de la séance 5
-  }
-  ```
-- Vérifications : `npm run valider`, `npm run lint`, `npm test`, `npm run build`
-- Les anciennes adresses (`/react/...` et celles du site Angular : `/prof/<id>`, `/dec/p`, `/goodies`...)
-  sont redirigées par la page 404 : `web/lib/redirections.ts`. Les agendas `/react/agenda/*.ics` (abonnements des téléphones)
-  et les `/react/donnees/cours/*.json` (sites de cours) sont recopiés tels quels : `web/scripts/anciennes-adresses.ts`.
-- L'ancien site Angular (`angular/` et les fichiers JSON de `data/`) n'est plus déployé ; il sera supprimé.
+[**Visiter le site**](https://info.cegepmontpetit.ca/) · [Modifier ma page de prof](https://info.cegepmontpetit.ca/modifier-mon-profil) · [Signaler un problème](https://github.com/departement-info-cem/departement-info-cem.github.io/issues)
 
-## Ancien site Angular (plus déployé)
+<br>
 
-### Changer du contenu
+<a href="https://info.cegepmontpetit.ca/"><img src=".github/captures/accueil.webp" alt="Accueil du site : « Fais de l'informatique ton métier », à côté du bot d'orientation en forme de terminal" width="100%"></a>
 
-Le contenu du site est fourni par plusieurs fichiers JSON que vous pouvez modifier sans
-toucher à l'application du site.
+</div>
 
-On peut même les modifier directement dans l'interface web de github.
-Voici un exemple pour modifier la liste des profs:
+## En bref
 
-- ouvrir un navigateur sur https://github.com/departement-info-cem/departement-info-cem.github.io/tree/master/data
-- si vous n'avez pas les droits, les demander à un prof qui les a (coordo ...)
-- sélectionner le fichier profs.json
-- sur la droite, vous trouverez une icône de crayon pour éditer
-- modifier le fichier en faisant attention SVP
-- sauvegarder en décrivant la modification dans votre commit
+Un seul site pour tout le département :
 
-## Modifier l'application
+- **les futurs étudiants et leurs parents** découvrent les trois parcours, les grilles de cours et testent leur logique avec des mini-jeux ;
+- **les étudiants** trouvent leurs profs, leurs disponibilités, les laboratoires libres et le calendrier de la session ;
+- **les profs** tiennent leur page à jour en modifiant un simple fichier texte, sans rien installer.
 
-Le site est une application Angular. Merci de ne pas y toucher si vous n'êtes pas familier ou alors de travailler sur un fork du repo.
+Tout le contenu vit dans des fichiers YAML lisibles ([`data/`](data/)), vérifiés à chaque modification, puis transformés en un site statique
+publié sur GitHub Pages. Pas de serveur, pas de base de données, pas de mot de passe à gérer.
 
-### Créer une nouvelle page
+## Fonctionnalités
 
-executer `ng generate component component-name` pour générer une nouvelle page.
+### 🎓 Choisir son programme
 
-Ensuite, il faut l'ajouter dans les routes.
+- **Trois parcours en un coup d'œil** : DEC Développement d'applications, DEC Administration d'infrastructure TI,
+  DEC-BAC avec l'Université de Sherbrooke, et les AEC du soir.
+- **Des grilles de cours interactives** : sessions, heures, filtres par techno (web, mobile, réseau, sécurité…),
+  le site de chaque cours, et un comparateur de programmes.
+- **Un bot d'orientation** qui a l'allure d'un terminal : « L'informatique, est-ce pour moi ? »
+- **Deux mini-jeux** : programmer Octet, le robot, en Python, ou réparer une panne dans la salle réseau.
+- Les prochaines portes ouvertes, Étudiant d'un jour et la demande d'admission, dès l'accueil.
 
-## Déployer l'application
+<table>
+  <tr>
+    <td width="50%" align="center"><img src=".github/captures/grille.webp" alt="Grille de cours du DEC Développement d'applications, avec ses filtres par techno"><br><sub>Grille de cours, avec les filtres par techno</sub></td>
+    <td width="50%" align="center"><img src=".github/captures/robot.webp" alt="Mini-jeu : un robot à guider sur un parcours en écrivant du Python"><br><sub>Octet, le robot : un premier programme en Python</sub></td>
+  </tr>
+</table>
 
-L'application est présentement automatiquement déployée à l'aide de Github Actions, il n'y a donc rien à faire pour déployer l'application.
+### 📚 Suivre sa session
+
+- **Une page par prof** : horaire de la semaine, disponibilités, heures au centre d'aide, bureau, et un bouton pour lui écrire (Teams ou MIO).
+- **Locaux, en direct** : quels profs sont disponibles maintenant, et où ; quels laboratoires sont libres.
+  Un bandeau au bas de chaque page le rappelle.
+- **Mes cours** : on indique ses cours et son groupe, et le site met ses profs en premier, montre son horaire et son calendrier
+  (examens, remises, cours annulés), et abonne l'agenda du téléphone à chaque cours, avec un rappel 15 minutes avant.
+- **Le calendrier scolaire**, extrait automatiquement du PDF officiel du cégep et revérifié chaque matin.
+- **Une recherche** (<kbd>Ctrl</kbd> + <kbd>K</kbd>) qui trouve un prof, un cours, un programme ou une réponse de la FAQ.
+- Centre d'aide, FAQ, conseils aux nouveaux, logiciels gratuits, Git et commits, plagiat et IA.
+
+<table>
+  <tr>
+    <td width="50%" align="center"><img src=".github/captures/prof.webp" alt="Page d'un prof : statut « Disponible jusqu'à 13 h 45 », horaire de la semaine et disponibilités"><br><sub>La page d'un prof : son statut en direct et sa semaine</sub></td>
+    <td width="50%" align="center"><img src=".github/captures/locaux.webp" alt="Page Locaux : profs disponibles et état de chaque laboratoire"><br><sub>Locaux : les profs disponibles et les labos libres</sub></td>
+  </tr>
+</table>
+
+### 🧑‍🏫 Pour les profs
+
+- **Sa page dans un fichier texte** ([`data/profs/<courriel>.yaml`](data/profs/)), modifié directement sur GitHub et en ligne 2-3 minutes plus tard.
+- **Un aperçu en direct** : on y colle sa fiche, les erreurs s'affichent avec le numéro de ligne, et on voit son horaire avant de publier.
+- **Rien ne casse** : chaque modification est vérifiée ; en cas d'erreur, l'ancienne version reste en ligne et GitHub indique la ligne à corriger.
+- **Des horaires préremplis** à chaque session, d'après l'horaire des laboratoires.
+- **Des données pour les sites de cours** : un fichier JSON par cours (séances datées, horaires des groupes, agenda),
+  pour ne plus recopier les dates d'une session à l'autre.
+- Un outil pour **trouver un moment de rencontre** entre collègues.
+
+<table>
+  <tr>
+    <td width="50%" align="center"><img src=".github/captures/modifier.webp" alt="Guide « Profs : modifier ma page » en cinq étapes"><br><sub>Le guide en 5 étapes, sans rien installer</sub></td>
+    <td width="50%" align="center"><img src=".github/captures/apercu.webp" alt="Aperçu en direct : une fiche YAML à gauche, l'horaire obtenu à droite"><br><sub>L'aperçu : la fiche à gauche, l'horaire à droite</sub></td>
+  </tr>
+</table>
+
+### 📱 Partout
+
+- **Pensé pour le téléphone**, et installable sur l'écran d'accueil comme une appli.
+- **Un mode sombre**, automatique ou au choix.
+- **Accessible** : menus utilisables au clavier, textes pour les lecteurs d'écran, animations coupées si le système le demande.
+- Et pour les curieux, un easter egg : <kbd>↑</kbd> <kbd>↑</kbd> <kbd>↓</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd> <kbd>←</kbd> <kbd>→</kbd> <kbd>B</kbd> <kbd>A</kbd>
+
+<table>
+  <tr>
+    <td width="33%" align="center"><img src=".github/captures/mobile-accueil.webp" alt="Accueil sur téléphone"><br><sub>Accueil</sub></td>
+    <td width="33%" align="center"><img src=".github/captures/mobile-prof.webp" alt="Page d'un prof sur téléphone, disponibilités en premier"><br><sub>Page d'un prof, dispos d'abord</sub></td>
+    <td width="33%" align="center"><img src=".github/captures/mobile-locaux.webp" alt="Page Locaux sur téléphone"><br><sub>Locaux</sub></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="50%" align="center"><img src=".github/captures/sombre.webp" alt="Les trois parcours de l'accueil en mode sombre"><br><sub>Mode sombre</sub></td>
+    <td width="50%" align="center"><img src=".github/captures/retro.webp" alt="Le site en mode rétro : texte vert phosphore façon terminal des années 80"><br><sub>Le code Konami, pour les nostalgiques</sub></td>
+  </tr>
+</table>
+
+## Sous le capot
+
+| Rôle | Technologie |
+| --- | --- |
+| **Framework** | [Next.js 16](https://nextjs.org/) (App Router, export statique) et React 19 |
+| **Langage** | TypeScript |
+| **Interface** | Tailwind CSS 4, composants [shadcn/ui](https://ui.shadcn.com/) sur Base UI, icônes Lucide |
+| **Données** | YAML dans [`data/`](data/), validé par [Zod](https://zod.dev/) |
+| **Qualité** | Tests Vitest, ESLint, vérification des données et des types à chaque pull request |
+| **Hébergement** | GitHub Pages, déployé par GitHub Actions |
+
+```mermaid
+flowchart LR
+  Y["data/*.yaml<br>fiches, grilles, FAQ…"] --> V{"Vérification<br>des données"}
+  P["PDF du calendrier<br>du cégep"] -->|"chaque matin"| Y
+  V -->|"OK"| B["next build<br>site statique"]
+  V -->|"erreur : fichier et ligne"| X["l'ancienne version<br>reste en ligne"]
+  B --> G["GitHub Pages<br>info.cegepmontpetit.ca"]
+  B --> J["JSON des sites de cours<br>agendas .ics"]
+```
+
+Le site est reconstruit à chaque push sur `main`, et chaque matin de semaine pour reprendre le calendrier du cégep s'il a changé.
+
+### Structure du dépôt
+
+```text
+.
+├── data/              Le contenu du site, en YAML
+│   ├── profs/         une fiche par prof : <courriel>.yaml
+│   ├── programmes/    les grilles de cours (DEC, DEC-BAC, AEC)
+│   ├── photos/        les photos des profs
+│   └── *.yaml         cours, laboratoires, calendrier scolaire, FAQ, bot, logiciels
+├── web/               Le site Next.js
+│   ├── app/           les pages (un dossier par adresse)
+│   ├── components/    les composants React
+│   ├── lib/           la logique : horaires, disponibilités, agendas, calendrier
+│   ├── scripts/       vérification des données, calendrier scolaire, photos
+│   └── tests/         les tests Vitest
+└── angular/           l'ancien site, plus déployé (il sera supprimé)
+```
+
+## Contribuer
+
+Les contributions sont les bienvenues, que tu sois prof, étudiant ou diplômé.
+
+### Tu es prof : modifier ta page
+
+Rien à installer : suis le guide [Profs : modifier ma page](https://info.cegepmontpetit.ca/modifier-mon-profil).
+Il ouvre ta fiche dans l'éditeur de GitHub et explique chaque champ. Il faut un compte GitHub membre de
+l'organisation `departement-info-cem` : demande-le à la coordination.
+
+### Signaler un problème ou proposer une idée
+
+Une information erronée, un bug, une page qui manque ? [Ouvre une issue](https://github.com/departement-info-cem/departement-info-cem.github.io/issues).
+
+### Développer
+
+Prérequis : [Node.js 22](https://nodejs.org/) et npm.
+
+```bash
+git clone https://github.com/departement-info-cem/departement-info-cem.github.io.git
+cd departement-info-cem.github.io/web
+npm ci
+npm run dev    # http://localhost:3000
+```
+
+Avant d'ouvrir une pull request :
+
+| Commande | Ce qu'elle vérifie |
+| --- | --- |
+| `npm run valider` | les fichiers de `data/` (erreurs avec le fichier et la ligne) |
+| `npm run lint` | ESLint |
+| `npm test` | les tests Vitest |
+| `npm run build` | le build complet, avec la vérification des types |
+
+1. Crée une branche à partir de `main`.
+2. Ouvre une pull request : GitHub Actions refait la vérification des données, le build, le lint et les tests.
+3. Si ta PR change l'apparence du site, montre l'avant et l'après côte à côte
+   (voir [Captures avant / après](CLAUDE.md#captures-avant--après-dans-les-pr)).
+4. Une fois la PR fusionnée dans `main`, le site est en ligne en quelques minutes.
+
+Pour aller plus loin :
+
+- [Documentation technique](web/README.md) : les données, le calcul des profs actifs, le calendrier scolaire,
+  le JSON des sites de cours et les anciennes adresses.
+- [Changement de session](data/changement-de-session.md) : mettre à jour les horaires des profs et des laboratoires.
+
+## Licence
+
+[MIT](LICENSE) © Département d'informatique, Cégep Édouard-Montpetit
+
+<div align="center">
+<br>
+<sub>Fait à Longueuil, au département d'informatique du <a href="https://www.cegepmontpetit.ca/">Cégep Édouard-Montpetit</a>.</sub>
+</div>

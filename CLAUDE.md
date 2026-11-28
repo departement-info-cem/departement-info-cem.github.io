@@ -5,7 +5,7 @@ Ce dépôt contient deux sites :
 - `web/` : le site (Next.js, publié à la racine de https://info.cegepmontpetit.ca/). **Tout le travail se fait là.**
 - `angular/` : l'ancien site, plus déployé (il sera supprimé). N'y touche pas, ni aux fichiers JSON de `data/` qu'il lit, sauf demande explicite.
 
-Commandes du site (dans `web/`) : voir le README. Particularités de cette version de Next.js : @web/AGENTS.md
+Commandes du site (dans `web/`) : voir [web/README.md](web/README.md). Particularités de cette version de Next.js : @web/AGENTS.md
 
 **Nouvelle session**, ou mise à jour des horaires des profs et des labos : suis [data/changement-de-session.md](data/changement-de-session.md).
 
